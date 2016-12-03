@@ -10,6 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/BrunoCasotto/blog.git"
   },
+  "_moduleAliases": {
+    "@app": ".",
+    "@route": "src/routes",
+    "@module": "src/module",
+    "@config": "src/config",
+    "@helpers": "src/helpers",
+    "@templates": "resources"
+  },
   "keywords": [
     "blog"
   ],
@@ -20,6 +28,7 @@
   },
   "homepage": "https://github.com/BrunoCasotto/blog#readme",
   "devDependencies": {
+    "handlebars": "^4.0.6",
     "hapi": "^16.0.1",
     "hapi-plugin-co": "^0.9.4",
     "module-alias": "^2.0.0",

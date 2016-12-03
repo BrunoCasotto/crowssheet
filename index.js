@@ -1,14 +1,30 @@
 'use strict'
-
+require('module-alias/register')
 const Hapi = require('hapi')
-let routes = require('./src/routes/route.js')
+let routes = require('@route/route.js')
+const Path = require('path');
+const Hoek = require('hoek');
 
 const server = new Hapi.Server()
+
 server.connection({ port: 4000 })
 
-    server.register(require("hapi-plugin-co"))
+server.register(require('vision'), (err) => { 
 
-    server.route(routes)
+    Hoek.assert(!err, err)
+
+    server.views({
+        engines: {
+            html: require('handlebars')
+        },
+        relativeTo: __dirname,
+        path: 'resources/views'
+    })
+})
+
+server.register(require("hapi-plugin-co"))
+
+server.route(routes)
 
 server.start((err) => {
     if (err) {

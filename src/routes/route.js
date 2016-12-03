@@ -1,4 +1,6 @@
+let home = require("@module/home/controller")
+let controller = new home();
 
 module.exports = [
-	{ method: 'GET', path: '/', handler: (request, reply)=>{reply ('hello world')}}
+	{ method: 'GET', path: '/', handler: controller.index}
 ]
