@@ -18,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/BrunoCasotto/blog/issues"
   },
-  "homepage": "https://github.com/BrunoCasotto/blog#readme"
+  "homepage": "https://github.com/BrunoCasotto/blog#readme",
+  "devDependencies": {
+    "hapi": "^16.0.1",
+    "hapi-plugin-co": "^0.9.4",
+    "module-alias": "^2.0.0",
+    "request": "^2.79.0"
+  }
 }
