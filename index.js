@@ -15,8 +15,8 @@ server.register(require('vision'), (err) => {
 
     server.views({
         engines: {
-            html: require('handlebars')
-        },
+				njk: require('nunjucks-hapi')
+			},
         relativeTo: __dirname,
         path: 'resources/views'
     })

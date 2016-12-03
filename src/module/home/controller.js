@@ -4,7 +4,7 @@ class HomeController {
 
 	index(request, reply) {
 		let service = new homeService()
-		reply.view('index')
-	}
+		reply.view('pages/home')
+	}   
 }
 module.exports = HomeController

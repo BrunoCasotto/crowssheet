@@ -16,7 +16,7 @@
     "@module": "src/module",
     "@config": "src/config",
     "@helpers": "src/helpers",
-    "@templates": "resources"
+    "@resources": "resources"
   },
   "keywords": [
     "blog"
@@ -28,8 +28,10 @@
   },
   "homepage": "https://github.com/BrunoCasotto/blog#readme",
   "devDependencies": {
+    "angular": "^1.5.9",
     "handlebars": "^4.0.6",
     "hapi": "^16.0.1",
+    "nunjucks-hapi": "^2.1.0",
     "hapi-plugin-co": "^0.9.4",
     "module-alias": "^2.0.0",
     "request": "^2.79.0"
