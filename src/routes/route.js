@@ -1,6 +1,3 @@
-let home = require("@module/home/controller")
-let controller = new home();
-
-module.exports = [
-	{ method: 'GET', path: '/', handler: controller.index}
-]
+let routes = require('./home')
+	.concat(require('./authentication'))
+module.exports = routes

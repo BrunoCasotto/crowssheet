@@ -14,4 +14,4 @@ class Firebase {
 
 	
 }
-module.exports = Firebase   
+module.exports = new Firebase()

@@ -1,9 +1,9 @@
-let database = require("@module/core/firebase")
+let database = require("@modules/core/firebase")
 
 class HomeService {
 
 	constructor() {
-		this.firebase = new database()
+		this.firebase = database
 	}
 
 	test() {

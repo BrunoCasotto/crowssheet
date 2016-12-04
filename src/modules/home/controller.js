@@ -1,4 +1,4 @@
-let homeService = require("@module/home/service")
+let homeService = require("@modules/home/service")
   
 class HomeController {
 

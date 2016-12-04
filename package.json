@@ -13,7 +13,7 @@
   "_moduleAliases": {
     "@app": ".",
     "@route": "src/routes",
-    "@module": "src/module",
+    "@modules": "src/modules",
     "@config": "config",
     "@helpers": "src/helpers",
     "@resources": "resources"
