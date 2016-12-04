@@ -1,9 +1,13 @@
+let database = require("@module/core/firebase")
 
 class HomeService {
 
+	constructor() {
+		this.firebase = new database()
+	}
+
 	test() {
-		console.log('teste')
 		return 'aliases'
 	}
 }
-module.exports = HomeService
+module.exports = HomeService 

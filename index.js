@@ -4,7 +4,6 @@ const Hapi = require('hapi')
 let routes = require('@route/route.js')
 const Path = require('path');
 const Hoek = require('hoek');
-
 const server = new Hapi.Server()
 
 server.connection({ port: 4000 })
@@ -15,9 +14,9 @@ server.register(require('vision'), (err) => {
 
     server.views({
         engines: {
-				njk: require('nunjucks-hapi')
-			},
-        relativeTo: __dirname,
+				njk: require('nunjucks-hapi')   
+			}, 
+        relativeTo: __dirname,     
         path: 'resources/views'
     })
 })
@@ -32,3 +31,4 @@ server.start((err) => {
     }
     console.log(`Server running at: ${server.info.uri}`);
 })
+  

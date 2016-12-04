@@ -14,7 +14,7 @@
     "@app": ".",
     "@route": "src/routes",
     "@module": "src/module",
-    "@config": "src/config",
+    "@config": "config",
     "@helpers": "src/helpers",
     "@resources": "resources"
   },
@@ -35,5 +35,8 @@
     "hapi-plugin-co": "^0.9.4",
     "module-alias": "^2.0.0",
     "request": "^2.79.0"
+  },
+  "dependencies": {
+    "firebase": "^3.6.2"
   }
 }
