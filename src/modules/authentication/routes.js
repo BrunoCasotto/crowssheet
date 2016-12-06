@@ -3,6 +3,6 @@ module.exports = ( controller ) => {
 	controller = controller || new AuthController()
 
 	return [
-		{method: 'GET',	path: '/login', handler: controller.login}
+		{method: 'POST',	path: '/login', handler: controller.login}
 	]
 }
