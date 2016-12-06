@@ -37,6 +37,7 @@
     "request": "^2.79.0"
   },
   "dependencies": {
-    "firebase": "^3.6.2"
+    "firebase": "^3.6.2",
+    "inert": "^4.0.3"
   }
 }
