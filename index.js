@@ -17,7 +17,7 @@ const server = new Hapi.Server({
 
 server.connection({ port: 4000 })
 
-server.register(require('vision'), (err) => {
+server.register(require('vision'), (err) => { 
     Hoek.assert(!err, err)
     server.views({
            

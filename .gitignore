@@ -39,3 +39,6 @@ jspm_packages
 #env and configures
 config/database.js
 config/external.js
+
+#public path
+dist

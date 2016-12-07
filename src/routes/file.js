@@ -1,9 +1,9 @@
 module.exports = [
     {
         method: 'GET',
-        path: '/koala',
+        path: '/favicon.ico',
         handler: function(request, reply) {
-            reply.file( 'koala.jpeg', { confine: false })
+            reply.file( 'favico.ico', { confine: false })
         }
     },
     {
@@ -30,6 +30,15 @@ module.exports = [
         handler: {
             directory: {
                 path: 'js/'
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/fonts/{filename*}',
+        handler: {
+            directory: {
+                path: 'fonts/'
             }
         }
     }
