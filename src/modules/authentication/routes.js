@@ -3,7 +3,10 @@ module.exports = ( controller ) => {
 	controller = controller || new AuthController()
 
 	return [
-		{method: 'POST',	path: '/login', handler: controller.login},
-		{method: 'POST',	path: '/singup/register', handler: controller.singup }
+		{method: 'GET',	path: '/auth/admin', handler: controller.index},
+		{method: 'GET',	path: '/auth/register', handler: controller.register},
+
+		{method: 'POST',	path: '/auth/login', handler: controller.login},
+		{method: 'POST',	path: '/auth/singup', handler: controller.singup }
 	]
 }

@@ -3,7 +3,7 @@
 		<v-header></v-header>
 	</div>
 	<div class="container singup">
-		<form class="form" action="/singup/register" method="post">
+		<form class="form" action="/singup/singup" method="post">
 			<label class="form__title">Singup</label>
 			 <div class="form__row">
 			   <div class="col col--md">
@@ -59,7 +59,7 @@ export default {
 			display: block;
 			width: 100%;
 			height: 30%;
-			background-color: $color-grey--base;
+			background-color: $color-blue--light;
 			position: absolute;
 			top:100px;
 		}
@@ -69,7 +69,7 @@ export default {
 			width: 100%;
 			flex-direction: column;
 			padding: 40px;
-			background-color: $color-grey--dark;
+			background-color: $color-blue--base;
 			border-radius: 8px;
 			z-index: 100;
 			transform: translateY(-50px);

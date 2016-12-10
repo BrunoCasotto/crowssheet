@@ -10,18 +10,23 @@ import store from './vuex/store'
 
 //===== components ======
 import Menu from '_app/common/components/Menu.vue'
+import Slider from '_app/common/components/Slider.vue'
 import Breadcrumb from './plugins/breadcrumb'
+import Post from '_app/components/Post.vue'
+
 //===== modules ========
 import Dashboard from './components/pages/Dashboard.vue'
 import Login from './components/pages/Login.vue'
 import Singup from './components/pages/Singup.vue'
 
 new Vue({
-    el: 'body', 
+    el: 'body',
     store: store,
     components: {
         Dashboard,
         Login,
         Singup,
+        Post,
+        Slider
     }
 })

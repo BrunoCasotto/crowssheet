@@ -3,18 +3,23 @@
 		<v-header></v-header>
 	</div>
 	<div class="login">
-		<form class="login__form" action="/login" method="post">
-			<div class="form-group">
-		    	<input v-model="email" type="email" class="form-control" placeholder="Email">
-		  	</div>
-		  	<div class="form-group">
-		    	<input v-model="password" type="password" class="form-control" placeholder="Password">
-		  	</div>
-		  	<button type="submit" class="btn btn-default">Login</button>
-			<a href="/singup" class="btn btn-default" >Singup</a>
-		</form>
-		<div class="login__background">
-			<logo-corvo apperance="background__login" ></logo-corvo>
+		<div class="login__strip">
+			<form class="login__form" action="/login" method="post">
+				<div class="form-group">
+					<input v-model="email" type="email" class="form-control" placeholder="Email">
+				</div>
+				<div class="form-group">
+					<input v-model="password" type="password" class="form-control" placeholder="Password">
+				</div>
+				<button type="submit" class="btn btn-default">Login</button>
+				<a href="/auth/register" class="btn btn-default" >Singup</a>
+			</form>
+
+			<div class="login__logo">
+				<img src="/images/Logo.png" alt=""></img>
+			</div>
+		</div>
+		<div class="login__footer">
 			<v-footer></v-footer>
 		</div>
 	</div>
@@ -46,33 +51,68 @@
 	.login {
 		padding: 40px;
 		display: flex;
+		flex-direction: column;
 		height: 100%;
 		justify-content: center;
 		align-items: center;
 
-		&:after {
-			content: '';
-			display: block;
-			width: 100%;
-			height: 30%;
+		&__strip {
+			padding: 10px;
+			display: flex;
+			flex-wrap: wrap-reverse;
 			background-color: $color-blue--light;
-			position: absolute;
-			top:100px;
+			border-radius: 8px;
+
+			@media screen and(max-width: $screen-md) {
+				justify-content: center;
+			}
+
+			@media screen and(max-width: $screen-sm) {
+				width: 98vw;
+			}
 		}
 
 		&__form {
-			width: 400px;
+			min-width: 400px;
 			padding: 10px;
+			flex:1;
 			border-radius: 8px;
-			transform: translateY(-25%);
 			z-index:1;
 			background-color: $color-blue--base;
+
+			@media screen and(max-width: $screen-md) {
+				min-width: 300px;
+				width: 100%;
+			}
+
+			@media screen and(max-width: $screen-sm) {
+				min-width: 100%;
+			}
 		}
 
-		&__background {
-			padding-left: 10%;
-			z-index: 2;
-			transform: translateY(-15%);
+		&__logo {
+			min-width: 400px;
+			height: 200px;
+			display: flex;
+			flex: 1;
+
+			@media screen and(max-width: $screen-md) {
+				min-width: 100;
+				justify-content: center;
+			}
+
+			@media screen and(max-width: $screen-sm) {
+				min-width: 100%;
+				height: 150px;
+			}
+
+			img {
+				height: 100%;
+			}
+		}
+
+		&__footer {
+			padding: 30px 0;
 		}
 	}
 </style>

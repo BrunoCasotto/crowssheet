@@ -2,6 +2,14 @@ let AuthService = require('@modules/authentication/service')
 
 class AuthController {
 
+	index(request, reply) {
+		reply.view('pages/login')
+	}
+
+	register(request, reply) {
+		reply.view('pages/singup')
+	}
+
 	login(request, reply) {
 		let service = new AuthService()
 		if(service.login(request.payload.email, request.payload.password)) {
