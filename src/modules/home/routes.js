@@ -3,6 +3,7 @@ module.exports = ( controller ) => {
 	controller = controller || new HomeController
 
 	return [
-		{method: 'GET',	path: '/', handler: controller.index	}
+		{method: 'GET',	path: '/admin', handler: controller.index},
+		{method: 'GET',	path: '/singup', handler: controller.singup}
 	]
 }

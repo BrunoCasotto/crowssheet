@@ -4,8 +4,23 @@ class AuthController {
 
 	login(request, reply) {
 		let service = new AuthService()
-		
-		reply(service.login(request.payload.email, request.payload.password))
-	}    
+		if(service.login(request.payload.email, request.payload.password)) {
+			reply.view('pages/dashboard')
+		} else {
+			//page login wrong
+		}
+	}
+
+	singup(request, reply) {
+		let service = new AuthService()
+		if( request.payload.password == request.payload.passwordAgain ) {
+			if(service.singup( request.payload.email, request.payload.password)) {
+				reply.view('pages/dashboard')
+			} else {
+				//return error page
+			}
+		}
+		return false
+	}
 }
-module.exports = AuthController    
+module.exports = AuthController

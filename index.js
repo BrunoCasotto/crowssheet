@@ -13,21 +13,19 @@ const server = new Hapi.Server({
             }
         }
     }
-});
+}) 
 
 server.connection({ port: 4000 })
 
-server.register(require('vision'), (err) => { 
+server.register(require('vision'), (err) => {
     Hoek.assert(!err, err)
     server.views({
-           
-        engines: { 
-            html: require('handlebars')   
-        }, 
-        relativeTo: __dirname,     
+        engines: {
+            njk: require('nunjucks-hapi')
+        },
+        relativeTo: __dirname,
         path: __dirname + '/resources/views'
         , helpersPath: __dirname + '/resources/assets'
-        , layoutPath: __dirname + '/resources/views/layouts' 
     })
 })
 
@@ -46,4 +44,3 @@ server.start((err) => {
     }
     console.log(`Server running at: ${server.info.uri}`);
 })
-  

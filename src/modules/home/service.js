@@ -7,6 +7,7 @@ class HomeService {
 	}
 
 	test() {
+		console.log(this.firebase)
 		return 'aliases'
 	}
 }
