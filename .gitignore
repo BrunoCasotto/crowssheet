@@ -42,3 +42,4 @@ config/external.js
 
 #public path
 dist
+!dist/images
