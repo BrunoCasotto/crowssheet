@@ -41,14 +41,5 @@ module.exports = [
                 path: 'fonts/'
             }
         }
-    },
-    {
-        method: 'GET',
-        path: '/boostrap/{filename*}',
-        handler: {
-            directory: {
-                path: './../node_modules/bootstrap/dist/css/'
-            }
-        }
     }
 ]

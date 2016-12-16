@@ -6,7 +6,7 @@ let service = new AuthService()
 describe('Login', function() {
   describe('connection with firebase', function(done) {
     it('should return true', function() {
-      assert.equal(true, service.login())
+      assert.equal(true, service.login('casottoalves'))
     })
     done()
   })
