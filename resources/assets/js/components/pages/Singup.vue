@@ -3,7 +3,7 @@
 		<v-header></v-header>
 	</div>
 	<div class="container singup">
-		<form class="form" action="/singup/singup" method="post">
+		<form class="form" action="/auth/singup" method="post">
 			<label class="form__title">Singup</label>
 			 <div class="form__row">
 			   <div class="col col--md">

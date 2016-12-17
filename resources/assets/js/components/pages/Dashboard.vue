@@ -3,15 +3,14 @@
         <h3>Dashboard</h3>
     </div>
 </template>
-
 <script>
     export default {
-        name: 'Dashboard',
+        name: 'dashboard',
         components: {
         }
     }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 
 </style>

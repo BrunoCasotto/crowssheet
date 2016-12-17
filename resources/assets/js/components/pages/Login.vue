@@ -4,12 +4,12 @@
 	</div>
 	<div class="login">
 		<div class="login__strip">
-			<form class="login__form" action="/login" method="post">
+			<form class="login__form" action="/auth/singin" method="post">
 				<div class="form-group">
-					<input v-model="email" type="email" class="form-control" placeholder="Email">
+					<input name="email" v-model="email" type="email"  class="form-control" placeholder="Email">
 				</div>
 				<div class="form-group">
-					<input v-model="password" type="password" class="form-control" placeholder="Password">
+					<input name="password" v-model="password" type="password" class="form-control" placeholder="Password">
 				</div>
 				<button type="submit" class="btn btn-default">Login</button>
 				<a href="/auth/register" class="btn btn-default" >Singup</a>

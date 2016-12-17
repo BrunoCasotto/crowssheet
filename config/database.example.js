@@ -1,3 +1,7 @@
 module.exports = {
-	'firebase_bd' : "https://database_url"
+	 apiKey: "YourApiFirebase",
+    authDomain: "YourUrl.firebaseapp.com",
+    databaseURL: "https://YourUrl.firebaseio.com",
+    storageBucket: "YourUrl.appspot.com",
+    messagingSenderId: "MessageId"
 }

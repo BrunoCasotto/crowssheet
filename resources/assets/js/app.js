@@ -14,7 +14,7 @@ import Slider from '_app/common/components/Slider.vue'
 import Breadcrumb from './plugins/breadcrumb'
 import Post from '_app/components/Post.vue'
 
-//===== modules ========
+//===== Pages ========
 import Dashboard from './components/pages/Dashboard.vue'
 import Login from './components/pages/Login.vue'
 import Singup from './components/pages/Singup.vue'

@@ -6,7 +6,7 @@ module.exports = ( controller ) => {
 		{method: 'GET',	path: '/auth/admin', handler: controller.index},
 		{method: 'GET',	path: '/auth/register', handler: controller.register},
 
-		{method: 'POST',	path: '/auth/login', handler: controller.login},
+		{method: 'POST',	path: '/auth/singin', handler: controller.singin},
 		{method: 'POST',	path: '/auth/singup', handler: controller.singup }
 	]
 }

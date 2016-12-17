@@ -10,12 +10,13 @@ class AuthController {
 		reply.view('pages/singup')
 	}
 
-	login(request, reply) {
+	singin(request, reply) {
 		let service = new AuthService()
+		console.log(service.login(request.payload.email, request.payload.password));
 		if(service.login(request.payload.email, request.payload.password)) {
 			reply.view('pages/dashboard')
 		} else {
-			//page login wrong
+			reply.view('pages/home')
 		}
 	}
 
@@ -25,7 +26,7 @@ class AuthController {
 			if(service.singup( request.payload.email, request.payload.password)) {
 				reply.view('pages/dashboard')
 			} else {
-				//return error page
+				reply.view('pages/home')
 			}
 		}
 		return false

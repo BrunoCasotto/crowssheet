@@ -2,12 +2,12 @@ let firebase = require('@modules/core/firebase')
 
 class AuthService extends firebase{
 
-	login() {
-		this._firebase.auth().signInWithEmailAndPassword('', '').catch(function(error) {
+	login(email , password) {
+		this._firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
 		return error
 		})
 		if(this._firebase.auth().currentUser) {
-			return true
+			return this._firebase.auth().currentUser
 		} else {
 			return false
 		}
