@@ -6,7 +6,7 @@
 				<img src="/images/biblia.jpeg" alt="">
 			</div>
 			<div class="post__content__text">
-				<h3 class="text__title">Prévia de um tópico</h3>
+				<p class="text__title">Prévia de um tópico</p>
 				<p class="text__previous">
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -14,6 +14,10 @@
 					Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
 					mollit anim id est laborum.
 				</p>
+				<button class="btn btn-default">Ver mais</button>
+			</div>
+			<div class="post__content__controller">
+				
 			</div>
 		</div>
 
@@ -27,7 +31,7 @@ export default {
   }
 }
 </script>
-<style lang="sass">
+<style lang="sass" scoped>
 	@import "~_app/variables.scss";
 
 	.post {
@@ -45,6 +49,8 @@ export default {
 
 		&__content {
 			display: flex;
+			justify-content: center;
+			align-items: center;
 
 			&__image {
 				height: 150px;
@@ -57,6 +63,10 @@ export default {
 			&__text {
 				flex:1;
 				padding: 10px;
+
+				.text__title {
+					font-size: 2rem;
+				}
 			}
 		}
 	}
