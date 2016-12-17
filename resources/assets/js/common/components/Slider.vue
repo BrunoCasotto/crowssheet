@@ -7,7 +7,7 @@ export default {
   data () {
     return {
 		items: [
-			{
+			{ 
 				src: '/images/wall2.png',
 				alt: '/images/wall2.png'
 			},
