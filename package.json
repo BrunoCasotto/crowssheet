@@ -15,8 +15,7 @@
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
     "start:dev": "concurrently \"npm run watch-css\"  \"npm run build\"",
     "start:prod": " npm run build-css\"  \" npm run build:webpack\"",
-    "start": "node index.js",
-    "postinstall": "npm run start:prod"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
