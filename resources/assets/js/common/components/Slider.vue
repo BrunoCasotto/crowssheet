@@ -1,8 +1,11 @@
 <template lang="html">
-	<slider :items="items" :speed="2" :delay="3" :pause="true" :autoplay:"true" :dots="true" :arrows:"true"></slider>
+	<div>
+		Slider
+		<!--<slider :items="items" :speed="2" :delay="3" :pause="true" :autoplay:"true" :dots="true" :arrows:"true"></slider>-->
+	</div>
 </template>
 <script>
-import Slider from 'vue-slider'
+// import Slider from 'vue-slider'
 export default {
   data () {
     return {
