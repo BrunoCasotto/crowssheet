@@ -2,15 +2,20 @@
   "name": "blog",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "6.7.0"
+  },
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
+    "build": "webpack --watch",
     "dev": "webpack-dev-server --inline --hot",
     "build-css": "node-sass --include-path scss resources/assets/sass/main.scss dist/css/main.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-    "build:dev": "concurrently \"npm run watch-css\"  \"npm run build\"",
-    "build": "webpack --watch",
-    "start": "node index.js"
+    "start:dev": "concurrently \"npm run watch-css\"  \"npm run build\"",
+    "start:prod": "concurrently \"npm run build-css\"  \"npm run build\"",
+    "start": "node index.js",
+    "postinstall": "npm run start:prod"
   },
   "repository": {
     "type": "git",
@@ -74,8 +79,5 @@
     "vuex-router-sync": "^2.0.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
-  },
-  "engines": {
-    "node": "6.7.0"
   }
 }

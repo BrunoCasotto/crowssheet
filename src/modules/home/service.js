@@ -1,14 +1,20 @@
-let database = require("@modules/core/firebase")
+let firebase = require('@modules/core/firebase')
 
-class HomeService {
+class HomeService extends firebase{
 
-	constructor() {
-		this.firebase = database
+	getPosts() {
+		let call = this.database.ref('posts');
+
+		call.on('value', function(posts) {
+			return posts
+		})
 	}
 
-	test() {
-		console.log(this.firebase)
-		return 'aliases'
+	store() {
+		this.database.ref('users').set({
+			username: 'Bruno',
+			email: 'casottoalves'
+		})
 	}
 }
 module.exports = HomeService 
