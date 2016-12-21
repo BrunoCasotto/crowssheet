@@ -1,5 +1,4 @@
 'use strict'
-const babel = require('babel')
 const path = require( 'path' )
 const webpack = require("webpack")
 
