@@ -1,9 +1,11 @@
 'use strict'
+
 const path = require( 'path' )
 const webpack = require("webpack")
 
-const base_path = path.resolve(__dirname, 'resources/assets/js')
+
 const assets_path = path.resolve(__dirname,'resources', 'assets')
+const base_path = path.resolve(__dirname, 'resources/assets/js')
 const base_path_sass = path.join(assets_path, 'sass')
 
 // webpack.config.js
