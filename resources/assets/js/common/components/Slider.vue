@@ -1,5 +1,5 @@
 <template lang="html">
-	<slider :items="items", :speed="2", :delay="3", :pause="true", :autoplay:"true", :dots="true", :arrows:"true"></slider>
+	<slider :items="items" :speed="2" :delay="3" :pause="true" :autoplay:"true" :dots="true" :arrows:"true"></slider>
 </template>
 <script>
 import Slider from 'vue-slider'
