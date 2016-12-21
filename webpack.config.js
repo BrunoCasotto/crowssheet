@@ -2,11 +2,16 @@ const path = require( 'path' )
 const webpack = require("webpack")
 
 const base_path = path.resolve(__dirname, 'resources/assets/js')
+const assets_path = path.resolve(__dirname,'resources', 'assets')
+const base_path_sass = path.join(assets_path, 'sass')
 
 // webpack.config.js
 module.exports = {
     // entry point of our application
-    entry: path.join(base_path, 'app.js'),
+   entry: [ 
+       path.join(base_path, 'app.js'),
+       path.join(base_path_sass, 'main.scss')
+   ],
     // where to place the compiled bundle
     output: {
         path: './dist/js',
@@ -24,8 +29,6 @@ module.exports = {
             _util: path.join(base_path, 'util'),
             _vuex: path.join(base_path, 'vuex'),
             _image: path.join(base_path, 'img')
-
-            // jquery: path.resolve(__dirname, 'node_modules', 'jquery')
         }
     },
     module: {
