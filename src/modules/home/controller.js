@@ -6,7 +6,6 @@ class HomeController {
 	index(request, reply) {
 		let service = new postService()
 		let posts = service.get()
-		console.log(posts)
 		reply.view('pages/home')
 	}
 }

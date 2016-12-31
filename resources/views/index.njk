@@ -8,6 +8,7 @@
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
+        {% include "includes/header.njk" %}
         {% block content %}{% endblock %}
         <script src="/js/bundled.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

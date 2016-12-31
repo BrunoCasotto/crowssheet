@@ -4,7 +4,6 @@ class AuthController {
 
 	constructor() {
 		let service = new AuthService()
-		console.log(service.isSigned())
 		if(service.isSigned() != null) {
 			reply.view('pages/dashboard')
 		}

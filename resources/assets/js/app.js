@@ -25,7 +25,7 @@ new Vue({
     components: {
         Dashboard,
         Login,
-        Singup,
+        Singup,     
         Post,
         Slider
     }
