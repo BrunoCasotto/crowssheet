@@ -1,0 +1,37 @@
+@import '../config/vars.scss';
+
+nav {
+	.nav {
+		&__content { 
+			height: 50px;
+			display: flex;
+			width: 100%;
+			justify-content: center;
+			box-shadow: 1px 1px 11px 0px;
+    		margin-bottom: 10px;
+
+			.items {
+				display: flex;
+				align-items: center;
+
+				.item {
+					margin: 0 10px 0 10px;
+					display: flex;
+					padding: 5px;
+					min-width: 100px;
+					max-width: 150px;
+					font-size: 1.4rem;	
+					font-family: 'Dancing Script', cursive;
+					color: black;
+					text-decoration: none;
+					transition: all 1s ease;
+
+					&:hover {
+					color: $color-grey-blue-light;
+					transform: scale(1.3);
+					}
+				}
+			}
+		}
+	}
+}
