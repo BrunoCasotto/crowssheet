@@ -7,15 +7,13 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha test",
-    "build": "webpack --watch",
-    "dev": "webpack-dev-server --inline --hot",
-    "build-css": "node-sass --include-path scss resources/assets/sass/main.scss dist/css/main.css",
-    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-    "start:dev": "concurrently \"npm run watch-css\"  \"npm run build\"",
-    "start:prod": "concurrently \"npm run build-css\"  \"npm run build\"",
     "start": "node index.js",
-    "postinstall": "npm run start:prod"
+    "build:prod": "webpack",
+    "dev": "concurrently \"npm run watch:dev\" \"npm run build:dev\"",
+    "watch:dev": "nodemon index.js",
+    "build:dev": "webpack --watch",
+    "test": "mocha test",
+    "heroku-postbuild": "npm run build:prod"
   },
   "repository": {
     "type": "git",
