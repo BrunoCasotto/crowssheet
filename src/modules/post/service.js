@@ -3,17 +3,17 @@ let firebase = require("@modules/core/firebase")
 class PostService extends firebase{
 
 	store(post) {
-		console.log(this._firebase.auth().currentUser)
-		this.database.ref('post').push({
+		this.database.ref('posts').push({
 			"title": post.title,
 			"text": post.text
 		})
 	}
 
-	get() {
-		let call = this.database.ref('users/email');
-		call.on('value', function(users) {
-			console.log( users.val())
+	getPost() {
+		let ref = this.database.ref('posts/codigo1')
+		ref.on('value', (snapshot) => {
+			console.log(snapshot.val())
+			return snapshot.val()
 		})
 	}
 }

@@ -10,7 +10,6 @@ npm-debug.log*
 .node_repl_history
 
 #env and configures
-config/database.js
 config/external.js
 
 #public path
