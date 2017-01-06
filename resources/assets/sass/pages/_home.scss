@@ -1,0 +1,16 @@
+.home {
+
+	&__header {
+		min-height: 250px;
+		max-height: 300px;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		img {
+			width: 100%;
+			background-image: url('/images/wall1.jpeg');
+		}
+	}
+}

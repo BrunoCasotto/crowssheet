@@ -1,0 +1,28 @@
+{% extends 'index.njk' %}
+{% block title %}Blog Iap{% endblock %}
+{%block header%}{%endblock%}
+{% block content %}
+<div class="home">
+	<!-- Page Header -->
+	<div class="home__header">
+		<slider></slider>
+	</div>
+	<!-- Main Content -->
+	<div class="home__posts container">
+	{% for post in posts %}
+		<post 
+		title="{{ post['title'] }}"
+		text="{{ post['text'] }}"
+		author="{{ post['author'] }}"
+		image="{{ post['image'] }}"
+		></post>
+	{% endfor %}
+	</div>
+	<hr>
+
+	<!-- Footer -->
+	<footer>
+
+	</footer>
+</div>
+{% endblock %}
