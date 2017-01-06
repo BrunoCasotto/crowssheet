@@ -38,7 +38,7 @@ export default {
 	}
 },
 components: {
-	Slider
+	// Slider
 },
 props: {
 	content: []
