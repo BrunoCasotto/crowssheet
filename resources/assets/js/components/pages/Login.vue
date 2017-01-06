@@ -16,7 +16,7 @@
 			</form>
 
 			<div class="login__logo">
-				<img src="/images/Logo.png" alt=""></img>
+				<img src="/images/Logo.png" alt=""></img> 
 			</div>
 		</div>
 		<div class="login__footer">
