@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build:prod": "webpack",
+    "build:prod": "webpack -p",
     "dev": "concurrently \"npm run watch:dev\" \"npm run build:dev\"",
     "watch:dev": "nodemon index.js",
     "build:dev": "webpack --watch",

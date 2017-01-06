@@ -1,15 +1,13 @@
-'use strict'
-
 const path = require( 'path' )
 const webpack = require("webpack")
 
-const base_path = path.join(__dirname, 'resources/assets/js')
-const base_path_sass = path.join(__dirname, 'resources/assets/sass')
+const base_path = path.resolve(__dirname, 'resources/assets/js')
+
+// webpack.config.js
 module.exports = {
-    entry:[
-        path.join(base_path, 'app.js'),
-        path.join(base_path_sass, 'main.scss')
-    ],
+    // entry point of our application
+    entry: path.join(base_path, 'app.js'),
+    // where to place the compiled bundle
     output: {
         path: './dist/js',
         publicPath: './dist/',
@@ -17,6 +15,7 @@ module.exports = {
     },
     devtool: 'source-map',
     resolve: {
+    // add alias for application code directory
         alias:{
             _app: base_path,
             _common: path.join(base_path, 'common'),
@@ -25,19 +24,27 @@ module.exports = {
             _util: path.join(base_path, 'util'),
             _vuex: path.join(base_path, 'vuex'),
             _image: path.join(base_path, 'img')
+
+            // jquery: path.resolve(__dirname, 'node_modules', 'jquery')
         }
     },
     module: {
+        // `loaders` is an array of loaders to use.
+        // here we are only configuring vue-loader
         loaders: [
             {
                 test: /\.vue$/, // a regex for matching all files that end in `.vue`
-                exclude: /node_modules/, 
+                exclude: /node_modules/,
                 loader: 'vue'   // loader to use for matched files
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel'
+            },
+            {
+                test: /\.html$/,
+                loader: "html"
             },
             {
                 test: /\.scss$/,
@@ -49,6 +56,7 @@ module.exports = {
             }
         ],
         vue: {
+            // configure autoprefixer
             autoprefixer: {
                 browsers: ['last 2 versions', 'IE 10']
             }
