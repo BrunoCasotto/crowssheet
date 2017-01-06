@@ -13,8 +13,7 @@ npm-debug.log*
 config/external.js
 
 #public path
-dist
-!dist/images
+dist/js
 
 #npm dependencies
 node_modules
