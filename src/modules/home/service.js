@@ -3,10 +3,12 @@ let firebase = require('@modules/core/firebase')
 class HomeService extends firebase{
 
 	getPosts() {
-		let call = this.database.ref('posts');
-
-		call.on('value', function(posts) {
-			return posts
+		var ref = this.database.ref("posts/");
+		ref.once("value")
+		.then(function(snapshot) {
+			var key = snapshot.key; // "ada
+			// var childKey = snapshot.child("title")
+			console.log(key)
 		})
 	}
 

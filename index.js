@@ -2,8 +2,8 @@
 require('module-alias/register')
 const Hapi = require('hapi')
 let routes = require('@route/route.js')
-const Path = require('path');
-const Hoek = require('hoek');
+const Path = require('path')
+const Hoek = require('hoek')
 
 const server = new Hapi.Server({
     connections: {
@@ -13,9 +13,9 @@ const server = new Hapi.Server({
             }
         }
     }
-}) 
+})
 
-server.connection({ port: 4000 })
+server.connection({ port: process.env.PORT || 4000 })
 
 server.register(require('vision'), (err) => {
     Hoek.assert(!err, err)

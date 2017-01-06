@@ -2,8 +2,9 @@ let PostService = require("@modules/post/service")
 
 class PostController {
 
-	index(request, reply) {
-		reply('post')
+	getPost(request, reply) {
+		let service = new PostService()
+		service.getPost()
 	}
 
 	store(request, reply) {
