@@ -17,3 +17,5 @@ dist/js
 
 #npm dependencies
 node_modules
+
+.env
