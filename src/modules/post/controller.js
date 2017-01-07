@@ -4,7 +4,9 @@ class PostController {
 
 	getPost(request, reply) {
 		let service = new PostService()
-		service.getPost()
+		service.getPost((result)=>{
+			
+		})
 	}
 
 	store(request, reply) {

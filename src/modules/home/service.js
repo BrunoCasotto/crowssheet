@@ -2,8 +2,8 @@ let firebase = require('@modules/core/firebase')
 
 class HomeService extends firebase{
 
-	getPosts() {
-		var ref = this.database.ref("posts/");
+	getPosts(postId) {
+		var ref = this.database.ref("posts/"+postId);
 		ref.once("value")
 		.then(function(snapshot) {
 			var key = snapshot.key; // "ada

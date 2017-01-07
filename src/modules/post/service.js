@@ -9,11 +9,10 @@ class PostService extends firebase{
 		})
 	}
 
-	getPost() {
-		let ref = this.database.ref('posts/codigo1')
-		ref.on('value', (snapshot) => {
-			console.log(snapshot.val())
-			return snapshot.val()
+	getPost(postId,callback) {
+		let ref = this.database.ref('posts/'+postId)
+		return ref.on('value', (result)=>{
+			callback(result.val())
 		})
 	}
 }
