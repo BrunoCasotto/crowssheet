@@ -10,7 +10,7 @@ import store from './vuex/store'
 
 //===== components ======
 import Menu from '_app/common/components/Menu.vue'
-import Slider from '_app/common/components/Slider.vue'
+import PhotoGrid from '_app/common/components/PhotoGrid.vue'
 import Breadcrumb from './plugins/breadcrumb'
 import Post from '_app/components/Post.vue'
 
@@ -27,6 +27,6 @@ new Vue({
         Login,
         Singup,        
         Post,
-        Slider
+        PhotoGrid
     }
 })
