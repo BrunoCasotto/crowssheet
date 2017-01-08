@@ -1,5 +1,5 @@
 <template lang="html">
-	<div class="post">
+	<div :class="'post--'+appearance">
 		<a class="title">this is a post</a>
 		<div class="post__content">
 			<div class="post__content__image">
@@ -12,7 +12,7 @@
 				</p>
 				<button class="btn btn-default">Ver mais</button>
 			</div>
-			<div class="post__content__controller">
+			<div class="post__content__controller">  
 				
 			</div>
 		</div>
@@ -29,27 +29,28 @@ export default {
 	  title: '',
 	  text: '',
 	  image: '',
-	  author: ''
+	  author: '',
+	  appearance: ''
   }
 }
 </script>
 <style lang="sass" scoped>
 	@import "~_app/variables.scss";
 
-	.post {
+	.post--previous {
 		border-top: solid 1px $color-blue--light;
 		border-bottom: solid 1px $color-blue--light;
 		display: flex;
 		flex-direction: column;
 		padding: 15px;
-		width: 100%;
+		width: 100%; 
 
 		.title {
 			font-size: 2rem;
 			color: $color-blue--base;
 		}
 
-		&__content {
+		.post__content {
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -72,4 +73,31 @@ export default {
 			}
 		}
 	}
+	.post--single {
+		display: flex;
+		flex-direction: column;
+		padding: 20px;
+
+		.post__content {
+			display: flex;
+			flex-direction: column;
+
+			&__image {
+				height: 150px;
+
+				img {
+					height: 100%;
+				}
+			}
+
+			&__text {
+				flex:1;
+				padding: 10px;
+
+				.text__title {
+					font-size: 2rem;
+				}
+			}
+		}
+	}	
 </style>

@@ -7,8 +7,10 @@
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
+    {% if noheader != null %}
         {% include "includes/header.njk" %}
         {% include "includes/nav.njk" %}
+    {% endif %}
         {% block content %}{% endblock %}
         <script src="/js/bundled.js"></script>
         <script src="/js/bundled.js.map"></script>

@@ -9,7 +9,7 @@ import store from './vuex/store'
 // import routes from './routes'
 
 //===== components ======
-import Menu from '_app/common/components/Menu.vue'
+import Menu from '_app/common/components/Menu.vue' 
 import PhotoGrid from '_app/common/components/PhotoGrid.vue'
 import Breadcrumb from './plugins/breadcrumb'
 import Post from '_app/components/Post.vue'

@@ -1,0 +1,15 @@
+{% extends 'index.njk' %}
+{% block title %}Post{% endblock %}
+{% block content %}
+<div class="single-post">
+    <div class="container single-post__content">
+        <post
+		title="{{ post['title'] }}" 
+		text="{{ post['text'] }}"
+		author="{{ post['author'] }}"
+		image="{{ post['image'] }}"
+		appearance="single"
+		></post>
+    </div>
+</div>
+{% endblock %}

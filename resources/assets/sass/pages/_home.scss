@@ -1,5 +1,6 @@
-.home {
+@import '../config/vars.scss';
 
+.home {
 	&__header {
 		overflow: hidden;
 		display: flex;
