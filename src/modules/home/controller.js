@@ -1,11 +1,12 @@
 let homeService = require("@modules/home/service")
 let postService = require("@modules/post/service")
+let jsonQuery = require('json-query')
 
 class HomeController {
 
 	index(request, reply) {
 		let service = new postService()
-		service.getPost('codigo1',(result)=>{
+		service.getAll((result)=>{
 			reply.view('pages/home',{
 				posts:[
 					{

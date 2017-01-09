@@ -15,5 +15,13 @@ class PostService extends firebase{
 			callback(result.val())
 		})
 	}
+
+	getAll(callback) {
+		let ref = this.database.ref('posts/')
+		
+		return ref.on('value', (result)=>{
+			callback(result.val())
+		})
+	}
 }
 module.exports = PostService 

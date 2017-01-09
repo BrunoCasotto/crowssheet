@@ -38,6 +38,12 @@ server.register( require('inert'), (err) => {
     server.route(require('@route/file.js'))
 })
 
+let bind = {
+        var: 'content'
+	}
+
+server.bind( bind )
+
 server.start((err) => {
     if (err) {
         console.log(err)

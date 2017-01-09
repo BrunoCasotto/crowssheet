@@ -60,6 +60,7 @@
     "hapi-plugin-co": "^0.9.4",
     "inert": "^4.0.3",
     "jquery": "2.2.4",
+    "json-query": "^2.2.0",
     "module-alias": "^2.0.0",
     "moment": "^2.14.1",
     "node-sass": "^3.13.0",

@@ -10,7 +10,9 @@ class AuthController {
 	}
 
 	index(request, reply) {
-		reply.view('pages/login')
+		reply.view('pages/login',{
+			noheader: true
+		})
 	}
 
 	register(request, reply) {
