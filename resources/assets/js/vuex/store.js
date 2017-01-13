@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
-import project from './modules/project'
-
+let data = window.DigitalDrift || {};
+// import project from './modules/project.js'
+// import post from './modules/post'
+import loader from './modules/loader'
 
 Vue.use(Vuex)
-
 export default new Vuex.Store({
     modules: {
-        project
+        loader: loader(data.loader)
     }
 })

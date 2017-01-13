@@ -23,8 +23,8 @@ module.exports = {
             _common: path.join(base_path, 'common'),
             _components: path.join(base_path, 'components'),
             _services: path.join(base_path, 'services'),
-            _util: path.join(base_path, 'util'),
-            _vuex: path.join(base_path, 'vuex'),
+            _util: path.join(__dirname, 'resources', 'assets', 'js', 'vuex'),
+            _vuex: path.join(__dirname, 'resources', 'assets', 'js', 'vuex'),
             _image: path.join(base_path, 'img')
         }
     },

@@ -27,7 +27,8 @@
     "@config": "config",
     "@helpers": "src/helpers",
     "@resources": "resources",
-    "@node": "node_modules"
+    "@node": "node_modules",
+    "@vuex": "resources/assets/js/vuex"
   },
   "keywords": [
     "blog"

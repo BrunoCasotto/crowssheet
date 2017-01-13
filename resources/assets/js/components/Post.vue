@@ -21,16 +21,26 @@
 </template>
 
 <script>
+import { toggleLoader } from '_vuex/actions';
+
 export default {
   data () {
     return {}
   },
   props: {
-	  title: '',
-	  text: '',
-	  image: '',
-	  author: '',
-	  appearance: ''
+		title: '',
+		text: '',
+		image: '',
+		author: '',
+		appearance: ''
+	},
+	vuex: {
+		actions: {
+			toggleLoader
+		}
+	},
+  ready: function() {
+	//   this.updatePost('roso')
   }
 }
 </script>

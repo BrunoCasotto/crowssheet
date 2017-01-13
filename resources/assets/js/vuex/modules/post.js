@@ -1,16 +1,15 @@
 import {
-    UPDATE_PROJECTS
+    UPDATE_POSTS
 } from '../mutation-types'
 
 export default function() {
-
     const state = {
-        projects: []
-    }
+        posts: 'roso'
+    };
 
     const mutations = {
-        [UPDATE_PROJECTS] (state, projects) {
-            state = projects
+        [UPDATE_POSTS] (state, posts) {
+            state.posts = posts
         }
     }
 }
@@ -18,4 +17,3 @@ export default function() {
         state,
         mutations
     }
-
