@@ -22,11 +22,9 @@
 
 <script>
 import { toggleLoader } from '_vuex/actions';
+import vuex from '_vuex/store';
 
 export default {
-  data () {
-    return {}
-  },
   props: {
 		title: '',
 		text: '',
@@ -40,7 +38,7 @@ export default {
 		}
 	},
   ready: function() {
-	//   this.updatePost('roso')
+	  console.log(vuex)
   }
 }
 </script>

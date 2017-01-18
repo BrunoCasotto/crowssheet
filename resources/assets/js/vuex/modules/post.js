@@ -4,16 +4,17 @@ import {
 
 export default function() {
     const state = {
-        posts: 'roso'
-    };
+        posts: false
+    }
 
     const mutations = {
-        [UPDATE_POSTS] (state, posts) {
-            state.posts = posts
+        [UPDATE_POSTS] (state) {
+            state.posts = state
         }
     }
-}
-    export default {
+
+    return {
         state,
         mutations
     }
+}
