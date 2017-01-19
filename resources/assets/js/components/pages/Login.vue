@@ -4,14 +4,14 @@
 	</div>
 	<div class="login">
 		<div class="login__strip">
-			<form class="login__form" action="/auth/singin" method="post">
+			<form class="login__form" v-on:submit.prevent>
 				<div class="form-group">
 					<input name="email" v-model="email" type="email"  class="form-control" placeholder="Email">
 				</div>
 				<div class="form-group">
 					<input name="password" v-model="password" type="password" class="form-control" placeholder="Password">
 				</div>
-				<button type="submit" class="btn btn-default">Login</button>
+				<button v-on:click="login" class="btn btn-default">Login</button>
 				<a href="/auth/register" class="btn btn-default" >Singup</a>
 			</form>
 
@@ -29,6 +29,7 @@
 	import LogoCorvo from "_app/common/components/Logo.vue"
 	import VHeader from "_app/components/includes/Header.vue"
 	import VFooter from "_app/components/includes/Footer.vue"
+	import axios from 'axios'
 
 	export default {
 		name: 'Login',
@@ -42,6 +43,24 @@
 			LogoCorvo,
 			VHeader,
 			VFooter
+		},
+		methods: {
+			login: function() {
+				axios.post('/auth/singin', {
+					email: this.email,
+					password: this.password
+				})
+				.then(function (response) {
+					if(response.data.status == true) {
+						window.location.assign('/dashboard')
+					} else {
+						console.log(response)
+					}
+				})
+				.catch(function (error) {
+					
+				})
+			}
 		}
 	}
 </script>

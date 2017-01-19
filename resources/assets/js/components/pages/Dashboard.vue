@@ -1,26 +1,6 @@
 <template lang="html">
    	<div>
-		<v-header></v-header>
-	</div>
-	<div class="login">
-		<div class="login__strip">
-			<form class="login__form" action="/auth/singin" method="post">
-				<div class="form-group">
-					<input name="title" v-model="title" type="text"  class="form-control" placeholder="Title">
-				</div>
-				<div class="form-group">
-					<input name="text" v-model="text" type="text" class="form-control" placeholder="Text">
-				</div>
-				<button type="submit" class="btn btn-default">Save</button>
-			</form>
-
-			<div class="login__logo">
-				<img src="/images/Logo.png" alt=""></img>
-			</div>
-		</div>
-		<div class="login__footer">
-			<v-footer></v-footer>
-		</div>
+		   <h3>dashboard</h3>
 	</div>
 </template>
 <script>
