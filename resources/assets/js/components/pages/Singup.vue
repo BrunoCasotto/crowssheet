@@ -3,25 +3,49 @@
 		<v-header></v-header>
 	</div>
 	<div class="container singup">
-		<form class="form" action="/auth/singup" method="post">
+		<form class="form" v-on:submit.prevent>
 			<label class="form__title">Singup</label>
 			 <div class="form__row">
 			   <div class="col col--md">
-				 <input type="text" name="name" value="" placeholder="name" class="input input--blank">
+				 <input 
+				 type="text" 
+				 name="name" 
+				 placeholder="name" 
+				 class="input input--blank"
+				v-model="name"
+				 >
 			   </div>
 			   <div class="col col--md">
-				 <input type="text" name="email" value="" placeholder="e-mail" class="input input--blank">
+				 <input 
+				 type="text" 
+				 name="email" 
+				 placeholder="e-mail" 
+				 class="input input--blank"
+				 v-model="email"
+				 >
 			   </div>
 			 </div>
 			 <div class="form__row">
 			  <div class="col col--md">
-				<input type="password" name="password" value="" placeholder="password" class="input input--blank">
+				<input 
+				type="password" 
+				name="password" 
+				placeholder="password" 
+				class="input input--blank"
+				v-model="password"
+				>
 			  </div>
 			  <div class="col col--md">
-				<input type="password" name="passwordAgain" value="" placeholder="password again" class="input input--blank">
+				<input 
+				type="password"
+				name="passwordAgain" 
+				placeholder="password again" 
+				class="input input--blank"
+				v-model="passwordAgain"
+				>
 			  </div>
 			</div>
-			<button type="submit" class="btn btn-default form__btn">Sing Up</butotn>
+			<button class="btn btn-default form__btn" v-on:click="register()">Sing Up</butotn>
 		</form>
 	</div>
 	<div>
@@ -32,6 +56,7 @@
 <script>
 import VHeader from "_app/components/includes/Header.vue"
 import VFooter from "_app/components/includes/Footer.vue"
+import axios from 'axios'
 
 export default {
   data () {
@@ -40,6 +65,34 @@ export default {
   components: {
 	  VHeader,
 	  VFooter
+  },
+  methods: {
+	  register: function() {
+		  if(this.validate()){
+			axios.post('/auth/singup', {
+				name: this.name,
+				email: this.email,
+				password: this.password
+				})
+				.then(function (response) {
+					console.log(response.data)
+					if(response.data.status == true) {
+						window.location.replace('/')
+					}
+				})
+				.catch(function (error) {
+					console.log(error) 
+				})
+		  }
+	  },
+	  validate: function() {
+		  return true;
+		  if(this.password == this.passwordAgain && this.name.trim().length > 5 && this.email.trim().length > 4) {
+			  return true
+		  } else {
+			  return false
+		  }
+	  }
   }
 }
 </script>
@@ -77,7 +130,7 @@ export default {
 
 			&__title {
 				font-size: 3rem;
-				color: $color-white-base;
+				color: white;
 			}
 
 			&__row {

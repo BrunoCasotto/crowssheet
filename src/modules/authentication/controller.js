@@ -3,11 +3,15 @@ let AuthService = require('@modules/authentication/service')
 class AuthController {
 
 	index(request, reply) {
-		reply.view('pages/login')
+		reply.view('pages/login',{
+			noheader: true
+		})
 	}
 
 	showSingup(request, reply) {
-        reply.view('pages/singup')
+        reply.view('pages/singup',{
+			noheader: true
+		})
     }
 
 	* singin(request, reply) {

@@ -1,6 +1,64 @@
 <template lang="html">
-   	<div>
-		   <h3>dashboard</h3>
+   	<div class="dashboard">
+		<div class="dashboard__header">
+			<div class="header__top">
+
+			</div>
+			<div class="header__nav">
+				<div class="container header__nav__content">
+					<div class="items">
+						<a class="item" href="#">Posts</a>
+						<a class="item" href="#">Personalizar</a>
+						<a class="item" href="#">Usuarios</a>
+						<a class="item" href="#">Configurações</a>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<div class="container dashboard__content">
+			<form class="form">
+  				<div class="form-group">
+					<label for="exampleInputEmail1">Titulo</label>
+					<input class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Descrição curta</label>
+					<textarea class="form-control" rows="3"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Conteudo Principal</label>
+					<textarea class="form-control" rows="10"></textarea>
+				</div>
+				<button class="btn btn-default">Salvar</button>
+			</form>
+			<div class="config">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Imagem prévia</label>
+					<input type="file" name="image" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Imagem Principal</label>
+					<input type="file" name="image" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Imagem final</label>
+					<input type="file" name="image" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Categoria</label>
+					<input class="form-control">
+				</div>
+				<label for="exampleInputEmail1">Status</label>
+				<select class="form-control">
+					<option>Oculto</option>
+					<option>Visível</option>
+				</select>
+			</div>
+		</div>
+		<div class="dashboard__footer">
+
+		</div>
+
 	</div>
 </template>
 <script>
@@ -18,73 +76,64 @@
 
 <style lang="sass" scoped>
 	@import "~_app/variables.scss";
+	.dashboard {
 
-	.login {
-		padding: 40px;
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-		justify-content: center;
-		align-items: center;
-
-		&__strip {
-			padding: 10px;
-			display: flex;
-			flex-wrap: wrap-reverse;
-			background-color: $color-blue--light;
-			border-radius: 8px;
-
-			@media screen and(max-width: $screen-md) {
-				justify-content: center;
-			}
-
-			@media screen and(max-width: $screen-sm) {
-				width: 98vw;
-			}
-		}
-
-		&__form {
-			min-width: 400px;
-			padding: 10px;
-			flex:1;
-			border-radius: 8px;
-			z-index:1;
-			background-color: $color-blue--base;
-
-			@media screen and(max-width: $screen-md) {
-				min-width: 300px;
+		&__header {
+			background-color: $color-grey--light;
+			.header__top{
+				height: 100px;
 				width: 100%;
 			}
+			.header__nav {
+				background-color: $color-light-grey--base;
+				&__content {
+					.items {
+						display: flex;
+						align-items: center;
 
-			@media screen and(max-width: $screen-sm) {
-				min-width: 100%;
+						.item {
+							margin: 0 5px 0 5px;
+							display: flex;
+							padding: 5px;
+							font-size: 1.4rem;
+							color: black;
+							text-decoration: none;
+
+							&:hover {
+							color: $color-grey-blue-light;
+							}
+						}
+					}
+					
+				}
 			}
 		}
 
-		&__logo {
-			min-width: 400px;
-			height: 200px;
-			display: flex;
-			flex: 1;
-
-			@media screen and(max-width: $screen-md) {
-				min-width: 100;
-				justify-content: center;
+		&__content {
+			max-width: 1000px;
+			margin: 20px auto;
+			@media screen and(min-width: $screen-sm) {
+				display: flex;
 			}
 
-			@media screen and(max-width: $screen-sm) {
-				min-width: 100%;
-				height: 150px;
+			.form {
+				width: 50%;
+				padding: 5px;
+				@media screen and(max-width: $screen-sm) {
+					width: 100%;
+				}
 			}
-
-			img {
-				height: 100%;
+			.config {
+				width: 50%;
+				padding: 5px;
+				@media screen and(max-width: $screen-sm) {
+					width: 100%;
+				}
 			}
 		}
 
 		&__footer {
-			padding: 30px 0;
+
 		}
 	}
-
 </style>
