@@ -16,20 +16,20 @@
 			</div>
 		</div>
 		<div class="container dashboard__content">
-			<form class="form">
+			<form class="form" v-on:submit.prevent>
   				<div class="form-group">
 					<label for="exampleInputEmail1">Titulo</label>
-					<input class="form-control">
+					<input class="form-control" v-model="post.title">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Descrição curta</label>
-					<textarea class="form-control" rows="3"></textarea>
+					<textarea class="form-control" rows="3" v-model="post.previous"></textarea>
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Conteudo Principal</label>
-					<textarea class="form-control" rows="10"></textarea>
+					<textarea class="form-control" rows="10" v-model="post.text"></textarea>
 				</div>
-				<button class="btn btn-default">Salvar</button>
+				<button class="btn btn-default" v-on:click="storePost">Salvar</button>
 			</form>
 			<div class="config">
 				<div class="form-group">
@@ -46,10 +46,10 @@
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Categoria</label>
-					<input class="form-control">
+					<input class="form-control" v-model="post.categoria">
 				</div>
 				<label for="exampleInputEmail1">Status</label>
-				<select class="form-control">
+				<select class="form-control" v-model="post.status">
 					<option>Oculto</option>
 					<option>Visível</option>
 				</select>
@@ -64,13 +64,31 @@
 <script>
     import VHeader from "_app/components/includes/Header.vue"
 	import VFooter from "_app/components/includes/Footer.vue"
-
+	import axios from "axios"
     export default {
         name: 'dashboard',
         components: {
             VHeader,
             VFooter
-        }
+        },
+		data: function() {
+			return{
+				post: null
+			}
+		},
+		methods: {
+			storePost: function() {
+				axios.post('/post/save', {
+					post: this.post
+				})
+				.then(function (response) {
+					console.log(response)
+				})
+				.catch(function (error) {
+					
+				})
+			}
+		}
     }
 </script>
 
