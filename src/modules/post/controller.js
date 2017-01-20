@@ -24,7 +24,7 @@ class PostController {
 
 	store(request, reply) {
 		let service = new PostService()
-		service.store()
+		service.store(request.payload.post)
 	}
 }
 module.exports = PostController

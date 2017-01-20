@@ -36,7 +36,9 @@ class AuthService extends firebase{
 	}
 
 	isSigned() {
-		return this._firebase.auth().currentUser
+		return new Promise( (resolve, reject) => {
+			resolve(this._firebase.auth().currentUser)
+		})
 	}
 }
 module.exports = AuthService
