@@ -6,6 +6,6 @@ module.exports = ( controller ) => {
 		{method: 'POST', path: '/post/save', handler: controller.store},
 		{method: 'GET',	path: '/post/{postId}', handler: controller.showSinglePost},
 		{method: 'GET',	path: '/json/post/get', handler: controller.getPost},
-		{method: 'GET', path: '/post/all', handler: controller.getAll}
+		{method: 'GET', path: '/json/post/all', handler: controller.getAll}
 	]
 }

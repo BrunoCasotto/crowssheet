@@ -44,7 +44,7 @@ export default {
 	},
   	methods: {
 		fetchPosts: function(){
-			axios.get('/post/all')
+			axios.get('/json/post/all')
 			.then((response)=> {
 				this.posts = response.data
 			})
