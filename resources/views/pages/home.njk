@@ -10,13 +10,7 @@
 	<!-- Main Content -->
 	<div class="home__posts container">
 	{% for post in posts %}
-		<post
-		title="{{ post['title'] }}"
-		text="{{ post['text'] }}"
-		author="{{ post['author'] }}"
-		image="{{ post['image'] }}"
-		appearance="previous"
-		></post>
+		<post appearance="list"></post>
 	{% endfor %}
 	</div>
 	<hr>

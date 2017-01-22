@@ -1,14 +1,14 @@
 <template lang="html">
-	<div :class="'post--'+appearance">
-		<a class="title">this is a post</a>
-		<div class="post__content">
+	<div :class="'post--'+appearance" v-for="post in posts">
+		<a href="{{'/post/'+post.key}}" class="title">this is a post</a>
+		<div class="post__content" >
 			<div class="post__content__image">
-				<img src="{{image}}" alt="">
+				<img src="{{post.image}}" alt="">
 			</div>
 			<div class="post__content__text">
-				<p class="text__title" v-model="title">{{ title }}</p>
+				<p class="text__title" v-model="title">{{ post.title }}</p>
 				<p class="text__previous">
-					{{ text }}
+					{{ post.text }}
 				</p>
 				<button class="btn btn-default">Ver mais</button>
 			</div>
@@ -21,31 +21,49 @@
 </template>
 
 <script>
-import { toggleLoader } from '_vuex/actions';
-import vuex from '_vuex/store';
+import axios from 'axios'
 
 export default {
-  props: {
-		title: '',
-		text: '',
-		image: '',
-		author: '',
+  props: { 
+		postId: '',
 		appearance: ''
 	},
-	vuex: {
-		actions: {
-			toggleLoader
+	data: function() {
+		return {
+			posts: {}
 		}
 	},
-  ready: function() {
-	  console.log(vuex)
-  }
+	ready: function() {
+		console.log(this.postId)
+
+		if(this.appearance == 'list')
+			this.fetchPosts()
+		
+		if(this.appearance == 'single')
+			this.getPost()
+	},
+  	methods: {
+		fetchPosts: function(){
+			axios.get('/post/all')
+			.then((response)=> {
+				this.posts = response.data
+			})
+			.catch((error)=> {})
+		},
+		getPost: function(){
+			axios.get('/json/post/get?postId='+this.postId)
+			.then((response)=> {
+				this.posts = [response.data]
+			})
+			.catch((error)=> {})
+		}
+  	}
 }
 </script>
 <style lang="sass" scoped>
 	@import "~_app/variables.scss";
 
-	.post--previous {
+	.post--list {
 		border-top: solid 1px $color-blue--light;
 		border-bottom: solid 1px $color-blue--light;
 		display: flex;

@@ -4,27 +4,32 @@ class PostController {
 
 	showSinglePost(request, reply) {
 		let service = new PostService()
-		let codigo = request.params.postId
+		reply.view('pages/singlePost',{postId: request.params.postId})
+	}
 
-		service.getPost(codigo, (result)=>{
-			if(result) {
-				reply.view('pages/singlePost',{
-				post:{
-						title: result.title ? result.title : '' ,
-						text: result.text ? result.text : '' ,
-						image: result.image ? result.image : '',
-						autor: result.author ? result.autor : ''
-					}
-				})
-			} else {
-				reply('no post')
-			}	
+	store(request, reply) { 
+		let service = new PostService()
+		service.store(request.payload.post)
+	}   
+
+	getAll(request, reply) {
+		let service = new PostService()
+		service.getAll((result)=>{
+			let posts = []
+			for(var key in result) {
+				result[key]['key'] = key
+				posts.push(result[key])
+			}
+			reply(posts)
 		})
 	}
 
-	store(request, reply) {
+	getPost(request, reply) {
 		let service = new PostService()
-		service.store(request.payload.post)
+		service.getPost(request.query.postId,(result)=>{
+			reply(result)
+		})
 	}
+	
 }
 module.exports = PostController

@@ -6,9 +6,7 @@ class HomeService extends firebase{
 		var ref = this.database.ref("posts/"+postId);
 		ref.once("value")
 		.then(function(snapshot) {
-			var key = snapshot.key; // "ada
-			// var childKey = snapshot.child("title")
-			console.log(key)
+			var key = snapshot.key;
 		})
 	}
 
