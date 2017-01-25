@@ -73,7 +73,11 @@
         },
 		data: function() {
 			return{
-				post: null
+				post: {
+					title: '',
+					text: '',
+					previous: ''
+				}
 			}
 		},
 		methods: {
@@ -85,7 +89,7 @@
 					console.log(response)
 				})
 				.catch(function (error) {
-					
+					console.log(error)
 				})
 			}
 		}

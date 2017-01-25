@@ -3,7 +3,13 @@ let firebase = require("@modules/core/firebase")
 class PostService extends firebase{
 
 	store(post) {
-		this.database.ref('posts').push(post)
+		return this.database.ref('posts').push(post)
+		.then((result)=>{
+			return {
+				status: true,
+				data: result.path
+			}
+		})
 	}
 
 	getPost(postId,callback) {

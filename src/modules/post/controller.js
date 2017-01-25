@@ -7,10 +7,12 @@ class PostController {
 		reply.view('pages/singlePost',{postId: request.params.postId})
 	}
 
-	store(request, reply) { 
+	* store(request, reply) {
 		let service = new PostService()
-		service.store(request.payload.post)
-	}   
+		let response = yield service.store(request.payload.post)
+		reply(response) 
+		// return  service.store(request.payload.post)
+	}  
 
 	getAll(request, reply) {
 		let service = new PostService()
