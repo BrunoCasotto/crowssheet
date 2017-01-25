@@ -46,7 +46,13 @@
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Categoria</label>
-					<input class="form-control" v-model="post.categoria">
+					<select class="form-control" v-model="post.category" v-if="categories.length > 0">
+						<option v-for="cat in categories" :value="cat.key">{{cat.name}}</option>
+					</select>
+					<select class="form-control" v-else>
+						<option>Nenhuma categoria</option>
+					</select>
+
 				</div>
 				<label for="exampleInputEmail1">Status</label>
 				<select class="form-control" v-model="post.status">
@@ -76,9 +82,14 @@
 				post: {
 					title: '',
 					text: '',
-					previous: ''
-				}
+					previous: '',
+					category: ''
+				},
+				categories: []
 			}
+		},
+		ready: function() {
+			this.fetchData()
 		},
 		methods: {
 			storePost: function() {
@@ -91,6 +102,13 @@
 				.catch(function (error) {
 					console.log(error)
 				})
+			},
+			fetchData: function() {
+				axios.get('/json/post/all/category')
+				.then((response)=> {
+					this.categories = response.data
+				})
+				.catch((error)=> {})
 			}
 		}
     }

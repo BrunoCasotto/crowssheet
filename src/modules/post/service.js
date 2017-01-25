@@ -25,5 +25,29 @@ class PostService extends firebase{
 			callback(result.val())
 		})
 	}
+
+	getCategory(categoryId, callback) {
+		let ref = this.database.ref('categories/'+postId)
+		return ref.on('value', (result)=>{
+			callback(result.val())
+		})
+	}
+
+	getAllCategories(callback) {
+		let ref = this.database.ref('categories/')
+		return ref.on('value', (result)=>{
+			callback(result.val())
+		})
+	}
+
+	storeCategory(post) {
+		return this.database.ref('categories').push(post)
+		.then((result)=>{
+			return {
+				status: true,
+				data: result.path
+			}
+		})
+	}
 }
 module.exports = PostService 
