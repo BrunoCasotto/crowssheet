@@ -101,21 +101,20 @@
 		},
 		methods: {
 			storePost: function() {
-				this.saveImage()
-				// axios.post('/post/save', {
-				// 	post: this.post
-				// })
-				// .then((response)=> {
-				// 	if(response.data.status) {
-				// 		this.post.title = ""
-				// 		this.post.text = ""
-				// 		this.post.previous = ""
-				// 		growl.success('Postado')
-				// 	}
-				// })
-				// .catch((error)=> {
-				// 	growl.success('Ocorreu um erro')
-				// })
+				axios.post('/post/save', {
+					post: this.post
+				})
+				.then((response)=> {
+					if(response.data.status) {
+						this.post.title = ""
+						this.post.text = ""
+						this.post.previous = ""
+						growl.success('Postado')
+					}
+				})
+				.catch((error)=> {
+					growl.success('Ocorreu um erro')
+				})
 			},
 			fetchData: function() {
 				axios.get('/json/post/all/category')
@@ -123,15 +122,6 @@
 					this.categories = response.data
 				})
 				.catch((error)=> {})
-			},
-			saveImage: function() {
-				axios.post('/file/image/save', this.image.previous)
-				.then((response)=> {
-					console.log(response)
-				})
-				.catch((error)=> {
-					console.log(error)
-				})
 			}
 		}
     }
