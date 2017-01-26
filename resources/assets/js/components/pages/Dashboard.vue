@@ -29,7 +29,6 @@
 					<label for="exampleInputEmail1">Conteudo Principal</label>
 					<textarea class="form-control" rows="10" v-model="post.text"></textarea>
 				</div>
-				<button class="btn btn-default" v-on:click="storePost">Salvar</button>
 			</form>
 			<div class="config">
 				<div class="form-group">
@@ -47,7 +46,9 @@
 				<div class="form-group">
 					<label for="exampleInputEmail1">Categoria</label>
 					<select class="form-control" v-model="post.category" v-if="categories.length > 0">
-						<option v-for="cat in categories" :value="cat.key">{{cat.name}}</option>
+						<option v-for="(key, cat) in categories" :value="cat.key" :selected="key === 0">
+							{{index, cat.name}}
+						</option>
 					</select>
 					<select class="form-control" v-else>
 						<option>Nenhuma categoria</option>
@@ -56,9 +57,10 @@
 				</div>
 				<label for="exampleInputEmail1">Status</label>
 				<select class="form-control" v-model="post.status">
-					<option>Oculto</option>
+					<option selected>Oculto</option>
 					<option>Visível</option>
 				</select>
+				<button class="btn btn-default btn__save" v-on:click="storePost">Salvar</button>
 			</div>
 		</div>
 		<div class="dashboard__footer">
@@ -68,8 +70,8 @@
 	</div>
 </template>
 <script>
-    import VHeader from "_app/components/includes/Header.vue"
-	import VFooter from "_app/components/includes/Footer.vue"
+    import VHeader from "_components/includes/Header.vue"
+	import VFooter from "_components/includes/Footer.vue"
 	import axios from "axios"
     export default {
         name: 'dashboard',
@@ -83,7 +85,8 @@
 					title: '',
 					text: '',
 					previous: '',
-					category: ''
+					category: '',
+					status: ''
 				},
 				categories: []
 			}
@@ -96,10 +99,14 @@
 				axios.post('/post/save', {
 					post: this.post
 				})
-				.then(function (response) {
-					console.log(response)
+				.then((response)=> {
+					if(response.data.status) {
+						this.post.title = ""
+						this.post.text = ""
+						this.post.previous = ""
+					}
 				})
-				.catch(function (error) {
+				.catch((error)=> {
 					console.log(error)
 				})
 			},
@@ -115,8 +122,12 @@
 </script>
 
 <style lang="sass" scoped>
-	@import "~_app/variables.scss";
+	@import "~_config/_vars.scss";
+	
 	.dashboard {
+		.btn__save{
+			margin-top: 20px;
+		}
 
 		&__header {
 			background-color: $color-grey--light;

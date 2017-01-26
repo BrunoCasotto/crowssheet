@@ -26,9 +26,9 @@
 </template>
 
 <script>
-	import LogoCorvo from "_app/common/components/Logo.vue"
-	import VHeader from "_app/components/includes/Header.vue"
-	import VFooter from "_app/components/includes/Footer.vue"
+	import LogoCorvo from "_common/components/Logo.vue"
+	import VHeader from "_components/includes/Header.vue"
+	import VFooter from "_components/includes/Footer.vue"
 	import axios from 'axios'
 
 	export default {
@@ -65,7 +65,7 @@
 	}
 </script>
 <style lang="sass" scoped>
-	@import "~_app/variables.scss";
+	@import "~_config/_vars.scss";
 
 	.login {
 		padding: 40px;

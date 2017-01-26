@@ -61,7 +61,7 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-	@import "~_app/variables.scss";
+	@import "~_config/_vars.scss";
 
 	.post--list {
 		border-top: solid 1px $color-blue--light;

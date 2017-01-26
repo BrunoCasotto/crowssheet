@@ -72,7 +72,7 @@ props: {
 </script>
 
 <style lang="sass">
-@import "~_app/variables.scss";
+@import "~_config/_vars.scss";
 
 .featured-category {
     width: 100%;

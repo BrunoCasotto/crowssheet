@@ -6,7 +6,7 @@
 
 <script>
 import Menu from '_common/components/Menu.vue'
-import Logo from "_app/common/components/Logo.vue"
+import Logo from "_common/components/Logo.vue"
 
     export default {
         name: 'Header',
@@ -18,7 +18,7 @@ import Logo from "_app/common/components/Logo.vue"
 </script>
 
 <style lang="sass" scoped>
-    @import "~_app/variables.scss";
+    @import "~_config/_vars.scss";
 
     .header {
         width: 100%;

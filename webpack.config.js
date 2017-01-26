@@ -3,13 +3,14 @@
 const path = require( 'path' )
 const webpack = require("webpack")
 
-const base_path = path.resolve(__dirname, 'resources/assets/js')
+const base_path = path.resolve(__dirname, 'resources/')
+const base_js = path.resolve(base_path, 'assets/js')
 const base_sass = path.resolve(__dirname, 'resources/assets/sass')
 
 module.exports = {
     entry: [
         path.join(base_sass, 'main.scss'),
-        path.join(base_path, 'app.js')
+        path.join(base_js, 'app.js')
     ],
     output: {
         path: './dist/js',
@@ -19,13 +20,12 @@ module.exports = {
     devtool: 'source-map',
     resolve: {
         alias:{
-            _app: base_path,
-            _common: path.join(base_path, 'common'),
-            _components: path.join(base_path, 'components'),
-            _services: path.join(base_path, 'services'),
-            _util: path.join(__dirname, 'resources', 'assets', 'js', 'vuex'),
+            _components: path.join(base_js,'components'),
+            _common: path.join(base_js, 'common'),
             _vuex: path.join(__dirname, 'resources', 'assets', 'js', 'vuex'),
-            _image: path.join(base_path, 'img')
+            _config: path.join(base_sass,'config'),
+            _image: path.join(base_path, 'img'),
+            _npm: path.join(__dirname, 'node_modules')
         }
     },
     module: {
