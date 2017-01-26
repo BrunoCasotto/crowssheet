@@ -8,10 +8,15 @@ class Firebase {
     
 	constructor() {
 		this._firebase = firebaseApp
+        console.log(this._firebase.database())
 	}
 
     get database () {
         return this._firebase.database()
+    }
+
+    get storage () {
+        return this._firebase.storage()
     }
 
     get auth () {

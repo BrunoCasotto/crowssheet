@@ -33,7 +33,7 @@
 			<div class="config">
 				<div class="form-group">
 					<label for="exampleInputEmail1">Imagem prévia</label>
-					<input type="file" name="image" class="form-control">
+					<input type="file" name="image" class="form-control" v-model="image.previous">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Imagem Principal</label>
@@ -73,6 +73,8 @@
     import VHeader from "_components/includes/Header.vue"
 	import VFooter from "_components/includes/Footer.vue"
 	import axios from "axios"
+	import growl from "growl-alert"
+
     export default {
         name: 'dashboard',
         components: {
@@ -88,7 +90,10 @@
 					category: '',
 					status: ''
 				},
-				categories: []
+				categories: [],
+				image: {
+					previous: ''
+				}
 			}
 		},
 		ready: function() {
@@ -96,19 +101,21 @@
 		},
 		methods: {
 			storePost: function() {
-				axios.post('/post/save', {
-					post: this.post
-				})
-				.then((response)=> {
-					if(response.data.status) {
-						this.post.title = ""
-						this.post.text = ""
-						this.post.previous = ""
-					}
-				})
-				.catch((error)=> {
-					console.log(error)
-				})
+				this.saveImage()
+				// axios.post('/post/save', {
+				// 	post: this.post
+				// })
+				// .then((response)=> {
+				// 	if(response.data.status) {
+				// 		this.post.title = ""
+				// 		this.post.text = ""
+				// 		this.post.previous = ""
+				// 		growl.success('Postado')
+				// 	}
+				// })
+				// .catch((error)=> {
+				// 	growl.success('Ocorreu um erro')
+				// })
 			},
 			fetchData: function() {
 				axios.get('/json/post/all/category')
@@ -116,6 +123,15 @@
 					this.categories = response.data
 				})
 				.catch((error)=> {})
+			},
+			saveImage: function() {
+				axios.post('/file/image/save', this.image.previous)
+				.then((response)=> {
+					console.log(response)
+				})
+				.catch((error)=> {
+					console.log(error)
+				})
 			}
 		}
     }
