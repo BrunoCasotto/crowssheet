@@ -34,7 +34,6 @@
             init: function() {
                 axios.post('/token')
 				.then((response)=> {
-					console.log(response.data)
                     firebase.initializeApp(response.data)
 				})
 				.catch((error)=> {
