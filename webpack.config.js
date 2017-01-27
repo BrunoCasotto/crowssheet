@@ -22,10 +22,12 @@ module.exports = {
         alias:{
             _components: path.join(base_js,'components'),
             _common: path.join(base_js, 'common'),
+            _service: path.join(base_js,'service'),
             _vuex: path.join(__dirname, 'resources', 'assets', 'js', 'vuex'),
             _config: path.join(base_sass,'config'),
             _image: path.join(base_path, 'img'),
-            _npm: path.join(__dirname, 'node_modules')
+            _npm: path.join(__dirname, 'node_modules'),
+            _external: path.join(__dirname, 'config')
         }
     },
     module: {

@@ -31,18 +31,11 @@
 				</div>
 			</form>
 			<div class="config">
-				<div class="form-group">
-					<label for="exampleInputEmail1">Imagem prévia</label>
-					<input type="file" name="image" class="form-control" v-model="image.previous">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputEmail1">Imagem Principal</label>
-					<input type="file" name="image" class="form-control">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputEmail1">Imagem final</label>
-					<input type="file" name="image" class="form-control">
-				</div>
+				<input-file 
+					title="imagem previa"
+					image-name="imagem-test"
+					image-locale="previous"	
+				></input-file>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Categoria</label>
 					<select class="form-control" v-model="post.category" v-if="categories.length > 0">
@@ -74,12 +67,14 @@
 	import VFooter from "_components/includes/Footer.vue"
 	import axios from "axios"
 	import growl from "growl-alert"
-
+	import InputFile from '_service/files/InputFile.vue'
+	
     export default {
         name: 'dashboard',
         components: {
             VHeader,
-            VFooter
+            VFooter,
+			InputFile
         },
 		data: function() {
 			return{
@@ -88,7 +83,8 @@
 					text: '',
 					previous: '',
 					category: '',
-					status: ''
+					status: '',
+					image: ''
 				},
 				categories: [],
 				image: {
@@ -101,6 +97,7 @@
 		},
 		methods: {
 			storePost: function() {
+				console.log()
 				axios.post('/post/save', {
 					post: this.post
 				})
@@ -108,12 +105,11 @@
 					if(response.data.status) {
 						this.post.title = ""
 						this.post.text = ""
-						this.post.previous = ""
 						growl.success('Postado')
 					}
 				})
 				.catch((error)=> {
-					growl.success('Ocorreu um erro')
+					growl.error('Ocorreu um erro')
 				})
 			},
 			fetchData: function() {
@@ -122,6 +118,11 @@
 					this.categories = response.data
 				})
 				.catch((error)=> {})
+			}
+		},
+		events: {
+			'picture-url': function(msg) {
+				this.post.image = msg
 			}
 		}
     }
