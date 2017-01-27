@@ -12,6 +12,7 @@
 <script>
     import firebase from 'firebase'
     import growl from "growl-alert"
+    import axios from "axios"
 
     export default {
         name: 'input-file',
@@ -31,14 +32,14 @@
         },
         methods: {
             init: function() {
-                var config = {
-                    apiKey: "AIzaSyCKAZF2oajMvnEfgOJwBO__PPqZ3nUgOkA",
-                    authDomain: "blog-9d0bc.firebaseapp.com",
-                    databaseURL: "https://blog-9d0bc.firebaseio.com",
-                    storageBucket: "blog-9d0bc.appspot.com",
-                    messagingSenderId: "642355234164"
-                }
-                firebase.initializeApp(config)
+                axios.post('/token')
+				.then((response)=> {
+					console.log(response.data)
+                    firebase.initializeApp(response.data)
+				})
+				.catch((error)=> {
+					growl.error('Ocorreu um erro')
+				})
             },
             upload: function() {
                 let storageRef = firebase.storage().ref()

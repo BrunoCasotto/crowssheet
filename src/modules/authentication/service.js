@@ -1,6 +1,10 @@
 let firebase = require('@modules/core/firebase')
 
 class AuthService extends firebase{
+
+	getToken() {
+		return require('@config/database')
+	}
 	
 	login(email, password) {
 		return this._firebase.auth().signInWithEmailAndPassword(email, password)

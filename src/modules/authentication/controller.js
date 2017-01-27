@@ -12,6 +12,11 @@ class AuthController {
 		})
 	}
 
+	getToken(request, reply) {
+		let service = new AuthService()
+		reply( service.getToken())
+	}
+
 	showSingup(request, reply) {
         reply.view('pages/singup',{
 			noheader: true

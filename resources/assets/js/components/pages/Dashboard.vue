@@ -97,7 +97,6 @@
 		},
 		methods: {
 			storePost: function() {
-				console.log()
 				axios.post('/post/save', {
 					post: this.post
 				})
