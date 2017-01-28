@@ -9,7 +9,7 @@ class AuthService extends firebase{
 	login(email, password) {
 		return this._firebase.auth().signInWithEmailAndPassword(email, password)
 		.then((response)=>{
-			console.log('aqui')
+			console.log(response)
 			return {
 				status: true,
 				data: response

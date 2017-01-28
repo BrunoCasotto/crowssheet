@@ -22,6 +22,10 @@
 					<input class="form-control" v-model="post.title">
 				</div>
 				<div class="form-group">
+					<label for="exampleInputEmail1">Subtitulo</label>
+					<input class="form-control" v-model="post.subtitle">
+				</div>
+				<div class="form-group">
 					<label for="exampleInputEmail1">Descrição curta</label>
 					<textarea class="form-control" rows="3" v-model="post.previous"></textarea>
 				</div>
@@ -33,7 +37,7 @@
 			<div class="config">
 				<input-file 
 					title="imagem previa"
-					image-name="imagem-test"
+					:image-name="imageName"
 					image-locale="previous"	
 				></input-file>
 				<div class="form-group">
@@ -50,8 +54,14 @@
 				</div>
 				<label for="exampleInputEmail1">Status</label>
 				<select class="form-control" v-model="post.status">
-					<option selected>Oculto</option>
-					<option>Visível</option>
+					<option value="hidden" selected>Oculto</option>
+					<option value="visible">Visível</op tion>
+				</select>
+
+				<label for="exampleInputEmail1">Tamanho</label>
+				<select class="form-control" v-model="post.appearance">
+					<option value="big" selected>Grande</option>
+					<option value="small" >Pequeno</option>
 				</select>
 				<button class="btn btn-default btn__save" v-on:click="storePost">Salvar</button>
 			</div>
@@ -68,6 +78,7 @@
 	import axios from "axios"
 	import growl from "growl-alert"
 	import InputFile from '_service/files/InputFile.vue'
+	import moment from 'moment'
 	
     export default {
         name: 'dashboard',
@@ -84,12 +95,14 @@
 					previous: '',
 					category: '',
 					status: '',
-					image: ''
+					image: '',
+					subtitle:''
 				},
 				categories: [],
 				image: {
 					previous: ''
-				}
+				},
+				imageName: JSON.parse(JSON.stringify(moment()))
 			}
 		},
 		ready: function() {

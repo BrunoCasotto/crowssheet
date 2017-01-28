@@ -18,7 +18,7 @@
         name: 'input-file',
         props:{
             title: '',
-            imageName: '',
+            imageName: 'default',
             imageLocale: ''
         },
         data: function() {

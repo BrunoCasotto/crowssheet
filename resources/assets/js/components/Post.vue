@@ -1,22 +1,23 @@
 <template lang="html">
-	<div :class="'post--'+appearance" v-for="post in posts">
-		<a href="{{'/post/'+post.key}}" class="title">this is a post</a>
-		<div class="post__content" >
+	<div :class="'post post--'+post.appearance" v-for="post in posts">
+		<div class="post__content">
 			<div class="post__content__image">
-				<img src="{{post.image}}" alt="">
+				<a class="controller__see-more" href="{{'/post/'+post.key}}">
+					<img src="{{post.image}}" alt="">
+				</a>
+			</div>
+			<div class="content__controller">
+				<p class="controller__date">90/08/2016</p>
+				<a class="controller__see-more" href="{{'/post/'+post.key}}">Ver mais</a>
 			</div>
 			<div class="post__content__text">
-				<p class="text__title" v-model="title">{{ post.title }}</p>
-				<p class="text__previous">
-					{{ post.text }}
-				</p>
-				<button class="btn btn-default">Ver mais</button>
-			</div>
-			<div class="post__content__controller">  
-				
+				<a class="title" href="{{'/post/'+post.key}}">{{ post.title }}</a>
+				<p class="sub-title">{{ post.subtitle }}</p>
+				<div class="text-previous">
+					<p>{{ post.text }}</p>
+				</div>
 			</div>
 		</div>
-
 	</div>
 </template>
 
@@ -34,10 +35,8 @@ export default {
 		}
 	},
 	ready: function() {
-		console.log(this.postId)
 
-		if(this.appearance == 'list')
-			this.fetchPosts()
+		this.fetchPosts()
 		
 		if(this.appearance == 'single')
 			this.getPost()
@@ -46,7 +45,7 @@ export default {
 		fetchPosts: function(){
 			axios.get('/json/post/all')
 			.then((response)=> {
-				this.posts = response.data
+				this.posts = response.data.reverse()
 			})
 			.catch((error)=> {})
 		},
@@ -62,68 +61,74 @@ export default {
 </script>
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
+	.post {
+		margin: 10px;
+		max-width: 50%;
+    	overflow: hidden;
+  		border-radius: 2px;
+		background-color: white;
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		transition: all 1s ease;
+		height: 500px;
 
-	.post--list {
-		border-top: solid 1px $color-blue--light;
-		border-bottom: solid 1px $color-blue--light;
-		display: flex;
-		flex-direction: column;
-		padding: 15px;
-		width: 100%; 
+		&--big {
+			width: 45%;
+		}
+		&--small {
+			width: 25%;
+		}
+		
 
-		.title {
-			font-size: 2rem;
-			color: $color-blue--base;
+		&:hover {
+			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 		}
 
 		.post__content {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-
 			&__image {
-				height: 150px;
-
+				max-height: 300px;
+				overflow: hidden;
 				img {
-					height: 100%;
+					width: 100%;
+				}
+			}
+			.content__controller {
+				display: flex;
+				height: 25px;
+				line-height: 25px;
+				justify-content: space-between;
+				padding: 0 10px;
+
+				.controller__date {
+
+				}
+				.controller__see-more {
+					color: black;
 				}
 			}
 
 			&__text {
 				flex:1;
-				padding: 10px;
+				padding: 0 10px;
 
-				.text__title {
+				.text-previous {
+					width: 100%;
+					p {
+						width: 100%;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+				}
+
+				.title {
 					font-size: 2rem;
+					color: black;
+				}
+
+				.sub-title {
+					font-size: 1.3rem;
+					font-weight: bold;
 				}
 			}
 		}
 	}
-	.post--single {
-		display: flex;
-		flex-direction: column;
-		padding: 20px;
-
-		.post__content {
-			display: flex;
-			flex-direction: column;
-
-			&__image {
-				height: 150px;
-
-				img {
-					height: 100%;
-				}
-			}
-
-			&__text {
-				flex:1;
-				padding: 10px;
-
-				.text__title {
-					font-size: 2rem;
-				}
-			}
-		}
-	}	
 </style>
