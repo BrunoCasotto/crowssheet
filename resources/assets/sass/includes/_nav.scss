@@ -12,9 +12,16 @@ nav {
 			box-shadow: 1px 1px 11px 0px;
     		margin-bottom: 10px;
 
+			@media screen and(max-width: $screen-sm) {
+				height: auto; 
+			}
+
 			.items {
 				display: flex;
 				align-items: center;
+				@media screen and(max-width: $screen-sm) {
+					display: block;
+				}
 
 				.item {
 					margin: 0 10px 0 10px;

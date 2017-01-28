@@ -76,7 +76,7 @@ export default {
 		&--small {
 			width: 25%;
 		}
-		@media screen and(max-width: $screen-sm) {
+		@media screen and(max-width: $screen-sm) { 
 			width: 100%;
 		}
 		
