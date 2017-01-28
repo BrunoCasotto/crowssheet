@@ -7,7 +7,7 @@
 				</a>
 			</div>
 			<div class="content__controller">
-				<p class="controller__date">90/08/2016</p>
+				<p class="controller__date">09/08/2016</p>
 				<a class="controller__see-more" href="{{'/post/'+post.key}}">Ver mais</a>
 			</div>
 			<div class="post__content__text">
@@ -63,7 +63,6 @@ export default {
 	@import "~_config/_vars.scss";
 	.post {
 		margin: 10px;
-		max-width: 50%;
     	overflow: hidden;
   		border-radius: 2px;
 		background-color: white;
@@ -76,6 +75,9 @@ export default {
 		}
 		&--small {
 			width: 25%;
+		}
+		@media screen and(max-width: $screen-sm) {
+			width: 100%;
 		}
 		
 
