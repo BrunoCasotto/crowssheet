@@ -38,7 +38,7 @@
 							{{index, cat.name}}
 						</option>
 					</select>
-					<select class="form-control" v-else
+					<select class="form-control" v-else>
 						<option>Nenhuma categoria</option>
 					</select>
 
