@@ -33,6 +33,12 @@
 					<label for="exampleInputEmail1">Conteudo Principal</label>
 					<textarea class="form-control" rows="10" v-model="post.text"></textarea>
 				</div>
+				<div class="input-group date" data-provide="datepicker">
+					<input type="text" class="form-control" v-model="post.date">
+					<div class="input-group-addon">
+						<span class="glyphicon glyphicon-th"></span>
+					</div>
+				</div>
 			</form>
 			<div class="config">
 				<input-file 
@@ -96,16 +102,18 @@
 					category: '',
 					status: '',
 					image: '',
-					subtitle:''
+					subtitle:'',
+					date: ''
 				},
 				categories: [],
 				image: {
 					previous: ''
 				},
-				imageName: JSON.parse(JSON.stringify(moment()))
+				imageName: moment().format('X')
 			}
 		},
 		ready: function() {
+			this.post.date = moment().format('DD-MM-YYYY')
 			this.fetchData()
 		},
 		methods: {
