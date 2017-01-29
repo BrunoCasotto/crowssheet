@@ -16,15 +16,7 @@
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Conteudo Principal</label>
-					<textarea 
-						id="tiny-text-area" 
-						class="form-control"
-						v-model="post.text"
-					></textarea>
-					<button class="btn btn-default" v-on:click="getPreviousMain">Ver prévia</button>
-				</div>
-				<div class="well input-file">
-					{{{post.text}}}
+					<textarea class="form-control" rows="10" v-model="post.text"></textarea>
 				</div>
 				<div class="input-group date" data-provide="datepicker">
 					<input type="text" class="form-control" v-model="post.date">
@@ -72,7 +64,7 @@
 	import growl from "growl-alert"
 	import InputFile from '_service/files/InputFile.vue'
 	import moment from 'moment'
-
+	
     export default {
         name: 'post-form',
         components: {
@@ -123,9 +115,6 @@
 					this.categories = response.data
 				})
 				.catch((error)=> {})
-			},
-			getPreviousMain: function() {
-				this.post.text = tinymce.get('tiny-text-area').getContent()
 			}
 		},
 		events: {

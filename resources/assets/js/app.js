@@ -13,6 +13,7 @@ import Menu from '_common/components/Menu.vue'
 import PhotoGrid from '_common/components/PhotoGrid.vue'
 import Breadcrumb from './plugins/breadcrumb'
 import Post from '_components/Post.vue'
+import SinglePost from '_components/SinglePost.vue'
 
 //===== Pages ========
 import Dashboard from './components/pages/Dashboard.vue'
@@ -27,6 +28,7 @@ new Vue({
         Login,
         Singup,        
         Post,
-        PhotoGrid
+        PhotoGrid,
+        SinglePost
     }
 })
