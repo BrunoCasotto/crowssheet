@@ -35,7 +35,6 @@ class AuthController {
 
 	* isLogged(request, reply) {
 		let service = new AuthService()
-		console.log(yield service.isSigned())
 		return yield service.isSigned()
 	}
 }
