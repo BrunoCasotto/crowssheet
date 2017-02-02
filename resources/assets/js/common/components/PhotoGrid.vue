@@ -8,16 +8,16 @@
 						</a>
 				</div>
 				<div class="featured-category__block">
-					<a class="featured-category__image" href="/category" style="background-image: url('/images/wall1.jpeg');">
-						<h3 class="image__title image__title--md">Louvores</h3>
-						<p class="image__text">Espaço para louvores</p>
-						<button class="image__button">Ouça agora</button>
+					<a class="featured-category__image" href="/boletim" style="background-image: url('/images/wall1.jpeg');">
+						<h3 class="image__title image__title--md">Boletim</h3>
+						<p class="image__text">Escala e programação da IAP Amparo</p>
+						<button class="image__button">Abrir</button>
 					</a>
 					<div class="block__row">
-						<a class="featured-category__image featured-category__image--md" href="/category" style="background-image: url('/images/wall3.png');">
-							<h3 class="image__title image__title--sm">Mensagens</h3>
+						<a class="featured-category__image featured-category__image--md" href="/category" style="background-image: url('/images/wall3.jpg');">
+							<h3 class="image__title image__title--sm">Café com Bíblia</h3>
 							<p class="image__text">Deus quer falar com você.</p>
-							<button class="image__button">Mensagens</button>
+							<button class="image__button">Escutar</button>
 						</a>
 						<a class="featured-category__image featured-category__image--md" href="/category" style="background-image: url('/images/wall6.png');">
 							<h3 class="image__title image__title--sm">Escola Biblica</h3>

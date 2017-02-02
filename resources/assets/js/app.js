@@ -19,6 +19,7 @@ import SinglePost from '_components/SinglePost.vue'
 import Dashboard from './components/pages/Dashboard.vue'
 import Login from './components/pages/Login.vue'
 import Singup from './components/pages/Singup.vue'
+import Programming from './components/pages/Programming.vue'
 
 new Vue({
     el: 'body',
@@ -29,6 +30,7 @@ new Vue({
         Singup,        
         Post,
         PhotoGrid,
-        SinglePost
+        SinglePost,
+        Programming
     }
 })
