@@ -1,4 +1,5 @@
 let PostService = require("@modules/post/service")
+let Boom = require('boom')
 
 class PostController {
 
@@ -11,18 +12,20 @@ class PostController {
 		let service = new PostService()
 		let response = yield service.store(request.payload.post)
 		reply(response)
-	}  
+	}
 
-	getAll(request, reply) {
+	* getAll(request, reply) {
 		let service = new PostService()
-		service.getAll((result)=>{
-			let posts = []
+		let result = yield service.getAll()
+		let posts = []
+		if(result.status == true) {
+			result = result.data
 			for(var key in result) {
 				result[key]['key'] = key
 				posts.push(result[key])
 			}
-			reply(posts)
-		})
+		}
+		reply(posts)
 	}
 
 	getPost(request, reply) {

@@ -35,24 +35,13 @@ export default {
 		}
 	},
 	ready: function() {
-
 		this.fetchPosts()
-		
-		if(this.appearance == 'single')
-			this.getPost()
 	},
   	methods: {
 		fetchPosts: function(){
 			axios.get('/json/post/all')
 			.then((response)=> {
 				this.posts = response.data.reverse()
-			})
-			.catch((error)=> {})
-		},
-		getPost: function(){
-			axios.get('/json/post/get?postId='+this.postId)
-			.then((response)=> {
-				this.posts = [response.data]
 			})
 			.catch((error)=> {})
 		}

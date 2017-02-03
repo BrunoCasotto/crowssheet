@@ -9,6 +9,11 @@ class PostService extends firebase{
 				status: true,
 				data: result.path
 			}
+		}).catch((error)=>{
+			return{
+				status: false,
+				data: error
+			}
 		})
 	}
 
@@ -19,10 +24,14 @@ class PostService extends firebase{
 		})
 	}
 
-	getAll(callback) {
+	getAll() {
 		let ref = this.database.ref('posts/')
-		return ref.on('value', (result)=>{
-			callback(result.val())
+		return new Promise( (resolve, reject) => {
+			ref.once('value', function(snapshot) {
+				resolve({status: true,data: snapshot.val()})
+			}, function(error) {
+				reject(error)
+			})
 		})
 	}
 
@@ -46,6 +55,11 @@ class PostService extends firebase{
 			return {
 				status: true,
 				data: result.path
+			}
+		}).catch((error)=>{
+			return{
+				status: false,
+				data: error
 			}
 		})
 	}
