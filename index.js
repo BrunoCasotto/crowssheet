@@ -34,7 +34,7 @@ server.register(require("hapi-plugin-co"))
 server.route(routes)
 
 server.register( require('inert'), (err) => {
-    if (err) console.log('Failed to load inert plugin.')
+    if (err) console.log('Failed to load inert plugin.')  
     server.route(require('@route/file.js'))
 })
 

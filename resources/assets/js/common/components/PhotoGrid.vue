@@ -13,8 +13,8 @@
 						<p class="image__text">Escala e programação da IAP Amparo</p>
 						<button class="image__button">Abrir</button>
 					</a>
-					<div class="block__row">
-						<a class="featured-category__image featured-category__image--md" href="/category" style="background-image: url('/images/wall3.jpg');">
+					<div class="block__row"> 
+						<a class="featured-category__image featured-category__image--md" href="/radio" style="background-image: url('/images/wall3.jpg');">
 							<h3 class="image__title image__title--sm">Café com Bíblia</h3>
 							<p class="image__text">Deus quer falar com você.</p>
 							<button class="image__button">Escutar</button>

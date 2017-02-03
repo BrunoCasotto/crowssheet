@@ -1,9 +1,17 @@
 //components
 @import "~_npm/growl-alert/dist/growl-alert.css";
 
-//components vue
+//important 
+@import './config/vars.scss';
+
+//pages vue
 @import './base/base.scss';
 @import './pages/home.scss';
 @import './pages/single-post.scss';
+@import './pages/radio.scss';
+
+//components
 @import './includes/header.scss';
 @import './includes/nav.scss'; 
+@import './includes/footer.scss';
+

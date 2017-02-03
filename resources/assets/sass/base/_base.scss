@@ -25,4 +25,8 @@ html {
  	-ms-text-size-adjust: 100%;
  	text-rendering: optimizeLegibility !important;
 	-webkit-font-smoothing: antialiased !important;
+
+	img {
+		max-width: 100%;
+	}
 }

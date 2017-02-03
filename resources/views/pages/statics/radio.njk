@@ -1,0 +1,41 @@
+{% extends 'index.njk' %}
+{% block title %}Radio{% endblock %}
+{% block content %}
+	<div class="radio">
+		<div class="radio__banner"></div>
+		<div class="container radio__content">
+			<div class="about">
+				<div class="about__description">
+					<h5 class="title">A missão da rádio ?</h5>
+					<p class="text">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+						Nulla quam velit, vulputate eu pharetra nec
+						, mattis ac neque. Duis vulputate commodo lectus, ac 
+						blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend 
+						tristique, tortor mauris molestie elit, et lacinia ipsum quam 
+						nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet 
+						quis magna. Aenean velit odio, elementum
+					</p>
+				</div>
+				<div class="about__person">
+					<img src="/images/person_default.jpg" class="img-circle">
+					<p class="person__name">Locutor: <span>Oliveira Filho</span></p>
+				</div>
+			</div>
+			<div class="contact">
+				<h3>Contato</h3>
+				<div class="text">
+					<h5>WhatsApp</h5>
+					<h5>(19) 00000000</h5>
+				</div>
+				<div class="text">
+					<h5>Telefone</h5>
+					<h5>(19) 00000000</h5>
+				</div>
+				<div class="text">
+					<a href="mms://cidadedasaguas.dyndns.org:1374" class="btn btn-info">Ouvir agora</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

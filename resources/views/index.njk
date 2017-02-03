@@ -21,9 +21,15 @@
         {% include "includes/header.njk" %}
         {% include "includes/nav.njk" %}
     {% endif %}
-        {% block content %}{% endblock %}
-        <script src="/js/bundled.js"></script>
-        <script src="/js/bundled.js.map"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    {% block content %}{% endblock %}
+
+    <script src="/js/bundled.js"></script>
+    <script src="/js/bundled.js.map"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <footer class="footer">
+        Iap Amparo 2017
+    </footer>
     </body>
 </html>
