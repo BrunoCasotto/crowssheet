@@ -11,7 +11,11 @@ class PostController {
 	* store(request, reply) {
 		let service = new PostService()
 		let response = yield service.store(request.payload.post)
-		reply(response)
+		if(response.status == true) {
+			reply(true)
+		} else {
+			reply(response)
+		}
 	}
 
 	* getAll(request, reply) {

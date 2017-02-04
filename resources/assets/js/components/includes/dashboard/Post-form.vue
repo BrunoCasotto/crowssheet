@@ -107,7 +107,7 @@
 					post: this.post
 				})
 				.then((response)=> {
-					if(response.data.status) {
+					if(response.data) {
 						this.post.title = ""
 						this.post.text = ""
 						growl.success('Postado')
