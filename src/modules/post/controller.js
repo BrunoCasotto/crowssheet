@@ -1,11 +1,13 @@
 let PostService = require("@modules/post/service")
 let Boom = require('boom')
 
-class PostController {
+class PostController {  
 
-	showSinglePost(request, reply) {
+	* showSinglePost(request, reply) {
 		let service = new PostService()
-		reply.view('pages/singlePost',{postId: request.params.postId})
+		let post = yield service.getPost(request.params.postId)
+		console.log(post)
+		reply.view('pages/singlePost',post) 
 	}
 
 	* store(request, reply) {
@@ -33,24 +35,22 @@ class PostController {
 	}
 
 	getPost(request, reply) {
-		let service = new PostService()
-		service.getPost(request.query.postId,(result)=>{
-			reply(result)
-		})
 	}
 
-	getAllCategories(request, reply) {
+	* getAllCategories(request, reply) {
 		let service = new PostService()
-		service.getAllCategories((result)=>{
-			let categories = []
+		let categories = []
+		let result = yield service.getAllCategories()
+		if(result.status == true) {
+			result = result.data
 			for(var key in result) {
 				categories.push({
 					key: key,
 					name: result[key]
 				})
 			}
-			reply(categories)
-		})
+		}
+		reply(categories)
 	}
 
 	getCategory(request, reply) {

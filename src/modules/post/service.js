@@ -19,8 +19,12 @@ class PostService extends firebase{
 
 	getPost(postId,callback) {
 		let ref = this.database.ref('posts/'+postId)
-		return ref.on('value', (result)=>{
-			callback(result.val())
+		return new Promise( (resolve, reject) => {
+			ref.once('value', function(snapshot) {
+				resolve(snapshot.val())
+			}, function(error) {
+				reject(error)
+			})
 		})
 	}
 
@@ -35,17 +39,14 @@ class PostService extends firebase{
 		})
 	}
 
-	getCategory(categoryId, callback) {
-		let ref = this.database.ref('categories/'+postId)
-		return ref.on('value', (result)=>{
-			callback(result.val())
-		})
-	}
-
-	getAllCategories(callback) {
+	getAllCategories() {
 		let ref = this.database.ref('categories/')
-		return ref.on('value', (result)=>{
-			callback(result.val())
+		return new Promise( (resolve, reject) => {
+			ref.once('value', function(snapshot) {
+				resolve({status: true, data: snapshot.val()})
+			}, function(error) {
+				reject({status: false, data: error})
+			})
 		})
 	}
 

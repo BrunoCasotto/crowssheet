@@ -4,7 +4,28 @@
 
 <div class="single-post">
     <div class="container single-post__content">
-        <single-post post-id="{{postId}}"></single-post>
+        <div class="post">
+            <div class="post__content">
+                <div class="post__content__image">
+                        <div class="image" style="background-image: url({{image}});">
+                        </div>
+                    </a>
+                </div>
+                <div class="content__controller">
+                    <p class="controller__date">{{date}}</p>
+                </div>
+                <div class="post__content__text">
+                    <p class="title" href="{{'/post/'+key}}">{{ title }}</p>
+                    <p class="sub-title">{{ subtitle }}</p>
+                    <div class="text-previous">
+                        <p>{{ previous }}</p>
+                    </div>
+                    <div class="text-main">
+                        <p>{{ text | safe }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
