@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         {% block headIncludes %}{% endblock %}
         <title>{% block title %}{% endblock %}</title>
         <script>
@@ -18,7 +19,6 @@
     </head>
     <body>
     {% if not noheader %}
-        {% include "includes/header.njk" %}
         {% include "includes/nav.njk" %}
     {% endif %}
 
