@@ -1,27 +1,29 @@
 <template lang="html">
 	<div>
-		<v-header></v-header>
-	</div>
-	<div class="login">
-		<div class="login__strip">
-			<form class="login__form" v-on:submit.prevent>
-				<div class="form-group">
-					<input name="email" v-model="email" type="email"  class="form-control" placeholder="Email">
-				</div>
-				<div class="form-group">
-					<input name="password" v-model="password" type="password" class="form-control" placeholder="Password">
-				</div>
-				<button v-on:click="login" class="btn btn-default">Login</button>
-				<a href="/auth/register" class="btn btn-default" >Singup</a>
-			</form>
-
-			<div class="login__background">
-				<logo-corvo apperance="background__login" ></logo-corvo>
-			</div>
-
+		<div>
+			<v-header></v-header>
 		</div>
-		<div class="login__footer">
-			<v-footer></v-footer>
+		<div class="login">
+			<div class="login__strip">
+				<form class="login__form" v-on:submit.prevent>
+					<div class="form-group">
+						<input name="email" v-model="email" type="email"  class="form-control" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<input name="password" v-model="password" type="password" class="form-control" placeholder="Password">
+					</div>
+					<button v-on:click="login" class="btn btn-default">Login</button>
+					<a href="/auth/register" class="btn btn-default" >Singup</a>
+				</form>
+
+				<div class="login__background">
+					<logo-corvo apperance="background__login" ></logo-corvo>
+				</div>
+
+			</div>
+			<div class="login__footer">
+				<v-footer></v-footer>
+			</div>
 		</div>
 	</div>
 </template>

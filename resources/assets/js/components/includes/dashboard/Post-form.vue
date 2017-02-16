@@ -40,7 +40,8 @@
 				<div class="form-group">
 					<label for="exampleInputEmail1">Categoria</label>
 					<select class="form-control" v-model="post.category" v-if="categories.length > 0">
-						<option v-for="(cat, key) in categories" :value="cat.key" :selected="key === 0">
+						<!--<option v-for="(cat, key) in categories" :value="cat.key" :selected="key === 0">-->
+						<option v-for="(cat, key) in categories" :value="cat.key">
 							{{index, cat.name}}
 						</option>
 					</select>
@@ -51,13 +52,13 @@
 				</div>
 				<label for="exampleInputEmail1">Status</label>
 				<select class="form-control" v-model="post.status">
-					<option value="hidden" selected>Oculto</option>
+					<option value="hidden">Oculto</option>
 					<option value="visible">Visível</op tion>
 				</select>
 
 				<label for="exampleInputEmail1">Tamanho</label>
 				<select class="form-control" v-model="post.appearance">
-					<option value="big" selected>Grande</option>
+					<option value="big">Grande</option>
 					<option value="small" >Pequeno</option>
 				</select>
 				<button class="btn btn-default btn__save" v-on:click="storePost">Salvar</button>
@@ -83,10 +84,11 @@
 					text: '',
 					previous: '',
 					category: '',
-					status: '',
+					status: 'hidden',
 					image: '',
 					subtitle:'',
-					date: ''
+					date: '',
+					appearance: 'big'
 				},
 				categories: [],
 				image: {

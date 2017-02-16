@@ -1,55 +1,57 @@
 <template lang="html">
 	<div>
-		<v-header></v-header>
-	</div>
-	<div class="container singup">
-		<form class="form" v-on:submit.prevent>
-			<label class="form__title">Singup</label>
-			 <div class="form__row">
-			   <div class="col col--md">
-				 <input 
-				 type="text" 
-				 name="name" 
-				 placeholder="name" 
-				 class="input input--blank"
-				v-model="name"
-				 >
-			   </div>
-			   <div class="col col--md">
-				 <input 
-				 type="text" 
-				 name="email" 
-				 placeholder="e-mail" 
-				 class="input input--blank"
-				 v-model="email"
-				 >
-			   </div>
-			 </div>
-			 <div class="form__row">
-			  <div class="col col--md">
-				<input 
-				type="password" 
-				name="password" 
-				placeholder="password" 
-				class="input input--blank"
-				v-model="password"
-				>
-			  </div>
-			  <div class="col col--md">
-				<input 
-				type="password"
-				name="passwordAgain" 
-				placeholder="password again" 
-				class="input input--blank"
-				v-model="passwordAgain"
-				>
-			  </div>
-			</div>
-			<button class="btn btn-default form__btn" v-on:click="register()">Sing Up</butotn>
-		</form>
-	</div>
-	<div>
-		<v-footer></v-footer>
+		<div>
+			<v-header></v-header>
+		</div>
+		<div class="container singup">
+			<form class="form" v-on:submit.prevent>
+				<label class="form__title">Singup</label>
+				<div class="form__row">
+				<div class="col col--md">
+					<input 
+					type="text" 
+					name="name" 
+					placeholder="name" 
+					class="input input--blank"
+					v-model="name"
+					>
+				</div>
+				<div class="col col--md">
+					<input 
+					type="text" 
+					name="email" 
+					placeholder="e-mail" 
+					class="input input--blank"
+					v-model="email"
+					>
+				</div>
+				</div>
+				<div class="form__row">
+				<div class="col col--md">
+					<input 
+					type="password" 
+					name="password" 
+					placeholder="password" 
+					class="input input--blank"
+					v-model="password"
+					>
+				</div>
+				<div class="col col--md">
+					<input 
+					type="password"
+					name="passwordAgain" 
+					placeholder="password again" 
+					class="input input--blank"
+					v-model="passwordAgain"
+					>
+				</div>
+				</div>
+				<button class="btn btn-default form__btn" v-on:click="register()">Sing Up</butotn>
+			</form>
+		</div>
+		<div>
+			<v-footer></v-footer>
+		</div>
 	</div>
 </template>
 

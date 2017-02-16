@@ -47,9 +47,6 @@
 			return{
 				active: 'post-form'
 			}
-		},
-		ready () {
-	
 		}
     }
 </script>

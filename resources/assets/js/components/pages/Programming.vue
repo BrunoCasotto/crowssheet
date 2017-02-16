@@ -3,7 +3,7 @@
 		<div class="container boletim__content">
 			<h3 class="boletim__title">{{tema}}</h3>
 			<div class="boletim__image">
-				<img src="{{imageUrl}}" alt="">
+				<img :src="imageUrl" alt="">
 			</div>
 		</div>
 	</div>

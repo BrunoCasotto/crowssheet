@@ -7,7 +7,7 @@
         <div class="post">
             <div class="post__content">
                 <div class="post__content__image">
-                        <div class="image" style="background-image: url({{image}});">
+                        <div class="image" :style="`background-image: url(${image});`">
                         </div>
                     </a>
                 </div>
@@ -15,7 +15,7 @@
                     <p class="controller__date">{{date}}</p>
                 </div>
                 <div class="post__content__text">
-                    <p class="title" href="{{'/post/'+key}}">{{ title }}</p>
+                    <p class="title" :href="`/post/${key}`">{{ title }}</p>
                     <p class="sub-title">{{ subtitle }}</p>
                     <div class="text-previous">
                         <p>{{ previous }}</p>
