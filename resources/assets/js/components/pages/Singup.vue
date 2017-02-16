@@ -112,7 +112,7 @@ export default {
 			display: block;
 			width: 100%;
 			height: 30%;
-			background-color: $color-blue--light;
+			background-color: $color-grey--base;
 			position: absolute;
 			top:100px;
 		}
@@ -122,7 +122,7 @@ export default {
 			width: 100%;
 			flex-direction: column;
 			padding: 40px;
-			background-color: $color-blue--base;
+			background-color: $color-grey--dark;
 			border-radius: 8px;
 			z-index: 100;
 			transform: translateY(-50px);

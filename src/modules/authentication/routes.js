@@ -3,7 +3,7 @@ module.exports = ( controller ) => {
 	controller = controller || new AuthController()
 
 	return [
-		{method: 'GET',	path: '/auth/admin', handler: controller.index},
+		{method: 'GET',	path: '/', handler: controller.index},
 		{method: 'GET',	path: '/auth/register', handler: controller.showSingup},
 		{method: 'GET',	path: '/auth/islogged', handler: controller.isLogged},
 		{method: 'POST', path: '/auth/singin', handler: controller.singin},

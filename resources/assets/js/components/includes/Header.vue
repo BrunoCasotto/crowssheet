@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="header grey lighten-1 ">
-        <a href="/" class="title">Igreja Adventista da Promessa</a>
+        <a href="/" class="title">Crows sheet</a>
     </div>
 </template>
 

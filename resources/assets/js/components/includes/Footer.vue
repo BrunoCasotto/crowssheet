@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <p>Iap Amparo - Deus seja louvado!</p>
+        <p>Desenvolvido por Bruno Casotto</p>
     </footer>
 </template>
 
