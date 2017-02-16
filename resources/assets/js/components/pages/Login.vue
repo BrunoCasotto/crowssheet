@@ -34,7 +34,7 @@
 
 	export default {
 		name: 'Login',
-		data: function() {
+		data () {
 			return {
 				email: '',
 				password: ''
@@ -46,19 +46,19 @@
 			VFooter
 		},
 		methods: {
-			login: function() {
+			login () {
 				axios.post('/auth/singin', {
 					email: this.email,
 					password: this.password
 				})
-				.then(function (response) {
-					if(response.data.status == true) {
+				.then(response => {
+					if (response.data.status == true) {
 						window.location.assign('/dashboard')
 					} else {
 						console.log(response)
 					}
 				})
-				.catch(function (error) {
+				.catch(error => {
 					
 				})
 			}
