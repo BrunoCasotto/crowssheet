@@ -6,15 +6,15 @@
 	</div>
 </template>
 <script>
-export default {
-	name: 'logo_corvo',
-	props: {
-		apperance: {
-			type: String,
-			default: 'default'
+	export default {
+		name: 'LogoCorvo',
+		props: {
+			apperance: {
+				type: String,
+				default: 'default'
+			}
 		}
 	}
-}
 </script>
 
 <style lang="sass">

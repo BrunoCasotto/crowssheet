@@ -1,4 +1,3 @@
-'use strict'
 require('module-alias/register')
 const Hapi = require('hapi')
 let routes = require('@route/route.js')
@@ -33,18 +32,18 @@ server.register(require("hapi-plugin-co"))
 
 server.route(routes)
 
-server.register( require('inert'), (err) => {
+server.register( require('inert'), err => {
     if (err) console.log('Failed to load inert plugin.')  
     server.route(require('@route/file.js'))
 })
 
 let bind = {
-        var: 'content'
-	}
+    var: 'content'
+}
 
 server.bind( bind )
 
-server.start((err) => {
+server.start(err => {
     if (err) {
         console.log(err)
     }

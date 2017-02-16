@@ -66,12 +66,12 @@
 	import moment from 'moment'
 	
     export default {
-        name: 'post-form',
+        name: 'StaticForm',
         components: {
 			InputFile
         },
-		data: function() {
-			return{
+		data () {
+			return {
 				post: {
 					title: '',
 					text: '',
@@ -89,32 +89,32 @@
 				imageName: moment().format('X')
 			}
 		},
-		ready: function() {
+		ready () {
 			this.post.date = moment().format('DD-MM-YYYY')
 			this.fetchData()
 		},
 		methods: {
-			storePost: function() {
+			storePost () {
 				axios.post('/post/save', {
 					post: this.post
 				})
-				.then((response)=> {
-					if(response.data.status) {
+				.then(response => {
+					if (response.data.status) {
 						this.post.title = ""
 						this.post.text = ""
 						growl.success('Postado')
 					}
 				})
-				.catch((error)=> {
+				.catch(error => {
 					growl.error('Ocorreu um erro')
 				})
 			},
-			fetchData: function() {
+			fetchData () {
 				axios.get('/json/post/all/category')
-				.then((response)=> {
-					this.categories = response.data
-				})
-				.catch((error)=> {})
+					.then(response => {
+						this.categories = response.data
+					})
+					.catch(error => {})
 			}
 		},
 		events: {

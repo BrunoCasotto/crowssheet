@@ -11,10 +11,11 @@
 
 <script>
 	export default {
+		name: 'Programming',
 		props: {
 			tema: ''
 		},
-		data: function(){
+		data () {
 			return {
 				imageUrl: 'https://firebasestorage.googleapis.com/v0/b/blog-9d0bc.appspot.com/o/boletim%2FScreen%20Shot%202017-02-01%20at%209.29.42%20PM.png?alt=media&token=81e77722-7e20-4d30-af16-fb2eb55a2272'
 			}

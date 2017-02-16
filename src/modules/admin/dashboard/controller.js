@@ -4,18 +4,17 @@ let Boom = require('boom')
 
 class DashController {
 	
-	index( request, reply ) {
+	index ( request, reply ) {
 		let service = new AuthService()
-		service.isSigned().then((result)=>{
+		service.isSigned().then( result => {
 			console.log(result)
-			if(result == null ){
-				reply.view('pages/login',{noheader: true})
+			if (result == null ){
+				reply.view('pages/login', { noheader: true })
 			} else {
-				reply.view('pages/dashboard', {
-					noheader: true
-				})
+				reply.view('pages/dashboard', { noheader: true })
 			}
 		})
 	}
 }
+
 module.exports = DashController

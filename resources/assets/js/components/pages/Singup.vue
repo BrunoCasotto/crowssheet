@@ -54,47 +54,47 @@
 </template>
 
 <script>
-import VHeader from "_components/includes/Header.vue"
-import VFooter from "_components/includes/Footer.vue"
-import axios from 'axios'
+	import VHeader from "_components/includes/Header.vue"
+	import VFooter from "_components/includes/Footer.vue"
+	import axios from 'axios'
 
-export default {
-  data () {
-    return {}
-  },
-  components: {
-	  VHeader,
-	  VFooter
-  },
-  methods: {
-	  register: function() {
-		  if(this.validate()){
-			axios.post('/auth/singup', {
-				name: this.name,
-				email: this.email,
-				password: this.password
-				})
-				.then(function (response) {
-					console.log(response.data)
-					if(response.data.status == true) {
-						window.location.replace('/')
-					}
-				})
-				.catch(function (error) {
-					console.log(error) 
-				})
-		  }
-	  },
-	  validate: function() {
-		  return true;
-		  if(this.password == this.passwordAgain && this.name.trim().length > 5 && this.email.trim().length > 4) {
-			  return true
-		  } else {
-			  return false
-		  }
-	  }
-  }
-}
+	export default {
+		data () {
+			return {}
+		},
+		components: {
+			VHeader,
+			VFooter
+		},
+		methods: {
+			register () {
+				if (this.validate()){
+					axios.post('/auth/singup', {
+						name: this.name,
+						email: this.email,
+						password: this.password
+					})
+					.then(response => {
+						console.log(response.data)
+						if(response.data.status == true) {
+							window.location.replace('/')
+						}
+					})
+					.catch(error => {
+						console.log(error) 
+					})
+				}
+			},
+			validate () {
+				return true;
+				if (this.password == this.passwordAgain && this.name.trim().length > 5 && this.email.trim().length > 4) {
+					return true
+				} else {
+					return false
+				}
+			}
+		}
+	}
 </script>
 
 <style lang="sass" scoped>

@@ -36,19 +36,19 @@
 	import StaticForm from '_components/includes/dashboard/Static-form.vue'
 	
     export default {
-        name: 'dashboard',
+        name: 'Dashboard',
         components: {
             VHeader,
             VFooter,
 			PostForm,
 			StaticForm
         },
-		data: function() {
+		data () {
 			return{
 				active: 'post-form'
 			}
 		},
-		ready: function() {
+		ready () {
 	
 		}
     }

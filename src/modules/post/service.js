@@ -4,23 +4,23 @@ class PostService extends firebase{
 
 	store(post) {
 		return this.database.ref('posts').push(post)
-		.then((result)=>{
-			return {
-				status: true,
-				data: result.path
-			}
-		}).catch((error)=>{
-			return{
-				status: false,
-				data: error
-			}
-		})
+			.then(result => {
+				return {
+					status: true,
+					data: result.path
+				}
+			}).catch(error => {
+				return{
+					status: false,
+					data: error
+				}
+			})
 	}
 
 	getPost(postId,callback) {
 		let ref = this.database.ref('posts/'+postId)
 		return new Promise( (resolve, reject) => {
-			ref.once('value', function(snapshot) {
+			ref.once('value', snapshot => {
 				resolve(snapshot.val())
 			}, function(error) {
 				reject(error)
@@ -31,7 +31,7 @@ class PostService extends firebase{
 	getAll() {
 		let ref = this.database.ref('posts/')
 		return new Promise( (resolve, reject) => {
-			ref.once('value', function(snapshot) {
+			ref.once('value', snapshot => {
 				resolve({status: true,data: snapshot.val()})
 			}, function(error) {
 				reject(error)
@@ -42,7 +42,7 @@ class PostService extends firebase{
 	getAllCategories() {
 		let ref = this.database.ref('categories/')
 		return new Promise( (resolve, reject) => {
-			ref.once('value', function(snapshot) {
+			ref.once('value', snapshot => {
 				resolve({status: true, data: snapshot.val()})
 			}, function(error) {
 				reject({status: false, data: error})
@@ -52,17 +52,18 @@ class PostService extends firebase{
 
 	storeCategory(post) {
 		return this.database.ref('categories').push(post)
-		.then((result)=>{
-			return {
-				status: true,
-				data: result.path
-			}
-		}).catch((error)=>{
-			return{
-				status: false,
-				data: error
-			}
-		})
+			.then(result => {
+				return {
+					status: true,
+					data: result.path
+				}
+			})
+			.catch(error => {
+				return{
+					status: false,
+					data: error
+				}
+			})
 	}
 }
 module.exports = PostService 
