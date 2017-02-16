@@ -23,9 +23,7 @@
 					></textarea>
 					<button class="btn btn-default" v-on:click="getPreviousMain">Ver prévia</button>
 				</div>
-				<div class="well input-file">
-					{{{post.text}}}
-				</div>
+				<div class="well input-file" v-html="post.text"></div>
 				<div class="input-group date" data-provide="datepicker">
 					<input type="text" class="form-control" v-model="post.date">
 					<div class="input-group-addon">
@@ -42,7 +40,7 @@
 				<div class="form-group">
 					<label for="exampleInputEmail1">Categoria</label>
 					<select class="form-control" v-model="post.category" v-if="categories.length > 0">
-						<option v-for="(key, cat) in categories" :value="cat.key" :selected="key === 0">
+						<option v-for="(cat, key) in categories" :value="cat.key" :selected="key === 0">
 							{{index, cat.name}}
 						</option>
 					</select>
@@ -97,7 +95,7 @@
 				imageName: moment().format('X')
 			}
 		},
-		ready () {
+		mounted () {
 			this.post.date = moment().format('DD-MM-YYYY')
 			this.fetchData()
 		},
