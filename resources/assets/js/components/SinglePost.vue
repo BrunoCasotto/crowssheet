@@ -24,31 +24,32 @@
 </template>
 
 <script>
-import axios from 'axios'
+	import axios from 'axios'
 
-export default {
-  props: { 
-		postId: '',
-		appearance: ''
-	},
-	data: function() {
-		return {
-			posts: {}
+	export default {
+		name: 'SinglePost',
+		props: { 
+			postId: '',
+			appearance: ''
+		},
+		data () {
+			return {
+				posts: {}
+			}
+		},
+		ready () {
+			this.getPost()
+		},
+		methods: {
+			getPost (){
+				axios.get(`/json/post/get?postId=${this.postId}`)
+					.then(response => {
+						this.posts = [response.data]
+					})
+					.catch(error => {})
+			}
 		}
-	},
-	ready: function() {
-		this.getPost()
-	},
-  	methods: {
-		getPost: function(){
-			axios.get('/json/post/get?postId='+this.postId)
-			.then((response)=> {
-				this.posts = [response.data]
-			})
-			.catch((error)=> {})
-		}
-  	}
-}
+	}
 </script>
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
