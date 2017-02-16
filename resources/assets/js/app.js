@@ -23,11 +23,11 @@ import Programming from './components/pages/Programming.vue'
 
 new Vue({
     el: 'body',
-    store: store,
+    store,
     components: {
         Dashboard,
         Login,
-        Singup,        
+        Singup,
         Post,
         PhotoGrid,
         SinglePost,
