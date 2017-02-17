@@ -1,10 +1,11 @@
 <template>
     <div class="well input-file">
-        <img src="{{pictureUrl}}" class="img-thumbnail input-file__img-previous">
-        <button class="btn btn-default btn__save" v-on:click="clear">Remove</button>
+        <img :src="pictureUrl" class="img-thumbnail input-file__img-previous">
+        <button class="btn btn-default btn__save" @click="clear">Remove</button>
         <div class="form-group">
             <label for="exampleInputEmail1">{{title}}</label>
-            <input type="file" name="file" id="input" class="form-control" v-model="file" @change="upload">
+            <!--<input type="file" name="file" id="input" class="form-control" v-model="file" @change="upload">-->
+            <input type="file" name="file" id="input" class="form-control" @change="upload">
         </div>
     </div>
 </template>
@@ -16,46 +17,46 @@
 
     export default {
         name: 'input-file',
-        props:{
+        props: {
             title: '',
             imageName: 'default',
             imageLocale: ''
         },
-        data: function() {
+        data () {
             return {
                 file: '',
                 pictureUrl: '/images/default.jpg'
             }
         },
-        ready: function() {
+        mounted () {
             this.init()
         },
         methods: {
-            init: function() {
+            init () {
                 axios.post('/token')
-				.then((response)=> {
-                    firebase.initializeApp(response.data)
-				})
-				.catch((error)=> {
-					growl.error('Ocorreu um erro')
-				})
+                    .then(response => {
+                        firebase.initializeApp(response.data)
+                    })
+                    .catch(error => {
+                        growl.error('Ocorreu um erro')
+                    })
             },
-            upload: function() {
+            upload () {
                 let storageRef = firebase.storage().ref()
                 let file = document.getElementById('input').files[0]
                 let extension = '.'+file['type'].split('/')[1]
                 let uploadTask = storageRef.child(this.imagelocale + this.imageName+extension).put(file)
-                uploadTask.on('state_changed', (snapshot)=>{
+                uploadTask.on('state_changed', snapshot => {
                     growl.success('Upload em andamento: '+snapshot['totalBytes']+'b')
-                }, function(error) {
+                }, error => {
                     growl.error('ocorreu um erro ao upload')
-                }, ()=> {
+                }, () => {
                     this.pictureUrl = uploadTask.snapshot.downloadURL
                     this.$dispatch('picture-url',this.pictureUrl)
                      growl.success('upload concluido')
                 })
             },
-            clear: function() {
+            clear () {
                 this.file = ''
                 this.pictureUrl= '/images/default.jpg'
             }

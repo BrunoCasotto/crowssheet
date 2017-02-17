@@ -1,23 +1,25 @@
 <template lang="html">
-	<div :class="'post post--'+post.appearance" v-if="post.status == 'visible'" v-for="post in posts">
+	<div>
+		<div :class="'post post--'+post.appearance" v-if="post.status == 'visible'" v-for="post in posts">
 			<div class="post__content"> 
 				<div class="post__content__image">
-					<a class="controller__see-more" href="{{'/post/'+post.key}}">
-						<img src="{{post.image}}" alt="">
+					<a class="controller__see-more" :href="`/post/${post.key}`">
+						<img :src="post.image" alt="">
 					</a>
 				</div>
 				<div class="content__controller">
-					<p class="controller__date">{{{post.date || '00/00/0000'}}}</p>
-					<a class="controller__see-more" href="{{'/post/'+post.key}}">Ver mais</a>
+					<p class="controller__date" v-html="post.date || '00/00/0000'"></p>
+					<a class="controller__see-more" :href="`/post/${post.key}`">Ver mais</a>
 				</div>
 				<div class="post__content__text">
-					<a class="title" href="{{'/post/'+post.key}}">{{{ post.title }}}</a>
-					<p class="sub-title">{{{ post.subtitle }}}</p>
+					<a class="title" :href="`/post/${post.key}`" v-html="post.title"></a>
+					<p class="sub-title" v-html="post.subtitle"></p>
 					<div class="text-previous">
-						<p>{{{ post.previous }}}</p>
+						<p v-html="post.previous"></p>
 					</div>
 				</div>
 			</div>
+		</div>
 	</div>
 </template>
 
@@ -35,7 +37,7 @@
 				posts: {}
 			}
 		},
-		ready () {
+		mounted () {
 			this.fetchPosts()
 		},
 		methods: {

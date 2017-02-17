@@ -12,7 +12,7 @@ module.exports = {
     ],
     output: {
         path: './dist/js',
-        publicPath: './dist/',
+        publicPath: '/dist/',
         filename: 'bundled.js'
     },
     devtool: 'source-map',
@@ -29,35 +29,33 @@ module.exports = {
         }
     },
     module: {
-        loaders: [
+        rules: [
             {
-                test: /\.vue$/, // a regex for matching all files that end in `.vue`
+                test: /\.vue$/,
                 exclude: /node_modules/,
-                loader: 'vue'   // loader to use for matched files
+                loader: 'vue-loader',
+                options: {
+                    postcss: [
+                        require('autoprefixer')({
+                            browsers: ['last 4 versions', 'IE 10']
+                        })
+                    ]
+                }
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel'
+                loader: 'babel-loader'
             },
             {
                 test: /\.scss$/,
-                loader: "style!css!sass"
+                loader: "style-loader!css-loader!sass-loader"
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
-                loader: 'file?name=dist/fonts/[name].[ext]'
+                loader: 'file-loader?name=dist/fonts/[name].[ext]'
             }
-        ],
-        vue: {
-            autoprefixer: {
-                browsers: ['last 2 versions', 'IE 10']
-            }
-        }
-    },
-    babel: {
-        presets: ['es2015'],
-        plugins: ['transform-runtime']
+        ]
     },
     plugins: [
        new webpack.ProvidePlugin({

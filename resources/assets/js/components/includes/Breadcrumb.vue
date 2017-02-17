@@ -3,9 +3,9 @@
         .nav-wrapper
             .col.s12
                 a.breadcrumb(
-                    v-for="(index, route) in $breadcrumb"
-                    v-link="{path: route.handler.path, activeClass: 'active'}"
-                ) {{ route.handler.breadcrumb }}
+                    v-for="(route, index) in $breadcrumb"
+                    v-link="{path: route.meta.handler.path, activeClass: 'active'}"
+                ) {{ route.meta.handler.breadcrumb }}
 </template>
 
 <script>

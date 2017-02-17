@@ -2,19 +2,18 @@ import {
     UPDATE_POSTS
 } from '../mutation-types'
 
-export default function() {
-    const state = {
+export default {
+    state: {
         posts: false
-    }
-
-    const mutations = {
-        [UPDATE_POSTS] (state) {
-            state.posts = state
+    },
+    mutations: {
+        [UPDATE_POSTS] (state, posts) {
+            state.posts = posts
         }
-    }
-
-    return {
-        state,
-        mutations
+    },
+    actions: {
+        updatePost ({commit}, posts) {
+            commit(UPDATE_POSTS, posts)
+        }
     }
 }
