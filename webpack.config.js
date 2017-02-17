@@ -25,7 +25,8 @@ module.exports = {
             _config: path.join(base_sass,'config'),
             _image: path.join(base_path, 'img'),
             _npm: path.join(__dirname, 'node_modules'),
-            _external: path.join(__dirname, 'config')
+            _external: path.join(__dirname, 'config'),
+            'vue$': path.join(__dirname, 'node_modules', 'vue/dist/vue.common.js')
         }
     },
     module: {

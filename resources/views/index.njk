@@ -18,12 +18,13 @@
         </script>
     </head>
     <body>
-    {% if not noheader %}
-        {% include "includes/nav.njk" %}
-    {% endif %}
+    <div id="app">   
+        {% if not noheader %}
+            {% include "includes/nav.njk" %}
+        {% endif %}
 
-    {% block content %}{% endblock %}
-
+        {% block content %}{% endblock %}
+    </div>
     <script src="/js/bundled.js"></script>
     <script src="/js/bundled.js.map"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

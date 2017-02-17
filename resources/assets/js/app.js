@@ -22,7 +22,7 @@ import Singup from './components/pages/Singup.vue'
 import Programming from './components/pages/Programming.vue'
 
 new Vue({
-    el: 'body',
+    el: '#app', 
     store,
     components: {
         Dashboard,
