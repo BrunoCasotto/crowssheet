@@ -9,7 +9,8 @@ class DashController {
 		service.isSigned().then( result => {
 			console.log(result)
 			if (result == null ){
-				reply.view('pages/login', { noheader: true })
+				// reply.view('pages/login', { noheader: true })
+				reply.view('pages/dashboard', { noheader: true })
 			} else {
 				reply.view('pages/dashboard', { noheader: true })
 			}

@@ -96,7 +96,7 @@
 			height: 180px;
 			padding: 10px;
 			border-radius: 8px;
-			transform: translateY(-25%);
+			transform: translateY(40%);
 			z-index:1;
 			background-color: $color-grey--dark;
 		}
