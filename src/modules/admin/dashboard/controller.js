@@ -7,10 +7,9 @@ class DashController {
 	index ( request, reply ) {
 		let service = new AuthService()
 		service.isSigned().then( result => {
-			console.log(result)
 			if (result == null ){
-				// reply.view('pages/login', { noheader: true })
-				reply.view('pages/dashboard', { noheader: true })
+				reply.view('pages/login', { noheader: true })
+				// reply.view('pages/dashboard', { noheader: true })
 			} else {
 				reply.view('pages/dashboard', { noheader: true })
 			}
