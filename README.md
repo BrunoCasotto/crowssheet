@@ -2,8 +2,8 @@
 
   Crows sheet é uma aplicação para ensino online, onde será possivel disponibilizar conteúdos diversos, montar equipes para estudo e acompanhar o andamento dos estudos com aplicações de provas e foruns específicos.
   
-# Desenvolvimento
-  Esse sistema esta sendo desenvolvido utilizando:
+# Tecnologias do desenvolvimento
+  
   1) Vue 2 ( front end )
   
   2) Node - framework HapiJs ( Back end )
