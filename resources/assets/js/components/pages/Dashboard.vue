@@ -7,7 +7,6 @@
 				<side-menu></side-menu>
 			</div>
 			<div class="content">
-
 			</div>
 		</div>
 	</div>
@@ -36,7 +35,7 @@
 	@import "~_config/_vars.scss";
 	
 	.dashboard {
-		height: calc(100vh - 180px);
+		height: 100%;
 
 		&__header {
 			border-bottom: solid 1px $color-grey--light;
@@ -47,15 +46,21 @@
 			display: flex;
 			padding: 0 50px;
 			height: 100%;
-			border-left: solid 0.5px $color-grey--light;
-			
+			@media screen and(max-width: $screen-md) {
+				padding: 0;
+			}
 			.menu {
 				flex: 1;
-				border-left: solid 0.5px $color-grey--light;
-				border-right: solid 0.5px $color-grey--light;
+				@media screen and(max-width: $screen-md) {
+					flex: initial;
+				}
 			}
 			.content {
 				flex: 4;
+				border-right: solid 0.5px $color-grey--light;
+				@media screen and(max-width: $screen-md) {
+					border-right: none;
+				}
 			}
 		}
 

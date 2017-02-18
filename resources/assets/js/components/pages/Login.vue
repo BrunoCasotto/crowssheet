@@ -81,16 +81,6 @@
 			display: flex;
 		}
 
-		/*&:after {
-			content: '';
-			display: block;
-			width: 100%;
-			height: 30%;
-			background-color: $color-grey--base;
-			position: absolute;
-			top:100px;
-		}*/
-
 		&__form {
 			width: 400px;
 			height: 180px;
