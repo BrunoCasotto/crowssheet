@@ -4,9 +4,9 @@
   
 # Desenvolvimento
   Esse sistema esta sendo desenvolvido utilizando:
-  * Vue 2 ( front end )*
-  * Node - framework HapiJs ( Back end )*
-  * Firebase - armazenamento de dados e autenticação de usuários. *
+  * Vue 2 ( front end )
+  * Node - framework HapiJs ( Back end )
+  * Firebase - armazenamento de dados e autenticação de usuários.
 
 # Instruções
   Tenha instalado ( Node npm 6.4 > e Nodemon )
@@ -14,7 +14,7 @@
   Crie uma cópia de "env.example" com nome de .env na raiz do projeto;
   Preencha o env com os dados da sua conta no firebase para web;
   Entre na pasta baixada e execute;
-  * npm install *
-  * npm run dev *
+  * npm install 
+  * npm run dev 
 
  
