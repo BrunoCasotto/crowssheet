@@ -73,6 +73,8 @@
 		.items {
 			width: 100%;
 			transition: .5s all ease;
+			width: 250px;
+
 			@media screen and(max-width: $screen-md) {
 				width: 45px;
 			}
@@ -144,14 +146,14 @@
 			}
 
 			.items {
-				width: 200px;
+				width: 250px;
 
 				@media screen and(max-width: $screen-sm) {
-					position: absolute;
 					z-index: 1;
 				}
 
 				@media screen and(max-width: $screen-xs) {
+					position: absolute;
 					width: 100%;
 				}
 				

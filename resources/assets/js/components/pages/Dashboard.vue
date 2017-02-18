@@ -89,12 +89,6 @@
 			@media screen and(max-width: $screen-md) {
 				padding: 0;
 			}
-			.menu {
-				flex: 1;
-				@media screen and(max-width: $screen-md) {
-					flex: initial;
-				}
-			}
 			.content {
 				flex: 4;
 				border-right: solid 0.5px $color-grey--light;
