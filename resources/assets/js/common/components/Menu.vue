@@ -5,31 +5,35 @@
 				<i class="fa fa-arrow-right"></i>
 				<span class="fa fa-arrow-left">Esconder</span>
 			</div>
-			<div class="item">
+			<div class="item" v-on:click="change('home')" :class="{'item--active' : itemActive == 'home' }">
+				<i class="fa fa-home"></i>
+				<span class="fa fa-home">Turmas</span>
+			</div>
+			<div class="item" v-on:click="change('users')" :class="{'item--active' : itemActive == 'users' }">
 				<i class="fa fa-users"></i>
 				<span class="fa fa-users">Turmas</span>
 			</div>
-			<div class="item">
+			<div class="item" v-on:click="change('students')" :class="{'item--active' : itemActive == 'students' }">
 				<i class="fa fa-address-card"></i>
 				<span class="fa fa-address-card">Alunos</span>
 			</div>
-			<div class="item">
+			<div class="item" v-on:click="change('classes')" :class="{'item--active' : itemActive == 'classes' }">
 				<i class="fa fa-pencil-square-o"></i>
 				<span class="fa fa-pencil-square-o">Aulas</span>
 			</div>
-			<div class="item">
+			<div class="item" v-on:click="change('courses')" :class="{'item--active' : itemActive == 'courses' }">
 				<i class="fa fa-mortar-board"></i>
 				<span class="fa fa-mortar-board">Cursos</span>
 			</div>
-			<div class="item">
+			<div class="item" v-on:click="change('tools')" :class="{'item--active' : itemActive == 'tools' }">
 				<i class="fa fa-cog"></i>
 				<span class="fa fa-cog">Configurações</span>
 			</div>
-			<div class="item">
+			<div class="item" v-on:click="change('profile')" :class="{'item--active' : itemActive == 'profile' }">
 				<i class="fa fa-user"></i>
 				<span class="fa fa-user">Meu Perfil</span>
 			</div>
-			<div class="item">
+			<div class="item" v-on:click="change('security')" :class="{'item--active' : itemActive == 'security' }">
 				<i class="fa fa-lock"></i>
 				<span class="fa fa-lock">Segurança</span>
 			</div>
@@ -41,7 +45,8 @@
 	export default {
 		data: function() { 
 			return {
-				isHidden: false
+				isHidden: false,
+				itemActive: 'home'
 			}
 		},
 		methods: {
@@ -52,6 +57,9 @@
 				} else {
 					this.isHidden = true
 				}
+			},
+			change: function( active ) {
+				this.itemActive = active;
 			}
 		}
 	}
@@ -78,6 +86,12 @@
 				padding: 0 10px;
 				cursor: pointer;
 				overflow: hidden;
+				z-index: 1;
+				background-color: white;
+
+				&--active {
+					background-color: $color-medium-grey--base;
+				}
 
 				&--hidden {
 					span {
@@ -86,6 +100,10 @@
 							margin: 0;
 						}
 					}
+				}
+
+				&:hover {
+					background-color: $color-blue--light;
 				}
 
 				span {
@@ -118,8 +136,6 @@
 		}
 	@media screen and(max-width: $screen-md) {
 		&--active {
-			position: absolute;
-			width: 30%;
 			left: 0;
 			top: 100px;
 
@@ -128,7 +144,16 @@
 			}
 
 			.items {
-				width: 100%;
+				width: 200px;
+
+				@media screen and(max-width: $screen-sm) {
+					position: absolute;
+					z-index: 1;
+				}
+
+				@media screen and(max-width: $screen-xs) {
+					width: 100%;
+				}
 				
 				.item {
 					span {
