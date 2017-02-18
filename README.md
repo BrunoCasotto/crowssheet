@@ -4,9 +4,11 @@
   
 # Desenvolvimento
   Esse sistema esta sendo desenvolvido utilizando:
-  * Vue 2 ( front end )
-  * Node - framework HapiJs ( Back end )
-  * Firebase - armazenamento de dados e autenticação de usuários.
+  1) Vue 2 ( front end )
+  
+  2) Node - framework HapiJs ( Back end )
+  
+  3) Firebase - armazenamento de dados e autenticação de usuários.
 
 # Instruções
   Tenha instalado ( Node npm 6.4 > e Nodemon )
