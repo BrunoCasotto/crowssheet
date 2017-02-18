@@ -129,6 +129,10 @@
 			z-index: 100;
 			transform: translateY(-50px);
 			max-width: 1000px;
+			@media screen and(max-width: $screen-md) {
+				padding: 20px;
+				margin-top: 50px;
+			}
 
 			&__title {
 				font-size: 3rem;
@@ -147,7 +151,8 @@
 					margin: 0.5%;
 
 					&--md {
-						width: 49%
+						flex: 1;
+    					min-width: 200px;
 					}
 				}
 			}
@@ -155,6 +160,10 @@
 			&__btn {
 				margin: 10px 0;
 				max-width: 180px;
+
+				@media screen and(max-width: $screen-md) {
+					max-width: 100%;
+				}
 			}
 
 			.input {
@@ -165,6 +174,9 @@
 				font-size: 1.2rem;
 				line-height: 1.85em;
 				border-radius: 8px;
+				@media screen and(max-width: $screen-md) {
+					line-height: 1em;
+				}
 
 				&--border {
 					border-radius: 8px;
