@@ -1,6 +1,9 @@
 <template lang="html">
    	<div class="dashboard">
 		<div class="dashboard__header">
+			<div class="header__logo">
+				<logo width="100px" height="100px"></logo>
+			</div>
 		</div>
 		<div class="dashboard__content">
 			<div class="menu">
@@ -15,13 +18,15 @@
     import VHeader from "_components/includes/Header.vue"
 	import VFooter from "_components/includes/Footer.vue"
 	import SideMenu from "_common/components/Menu.vue"
+	import Logo from "_common/components/Logo.vue"
 
     export default {
         name: 'Dashboard',
         components: {
             VHeader,
             VFooter,
-			SideMenu
+			SideMenu,
+			Logo
         },
 		data () {
 			return{
@@ -40,6 +45,13 @@
 		&__header {
 			border-bottom: solid 1px $color-grey--light;
 			height: 100px;
+
+			.header__logo {
+				position: relative;
+				left: 5px;
+				top: 5px;
+				height: 100%;
+			}
 		}
 
 		.dashboard__content {

@@ -4,22 +4,19 @@
 			<v-header></v-header>
 		</div>
 		<div class="login">
-			<div class="login__strip">
-				<form class="login__form" v-on:submit.prevent>
-					<div class="form-group">
-						<input name="email" v-model="email" type="email"  class="form-control" placeholder="Email">
-					</div>
-					<div class="form-group">
-						<input name="password" v-model="password" type="password" class="form-control" placeholder="Password">
-					</div>
-					<button v-on:click="login" class="btn btn-default">Login</button>
-					<a href="/auth/register" class="btn btn-default" >Singup</a>
-				</form>
-
-				<div class="login__background">
-					<logo-corvo apperance="background__login" ></logo-corvo>
+			<form class="login__form" v-on:submit.prevent>
+				<div class="form-group">
+					<input name="email" v-model="email" type="email"  class="form-control" placeholder="Email">
 				</div>
+				<div class="form-group">
+					<input name="password" v-model="password" type="password" class="form-control" placeholder="Password">
+				</div>
+				<button v-on:click="login" class="btn btn-default">Login</button>
+				<a href="/auth/register" class="btn btn-default" >Singup</a>
+			</form>
 
+			<div class="login__background">
+				<logo-corvo apperance="background__login" ></logo-corvo>
 			</div>
 			<div class="login__footer">
 				<v-footer></v-footer>
@@ -76,6 +73,10 @@
 		height: 100%;
 		justify-content: center;
 		align-items: center;
+		@media screen and(max-width: $screen-xs) {
+			display: block;
+			padding: 0 10px;
+		}
 
 		&__strip {
 			display: flex;
@@ -86,15 +87,35 @@
 			height: 180px;
 			padding: 10px;
 			border-radius: 8px;
-			transform: translateY(40%);
+			transform: translateY(-25%);
 			z-index:1;
 			background-color: $color-grey--dark;
+
+			@media screen and(max-width: $screen-md) {
+				margin-top: 80px;
+			}
+
+			@media screen and(max-width: $screen-sm) {
+				width: 100%;
+				transform: translate(0);
+				margin-top: 50px auto 0 auto;
+			}
 		}
 
 		&__background {
 			padding-left: 10%;
 			z-index: 2;
 			transform: translateY(-15%);
+
+			@media screen and(max-width: $screen-md) {
+				display: none;
+			}
+		}
+
+		.login__footer {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
 		}
 	}
 </style>
