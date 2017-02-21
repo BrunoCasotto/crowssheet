@@ -10,50 +10,25 @@
 				<side-menu></side-menu>
 			</div>
 			<div class="content">
-				<div class="content__info">
-					<div class="block">
-						<text-block 
-						appearance="block--sm"
-						color= "#828c94"
-						:title="'Visualizações'"
-						:text="'100'"
-						></text-block>
-					</div>
-					<div class="block">
-						<text-block 
-						appearance="block--sm"
-						color= "#ff5c46"
-						:title="'Total Alunos'"
-						:text="'60'"
-						></text-block>
-					</div>
-					<div class="block">
-						<text-block 
-						appearance="block--sm"
-						color= "#2c9fc8"
-						:title="'Média turma'"
-						:text="'6.0'"
-						></text-block>
-				</div>	</div>
+				
+				<home></home>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-    import VHeader from "_components/includes/Header.vue"
-	import VFooter from "_components/includes/Footer.vue"
 	import SideMenu from "_common/components/Menu.vue"
 	import TextBlock from "_common/components/Text-block.vue"
 	import Logo from "_common/components/Logo.vue"
+	import Home from "_components/includes/dashboard/Home.vue"
 
     export default {
         name: 'Dashboard',
         components: {
-            VHeader,
-            VFooter,
 			SideMenu,
 			Logo,
-			TextBlock
+			TextBlock,
+			Home
         },
 		data () {
 			return{
@@ -96,30 +71,7 @@
 					border-right: none;
 				}
 
-				.content__info {
-					display: flex;
-					flex-wrap: wrap;
-					position: relative;
-					justify-content: space-around;
-					align-content: center;
-					width: 100%;
-					top: -50px;
-					
-					.block {
-						margin: 5px;
-						display: flex;
-    					justify-content: center;
-					}
-
-					@media screen and(max-width: $screen-md) {
-						top: 0px;
-					}
-
-					@media screen and(max-width: $screen-xs) {
-						display: block;
-					}
-
-				}
+				
 			}
 		}
 

@@ -7,7 +7,7 @@
 			</div>
 			<div class="item" v-on:click="change('home')" :class="{'item--active' : itemActive == 'home' }">
 				<i class="fa fa-home"></i>
-				<span class="fa fa-home">Turmas</span>
+				<span class="fa fa-home">Inicio</span>
 			</div>
 			<div class="item" v-on:click="change('users')" :class="{'item--active' : itemActive == 'users' }">
 				<i class="fa fa-users"></i>
