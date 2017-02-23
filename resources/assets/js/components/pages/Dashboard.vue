@@ -10,8 +10,8 @@
 				<side-menu></side-menu>
 			</div>
 			<div class="content">
-				
-				<home></home>
+				<home v-if="active == 'home'"></home>
+				<course-form v-if="active == 'create'"></course-form>
 			</div>
 		</div>
 	</div>
@@ -21,6 +21,7 @@
 	import TextBlock from "_common/components/Text-block.vue"
 	import Logo from "_common/components/Logo.vue"
 	import Home from "_components/includes/dashboard/Home.vue"
+	import CourseForm from "_components/includes/dashboard/Course-form.vue"
 
     export default {
         name: 'Dashboard',
@@ -28,15 +29,19 @@
 			SideMenu,
 			Logo,
 			TextBlock,
-			Home
+			Home,
+			CourseForm
         },
 		data () {
 			return{
-				active: 'post-form'
+				active: '',
 			}
 		},
-		mounted () {
-			
+		computed: {
+			active: function () {
+				// return this.$store.state.Menu.active
+				return 'create'
+			}
 		}
     }
 </script>

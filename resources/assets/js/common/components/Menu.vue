@@ -25,6 +25,10 @@
 				<i class="fa fa-mortar-board"></i>
 				<span class="fa fa-mortar-board">Cursos</span>
 			</div>
+			<div class="item" v-on:click="change('create')" :class="{'item--active' : itemActive == 'create' }">
+				<i class="fa fa-plus"></i>
+				<span class="fa fa-mortar-board">Criar curso</span>
+			</div>
 			<div class="item" v-on:click="change('tools')" :class="{'item--active' : itemActive == 'tools' }">
 				<i class="fa fa-cog"></i>
 				<span class="fa fa-cog">Configurações</span>
@@ -52,9 +56,6 @@
 			itemActive: function () {
 				return this.$store.state.Menu.active
 			}
-		},
-		mounted () {
-			this.itemActive = this.$store.state.Menu.active
 		},
 		methods: {
 			toggleMenu: function() {
