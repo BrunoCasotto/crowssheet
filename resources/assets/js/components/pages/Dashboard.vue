@@ -34,6 +34,9 @@
 			return{
 				active: 'post-form'
 			}
+		},
+		mounted () {
+			
 		}
     }
 </script>

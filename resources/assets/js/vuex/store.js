@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import post from './modules/post'
+import Menu from './modules/menu.js'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
     modules: {
-        post
+		Menu
     }
 })
+
+export default store

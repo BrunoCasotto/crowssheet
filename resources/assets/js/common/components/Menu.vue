@@ -45,9 +45,16 @@
 	export default {
 		data: function() { 
 			return {
-				isHidden: false,
-				itemActive: 'home'
+				isHidden: false
 			}
+		},
+		 computed: {
+			itemActive: function () {
+				return this.$store.state.Menu.active
+			}
+		},
+		mounted () {
+			this.itemActive = this.$store.state.Menu.active
 		},
 		methods: {
 			toggleMenu: function() {
@@ -59,7 +66,7 @@
 				}
 			},
 			change: function( active ) {
-				this.itemActive = active;
+				this.$store.dispatch('updateMenu', active)
 			}
 		}
 	}
