@@ -1,27 +1,30 @@
 <template lang="html">
    	<div class="course-form">
-		<div class="form-header">
-			<h4 class="title">Cadastro de curso</h4>
-		</div>
 		<div class="container course-form__content">
-			<form>
-				<div class="form">
-					<div class="form-group">
-						<label for="exampleInputEmail1">Matéria/Titulo</label>
-						<input class="form-control" v-model="course.title">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputEmail1">Descrição</label>
-						<textarea class="form-control" rows="5" v-model="course.description"></textarea>
-					</div>
-					<list-classes appearance="list--sm"></list-classes>
+			<h4 class="title">Cadastro de curso</h4>
+			<form v-on:submit.prevent>
+
+				<div class="form-group">
+					<label for="exampleInputEmail1">Matéria/Titulo</label>
+					<input class="form-control" v-model="course.title">
 				</div>
-				<div class="config">
-					<!--<div class="well input-file"></div>-->
-					<a class="btn btn-default btn-salvar">Salvar</a>
+
+				<div class="form-group">
+					<label for="exampleInputEmail1">Descrição</label>
+					<textarea 
+						id="form-description" 
+						v-model="course.description" 
+						class="tiny-text-area">
+					</textarea>
 				</div>
+
+				<div class="form-group form-group-image well">
+					<label for="exampleInputEmail1">Capa do curso</label>
+					<input type="file" name="file" id="input" class="form-control">
+				</div>
+
+				<button class="btn btn-default btn-salvar" @click="storeCourse">Salvar</button>
 			</form>
-  				
 		</div>
 	</div>
 </template>
@@ -44,21 +47,34 @@
 			}
 		},
 		methods: {
-			// storePost () {
-			// 	axios.post('/post/save', {
-			// 		post: this.post
-			// 	})
-			// 	.then(response => {
-			// 		if (response.data) {
-			// 			this.post.title = ""
-			// 			this.post.text = ""
-			// 			growl.success('Postado')
-			// 		}
-			// 	})
-			// 	.catch(error => {
-			// 		growl.error('Ocorreu um erro')
-			// 	})
-			// },
+			validateForm () {
+				this.course.description = tinymce.get('form-description').getContent()
+				if(this.course.title.length < 5) {
+					growl.warning('O titulo deve conter no minimo 5 caracteres')
+				} else {
+					if(this.course.description.length < 10) {
+						growl.warning('A descrição deve conter no minimo 10 caracteres') 
+					} else {
+						return true
+					}
+				}
+				console.log(this.course)
+			},
+			storeCourse () {
+				if(this.validateForm()) {
+					axios.post('/course/save', {
+						course: this.course
+					})
+					.then(response => {
+						if (response.data) {
+							growl.success('Salvo')
+						}
+					})
+					.catch(error => {
+						growl.error('Desculpe, ocorreu um erro')
+					})
+				}
+			}
 			// fetchData () {
 			// 	axios.get('/json/post/all/category')
 			// 		.then(response => {
@@ -79,61 +95,41 @@
 	.course-form {
 		width: 100%;
 
-		.form-header {
-			width: 100%;
-			text-align: center;
+		.course-form__content {
+			margin: 20px auto;
+			margin-left: 40px;
 
 			.title {
 				margin: 10px auto;
-			}
-		}
-
-		&__content {
-			max-width: 1000px;
-			margin: 20px auto;
-			@media screen and(min-width: $screen-sm) {
-				display: flex;
+				margin-left: 40px;
 			}
 
 			form {
-				display: flex;
-				width: 100%;
+				max-width: 600px;
+				margin: 40px;
 
-				@media screen and(max-width: $screen-sm) {
-					display: block;
+				@media screen and(max-width: $screen-md) {
+					margin: 20px;
 				}
 
-				.form {
+				.form-group-image {
 					width: 50%;
-					padding: 5px;
-					@media screen and(max-width: $screen-sm) {
+					
+					@media screen and(max-width: $screen-md) {
 						width: 100%;
 					}
-
 				}
-				.config {
-					width: 50%;
-					min-height: 200px;
-					padding: 5px;
-					position: relative;
 
-					@media screen and(max-width: $screen-sm) {
-						width: 100%;
-					}
+				.btn-salvar {
+					margin-top: 20px;
+					background-color: $color-blue--base;
+					color: white;
+					font-weight: bold;
+					width: 100px;
+					margin-left: calc(100% - 100px);
 
-					.btn-salvar {
-						margin-top: 20px;
-						background-color: $color-blue--base;
-						color: white;
-						font-weight: bold;
-						width: 100px;
-						position: absolute;
-						bottom: 15px;
-						right: 15px;
-
-						&:hover {
-							background-color: darken( $color-blue--base ,20);
-						}
+					&:hover {
+						background-color: darken( $color-blue--base ,20);
 					}
 				}
 			}

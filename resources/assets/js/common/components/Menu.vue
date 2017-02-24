@@ -82,9 +82,15 @@
 			width: 100%;
 			transition: .5s all ease;
 			width: 250px;
+			box-shadow: 10px 9px 20px -12px;
 
 			@media screen and(max-width: $screen-md) {
 				width: 45px;
+			}
+
+			@media screen and(max-width: $screen-sm) {
+				position: absolute;
+				z-index: 5;
 			}
 
 			.item {
@@ -158,10 +164,10 @@
 
 				@media screen and(max-width: $screen-sm) {
 					z-index: 1;
+					width: 220px;
 				}
 
 				@media screen and(max-width: $screen-xs) {
-					position: absolute;
 					width: 100%;
 				}
 				

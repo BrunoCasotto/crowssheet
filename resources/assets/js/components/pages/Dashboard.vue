@@ -11,7 +11,7 @@
 			</div>
 			<div class="content">
 				<home v-if="active == 'home'"></home>
-				<course-form v-if="active == 'create'"></course-form>
+				<course-form v-show="active == 'create'"></course-form>
 			</div>
 		</div>
 	</div>
@@ -34,13 +34,12 @@
         },
 		data () {
 			return{
-				active: '',
 			}
 		},
 		computed: {
 			active: function () {
-				// return this.$store.state.Menu.active
-				return 'create'
+				return this.$store.state.Menu.active
+				// return 'create'
 			}
 		}
     }
