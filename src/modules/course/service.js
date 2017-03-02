@@ -17,7 +17,23 @@ class CourseService extends firebase{
 			})
 	}
 
-	getPost(postId,callback) {
+	delete( id ) {
+		return this.database.ref('courses/'+id).remove()
+		.then(function(response) {
+			return {
+				status: true,
+				data: response
+			}
+		})
+		.catch(function(error) {
+			return {
+				status: false,
+				data: error.message
+			}
+		})
+	}
+
+	getPost(postId) {
 		let ref = this.database.ref('courses/'+postId)
 		return new Promise( (resolve, reject) => {
 			ref.once('value', snapshot => {

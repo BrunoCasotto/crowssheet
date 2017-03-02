@@ -10,28 +10,20 @@ class CourseController {
 	}
 
 	* store(request, reply) {
-		console.log(request)
 		let service = new CourseService()
 		let response = yield service.store(request.payload.course)
-		if(response.status == true) {
-			reply(true)
-		} else {
-			reply(response)
-		}
+		reply(response)
+	}
+
+	* delete(request, reply) {
+		let service = new CourseService()
+		let response = yield service.delete( request.payload.id )
+		reply(response)
 	}
 
 	* getAll(request, reply) {
-		let service = new Course()
+		let service = new CourseService()
 		let result = yield service.getAll()
-		let posts = []
-		if(result.status == true) {
-			result = result.data
-			for(var key in result) {
-				result[key]['key'] = key
-				posts.push(result[key])
-			}
-		}
-		reply(posts)
 	}
 }
 module.exports = CourseController
