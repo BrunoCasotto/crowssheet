@@ -57,15 +57,12 @@ class CourseService extends firebase{
 		})
 	}
 
-	// getAll() {
-	// 	let ref = this.database.ref('courses/')
-	// 	return new Promise( (resolve, reject) => {
-	// 		ref.once('value', snapshot => {
-	// 			resolve({status: true,data: snapshot.val()})
-	// 		}, function(error) {
-	// 			reject(error)
-	// 		})
-	// 	})
-	// }
+	getSingle( id ) {
+		return this.database.ref('courses/'+id)
+		.once('value')
+		.then((dataSnapshot)=> {
+			return dataSnapshot.val()
+		})
+	}
 }
 module.exports = CourseService 

@@ -32,12 +32,16 @@ class CourseController {
 		let response =  yield service.getAll()
 		let courses = []
 		for(var key in response) {
-			console.log(response[key])
 			response[key]['key'] = key
 			courses.push(response)
 		}
 
 		return courses
+	}
+
+	* getSingle(request, reply) {
+		let service = new CourseService()
+		return yield service.getSingle(request.params.id)
 	}
 }
 module.exports = CourseController
