@@ -21,6 +21,12 @@ class CourseController {
 		reply(response)
 	}
 
+	* update(request, reply) {
+		let service = new CourseService()
+		let response = yield service.update( request.payload.course, request.payload.id )
+		reply(response)
+	}
+
 	* getAll(request, reply) {
 		let service = new CourseService()
 		let result = yield service.getAll()

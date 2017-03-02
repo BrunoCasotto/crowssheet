@@ -33,15 +33,24 @@ class CourseService extends firebase{
 		})
 	}
 
+	update( newCourse, id) {
+		return this.database.ref('courses/'+id).update(newCourse)
+		.then(function(response) {
+			return {
+				status: true,
+				data: response
+			}
+		})
+		.catch(function(error) {
+			return {
+				status: false,
+				data: error.message
+			}
+		})
+	}
+
 	getPost(postId) {
 		let ref = this.database.ref('courses/'+postId)
-		return new Promise( (resolve, reject) => {
-			ref.once('value', snapshot => {
-				resolve(snapshot.val())
-			}, function(error) {
-				reject(error)
-			})
-		})
 	}
 
 	getAll() {
