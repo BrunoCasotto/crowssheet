@@ -9,7 +9,6 @@ class AuthService extends firebase{
 	login(email, password) {
 		return this._firebase.auth().signInWithEmailAndPassword(email, password)
 		.then((response)=>{
-			console.log(response)
 			return {
 				status: true,
 				data: response
@@ -24,11 +23,17 @@ class AuthService extends firebase{
 	}
 
 	singout() {
-		this._firebase.auth().signOut()
+		return this._firebase.auth().signOut()
 		.then((response)=> {
-			return true
-		}, (error)=> {
-			return false
+			return {
+				status: true,
+				data: response
+			}
+		}).catch((error)=>{
+			return {
+				status: false,
+				data: error
+			}
 		})
 	}
 
