@@ -29,7 +29,15 @@ class CourseController {
 
 	* getAll(request, reply) {
 		let service = new CourseService()
-		let result = yield service.getAll()
+		let response =  yield service.getAll()
+		let courses = []
+		for(var key in response) {
+			console.log(response[key])
+			response[key]['key'] = key
+			courses.push(response)
+		}
+
+		return courses
 	}
 }
 module.exports = CourseController
