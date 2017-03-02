@@ -32,6 +32,17 @@ class AuthController {
 		let service = new AuthService()
 		return yield service.singup( request.payload.email, request.payload.password)
 	}
+	
+	* singout(request, reply) {
+		let service = new AuthService()
+		let response = yield service.singout()
+		if(response) {
+			reply.view('pages/login',{noheader: true})
+		} else {
+			return response
+		}
+		
+	}
 
 	* isLogged(request, reply) {
 		let service = new AuthService()

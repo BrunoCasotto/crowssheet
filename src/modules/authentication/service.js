@@ -23,6 +23,15 @@ class AuthService extends firebase{
 		})
 	}
 
+	singout() {
+		this._firebase.auth().signOut()
+		.then((response)=> {
+			return true
+		}, (error)=> {
+			return false
+		})
+	}
+
 	singup(email, password) {
 		return this._firebase.auth().createUserWithEmailAndPassword(email, password)
 		.then((response)=>{

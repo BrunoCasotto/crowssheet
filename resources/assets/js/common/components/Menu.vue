@@ -1,5 +1,5 @@
 <template lang="html">
-	<div class="menu" :class="{'menu--active' : isHidden }">
+	<div class="menu" :class="{'menu--active' : isActive }">
 		<div class="items">
 			<div v-on:click="toggleMenu" class="item item--hidden">
 				<i class="fa fa-arrow-right"></i>
@@ -41,15 +41,22 @@
 				<i class="fa fa-lock"></i>
 				<span class="fa fa-lock">Segurança</span>
 			</div>
+			<div class="item" v-on:click="logout">
+				<i class="fa fa-power-off"></i> 
+				<span class="fa fa-power-off">Sair</span>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+	import axios from "axios"
+	import growl from "growl-alert"
+
 	export default {
 		data: function() { 
 			return {
-				isHidden: false
+				isActive: false
 			}
 		},
 		 computed: {
@@ -59,15 +66,23 @@
 		},
 		methods: {
 			toggleMenu: function() {
-				console.log('test')
-				if(this.isHidden) {
-					this.isHidden = false
+				if(this.isActive) {
+					this.isActive = false
 				} else {
-					this.isHidden = true
+					this.isActive = true
 				}
 			},
 			change: function( active ) {
 				this.$store.dispatch('updateMenu', active)
+			},
+			logout: ()=> {
+				axios.post('/auth/singout')
+				.then(response => {
+					console.log(response)
+				})
+				.catch(error => {
+					growl.error('Desculpe, ocorreu um erro')
+				})
 			}
 		}
 	}
