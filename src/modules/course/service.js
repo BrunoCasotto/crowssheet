@@ -1,68 +1,30 @@
 let firebase = require("@modules/core/firebase")
+let serviceCore = require("@modules/core/service")
 
 class CourseService extends firebase{
 
-	store(post) {
-		return this.database.ref('courses').push(post)
-			.then(result => {
-				return {
-					status: true,
-					data: result.path
-				}
-			}).catch(error => {
-				return{
-					status: false,
-					data: error
-				}
-			})
+	get core() {
+		return new serviceCore()
+	}
+
+	store(course) {
+		return this.core.store('courses', course)
 	}
 
 	delete( id ) {
-		return this.database.ref('courses/'+id).remove()
-		.then(function(response) {
-			return {
-				status: true,
-				data: response
-			}
-		})
-		.catch(function(error) {
-			return {
-				status: false,
-				data: error.message
-			}
-		})
+		return this.core.delete('courses/', id)
 	}
 
 	update( newCourse, id) {
-		return this.database.ref('courses/'+id).update(newCourse)
-		.then(function(response) {
-			return {
-				status: true,
-				data: response
-			}
-		})
-		.catch(function(error) {
-			return {
-				status: false,
-				data: error.message
-			}
-		})
+		return this.core.update('courses/', newCourse, id)
 	}
 
 	getAll() {
-		return this.database.ref('courses/')
-		.once('value')
-		.then((dataSnapshot)=> {
-			return dataSnapshot.val()
-		})
+		return this.core.getAll('courses/')
 	}
 
 	getSingle( id ) {
-		return this.database.ref('courses/'+id)
-		.once('value')
-		.then((dataSnapshot)=> {
-			return dataSnapshot.val()
-		})
+		return this.core.getSingle('courses/', id)
 	}
 }
 module.exports = CourseService 
