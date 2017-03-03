@@ -13,7 +13,7 @@
 					<label for="exampleInputEmail1">Descrição</label>
 					<textarea 
 						id="form-description" 
-						v-model="course.description" 
+						v-model="course.description"
 						class="tiny-text-area">
 					</textarea>
 				</div>
@@ -24,6 +24,7 @@
 				</div>
 
 				<button class="btn btn-default btn-salvar" @click="storeCourse">Salvar</button>
+				<loader></loader>
 			</form>
 		</div>
 	</div>
@@ -33,10 +34,13 @@
 	import growl from "growl-alert"
 	import moment from 'moment'
 	import listClasses from '_common/components/ListClasses.vue'
+	import Loader from '_common/components/Loader.vue'
+	import courseService from '_service/course'
 
     export default {
 		components: {
-			listClasses
+			listClasses,
+			Loader
 		},
 		data () {
 			return {
@@ -58,19 +62,27 @@
 						return true
 					}
 				}
-				console.log(this.course)
+			},
+			clearForm() {
+				this.course.title = ''
+				tinymce.activeEditor.setContent('');
 			},
 			storeCourse () {
 				if(this.validateForm()) {
-					axios.post('/course/save', {
-						course: this.course
-					})
+					this.$store.dispatch('toggleLoader', true)
+					courseService.store( this.course )
 					.then(response => {
-						if (response.data) {
+						if (response.data.status) {
+							this.$store.dispatch('toggleLoader', false)
 							growl.success('Salvo')
+							this.clearForm()
+						} else {
+							this.$store.dispatch('toggleLoader', false)
+							growl.error(response.data.data.message)
 						}
 					})
 					.catch(error => {
+						this.$store.dispatch('toggleLoader', false)
 						growl.error('Desculpe, ocorreu um erro')
 					})
 				}
