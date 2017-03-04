@@ -12,6 +12,7 @@
 			<div class="content">
 				<home v-if="active == 'home'"></home>
 				<course-form v-show="active == 'create'"></course-form>
+				<course-list v-show="active == 'courses'"></course-list>
 			</div>
 		</div>
 	</div>
@@ -21,6 +22,7 @@
 	import TextBlock from "_common/components/Text-block.vue"
 	import Logo from "_common/components/Logo.vue"
 	import Home from "_components/includes/dashboard/Home.vue"
+	import CourseList from "_components/includes/dashboard/Course-list.vue"
 	import CourseForm from "_components/includes/dashboard/Course-form.vue"
 
     export default {
@@ -30,7 +32,8 @@
 			Logo,
 			TextBlock,
 			Home,
-			CourseForm
+			CourseForm,
+			CourseList
         },
 		data () {
 			return{
