@@ -4,17 +4,17 @@ class PostService extends firebase{
 
 	store(post) {
 		return this.database.ref('posts').push(post)
-			.then(result => {
-				return {
-					status: true,
-					data: result.path
-				}
-			}).catch(error => {
-				return{
-					status: false,
-					data: error
-				}
-			})
+				.then(result => {
+					return {
+						status: true,
+						data: result.path
+					}
+				}).catch(error => {
+					return{
+						status: false,
+						data: error
+					}
+				})
 	}
 
 	getPost(postId,callback) {
