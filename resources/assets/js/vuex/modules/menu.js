@@ -1,7 +1,7 @@
 
 export default {
     state: {
-        active: 'home'
+        active: 'courses'
     },
     mutations: {
         updateMenu (state, active) {

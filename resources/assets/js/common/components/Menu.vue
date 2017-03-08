@@ -104,7 +104,6 @@
 			}
 
 			@media screen and(max-width: $screen-sm) {
-				position: absolute;
 				z-index: 5;
 			}
 
@@ -169,6 +168,8 @@
 		&--active {
 			left: 0;
 			top: 100px;
+			position: absolute;
+			z-index: 3;
 
 			@media screen and(max-width: $screen-sm) {
 				width: 100%;

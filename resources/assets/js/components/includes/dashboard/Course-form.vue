@@ -87,16 +87,6 @@
 					})
 				}
 			}
-			// fetchData () {
-			// 	axios.get('/json/post/all/category')
-			// 		.then(response => {
-			// 			this.categories = response.data
-			// 		})
-			// 		.catch(error => {})
-			// },
-			// getPreviousMain () {
-			// 	this.post.text = tinymce.get('tiny-text-area').getContent()
-			// }
 		}
     }
 </script>

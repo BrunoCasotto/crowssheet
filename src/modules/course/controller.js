@@ -33,7 +33,7 @@ class CourseController {
 		let courses = []
 		for(var key in response) {
 			response[key]['key'] = key
-			courses.push(response)
+			courses.push(response[key])
 		}
 
 		return courses

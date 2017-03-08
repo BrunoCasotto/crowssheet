@@ -9,4 +9,20 @@ export default new class CourseService {
             data: {course: course}
         });
 	}
+
+    getAll() {
+		return Axios({
+            url: '/json/course/all',
+            method: 'get',
+            data: {}
+        });
+	}
+
+    delete( id ) {
+		return Axios({
+            url: '/course/delete',
+            method: 'post',
+            data: {id: id}
+        });
+	}
 }
