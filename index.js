@@ -43,6 +43,21 @@ let bind = {
 
 server.bind( bind )
 
+server.ext('onPreResponse', function(request, reply) {
+    data ={
+        user: {
+            name: 'BrunoCasotto',
+            mail: 'tralala',
+            token: 'tralalala'
+        }
+    }
+        
+    if (request.response.source && request.response.source.context) {
+        request.response.source.context.state = '<script> window.__INITIAL_STATE__ = ' + JSON.stringify(data) + '; </script>'
+    }
+    reply.continue();
+})
+
 server.start(err => {
     if (err) {
         console.log(err)

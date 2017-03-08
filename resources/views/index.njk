@@ -7,10 +7,10 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         {% block headIncludes %}{% endblock %}
         <title>{% block title %}{% endblock %}</title>
+        {{state | safe}}
     </head>
     <body>
-
-    <div id="app">   
+    <div id="app">
         {% if not noheader %}
             {% include "includes/nav.njk" %}
         {% endif %}

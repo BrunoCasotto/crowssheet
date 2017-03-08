@@ -1,16 +1,24 @@
 import AuthService from '_service/auth'
 
 
-export default {
-    state:'roso',
-    mutations: {
+export default function( data ){
+    const state = data || {}
+
+    const mutations = {
         updateSession (state, data) {
             state.active = data
         }
-    },
-    actions: {
+    }
+
+    const actions = {
         updateSession(context, data) {
 			context.commit('updateSession', data)
         }
+    }
+
+    return {
+        state,
+        mutations,
+        actions
     }
 }
