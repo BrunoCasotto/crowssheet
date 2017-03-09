@@ -69,7 +69,6 @@
 
 		.dashboard__content {
 			display: flex;
-			padding: 0 50px;
 			height: 100%;
 			@media screen and(max-width: $screen-md) {
 				padding: 0;

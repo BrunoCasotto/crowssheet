@@ -74,11 +74,19 @@
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
 	.course-list {
+		margin: 20px 0;
 		.list__item {
 			display: flex;    
 			justify-content: space-between;
 			padding: 5px 20px;
-			border-bottom: solid 1px $color-grey--base;
+			border: solid 1px $color-grey--base;
+			height: 100px;
+			max-width: 600px;
+			margin: 5px auto;
+
+			&:first-child {
+				border-top: solid 1px $color-grey--base;
+			}
 
 			.item {
 
