@@ -92,12 +92,10 @@
 	@import "~_config/_vars.scss";
 
 	.menu {
-
 		.items {
 			width: 100%;
 			transition: .5s all ease;
 			width: 250px;
-			box-shadow: 10px 9px 20px -12px;
 
 			@media screen and(max-width: $screen-md) {
 				width: 45px;
@@ -109,7 +107,7 @@
 
 			.item {
 				display: flex;
-				height: 45px;
+				height: 60px;
 				border-bottom: solid 1px $color-grey--light;
 				border-left: solid 0.5px $color-grey--light;
 				border-right: solid 0.5px $color-grey--light;
@@ -124,12 +122,7 @@
 				}
 
 				&--hidden {
-					span {
-						margin-left: auto;
-						@media screen and(max-width: $screen-md) {
-							margin: 0;
-						}
-					}
+					display: none;
 				}
 
 				&:hover {
@@ -137,7 +130,7 @@
 				}
 
 				span {
-					line-height: 45px;
+					line-height: 60px;
 					transition: .5s all ease;
 					@media screen and(max-width: $screen-md) {
 						display: none;
@@ -163,60 +156,6 @@
 					}
 				}
 			}
-		}
-	@media screen and(max-width: $screen-md) {
-		&--active {
-			left: 0;
-			top: 100px;
-			position: absolute;
-			z-index: 3;
-
-			@media screen and(max-width: $screen-sm) {
-				width: 100%;
-			}
-
-			.items {
-				width: 250px;
-
-				@media screen and(max-width: $screen-sm) {
-					z-index: 1;
-					width: 220px;
-				}
-
-				@media screen and(max-width: $screen-xs) {
-					width: 100%;
-				}
-				
-				.item {
-					span {
-						display: flex;
-					}
-
-					i {
-						display: none;
-					}
-				}
-			}
-		}
-	}
-
-	@media screen and(min-width: $screen-md) {
-		&--active {
-			.items {
-				width: 45px;
-				
-				.item {
-					span {
-						display: none;
-					}
-
-					i {
-						display: block;
-					}
-				}
-			}
-		}
-	}
-		
+		}	
 	}
 </style>
