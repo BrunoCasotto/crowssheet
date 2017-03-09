@@ -1,4 +1,4 @@
-// let AuthService = require('@modules/authentication/service')
+let AuthService = require('@modules/authentication/service')
 
 class Injector {
 

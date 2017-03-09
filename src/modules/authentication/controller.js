@@ -30,7 +30,7 @@ class AuthController {
 
 	* singup(request, reply) {
 		let service = new AuthService()
-		return yield service.singup( request.payload.email, request.payload.password)
+		return yield service.singup( request.payload.email, request.payload.password, request.payload.name)
 	}
 	
 	* singout(request, reply) {

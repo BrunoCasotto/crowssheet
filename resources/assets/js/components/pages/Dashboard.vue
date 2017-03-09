@@ -4,6 +4,9 @@
 			<div class="header__logo">
 				<logo width="100px" height="100px"></logo>
 			</div>
+			<div class="header__user">
+			<p>Olá, {{user.email}} </p>
+			</div>
 		</div>
 		<div class="dashboard__content">
 			<div class="menu">
@@ -37,12 +40,15 @@
         },
 		data () {
 			return{
+
 			}
 		},
 		computed: {
 			active: function () {
 				return this.$store.state.Menu.active
-				// return 'create'
+			},
+			user: function() {
+				return this.$store.state.Session
 			}
 		}
     }
@@ -58,6 +64,7 @@
 			border-bottom: solid 1px $color-grey--light;
 			height: 100px;
 			display: flex;
+			justify-content: space-between;
 
 			.header__logo {
 				position: relative;
