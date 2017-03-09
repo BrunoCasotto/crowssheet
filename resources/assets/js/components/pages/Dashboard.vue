@@ -5,7 +5,7 @@
 				<logo width="100px" height="100px"></logo>
 			</div>
 			<div class="header__user">
-			<p>Olá, {{user.email}} </p>
+			<p>Olá, {{user.displayName}} </p>
 			</div>
 		</div>
 		<div class="dashboard__content">

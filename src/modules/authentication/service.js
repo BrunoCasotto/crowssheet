@@ -38,12 +38,19 @@ class AuthService extends firebase{
 	}
 
 	singup(email, password, name) {
+		console.log(name)
 		return this._firebase.auth().createUserWithEmailAndPassword(email, password)
 		.then((response)=>{
-			return { 
-				status: true,
-				data: response
-			 }
+			response.updateProfile({
+				displayName: name
+			}).then((response)=> {
+				return { 
+					status: true,
+					data: response
+				}
+			}, (error)=> {
+				
+			})
 		})
 		.catch((error)=> {
 			return { 
