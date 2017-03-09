@@ -1,9 +1,13 @@
-//components
-@import "~_npm/growl-alert/dist/growl-alert.css";
-@import "~_npm//bootstrap/dist/css/bootstrap.min.css";
 //important 
 @import './config/vars.scss';
 @import './config/mixins.scss';
+
+//components
+@import "~_npm/growl-alert/dist/growl-alert.css";
+//just when is offline
+// @import "~_npm//bootstrap/dist/css/bootstrap.min.css";
+// @import "~_npm//font-awesome/css/font-awesome.min.css";
+// @include font-face("fontAwesome", "~_npm/font-awesome/fonts/fontawesome-webfont");
 
 //pages vue
 @import './base/base.scss';
