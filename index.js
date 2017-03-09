@@ -1,6 +1,7 @@
 require('module-alias/register')
 const Hapi = require('hapi')
 let routes = require('@route/route.js')
+let preResponse = require('@middleware/pre_response.js')
 const Path = require('path')
 const Hoek = require('hoek')
 
@@ -43,20 +44,7 @@ let bind = {
 
 server.bind( bind )
 
-server.ext('onPreResponse', function(request, reply) {
-    data ={
-        user: {
-            name: 'BrunoCasotto',
-            mail: 'tralala',
-            token: 'tralalala'
-        }
-    }
-        
-    if (request.response.source && request.response.source.context) {
-        request.response.source.context.state = '<script> window.__INITIAL_STATE__ = ' + JSON.stringify(data) + '; </script>'
-    }
-    reply.continue();
-})
+server.ext('onPreResponse', preResponse)
 
 server.start(err => {
     if (err) {

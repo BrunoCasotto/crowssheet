@@ -23,6 +23,7 @@
   "_moduleAliases": {
     "@app": ".",
     "@route": "src/routes",
+    "@middleware": "src/middleware",
     "@modules": "src/modules",
     "@config": "config",
     "@helpers": "src/helpers",
