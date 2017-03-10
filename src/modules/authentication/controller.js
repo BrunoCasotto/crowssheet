@@ -5,10 +5,12 @@ class AuthController {
 	index(request, reply) {
 		let service = new AuthService()
 		service.isSigned().then((result)=>{
-			if(result)
+			if(result) {
+				request.session = { user: result}
 				reply.redirect('/dashboard')
-			else	
+			 } else	{
 				reply.view('pages/login',{noheader: true})
+			 }
 		})
 	}
 
