@@ -6,10 +6,24 @@
 		<div class="login">
 			<form class="login__form" v-on:submit.prevent>
 				<div class="form-group">
-					<input name="email" v-model="email" type="email"  class="form-control" placeholder="Email">
+					<input 
+					name="email" 
+					v-model="email" 
+					type="email"  
+					class="form-control" 
+					placeholder="Email" 
+					v-on:keyup.enter="login"
+					>
 				</div>
 				<div class="form-group">
-					<input name="password" v-model="password" type="password" class="form-control" placeholder="Password">
+					<input 
+					name="password" 
+					v-model="password" 
+					type="password" 
+					class="form-control" 
+					placeholder="Password" 
+					v-on:keyup.enter="login"
+					>
 				</div>
 				<button v-on:click="login" class="btn btn-default">Login</button>
 				<a href="/auth/register" class="btn btn-default" >Singup</a>
@@ -22,6 +36,7 @@
 				<v-footer></v-footer>
 			</div>
 		</div>
+		<loader></loader>
 	</div>
 </template>
 
@@ -29,7 +44,9 @@
 	import LogoCorvo from "_common/components/Logo.vue"
 	import VHeader from "_components/includes/Header.vue"
 	import VFooter from "_components/includes/Footer.vue"
-	import axios from 'axios'
+	import authService from '_service/auth'
+	import growl from "growl-alert"
+	import Loader from '_common/components/Loader.vue'
 
 	export default {
 		name: 'Login',
@@ -42,23 +59,24 @@
 		components: {
 			LogoCorvo,
 			VHeader,
-			VFooter
+			VFooter,
+			Loader
 		},
 		methods: {
 			login () {
-				axios.post('/auth/singin', {
-					email: this.email,
-					password: this.password
-				})
+				this.$store.dispatch('toggleLoader', true)
+				authService
+				.login( this.email, this.password )
 				.then(response => {
-					if (response.data.status == true) {
+					this.$store.dispatch('toggleLoader', false)
+					if (response.status == true) {
+						this.$store.dispatch('updateSession', response.data)
 						window.location.assign('/dashboard')
-					} else {
-						console.log(response)
 					}
 				})
 				.catch(error => {
-					
+					this.$store.dispatch('toggleLoader', false)
+					console.log(error)
 				})
 			}
 		}

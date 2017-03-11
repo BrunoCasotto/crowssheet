@@ -27,6 +27,7 @@
 	import Home from "_components/includes/dashboard/Home.vue"
 	import CourseList from "_components/includes/dashboard/Course-list.vue"
 	import CourseForm from "_components/includes/dashboard/Course-form.vue"
+	import authService from '_service/auth'
 
     export default {
         name: 'Dashboard',
@@ -38,9 +39,18 @@
 			CourseForm,
 			CourseList
         },
-		data () {
-			return{
-
+		mounted() {
+		},
+		methods: {
+			setUser() {
+				authService.isSigned()
+				.then(response => {
+					console.log(response)
+					this.$store.dispatch('updateSession', {user: response.data})
+				})
+				.catch(error => {
+					console.log(error)
+				})
 			}
 		},
 		computed: {

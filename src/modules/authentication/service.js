@@ -3,45 +3,7 @@ let firebase = require('@modules/core/firebase')
 class AuthService extends firebase{
 
 	getToken() {
-		return require('@config/database')
-	}
-
-	// update(uuid, user) {
-	// 	return this._firebase.auth()
-	// 	.updateUser(uid, user)
-	// 	.then((response)=>{
-	// 		return {
-	// 			status: true,
-	// 			data: response
-	// 		 }
-	// 	})
-	// 	.catch((error)=> {
-	// 		return { 
-	// 			status: false,
-	// 			data: error
-	// 		 }
-	// 	})
-	// }
-	
-	login(email, password) {
-		console.log(email, password)
-		console.log(this._firebase.auth())
-		return false
-		// .signInWithEmailAndPassword(email, password)
-		// .then((response)=>{
-		// 	console.log(response)
-		// 	return {
-		// 		status: true,
-		// 		data: response
-		// 	 }
-		// })
-		// .catch((error)=> {
-		// 	console.log(error)
-		// 	return { 
-		// 		status: false,
-		// 		data: error
-		// 	 }
-		// })
+		return require('@config/token')
 	}
 
 	singout() {
