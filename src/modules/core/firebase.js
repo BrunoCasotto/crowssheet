@@ -1,12 +1,17 @@
 let request = require("request")
-let firebase = require('firebase')
 let config = require('@config/database')
-const firebaseApp = firebase.initializeApp(config)
+var admin = require("firebase-admin")
 
+admin.initializeApp({
+  credential: admin.credential.cert(config),
+  databaseURL: "https://crows-755fd.firebaseio.com"
+})
+
+//new firebase cli
 class Firebase {
     
 	constructor() {
-		this._firebase = firebaseApp
+		this._firebase = admin
 	}
 
     get database () {

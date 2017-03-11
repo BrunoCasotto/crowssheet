@@ -5,21 +5,43 @@ class AuthService extends firebase{
 	getToken() {
 		return require('@config/database')
 	}
+
+	// update(uuid, user) {
+	// 	return this._firebase.auth()
+	// 	.updateUser(uid, user)
+	// 	.then((response)=>{
+	// 		return {
+	// 			status: true,
+	// 			data: response
+	// 		 }
+	// 	})
+	// 	.catch((error)=> {
+	// 		return { 
+	// 			status: false,
+	// 			data: error
+	// 		 }
+	// 	})
+	// }
 	
 	login(email, password) {
-		return this._firebase.auth().signInWithEmailAndPassword(email, password)
-		.then((response)=>{
-			return {
-				status: true,
-				data: response
-			 }
-		})
-		.catch((error)=> {
-			return { 
-				status: false,
-				data: error
-			 }
-		})
+		console.log(email, password)
+		console.log(this._firebase.auth())
+		return false
+		// .signInWithEmailAndPassword(email, password)
+		// .then((response)=>{
+		// 	console.log(response)
+		// 	return {
+		// 		status: true,
+		// 		data: response
+		// 	 }
+		// })
+		// .catch((error)=> {
+		// 	console.log(error)
+		// 	return { 
+		// 		status: false,
+		// 		data: error
+		// 	 }
+		// })
 	}
 
 	singout() {
@@ -38,19 +60,19 @@ class AuthService extends firebase{
 	}
 
 	singup(email, password, name) {
-		console.log(name)
-		return this._firebase.auth().createUserWithEmailAndPassword(email, password)
-		.then((response)=>{
-			response.updateProfile({
-				displayName: name
-			}).then((response)=> {
-				return { 
-					status: true,
-					data: response
-				}
-			}, (error)=> {
-				
-			})
+		return this._firebase.auth().createUser({
+			email: email,
+			emailVerified: false,
+			password: password,
+			displayName: name,
+			photoURL: "http://1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png",
+			disabled: false
+		}).then((response)=>{
+			console.log(response)
+			return { 
+				status: true,
+				data: response
+			}
 		})
 		.catch((error)=> {
 			return { 
