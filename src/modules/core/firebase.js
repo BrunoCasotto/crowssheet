@@ -1,10 +1,10 @@
+require('dotenv').config()
 let request = require("request")
 let config = require('@config/database')
 var admin = require("firebase-admin")
 let {private_key} = config,
     {project_id} = config,
     {client_email} = config
-require('dotenv').config()
 
 admin.initializeApp({
   credential: admin.credential.cert({
