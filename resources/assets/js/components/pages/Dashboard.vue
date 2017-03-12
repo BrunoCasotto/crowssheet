@@ -40,17 +40,16 @@
 			CourseList
         },
 		mounted() {
+			this.setUser()
 		},
 		methods: {
 			setUser() {
-				authService.isSigned()
-				.then(response => {
-					console.log(response)
-					this.$store.dispatch('updateSession', {user: response.data})
-				})
-				.catch(error => {
-					console.log(error)
-				})
+				let authKey = null
+				for (var key in localStorage){
+					authKey = key
+				}
+				console.log(localStorage[authKey])
+				
 			}
 		},
 		computed: {
