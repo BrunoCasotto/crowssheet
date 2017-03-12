@@ -4,7 +4,6 @@ import Firebase from 'firebase'
 class AuthService { 
 
 	constructor() {
-		console.log('instanciou')
 		this._firebase = {}
 		Axios({
 			url: '/token',
