@@ -1,21 +1,15 @@
 require('dotenv').config()
 let request = require("request")
-let config = require('@config/database')
 var admin = require("firebase-admin")
-let {private_key} = config,
-    {project_id} = config,
-    {client_email} = config
-
 admin.initializeApp({
   credential: admin.credential.cert({
-    projectId: process.env.project_id,
-    clientEmail: process.env.client_email,
-    privateKey: process.env.private_key.replace(/\\n/g, '\n')
+    projectId: process.env.PROJECT_ID,
+    clientEmail: process.env.CLIENT_EMAIL,
+    privateKey: process.env.PRIVATE_KEY.replace(/\\n/g, '\n')
   }),
-  databaseURL: "https://crows-755fd.firebaseio.com"
+  databaseURL: process.env.DATABASEURL
 })
 
-//new firebase cli
 class Firebase {
     
 	constructor() {
