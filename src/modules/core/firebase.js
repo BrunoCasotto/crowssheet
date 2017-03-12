@@ -1,9 +1,17 @@
 let request = require("request")
 let config = require('@config/database')
 var admin = require("firebase-admin")
+let {private_key} = config,
+    {project_id} = config,
+    {client_email} = config
+require('dotenv').config()
 
 admin.initializeApp({
-  credential: admin.credential.cert(config),
+  credential: admin.credential.cert({
+    projectId: process.env.project_id,
+    clientEmail: process.env.client_email,
+    privateKey: process.env.private_key.replace(/\\n/g, '\n')
+  }),
   databaseURL: "https://crows-755fd.firebaseio.com"
 })
 
