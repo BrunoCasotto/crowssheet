@@ -48,8 +48,10 @@
 				for (var key in localStorage){
 					authKey = key
 				}
-				console.log(localStorage[authKey])
-				
+
+				if(authKey) {
+					this.$store.dispatch('updateSession', JSON.parse(localStorage[authKey]))
+				}
 			}
 		},
 		computed: {
