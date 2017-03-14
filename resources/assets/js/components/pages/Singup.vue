@@ -77,7 +77,6 @@
 						password: this.password
 					})
 					.then(response => {
-						console.log(response.data)
 						if(response.data.status == true) {
 							window.location.replace('/')
 						}

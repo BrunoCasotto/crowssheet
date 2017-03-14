@@ -56,6 +56,9 @@
 				password: ''
 			}
 		},
+		mounted() {
+			this.verifyLogin()
+		},
 		components: {
 			LogoCorvo,
 			VHeader,
@@ -63,6 +66,18 @@
 			Loader
 		},
 		methods: {
+			verifyLogin() {
+				let authKey = null
+				for (var key in localStorage){
+					authKey = key
+				}
+				
+				if(authKey) {
+					if(JSON.parse(localStorage[authKey]).apiKey) {
+						window.location.assign('/dashboard')
+					}
+				}
+			},
 			login () {
 				this.$store.dispatch('toggleLoader', true)
 				authService

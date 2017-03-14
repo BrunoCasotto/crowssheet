@@ -5,7 +5,7 @@
 				<logo width="100px" height="100px"></logo>
 			</div>
 			<div class="header__user">
-			<p>Olá, {{user.displayName}} </p>
+			<p class="handshake">Olá, {{user.displayName}} </p>
 			</div>
 		</div>
 		<div class="dashboard__content">
@@ -18,6 +18,7 @@
 				<course-list v-show="active == 'courses'"></course-list>
 			</div>
 		</div>
+		<loader></loader>
 	</div>
 </template>
 <script>
@@ -28,6 +29,7 @@
 	import CourseList from "_components/includes/dashboard/Course-list.vue"
 	import CourseForm from "_components/includes/dashboard/Course-form.vue"
 	import authService from '_service/auth'
+	import Loader from '_common/components/Loader.vue'
 
     export default {
         name: 'Dashboard',
@@ -37,29 +39,44 @@
 			TextBlock,
 			Home,
 			CourseForm,
-			CourseList
+			CourseList,
+			Loader
         },
 		mounted() {
 			this.setUser()
+			this.verifyLogin()
 		},
 		methods: {
+			verifyLogin() {
+				let authKey = null
+				for (var key in localStorage){
+					authKey = key
+				}
+				
+				if(!authKey) {
+					window.location.assign('/')
+				} else if(!JSON.parse(localStorage[authKey]).apiKey) {
+					window.location.assign('/')
+				}
+
+			},
 			setUser() {
 				let authKey = null
 				for (var key in localStorage){
 					authKey = key
 				}
-
 				if(authKey) {
-					this.$store.dispatch('updateSession', JSON.parse(localStorage[authKey]))
+					this.$store.dispatch('setSession', JSON.parse(localStorage[authKey]))
 				}
 			}
+			
 		},
 		computed: {
 			active: function () {
 				return this.$store.state.Menu.active
 			},
 			user: function() {
-				return this.$store.state.Session
+				return this.$store.state.App.session
 			}
 		}
     }
@@ -82,6 +99,12 @@
 				left: 5px;
 				top: 5px;
 				height: 100%;
+			}
+
+			.header__user {
+				.logout {
+					cursor: pointer;
+				}
 			}
 		}
 

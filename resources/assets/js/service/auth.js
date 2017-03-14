@@ -42,7 +42,8 @@ class AuthService {
 	}
 
 	singout() {
-		return this._firebase.auth().signOut()
+		return this._firebase.auth()
+		.signOut()
 		.then((response)=> {
 			return {
 				status: true,

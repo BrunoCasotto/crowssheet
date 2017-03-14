@@ -41,7 +41,7 @@
 				<i class="fa fa-lock"></i>
 				<span class="fa fa-lock">Segurança</span>
 			</div>
-			<div class="item" v-on:click="logout">
+			<div class="item" v-on:click="singout">
 				<i class="fa fa-power-off"></i> 
 				<span class="fa fa-power-off">Sair</span>
 			</div>
@@ -52,6 +52,7 @@
 <script>
 	import axios from "axios"
 	import growl from "growl-alert"
+	import authService from '_service/auth'
 
 	export default {
 		data: function() { 
@@ -82,6 +83,22 @@
 				})
 				.catch(error => {
 					growl.error('Desculpe, ocorreu um erro')
+				})
+			},
+			singout() {
+				console.log('roso')
+				this.$store.dispatch('toggleLoader', true)
+				authService
+				.singout()
+				.then(response => {
+					this.$store.dispatch('toggleLoader', false)
+					if(response.status) {
+						window.location.assign('/')
+					}
+				})
+				.catch(error => {
+					this.$store.dispatch('toggleLoader', false)
+					console.log(error)
 				})
 			}
 		}

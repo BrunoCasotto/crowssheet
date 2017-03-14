@@ -6,7 +6,7 @@ export default function( data ){
 
     const mutations = {
         updateSession (state, data) {
-            state.active = data
+            state = data
         }
     }
 

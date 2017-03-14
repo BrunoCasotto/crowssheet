@@ -12,19 +12,14 @@
 				</div>
 			</div>
 		</div>
-		<loader></loader>
 	</div>
 </template>
 <script>
 	import CourseService from '_service/course'
-	import Loader from '_common/components/Loader.vue'
 	import growl from "growl-alert"
 
 	export default {
 		name: 'course-list',
-		components: {
-			Loader
-		},
 		data: ()=> {
 			return {
 				courses: []

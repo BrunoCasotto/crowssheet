@@ -24,7 +24,6 @@
 				</div>
 
 				<button class="btn btn-default btn-salvar" @click="storeCourse">Salvar</button>
-				<loader></loader>
 			</form>
 		</div>
 	</div>
@@ -34,13 +33,11 @@
 	import growl from "growl-alert"
 	import moment from 'moment'
 	import listClasses from '_common/components/ListClasses.vue'
-	import Loader from '_common/components/Loader.vue'
 	import courseService from '_service/course'
 
     export default {
 		components: {
 			listClasses,
-			Loader
 		},
 		data () {
 			return {
