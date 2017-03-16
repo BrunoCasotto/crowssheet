@@ -14,6 +14,7 @@ import PhotoGrid from '_common/components/PhotoGrid.vue'
 import Breadcrumb from './plugins/breadcrumb'
 import Post from '_components/Post.vue'
 import SinglePost from '_components/SinglePost.vue'
+import Modal from '_common/components/modal/Base.vue'
 
 //===== Pages ========
 import Dashboard from './components/pages/Dashboard.vue'
@@ -31,6 +32,7 @@ new Vue({
         Post,
         PhotoGrid,
         SinglePost,
-        Programming
+        Programming,
+        Modal
     }
 })

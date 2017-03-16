@@ -7,7 +7,7 @@
 					<p class="item-description" v-html="course.description"></p>
 				</div>
 				<div class="controller">
-					<i class="fa fa-pencil button"></i>
+					<i class="fa fa-pencil button" @click="updateCourse( course.key )"></i>
 					<i class="fa fa-trash button" @click="deleteCourse( course.key )"></i>
 				</div>
 			</div>
@@ -59,8 +59,16 @@
 					growl.error('Ocorreu algum erro') 
 				})
 			},
-			updateCourse() {
-
+			updateCourse(key) {
+				this.courses.forEach((item)=>{
+					if(item.key == key) {
+						this.$store.dispatch('toggleModal', {
+						type: 'course-form',
+						active: true,
+						data: item
+					})
+					}
+				})
 			}
 		},
 	}
@@ -84,7 +92,8 @@
 			}
 
 			.item {
-
+				width: 320px;
+				overflow: hidden;
 			}
 			.controller {
 				.button {

@@ -5,7 +5,7 @@
 				<logo width="100px" height="100px"></logo>
 			</div>
 			<div class="header__user">
-			<p class="handshake">Olá, {{user.displayName}} </p>
+				<p class="handshake">Olá, {{user.displayName}} </p>
 			</div>
 		</div>
 		<div class="dashboard__content">
@@ -102,6 +102,15 @@
 			}
 
 			.header__user {
+				padding: 10px;
+				display: flex;
+				align-items: center;
+				justify-contet: center;
+
+				p {
+					font-size: 16px;
+				}
+
 				.logout {
 					cursor: pointer;
 				}
