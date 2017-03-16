@@ -3,7 +3,7 @@
 		<div class="modal-base">
 			<i class="fa fa-times close" @click="close"></i>
 			<div class="modal-base__content">
-				<course-form v-show="modal.type == 'course-form'"></course-form>
+				<course-form modifier="update" v-show="modal.type == 'course-form'"></course-form>
 			</div>
 		</div>
 		<div class="overlay" @click="close"></div>
@@ -56,9 +56,17 @@
 	z-index: 16;
 	min-width: 500px;
 	min-height: 300px;
+	box-shadow: 3px 4px 16px -5px ;
+
+	@media screen and(max-width: $screen-sm) {
+		min-width: 320px;
+		min-height: 100%;
+		margin: 10px;
+	}
 
 	.modal-base__content {
-
+		margin: 0 auto;
+		max-width: 700px;
 	}
 
 	.close {

@@ -1,6 +1,6 @@
 <template lang="html">
    	<div class="course-form">
-		<div class="container course-form__content">
+		<div :class="['container course-form__content', modifier]">
 			<h4 class="title">Cadastro de curso</h4>
 			<form v-on:submit.prevent>
 
@@ -22,8 +22,10 @@
 					<label for="exampleInputEmail1">Capa do curso</label>
 					<input type="file" name="file" id="input" class="form-control">
 				</div>
-
-				<button class="btn btn-default btn-salvar" @click="storeCourse">Salvar</button>
+				<div class="form-controller">
+					<button class="btn btn-default btn-adicionar" @click="storeCourse">+ Aula</button>
+					<button class="btn btn-default btn-salvar" @click="storeCourse">Salvar</button>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -36,6 +38,16 @@
 	import courseService from '_service/course'
 
     export default {
+		props: {
+			courseUpdate: {
+				type: Object,
+				default: null
+			},
+			modifier: {
+				type: String,
+				default: ''
+			}
+		},
 		components: {
 			listClasses,
 		},
@@ -96,7 +108,7 @@
 
 		.course-form__content {
 			margin: 20px auto;
-			margin-left: 40px;
+			margin-left: 20px;
 
 			.title {
 				margin: 10px auto;
@@ -106,6 +118,7 @@
 			form {
 				max-width: 600px;
 				margin: 40px;
+				position: relative;
 
 				@media screen and(max-width: $screen-md) {
 					margin: 20px;
@@ -119,21 +132,48 @@
 					}
 				}
 
-				.btn-salvar {
-					margin-top: 20px;
-					background-color: $color-blue--base;
-					color: white;
-					font-weight: bold;
-					width: 100px;
-					margin-left: calc(100% - 100px);
+				.form-controller {
+					display: flex;
+					width: 100%;
 
-					&:hover {
-						background-color: darken( $color-blue--base ,20);
+					.btn {
+						color: white;
+						font-weight: bold;
+						margin-top: 20px;
+						width: 100px;
+					}
+				
+					.btn-salvar {
+						background-color: $color-blue--base;
+
+						&:hover {
+							background-color: darken( $color-blue--base ,20);
+						}
+					}
+					.btn-adicionar {
+						display: none;
+						background-color: $color-green--base;
+
+						&:hover {
+							background-color: darken( $color-green--base ,20);
+						}
+					}
+				}
+
+			}
+		}
+
+		//modifier
+		.update {
+			margin: 0 auto;
+			margin-left: 0px;
+			form {
+				.form-controller {
+					.btn-adicionar {
+						display: block	
 					}
 				}
 			}
-
-			
 		}
 	}
 </style>
