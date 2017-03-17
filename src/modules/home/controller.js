@@ -1,6 +1,4 @@
 let homeService = require("@modules/home/service")
-let postService = require("@modules/post/service")
-let jsonQuery = require('json-query')
 
 class HomeController {
 

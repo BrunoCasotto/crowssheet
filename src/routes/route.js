@@ -1,7 +1,6 @@
-let routes = require('./home')
-	.concat(require('./authentication'))
-	.concat(require('./post'))
-	.concat(require('./dashboard'))
-	.concat(require('./static'))
-	.concat(require('./course'))
+let routes = require("@modules/home/routes")
+	.concat(require("@modules/authentication/routes"))
+	.concat(require("@modules/admin/dashboard/routes"))
+	.concat(require("@modules/static/routes"))
+	.concat(require("@modules/course/routes"))
 module.exports = routes

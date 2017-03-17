@@ -1,9 +1,7 @@
-module.exports = ( controller ) => {
-	HomeController = require("@modules/home/controller")
-	controller = controller || new HomeController
+HomeController = require("@modules/home/controller")
+controller = new HomeController
+	
+module.exports =  [
+	{method: 'GET',	path: '/home', handler: controller.index}
+]
 
-	return [
-		{method: 'GET',	path: '/home', handler: controller.index}
-		// {method: 'GET',	path: '/singup', handler: controller.singup}
-	]
-}
