@@ -1,6 +1,5 @@
 const path = require( 'path' )
 const webpack = require("webpack")
-
 const base_path = path.resolve(__dirname, 'resources/')
 const base_js = path.resolve(base_path, 'assets/js')
 const base_sass = path.resolve(__dirname, 'resources/assets/sass')

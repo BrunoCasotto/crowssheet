@@ -12,8 +12,8 @@
 </template>
 
 <script>
-	import CourseForm from "_components/includes/dashboard/Course-form.vue"
-	import ClassForm from "_components/includes/dashboard/class-form.vue"
+	import CourseForm from "_components/includes/form/Course-form.vue"
+	import ClassForm from "_components/includes/form/class-form.vue"
 
     export default {
 	components: {

@@ -26,13 +26,9 @@
 				:title="'Média turma'"
 				:text="'6.0'"
 				></text-block>
-			</div>	
+			</div>
 		</div>
 		<!-- end information -->
-		<Component-table
-			:titles="['Materia','Alunos', 'Média']"
-			:content="[['matematica',20,3.2],['fisica',30,4],['historia',30,2]]"
-		></Component-table>
 		</div>
 	</div>
 </template>
@@ -40,13 +36,11 @@
 	import axios from "axios"
 	import growl from "growl-alert"
 	import moment from 'moment'
-	import ComponentTable from "_common/components/Table.vue"
 	import TextBlock from "_common/components/Text-block.vue"
 
     export default {
         name: 'Home',
 		components: {
-			ComponentTable,
 			TextBlock
 		},
 		methods: {

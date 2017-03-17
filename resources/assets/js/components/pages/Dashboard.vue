@@ -27,7 +27,7 @@
 	import Logo from "_common/components/Logo.vue"
 	import Home from "_components/includes/dashboard/Home.vue"
 	import CourseList from "_components/includes/dashboard/Course-list.vue"
-	import CourseForm from "_components/includes/dashboard/Course-form.vue"
+	import CourseForm from "_components/includes/form/Course-form.vue"
 	import authService from '_service/auth'
 	import Loader from '_common/components/Loader.vue'
 

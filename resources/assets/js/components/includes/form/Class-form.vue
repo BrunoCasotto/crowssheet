@@ -32,8 +32,8 @@
 				</div>
 
 				<div class="form-controller">
-					<button class="btn btn-default btn-adicionar" @click="addClass">+ Aula</button>
-					<button class="btn btn-default btn-salvar" @click="storeCourse">Salvar</button>
+					<button class="btn btn-default btn-adicionar">+ Test</button>
+					<button class="btn btn-default btn-salvar">Salvar</button>
 				</div>
 
 			</form>
