@@ -1,4 +1,4 @@
     PostController = require("@modules/static/controller")
-	controller = new PostController
+	let controller = new PostController
 
     module.exports = []
