@@ -34,7 +34,6 @@
 	import axios from "axios"
 	import growl from "growl-alert"
 	import moment from 'moment'
-	import listClasses from '_common/components/ListClasses.vue'
 	import courseService from '_service/course'
 
     export default {
@@ -43,9 +42,6 @@
 				type: String,
 				default: ''
 			}
-		},
-		components: {
-			listClasses,
 		},
 		computed: {
 			courseUpdate: function () {
