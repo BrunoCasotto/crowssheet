@@ -13,7 +13,7 @@
 
 <script>
 	import CourseForm from "_components/includes/form/Course-form.vue"
-	import ClassForm from "_components/includes/form/class-form.vue"
+	import ClassForm from "_components/includes/form/Class-form.vue"
 
     export default {
 	components: {
