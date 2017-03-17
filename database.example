@@ -71,22 +71,23 @@
 		team1: {
 			name: 'team name',
 			leader: leader1,
-			course: {
-				key: 'key',
-				title: 'title',
-				description: 'description',
-				image: 'url',
-				classes: {
-					class: {
-						title: 'title',
-						description: 'description',
-						arquivo: 'url',
-						video: 'url'
+			courses: {
+				course1: {
+					title: 'title',
+					description: 'description',
+					image: 'url',
+					classes: {
+						class: {
+							title: 'title',
+							description: 'description',
+							arquivo: 'url',
+							video: 'url'
+						}
 					}
-				},
-				users: {
-					user1
 				}
+			},
+			users: {
+				user1
 			}
 		}
 	}
