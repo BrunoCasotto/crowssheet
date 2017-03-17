@@ -23,7 +23,7 @@
 					<input type="file" name="file" id="input" class="form-control">
 				</div>
 				<div class="form-controller">
-					<button class="btn btn-default btn-adicionar" @click="storeCourse">+ Aula</button>
+					<button class="btn btn-default btn-adicionar" @click="addClass">+ Aula</button>
 					<button class="btn btn-default btn-salvar" @click="storeCourse">Salvar</button>
 				</div>
 			</form>
@@ -39,10 +39,6 @@
 
     export default {
 		props: {
-			courseUpdate: {
-				type: Object,
-				default: null
-			},
 			modifier: {
 				type: String,
 				default: ''
@@ -51,11 +47,17 @@
 		components: {
 			listClasses,
 		},
+		computed: {
+			courseUpdate: function () {
+				return this.$store.state.Modal.data
+			}
+		},
 		data () {
 			return {
 				course: {
 					title: '',
-					description: ''
+					description: '',
+					image: ''
 				}
 			}
 		},
@@ -95,6 +97,15 @@
 						growl.error('Desculpe, ocorreu um erro')
 					})
 				}
+			},
+			addClass() {
+				this.$store.dispatch('toggleModal', {
+					type: 'class-form',
+					active: true,
+					data: {
+						courseId: this.courseUpdate.key
+					}
+				})
 			}
 		}
     }

@@ -4,6 +4,7 @@
 			<i class="fa fa-times close" @click="close"></i>
 			<div class="modal-base__content">
 				<course-form modifier="update" v-show="modal.type == 'course-form'"></course-form>
+				<class-form modifier="" v-show="modal.type == 'class-form'"></class-form>
 			</div>
 		</div>
 		<div class="overlay" @click="close"></div>
@@ -12,9 +13,12 @@
 
 <script>
 	import CourseForm from "_components/includes/dashboard/Course-form.vue"
+	import ClassForm from "_components/includes/dashboard/class-form.vue"
+
     export default {
 	components: {
-		CourseForm
+		CourseForm,
+		ClassForm
 	},
     computed: {
         modal: function () {
