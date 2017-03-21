@@ -2,6 +2,7 @@ let firebase = require("@modules/core/firebase")
 
 class CoreService extends firebase{
 
+	// This is a push method
 	store(path, data) {
 		return this.database.ref(path).push(data)
 			.then(result => {
@@ -17,6 +18,22 @@ class CoreService extends firebase{
 			})
 	}
 
+	// This is a set method
+	storeSet(path, id, data) {
+	return this.database.ref(path).child(id)
+		.set(data)
+		.then(result => {
+			return {
+				status: true
+			}
+		}).catch(error => {
+			return {
+				status: false
+			}
+		})
+	}
+
+	//just delete data referenced by path
 	delete(path, id ) {
 		return this.database.ref(path+id).remove()
 		.then(function(response) {
@@ -33,6 +50,7 @@ class CoreService extends firebase{
 		})
 	}
 
+	//Update only the object params received
 	update( path, newData, id) {
 		return this.database.ref(path+id).update(newData)
 		.then(function(response) {
@@ -49,6 +67,7 @@ class CoreService extends firebase{
 		})
 	}
 
+	//return a object that contains all objects into the path
 	getAll(path) {
 		return this.database.ref(path)
 		.once('value')
@@ -57,6 +76,7 @@ class CoreService extends firebase{
 		})
 	}
 
+	//return a object into the path
 	getSingle( path, id ) {
 		return this.database.ref(path+id)
 		.once('value')
