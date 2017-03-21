@@ -35,6 +35,7 @@ class CoreService extends firebase{
 
 	//just delete data referenced by path
 	delete(path, id ) {
+		console.log(path+id)
 		return this.database.ref(path+id).remove()
 		.then(function(response) {
 			return {

@@ -7,24 +7,24 @@ class CourseService extends firebase{
 		return new serviceCore()
 	}
 
-	store(course) {
-		return this.core.store('courses', course)
+	store( user, course) {
+		return this.core.store('users/'+user+'/courses', course)
 	}
 
-	delete( id ) {
-		return this.core.delete('courses/', id)
+	delete( user, id ) {
+		return this.core.delete( 'users/'+user+'/courses/', id )
 	}
 
-	update( newCourse, id) {
-		return this.core.update('courses/', newCourse, id)
+	update( user, newCourse, id) {
+		return this.core.update('users/'+user+'/courses/', newCourse, id)
 	}
 
-	getAll() {
-		return this.core.getAll('courses/')
+	getAll( user ) {
+		return this.core.getAll('users/'+user+'/courses/')
 	}
 
-	getSingle( id ) {
-		return this.core.getSingle('courses/', id)
+	getSingle( user, id ) {
+		return this.core.getSingle('users/'+user+'/courses/', id)
 	}
 }
 module.exports = CourseService 
