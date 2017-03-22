@@ -80,6 +80,7 @@
 						class: {
 							title: 'title',
 							description: 'description',
+							content: 'content writted',
 							arquivo: 'url',
 							video: 'url'
 						}
