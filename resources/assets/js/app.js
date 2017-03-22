@@ -8,6 +8,8 @@ import store from './vuex/store'
 //===== components ======
 import Menu from '_common/components/Menu.vue' 
 import Modal from '_common/components/modal/Base.vue'
+import Account from '_common/components/Account.vue'
+import Loader from '_common/components/Loader.vue'
 
 //===== Pages ========
 import Dashboard from './components/pages/Dashboard.vue'
@@ -21,6 +23,8 @@ new Vue({
         Dashboard,
         Login,
         Singup,
-        Modal
+        Modal,
+        Account,
+        Loader
     }
 })

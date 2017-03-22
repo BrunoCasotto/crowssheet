@@ -1,0 +1,35 @@
+@import "~_config/_vars.scss";
+
+.menu {
+
+	.items {
+		width: 100%;
+		transition: .5s all ease;
+
+		a {
+			line-height: 60px;
+			transition: .5s all ease;
+			color: black;
+
+			&:before {
+				margin-right: 5px;
+				font-size: 1.3rem;
+			}
+		}
+
+		.item {
+			display: flex;
+			height: 60px;
+			border-bottom: solid 1px $color-grey--light;
+			border-left: solid 0.5px $color-grey--light;
+			border-right: solid 0.5px $color-grey--light;
+			padding: 0 10px;
+			cursor: pointer;
+			background-color: lighten($yellow-base,15);
+
+			&:hover {
+				background-color: $yellow-base;
+			}
+		}
+	}	
+}

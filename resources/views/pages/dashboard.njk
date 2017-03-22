@@ -8,6 +8,16 @@
 </script>
 {% endblock %}
 {% block title %}Dashboard{% endblock %}
+
 {% block content %}
-<Dashboard></Dashboard>
+	<account></account>
+	<div class="base-page">
+		<div class="base-page__menu">
+			{% include "includes/menu.njk" %}
+		</div>
+		<div class="base-page__content">
+			<Dashboard></Dashboard>
+		</div>
+	</div>
+
 {% endblock %}

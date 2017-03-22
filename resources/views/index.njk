@@ -12,11 +12,9 @@
     </head>
     <body>
     <div id="app">
-        {% if not noheader %}
-            {% include "includes/nav.njk" %}
-        {% endif %}
-        {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
         <modal></modal>
+        <loader></loader>
     </div>
 
     {#Scripts#}

@@ -1,0 +1,17 @@
+@import "~_config/_vars.scss";
+
+.base-page {
+	display:flex;
+
+	.base-page__menu {
+		width: 250px;
+
+		@media screen and(max-width: $screen-md) {
+			width: 150px;
+		}
+	}
+
+	.base-page__content {
+		width: 100%;
+	}
+}

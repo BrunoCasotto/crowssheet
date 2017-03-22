@@ -10,13 +10,13 @@
 // @include font-face("fontAwesome", "~_npm/font-awesome/fonts/fontawesome-webfont");
 
 //pages vue
+@import './pages/base.scss';
 @import './base/base.scss';
 @import './pages/home.scss';
 @import './pages/single-post.scss';
 @import './pages/radio.scss';
 
 //components
-@import './includes/header.scss';
-@import './includes/nav.scss'; 
+@import './includes/menu.scss';
 @import './includes/footer.scss';
 
