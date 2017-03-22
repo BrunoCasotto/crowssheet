@@ -9,13 +9,13 @@ import Session from './modules/session.js'
 let data = window.__INITIAL_STATE__ || {}
 
 //gettin session by localStorage
-let authKey = null, session = {}
+let authKey = [], session = {}
 for (var key in localStorage){
-  authKey = key
+  authKey.push(key)
 }
 
-if(authKey) {
-  session = JSON.parse(localStorage[authKey])
+if(authKey[0]) {
+    session = JSON.parse(localStorage[authKey[0]])
 }
 
 Vue.use(Vuex)
