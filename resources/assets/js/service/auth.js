@@ -26,14 +26,12 @@ class AuthService {
 		return this._firebase.auth()
 		.signInWithEmailAndPassword(email, password)
 		.then((response)=>{
-			console.log(response)
 			return {
 				status: true,
 				data: response
 			 }
 		})
 		.catch((error)=> {
-			console.log(error)
 			return { 
 				status: false,
 				data: error

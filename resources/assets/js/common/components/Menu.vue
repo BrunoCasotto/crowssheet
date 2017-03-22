@@ -79,14 +79,12 @@
 			logout: ()=> {
 				axios.post('/auth/singout')
 				.then(response => {
-					console.log(response)
 				})
 				.catch(error => {
 					growl.error('Desculpe, ocorreu um erro')
 				})
 			},
 			singout() {
-				console.log('roso')
 				this.$store.dispatch('toggleLoader', true)
 				authService
 				.singout()
@@ -98,7 +96,6 @@
 				})
 				.catch(error => {
 					this.$store.dispatch('toggleLoader', false)
-					console.log(error)
 				})
 			}
 		}

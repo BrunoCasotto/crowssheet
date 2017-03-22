@@ -30,7 +30,6 @@ class AuthService extends firebase{
 			photoURL: "http://1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png",
 			disabled: false
 		}).then((response)=>{
-			console.log(response)
 			return { 
 				status: true,
 				data: response

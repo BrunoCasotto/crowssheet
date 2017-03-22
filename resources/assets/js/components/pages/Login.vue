@@ -91,7 +91,6 @@
 				})
 				.catch(error => {
 					this.$store.dispatch('toggleLoader', false)
-					console.log(error)
 				})
 			}
 		}
