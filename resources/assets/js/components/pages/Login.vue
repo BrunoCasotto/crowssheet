@@ -28,12 +28,8 @@
 				<button v-on:click="login" class="btn btn-default">Login</button>
 				<a href="/auth/register" class="btn btn-default" >Singup</a>
 			</form>
-
 			<div class="login__background">
 				<logo-corvo apperance="background__login" ></logo-corvo>
-			</div>
-			<div class="login__footer">
-				<v-footer></v-footer>
 			</div>
 		</div>
 		<loader></loader>
@@ -102,9 +98,11 @@
 	.login {
 		padding: 40px;
 		display: flex;
-		height: 100%;
 		justify-content: center;
 		align-items: center;
+		height: calc(100vh - 170px);
+		background-image: linear-gradient(to bottom, white, $orange-base);
+
 		@media screen and(max-width: $screen-xs) {
 			display: block;
 			padding: 0 10px;
@@ -121,7 +119,7 @@
 			border-radius: 8px;
 			transform: translateY(-25%);
 			z-index:1;
-			background-color: $color-grey--dark;
+			background-color: $black-base;
 
 			@media screen and(max-width: $screen-md) {
 				margin-top: 80px;

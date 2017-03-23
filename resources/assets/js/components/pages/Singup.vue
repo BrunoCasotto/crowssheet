@@ -49,9 +49,6 @@
 				<button class="btn btn-default form__btn" v-on:click="register()">Sing Up</butotn>
 			</form>
 		</div>
-		<div>
-			<v-footer></v-footer>
-		</div>
 	</div>
 </template>
 
@@ -112,7 +109,7 @@
 			display: block;
 			width: 100%;
 			height: 30%;
-			background-color: $color-grey--base;
+			background-color: $orange-base;
 			position: absolute;
 			top:100px;
 		}
@@ -122,7 +119,7 @@
 			width: 100%;
 			flex-direction: column;
 			padding: 40px;
-			background-color: $color-grey--dark;
+			background-color: $black-base;
 			border-radius: 8px;
 			z-index: 100;
 			transform: translateY(-50px);

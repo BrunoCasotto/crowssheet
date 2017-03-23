@@ -28,7 +28,7 @@ import Logo from "_common/components/Logo.vue"
 
         a {
             text-decoration: none;
-            color: $color-grey-blue-light;
+            color: black;
         }
 
         .title {
