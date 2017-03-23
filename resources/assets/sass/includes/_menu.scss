@@ -4,11 +4,10 @@
 	width: 100%;
 	height: 100%;
 	border-right: solid 0.5px black;
-	background-color: $orange-base;
+	background-image: linear-gradient(to bottom, white, $orange-base);
 
 	.menu__logo {
 		padding: 10px;
-		background-color: white;
 	}
 
 	.items {
