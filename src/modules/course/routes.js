@@ -44,5 +44,10 @@
 			config: {
 				validate: validator.getAll
 			}
+		},
+		{
+			method: 'GET', 
+			path: '/course/form', 
+			handler: controller.showCourseForm
 		}
 	]

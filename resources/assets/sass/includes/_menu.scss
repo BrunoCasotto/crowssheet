@@ -1,6 +1,15 @@
 @import "~_config/_vars.scss";
 
 .menu {
+	width: 100%;
+	height: 100%;
+	border-right: solid 0.5px black;
+	background-color: $orange-base;
+
+	.menu__logo {
+		padding: 10px;
+		background-color: white;
+	}
 
 	.items {
 		width: 100%;
@@ -20,15 +29,29 @@
 		.item {
 			display: flex;
 			height: 60px;
-			border-bottom: solid 1px $color-grey--light;
-			border-left: solid 0.5px $color-grey--light;
-			border-right: solid 0.5px $color-grey--light;
+			border-bottom: solid 1px black;
 			padding: 0 10px;
 			cursor: pointer;
-			background-color: lighten($yellow-base,15);
+			font-size: 20px;
+			font-weight: bold;
+
+			&:first-child {
+				border-top: solid 1px black;
+			}
+			
+			a {
+				font-family: sans-serif;
+
+				&:before {
+					font-family: fontAwesome;
+				}
+			}
 
 			&:hover {
-				background-color: $yellow-base;
+				background-color: $black-base;
+				a {
+					color: white;
+				}
 			}
 		}
 	}	

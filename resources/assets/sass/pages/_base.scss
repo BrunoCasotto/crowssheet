@@ -6,12 +6,29 @@
 	.base-page__menu {
 		width: 250px;
 
-		@media screen and(max-width: $screen-md) {
-			width: 150px;
+		@media screen and(max-width: $screen-sm) {
+			display: none;
 		}
 	}
 
 	.base-page__content {
 		width: 100%;
+
+		.base-page__content__header {
+			height: 50px;
+			background-color: $green-base;
+			background-color: $black-base;
+
+			.header__title {
+				line-height: 50px;
+				margin-left: 10px;
+
+				p {
+					font-size: 20px;
+					color: white;
+					font-weight: bold;
+				}
+			}
+		}
 	}
 }

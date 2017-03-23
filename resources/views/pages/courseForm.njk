@@ -1,5 +1,13 @@
 {% extends 'index.njk' %}
-{% block title %}Dashboard{% endblock %}
+{% block headIncludes %}
+	<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+	<script>
+		tinymce.init({
+			selector: '.tiny-text-area'
+		})
+	</script>
+{% endblock %}
+{% block title %}Formulário do curso{% endblock %}
 
 {% block content %}
 	<account></account>
@@ -10,10 +18,10 @@
 		<div class="base-page__content">
 			<div class="base-page__content__header">
 			<div class="header__title">
-				<p>Página inicial<p>
+				<p>Cadastro de curso<p>
 			</div>
 			</div>
-			<Dashboard></Dashboard>
+			<course-form></course-form>
 		</div>
 	</div>
 

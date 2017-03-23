@@ -3,6 +3,10 @@ let Boom = require('boom')
 
 class CourseController {  
 
+	* showCourseForm(request, reply) {
+		reply.view('pages/courseForm')  
+	}
+
 	* showSingleCourse(request, reply) {
 		let service = new CourseService()
 		let post = yield service.getPost( request.params.postId )

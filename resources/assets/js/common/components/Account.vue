@@ -78,7 +78,7 @@
         position: fixed;
         right: 15px;
         top: 10px;
-        background-color: $purple-base;
+        background-color: $red-base;
         color: white;
         font-weight: bold;
         height: 50px;
@@ -108,10 +108,10 @@
                 width: 100%;
                 height: 30px;
                 line-height: 30px;
-                background-color: lighten($purple-base ,15);
+                background-color: $black-base;
 
                 &:hover {
-                    background-color: lighten($purple-base ,18);
+                    background-color: lighten($black-base ,18);
                 }
 
                 a {
