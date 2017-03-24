@@ -14,14 +14,6 @@ class AuthService {
 		}).catch((error)=>{})
 	}
 
-	isSigned() {
-		this.init( ()=>{
-			return new Promise( (resolve, reject) => {
-				resolve(this._firebase.auth().currentUser)
-			})
-		})
-	}
-
 	login(email, password) {
 		return this._firebase.auth()
 		.signInWithEmailAndPassword(email, password)
@@ -53,5 +45,14 @@ class AuthService {
 				data: error
 			}
 		})
+	}
+
+	singup(user) {
+		console.log(user)
+		return Axios({
+            url: '/user/create',
+            method: 'post',
+            data: user
+        })
 	}
 } export default new AuthService()

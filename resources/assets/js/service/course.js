@@ -2,12 +2,12 @@ import Axios from 'axios';
 
 export default new class CourseService { 
 
-	store( course ) {
-		return Axios({
+	store( userId, course ) {
+        return Axios({
             url: '/course/save',
             method: 'post',
-            data: {course: course}
-        });
+            data: { userId: userId, course: course}
+        })
 	}
 
     getAll() {
@@ -15,7 +15,7 @@ export default new class CourseService {
             url: '/json/course/all',
             method: 'get',
             data: {}
-        });
+        })
 	}
 
     delete( id ) {
@@ -23,6 +23,6 @@ export default new class CourseService {
             url: '/course/delete',
             method: 'post',
             data: {id: id}
-        });
+        })
 	}
 }

@@ -35,6 +35,9 @@
 		computed: {
 			courseUpdate: function () {
 				return this.$store.state.Modal.data
+			},
+			user: function () {
+				return this.$store.state.Session
 			}
 		},
 		data () {
@@ -42,7 +45,7 @@
 				course: {
 					title: '',
 					description: '', 
-					image: ''
+					image:"https://firebasestorage.googleapis.com/v0/b/crows-755fd.appspot.com/o/images-default%2Fcourse-default.png?alt=media&token=0ce5c765-b502-4ff6-9425-58c4bf4ae160"
 				}
 			}
 		},
@@ -66,7 +69,7 @@
 			storeCourse () {
 				if(this.validateForm()) {
 					this.$store.dispatch('toggleLoader', true)
-					courseService.store( this.course )
+					courseService.store( this.user.uid, this.course )
 					.then(response => {
 						if (response.data.status) {
 							this.$store.dispatch('toggleLoader', false)
@@ -79,7 +82,7 @@
 					})
 					.catch(error => {
 						this.$store.dispatch('toggleLoader', false)
-						growl.error('Desculpe, ocorreu um erro')
+						growl.error(error.data.message)
 					})
 				}
 			},

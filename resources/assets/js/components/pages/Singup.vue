@@ -46,7 +46,7 @@
 					>
 				</div>
 				</div>
-				<button class="btn btn-default form__btn" v-on:click="register()">Sing Up</butotn>
+				<button class="btn btn-default form__btn" @click="register">Sing Up</butotn>
 			</form>
 		</div>
 	</div>
@@ -56,10 +56,18 @@
 	import VHeader from "_components/includes/Header.vue"
 	import VFooter from "_components/includes/Footer.vue"
 	import axios from 'axios'
+	import growl from "growl-alert"
+	import authService from '_service/auth'
 
 	export default {
 		data () {
-			return {}
+			return {
+				name: '',
+				email: '',
+				password: '',
+				passwordAgain: '',
+				photo:'http://wpshowdown.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
+			}
 		},
 		components: {
 			VHeader,
@@ -67,28 +75,22 @@
 		},
 		methods: {
 			register () {
-				if (this.validate()){
-					axios.post('/auth/singup', {
-						name: this.name,
-						email: this.email,
-						password: this.password
-					})
-					.then(response => {
-						if(response.data.status == true) {
-							window.location.replace('/')
-						}
-					})
-					.catch(error => {
-					})
-				}
-			},
-			validate () {
-				return true;
-				if (this.password == this.passwordAgain && this.name.trim().length > 5 && this.email.trim().length > 4) {
-					return true
-				} else {
-					return false
-				}
+				authService
+				.singup({
+					name: this.name,
+					email: this.email,
+					password: this.password,
+					photo: this.photo
+				})
+				.then(response => {
+					console.log(response)
+					if(response.data.status == true) {
+						window.location.replace('/')
+					}
+				})
+				.catch(error => {
+					console.log(error)
+				})
 			}
 		}
 	}
