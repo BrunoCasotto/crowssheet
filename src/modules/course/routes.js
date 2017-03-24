@@ -39,7 +39,7 @@
 		},
 		{
 			method: 'GET', 
-			path: '/json/course/all', 
+			path: '/course/all', 
 			handler: controller.getAll,
 			config: {
 				validate: validator.getAll
@@ -49,5 +49,10 @@
 			method: 'GET', 
 			path: '/course/form', 
 			handler: controller.showCourseForm
+		},
+		{
+			method: 'GET', 
+			path: '/course/list', 
+			handler: controller.showAllCourse
 		}
 	]

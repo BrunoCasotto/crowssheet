@@ -20,7 +20,6 @@
 			<input type="file" name="file" id="input" class="form-control">
 		</div>
 		<div class="form-controller">
-			<button class="btn btn-default btn-adicionar" @click="addClass">+ Aula</button>
 			<button class="btn btn-default btn-salvar" @click="storeCourse">Salvar</button>
 		</div>
 	</div>

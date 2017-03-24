@@ -10,9 +10,9 @@ export default new class CourseService {
         })
 	}
 
-    getAll() {
+    getAll( userId ) {
 		return Axios({
-            url: '/json/course/all',
+            url: '/course/all?userId='+userId,
             method: 'get',
             data: {}
         })

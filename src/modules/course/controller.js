@@ -7,11 +7,16 @@ class CourseController {
 		reply.view('pages/courseForm')  
 	}
 
+	* showAllCourse(request, reply) {
+		reply.view('pages/courseList')  
+	}
+
 	* showSingleCourse(request, reply) {
 		let service = new CourseService()
 		let post = yield service.getPost( request.params.postId )
 		reply.view('pages/singlePost',post) 
 	}
+
 
 	* store(request, reply) {
 		let service = new CourseService()

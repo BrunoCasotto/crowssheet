@@ -17,6 +17,7 @@ import Dashboard from '_components/pages/Dashboard.vue'
 import Login from '_components/pages/Login.vue'
 import Singup from '_components/pages/Singup.vue'
 import CourseForm from '_components/pages/CourseForm.vue'
+import CourseList from '_components/pages/CourseList.vue'
 
 new Vue({
     el: '#app',
@@ -29,6 +30,7 @@ new Vue({
         Account,
         Loader,
         CourseForm,
-        Logo
+        Logo,
+        CourseList
     }
 })

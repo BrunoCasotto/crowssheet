@@ -25,13 +25,18 @@
 				courses: []
 			}
 		},
+		computed: {
+			user: function () {
+				return this.$store.state.Session
+			}
+		},
 		mounted (){
 			this.fetchCourses()
 		},
 		methods: {
 			fetchCourses() {
 				this.$store.dispatch('toggleLoader', true)
-				CourseService.getAll()
+				CourseService.getAll(this.user.uid)
 				.then(response => {
 					this.$store.dispatch('toggleLoader', false)
 					this.courses = response.data
@@ -77,15 +82,22 @@
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
 	.course-list {
-		margin: 20px 0;
+		width: 100%;
+		max-width: 700px;
+		margin: 20px;
+
 		.list__item {
-			display: flex;    
-			justify-content: space-between;
+			display: flex;
 			padding: 5px 20px;
-			border: solid 1px $color-grey--base;
 			height: 100px;
-			max-width: 600px;
 			margin: 5px auto;
+			cursor: pointer;
+			border: solid 1px $color-grey--base;
+			transition: .5s all ease;
+
+			&:hover {
+				height: 200px;
+			}
 
 			&:first-child {
 				border-top: solid 1px $color-grey--base;
