@@ -13,6 +13,10 @@
 
 	.base-page__content {
 		width: 100%;
+		min-height: calc(100vh - 70px);
+		background-image: url('/images/background.png');
+		background-repeat: no-repeat;
+		background-size: cover;
 
 		.base-page__content__header {
 			height: 50px;

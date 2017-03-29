@@ -1,5 +1,14 @@
 {% extends 'index.njk' %}
 
+{% block headIncludes %}
+	<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+	<script>
+		tinymce.init({
+			selector: '.tiny-text-area'
+		})
+	</script>
+{% endblock %}
+
 {% block title %}Lista de cursos{% endblock %}
 
 {% block content %}

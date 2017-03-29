@@ -18,11 +18,14 @@ export default new class CourseService {
         })
 	}
 
-    delete( id ) {
+    delete( userId, id ) {
 		return Axios({
             url: '/course/delete',
             method: 'post',
-            data: {id: id}
+            data: {
+                id: id,
+                userId: userId
+            }
         })
 	}
 }

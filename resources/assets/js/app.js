@@ -18,6 +18,7 @@ import Login from '_components/pages/Login.vue'
 import Singup from '_components/pages/Singup.vue'
 import CourseForm from '_components/pages/CourseForm.vue'
 import CourseList from '_components/pages/CourseList.vue'
+import ClassModal from '_common/components/modal/ClassModal.vue'
 
 new Vue({
     el: '#app',
@@ -31,6 +32,7 @@ new Vue({
         Loader,
         CourseForm,
         Logo,
-        CourseList
+        CourseList,
+        ClassModal
     }
 })

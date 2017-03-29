@@ -3,7 +3,7 @@
 		<div class="modal-base">
 			<i class="fa fa-times close" @click="close"></i>
 			<div class="modal-base__content">
-				<course-form></course-form>
+				<class-form></class-form>
 			</div>
 		</div>
 		<div class="overlay" @click="close"></div>
@@ -11,26 +11,26 @@
 </template>
 
 <script>
-	import CourseForm from '_components/pages/CourseForm.vue'
+import ClassForm from '_components/pages/ClassForm.vue'
 
-    export default {
-    computed: {
-        modal: function () {
-            return this.$store.state.Modal
-        }
-    },
-	methods: {
-		close () {
-			this.$store.dispatch('toggleModal', {
-				type: '',
-				active: false,
-				data: {}
-			})
+	export default {
+		computed: {
+			modal: function () {
+				return this.$store.state.Modal
+			}
+		},
+		components: {
+			ClassForm
+		},
+		methods: {
+			close () {
+				this.$store.dispatch('toggleModal', {
+					type: '',
+					active: false,
+					data: {}
+				})
+			}
 		}
-	},
-	components: {
-		CourseForm
-	}
     }
 </script>
 
@@ -57,7 +57,9 @@
 	z-index: 16;
 	min-width: 500px;
 	min-height: 300px;
-	box-shadow: 3px 4px 16px -5px ;
+	box-shadow: 3px 4px 16px -5px;
+	max-height: 95%;
+    overflow-y: scroll;
 
 	@media screen and(max-width: $screen-sm) {
 		min-width: 320px;

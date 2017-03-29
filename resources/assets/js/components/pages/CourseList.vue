@@ -7,8 +7,8 @@
 					<p class="item-description" v-html="course.description"></p>
 				</div>
 				<div class="controller">
-					<i class="fa fa-pencil button" @click="updateCourse( course.key )"></i>
-					<i class="fa fa-trash button" @click="deleteCourse( course.key )"></i>
+					<i class="btn btn-default btn-update" @click="updateCourse( course.key )">+ Aula</i>
+					<i class="btn btn-default btn-delete" @click="deleteCourse( course.key )">Deletar</i>
 				</div>
 			</div>
 		</div>
@@ -17,6 +17,7 @@
 <script>
 	import CourseService from '_service/course'
 	import growl from "growl-alert"
+	import ClassModal from '_common/components/modal/ClassModal.vue'
 
 	export default {
 		name: 'course-list',
@@ -33,6 +34,9 @@
 		mounted (){
 			this.fetchCourses()
 		},
+		components: {
+			ClassModal
+		},
 		methods: {
 			fetchCourses() {
 				this.$store.dispatch('toggleLoader', true)
@@ -48,7 +52,7 @@
 			},
 			deleteCourse( id ) {
 				this.$store.dispatch('toggleLoader', true)
-				CourseService.delete( id )
+				CourseService.delete( this.user.uid, id )
 				.then(response => {
 					if(response.status) {
 						this.$store.dispatch('toggleLoader', false)
@@ -68,10 +72,10 @@
 				this.courses.forEach((item)=>{
 					if(item.key == key) {
 						this.$store.dispatch('toggleModal', {
-						type: 'course-form',
-						active: true,
-						data: item
-					})
+							type: 'course-form',
+							active: true,
+							data: item
+						})
 					}
 				})
 			}
@@ -94,6 +98,7 @@
 			cursor: pointer;
 			border: solid 1px $color-grey--base;
 			transition: .5s all ease;
+			background-color: white;
 
 			&:hover {
 				height: 200px;
@@ -104,14 +109,36 @@
 			}
 
 			.item {
-				width: 320px;
+				flex: 5;
 				overflow: hidden;
 			}
+
 			.controller {
-				.button {
-					cursor: pointer;
-					padding: 2px;
+				padding: 5px;
+				flex: 1;
+
+				.btn {
+					min-width: 100px;
+					color: white;
+					font-weight: bold;
+					margin-left: auto;
 				}
+
+				.btn-update {
+					background-color: $red-base;
+
+					&:hover {
+						background-color: lighten($red-base,15);
+					}
+				}
+
+				.btn-delete {
+					background-color: $black-base;
+					&:hover {
+						background-color: lighten($black-base,15);
+					}
+				}
+
 			}
 		}
 	}

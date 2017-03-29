@@ -2,7 +2,7 @@
    	<div class="dashboard">
 		<!-- information -->
 		<div class="dashboard-home">
-		<div class="well content__info">
+		<div class="content__info">
 			<div class="block">
 				<text-block 
 				appearance="block--sm"
