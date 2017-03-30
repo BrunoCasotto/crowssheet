@@ -43,6 +43,11 @@
 					}
 				}
 			},
+			leader: {
+				team1,
+				team2,
+				team3
+			},
 			status: {
 				courses_completes: 0,
 				tests_completes: 0,
