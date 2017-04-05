@@ -9,7 +9,9 @@ class  TeamService{
 	create( user, team ) {
 		return this.core.store('teams', team)
 		.then((response)=>{
-			return this.core.storeSet('users/'+user+'/teams', response,null)
+			if(response.status) {
+				return this.core.storeSet('users/'+user+'/teams', response.data.o[1],team)
+			}
 		})
 		.catch((error)=>{
 			return {

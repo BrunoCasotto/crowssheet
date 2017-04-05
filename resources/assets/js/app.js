@@ -18,6 +18,8 @@ import Login from '_components/pages/Login.vue'
 import Singup from '_components/pages/Singup.vue'
 import CourseForm from '_components/pages/CourseForm.vue'
 import CourseList from '_components/pages/CourseList.vue'
+import TeamList from '_components/pages/TeamList.vue'
+import UserList from '_components/pages/UserList.vue'
 import ClassModal from '_common/components/modal/ClassModal.vue'
 
 new Vue({
@@ -33,6 +35,8 @@ new Vue({
         CourseForm,
         Logo,
         CourseList,
-        ClassModal
+        ClassModal,
+        UserList,
+        TeamList
     }
 })

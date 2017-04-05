@@ -6,6 +6,10 @@ class UserService  extends firebase {
 	get core() {
 		return new serviceCore()
 	}
+
+	getAll() {
+		return this.core.getAll('users')
+	}
 	
 	create(email, password, name, photo) {
 		
