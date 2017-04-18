@@ -7,7 +7,15 @@ class TeamController {
 	}
 
 	* getAll(request, reply) {
+		let service = new TeamService()
+		let response = yield service.getAll( request.query.user )
+		let teams = []
+		for(var key in response) {
+			response[key]['key'] = key
+			teams.push(response[key])
+		}
 
+		return teams
 	}
 	
 	* create(request, reply) {
@@ -16,7 +24,6 @@ class TeamController {
 	}
 
 	* delete(request, reply) {
-		console.log(request.payload)
 		let service = new TeamService()
 		return yield service.delete( request.payload.userId, request.payload.teamId )
 	}

@@ -12,9 +12,9 @@ export default new class TeamService {
 
 	getAll( userId ) {
         return Axios({
-            url: '/team/create',
-            method: 'post',
-            data: { userId: userId, team: team}
+            url: '/team/all?user='+userId,
+            method: 'get',
+            data: {}
         })
 	}
 

@@ -44,9 +44,7 @@
 				}
 			},
 			leader: {
-				team1,
-				team2,
-				team3
+				team1
 			},
 			status: {
 				courses_completes: 0,
@@ -54,11 +52,9 @@
 				total_tests: 0,
 				total_results: 0,
 				avatar {
-					avatar1,
+					avatar1
 					achievements: {
-						achievement1,
-						achievement2,
-						achievement3
+						achievement1
 					}
 				}
 			}
@@ -70,13 +66,10 @@
 			name: 'team name',
 			leader: user1,
 			users: {
-				user1,
-				user2,
-				user3
+				user1
 			},
 			courses: {
-				course1,
-				course2
+				course1
 			}
 		}
 	}
@@ -85,20 +78,11 @@
 		avatar1 {
 			picture: 'url',
 			name: 'avatar name'
-		},
-		avatar2 {
-			picture: 'url',
-			name: 'avatar name'
 		}
 	}
 
 	achievements: {
 		achievement1 {
-			picture: 'url',
-			name: 'avatar name',
-			rule: 'rule' 
-		},
-		achievement2 {
 			picture: 'url',
 			name: 'avatar name',
 			rule: 'rule' 

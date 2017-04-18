@@ -2,7 +2,7 @@
 	<div class="team-list">
 		<div class="list">
 			<team-form></team-form>
-			<!--<div v-for="team in teams" class="list__item">
+			<div v-for="team in teams" class="list__item">
 				<div class="item">
 					<div class="description">
 						<h4 class="name" >{{ team.name }}</h4>
@@ -11,12 +11,12 @@
 				<div class="controller">
 					<i class="btn btn-default btn-insert" @click="updateCourse( user.key )">Ver status</i>
 				</div>
-			</div>-->
+			</div>
 		</div>
 	</div>
 </template>
 <script>
-	import UserService from '_service/team'
+	import TeamService from '_service/team'
 	import growl from "growl-alert"
 	import ClassModal from '_common/components/modal/ClassModal.vue'
 	import TeamForm from '_components/TeamForm.vue'
@@ -34,7 +34,7 @@
 			}
 		},
 		mounted (){
-			// this.fetchTeams()
+			this.fetchTeams()
 		},
 		components: {
 			ClassModal,
@@ -43,7 +43,7 @@
 		methods: {
 			fetchTeams() {
 				this.$store.dispatch('toggleLoader', true)
-				UserService.getAll( this.user.uid )
+				TeamService.getAll( this.user.uid )
 				.then(response => {
 					this.$store.dispatch('toggleLoader', false)
 					this.teams = response.data

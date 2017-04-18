@@ -33,7 +33,10 @@ class  TeamService{
 			}
 		})
 	}
-	
+	getAll( userId ) {
+		return this.core.getAll('users/'+userId+'/teams/')
+	}
+
 	getSingle( teamId ) {
 		return this.core.getSingle('teams/', teamId)
 	}
