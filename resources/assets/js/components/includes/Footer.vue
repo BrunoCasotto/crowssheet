@@ -1,12 +1,9 @@
 <template>
-    <footer>
-        <p>Desenvolvido por Bruno Casotto</p>
-    </footer>
+    
 </template>
 
 <script>
     export default {
-        name: 'Footer'
     }
 </script>
 
