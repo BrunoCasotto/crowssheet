@@ -19,7 +19,7 @@
 			</div>
 			<div class="item" v-on:click="change('classes')" :class="{'item--active' : itemActive == 'classes' }">
 				<i class="fa fa-pencil-square-o"></i>
-				<span class="fa fa-pencil-square-o">Aulas</span>
+				<span class="fa fa-pencil-square-o">Sala de aula</span>
 			</div>
 			<div class="item" v-on:click="change('courses')" :class="{'item--active' : itemActive == 'courses' }">
 				<i class="fa fa-mortar-board"></i>

@@ -20,6 +20,9 @@ import CourseForm from '_components/pages/CourseForm.vue'
 import CourseList from '_components/pages/CourseList.vue'
 import TeamList from '_components/pages/TeamList.vue'
 import UserList from '_components/pages/UserList.vue'
+import ClassRoom from '_components/pages/ClassRoom.vue'
+import CourseRoom from '_components/pages/CourseRoom.vue'
+import CourseClassRoom from '_components/pages/CourseClassRoom.vue'
 import ClassModal from '_common/components/modal/ClassModal.vue'
 
 new Vue({
@@ -37,6 +40,9 @@ new Vue({
         CourseList,
         ClassModal,
         UserList,
-        TeamList
+        TeamList,
+        ClassRoom,
+        CourseRoom,
+        CourseClassRoom
     }
 })
