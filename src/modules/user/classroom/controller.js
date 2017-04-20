@@ -13,5 +13,9 @@ class ClassRoomController {
 		reply.view('pages/courseClassRoom')
 	}
 
+	showTestRoom (request, reply) {
+		reply.view('pages/testRoom')
+	}
+
 }
 module.exports = ClassRoomController

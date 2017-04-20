@@ -15,7 +15,7 @@
 			</p>
 		</div>
 		<div class="class-room__controller">
-			<a class="btn btn-default btn-test">Realizar a prova</a>
+			<a href="/classroom/course.key/aula.key/test.key" class="btn btn-default btn-test">Realizar a prova</a>
 		</div>
 	</div>
 </template>

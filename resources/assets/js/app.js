@@ -23,6 +23,7 @@ import UserList from '_components/pages/UserList.vue'
 import ClassRoom from '_components/pages/ClassRoom.vue'
 import CourseRoom from '_components/pages/CourseRoom.vue'
 import CourseClassRoom from '_components/pages/CourseClassRoom.vue'
+import TestRoom from '_components/pages/TestRoom.vue'
 import ClassModal from '_common/components/modal/ClassModal.vue'
 
 new Vue({
@@ -43,6 +44,7 @@ new Vue({
         TeamList,
         ClassRoom,
         CourseRoom,
-        CourseClassRoom
+        CourseClassRoom,
+        TestRoom
     }
 })
