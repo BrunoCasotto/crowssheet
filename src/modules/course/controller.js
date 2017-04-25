@@ -39,6 +39,7 @@ class CourseController {
 	* getAll(request, reply) {
 		let service = new CourseService()
 		let response =  yield service.getAll( request.query.userId )
+		console.log(typeof response)
 		let courses = []
 		for(var key in response) {
 			response[key]['key'] = key
