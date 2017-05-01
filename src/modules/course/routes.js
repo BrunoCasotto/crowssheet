@@ -30,6 +30,11 @@
 			}
 		},
 		{
+			method: 'GET', 
+			path: '/course/update/{id}', 
+			handler: controller.showCourseUpdate
+		},
+		{
 			method: 'GET',	
 			path: '/course', 
 			handler: controller.getSingle,

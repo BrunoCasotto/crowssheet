@@ -20,7 +20,9 @@
 			<input type="file" name="file" id="input" class="form-control">
 		</div>
 		<div class="form-controller">
-			<button class="btn btn-default btn-salvar" @click="storeCourse">Salvar</button>
+			<button v-if="update" class="btn btn-default btn-salvar" @click="inserirAula">Inserir Aula</button>
+			<button v-if="update" class="btn btn-default btn-salvar" @click="atualizar">Atualizar</button>
+			<button v-else class="btn btn-default btn-salvar" @click="storeCourse">Salvar</button>
 		</div>
 	</div>
 </template>
@@ -46,6 +48,12 @@
 					description: '', 
 					image:"https://firebasestorage.googleapis.com/v0/b/crows-755fd.appspot.com/o/images-default%2Fcourse-default.png?alt=media&token=0ce5c765-b502-4ff6-9425-58c4bf4ae160"
 				}
+			}
+		},
+		props: {
+			update: {
+				type: Boolean,
+				default: false
 			}
 		},
 		methods: {

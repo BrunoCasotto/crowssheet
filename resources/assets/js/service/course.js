@@ -18,6 +18,14 @@ export default new class CourseService {
         })
 	}
 
+    getSingle( userId, id ) {
+        return Axios({
+            url: `/course?userId=${userId}&id=${id}`,
+            method: 'get',
+            data: {}
+        })
+	}
+
     delete( userId, id ) {
 		return Axios({
             url: '/course/delete',

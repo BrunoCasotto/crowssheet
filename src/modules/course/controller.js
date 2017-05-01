@@ -7,6 +7,11 @@ class CourseController {
 		reply.view('pages/courseForm')  
 	}
 
+	* showCourseUpdate(request, reply) {
+
+		reply.view('pages/courseUpdate',{ courseId: request.params.id })  
+	}
+
 	* showAllCourse(request, reply) {
 		reply.view('pages/courseList')  
 	}

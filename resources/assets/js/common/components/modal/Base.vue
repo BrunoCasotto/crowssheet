@@ -3,7 +3,7 @@
 		<div class="modal-base">
 			<i class="fa fa-times close" @click="close"></i>
 			<div class="modal-base__content">
-				<course-form></course-form>
+				<course-form v-show="modal.type == 'course-form'"></course-form>
 			</div>
 		</div>
 		<div class="overlay" @click="close"></div>

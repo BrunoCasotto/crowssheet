@@ -17,6 +17,7 @@ import Dashboard from '_components/pages/Dashboard.vue'
 import Login from '_components/pages/Login.vue'
 import Singup from '_components/pages/Singup.vue'
 import CourseForm from '_components/pages/CourseForm.vue'
+import CourseUpdate from '_components/pages/CourseUpdate.vue'
 import CourseList from '_components/pages/CourseList.vue'
 import TeamList from '_components/pages/TeamList.vue'
 import UserList from '_components/pages/UserList.vue'
@@ -45,6 +46,7 @@ new Vue({
         ClassRoom,
         CourseRoom,
         CourseClassRoom,
-        TestRoom
+        TestRoom,
+        CourseUpdate
     }
 })
