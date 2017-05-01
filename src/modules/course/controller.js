@@ -11,6 +11,7 @@ class CourseController {
 		let service = new CourseService()
 		let course = yield service.getSingle( request.query.userId, request.query.id )
 		if(course) {
+			course.key = request.query.id
 			request['session']  = {
 				course: course
 			}

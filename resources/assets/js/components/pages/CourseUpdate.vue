@@ -3,14 +3,14 @@
 		<div class="form-group">
 			<label for="exampleInputEmail1">Matéria/Titulo: </label>
 			<input v-show="edit" class="form-control" v-model="course.title">
-			<h4 e-else class="content">{{ course.title }}</h4>
+			<h4 v-show="!edit" class="content">{{ course.title }}</h4>
 		</div>
 
 		<div class="form-group">
 			<label for="exampleInputEmail1">Descrição</label>
 			<div v-show="edit">
 				<textarea 
-					id="description" 
+					id="form-description" 
 					v-model="course.description"
 					class="tiny-text-area"
 					rows="12">
@@ -41,10 +41,6 @@
 		},
 		data () {
 			return {
-				course: {
-					title: '',
-					description: '',
-				},
 				edit: false
 			}
 		},
@@ -53,7 +49,26 @@
 				this.edit = !this.edit
 			},
 			update() {
-
+				this.$store.dispatch('toggleLoader', true)
+				if(this.validateForm()) {
+					courseService
+					.update( this.user.uid, this.course, this.course.key )
+					.then(response => {
+						if (response.data.status) {
+							this.$store.dispatch('toggleLoader', false)
+							growl.success('Salvo')
+							this.toggleUpdate()
+						} else {
+							this.$store.dispatch('toggleLoader', false)
+							growl.error(response.data.data.message)
+						}
+					})
+					.catch(error => {
+						this.$store.dispatch('toggleLoader', false)
+						growl.error(error.data.message)
+					})
+					this.$store.dispatch('toggleLoader', false)
+				}
 			},
 			validateForm () {
 				this.course.description = tinymce.get('form-description').getContent()
@@ -66,10 +81,6 @@
 						return true
 					}
 				}
-			},
-			clearForm() {
-				this.course.title = ''
-				tinymce.activeEditor.setContent('');
 			}
 		}
 	}
