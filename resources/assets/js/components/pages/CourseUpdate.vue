@@ -8,7 +8,7 @@
 
 		<div class="form-group">
 			<label for="exampleInputEmail1">Descrição</label>
-			<div v-show="true">
+			<div v-show="edit">
 				<textarea 
 					id="description" 
 					v-model="course.description"
@@ -32,11 +32,11 @@
 
 	export default {
 		computed: {
-			courseUpdate: function () {
-				return this.$store.state.Modal.data
-			},
 			user: function () {
 				return this.$store.state.Session
+			},
+			course: function() {
+				return this.$store.state.Course
 			}
 		},
 		data () {
@@ -48,40 +48,12 @@
 				edit: false
 			}
 		},
-		props: {
-			courseId: {
-				type: String,
-				required: true
-			}
-		},
-		mounted() {
-			this.fetch()
-		},
 		methods: {
 			toggleUpdate(){
 				this.edit = !this.edit
 			},
 			update() {
 
-			},
-			fetch() {
-				$("#description").val(this.user.uid);
-				this.$store.dispatch('toggleLoader', true)
-				courseService
-				.getSingle( this.user.uid, this.courseId )
-				.then(response => {
-					if (response.data) {
-						this.$store.dispatch('toggleLoader', false)
-						this.course = response.data
-					} else {
-						this.$store.dispatch('toggleLoader', false)
-						growl.error(response.data.data.message)
-					}
-				})
-				.catch(error => {
-					this.$store.dispatch('toggleLoader', false)
-					growl.error(error.data.message)
-				})
 			},
 			validateForm () {
 				this.course.description = tinymce.get('form-description').getContent()

@@ -1,15 +1,22 @@
 let CourseService = require("@modules/course/service")
 let Boom = require('boom')
 
-class CourseController {  
+class CourseController {
 
 	* showCourseForm(request, reply) {
-		reply.view('pages/courseForm')  
+		reply.view('pages/courseForm')
 	}
 
 	* showCourseUpdate(request, reply) {
+		let service = new CourseService()
+		let course = yield service.getSingle( request.query.userId, request.query.id )
+		if(course) {
+			request['session']  = {
+				course: course
+			}
+		}
 
-		reply.view('pages/courseUpdate',{ courseId: request.params.id })  
+		reply.view('pages/courseUpdate', {})  
 	}
 
 	* showAllCourse(request, reply) {
@@ -44,7 +51,6 @@ class CourseController {
 	* getAll(request, reply) {
 		let service = new CourseService()
 		let response =  yield service.getAll( request.query.userId )
-		console.log(typeof response)
 		let courses = []
 		for(var key in response) {
 			response[key]['key'] = key

@@ -31,7 +31,7 @@
 		},
 		{
 			method: 'GET', 
-			path: '/course/update/{id}', 
+			path: '/course/update', 
 			handler: controller.showCourseUpdate
 		},
 		{
