@@ -3,7 +3,7 @@
 		<div class="modal-base">
 			<i class="fa fa-times close" @click="close"></i>
 			<div class="modal-base__content">
-				<class-form></class-form>
+
 			</div>
 		</div>
 		<div class="overlay" @click="close"></div>
@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import ClassForm from '_components/pages/ClassForm.vue'
 
 	export default {
 		computed: {
@@ -20,7 +19,6 @@ import ClassForm from '_components/pages/ClassForm.vue'
 			}
 		},
 		components: {
-			ClassForm
 		},
 		methods: {
 			close () {

@@ -8,7 +8,7 @@
 				</div>
 				<div class="controller">
 					<a :href="'/course/update?id='+ course.key +'&userId='+ user.uid">
-						<i class="btn btn-default btn-update">Editar</i>
+						<i class="btn btn-default btn-update">Ver curso</i>
 					</a>
 					<i class="btn btn-default btn-delete" @click="deleteCourse( course.key )">Deletar</i>
 				</div>

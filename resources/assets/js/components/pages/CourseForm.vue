@@ -15,10 +15,10 @@
 			</textarea>
 		</div>
 
-		<div class="form-group form-group-image well">
+		<!--<div class="form-group form-group-image well">
 			<label for="exampleInputEmail1">Capa do curso</label>
 			<input type="file" name="file" id="input" class="form-control">
-		</div>
+		</div>-->
 		<div class="form-controller">
 			<button v-if="update" class="btn btn-default btn-salvar" @click="inserirAula">Inserir Aula</button>
 			<button v-if="update" class="btn btn-default btn-salvar" @click="atualizar">Atualizar</button>

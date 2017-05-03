@@ -18,6 +18,7 @@ module.exports = {
     resolve: {
         alias:{
             _components: path.join(base_js,'components'),
+            _helpers: path.join(base_js,'helpers'),
             _common: path.join(base_js, 'common'),
             _service: path.join(base_js,'service'),
             _vuex: path.join(__dirname, 'resources', 'assets', 'js', 'vuex'),
