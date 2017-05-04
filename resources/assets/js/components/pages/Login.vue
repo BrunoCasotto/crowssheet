@@ -25,8 +25,8 @@
 					v-on:keyup.enter="login"
 					>
 				</div>
-				<button v-on:click="login" class="btn btn-default">Login</button>
-				<a href="/auth/register" class="btn btn-default" >Singup</a>
+				<button v-on:click="login" class="btn btn-default">Entrar</button>
+				<a href="/auth/register" class="btn btn-default" >Registrar</a>
 			</form>
 			<div class="login__background">
 				<logo-corvo apperance="background__login" ></logo-corvo>

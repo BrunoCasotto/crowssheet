@@ -46,7 +46,7 @@
 					>
 				</div>
 				</div>
-				<button class="btn btn-default form__btn" @click="register">Sing Up</butotn>
+				<button class="btn btn-default form__btn" @click="register">Registrar</butotn>
 			</form>
 		</div>
 	</div>

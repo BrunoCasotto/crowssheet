@@ -5,7 +5,7 @@
 		<div class="list">
 			<div v-for="classData in classes" class="list__item">
 				<div class="item">
-					<a :href="'/class/update?id='+ classData.key+'&course='+ course.key +'&userId='+ user.uid">
+					<a :href="'/class/update?id='+ classData.key+'&courseId='+ course.key +'&userId='+ user.uid">
 						<h4 class="item-title" >{{ classData.title }}</h4>
 					</a>
 					<p class="item-description" v-html="classData.description"></p>

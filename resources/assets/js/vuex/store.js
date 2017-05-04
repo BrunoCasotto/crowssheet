@@ -6,6 +6,7 @@ import Loader from './modules/loader.js'
 import Modal from './modules/modal.js'
 import Session from './modules/session.js'
 import Course from './modules/course.js'
+import Class from './modules/class.js'
 
 // getting a initial state
 let data = window.__INITIAL_STATE__ || {}
@@ -27,7 +28,8 @@ const store = new Vuex.Store({
     Loader,
     Modal,
     Session: Session(session),
-    Course: Course(data)
+    Course: Course(data),
+    Class: Class(data)
     }
 })
 

@@ -30,6 +30,11 @@
 			}
 		},
 		{
+			method: 'GET', 
+			path: '/class/update', 
+			handler: controller.showClassUpdate
+		},
+		{
 			method: 'GET',	
 			path: '/class', 
 			handler: controller.getSingle,

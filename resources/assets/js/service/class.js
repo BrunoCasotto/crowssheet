@@ -41,14 +41,15 @@ export default new class ClassService {
         })
 	}
 
-    update( userId, course, id ) {
-        console.log(userId, course, id)
+    update( userId, courseId, id, courseClass ) {
+        console.log(userId, courseId, id, courseClass)
         return Axios({
-            url: '/course/update',
+            url: '/class/update',
             method: 'post',
             data: {
                 userId: userId,
-                course: course,
+                courseId: courseId,
+                courseClass: courseClass,
                 id : id
             }
         })

@@ -3,6 +3,22 @@ let Boom = require('boom')
 
 class ClassController {  
 
+	* showClassUpdate(request, reply) {
+		let service = new ClassService()
+		let classData = yield service.getSingle( request.query.userId, request.query.courseId,request.query.id )
+		if(classData) {
+			classData.key = request.query.id
+			request['session']  = {
+				classData: {
+					data: classData,
+					courseId: request.query.courseId
+				}
+			}
+		}
+
+		reply.view('pages/classUpdate', {})  
+	}
+
 	* store(request, reply) {
 		let service = new ClassService()
 		let response = yield service.store( 
