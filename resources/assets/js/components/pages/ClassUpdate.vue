@@ -1,6 +1,7 @@
 <template lang="html">
 	<div class="class">
-		<div class="class-form">
+		<test-form v-show="testForm"></test-form>
+		<div v-show="!testForm" class="class-form">
 			<div class="form-group">
 				<label>Matéria/Titulo</label>
 				<input v-show="edit" v-model="classData.title" class="form-control">
@@ -38,7 +39,7 @@
 			</div>
  
 			<div class="form-controller">
-				<button class="btn btn-default btn-salvar" >Inserir prova</button>
+				<button @click="toggleTestForm" class="btn btn-default btn-salvar" >Prova</button>
 				<button v-if="edit" class="btn btn-default btn-salvar" @click="update">Salvar</button>
 				<button v-else class="btn btn-default btn-salvar" @click="toggleUpdate">Atualizar</button>
 			</div>
@@ -50,6 +51,7 @@
 	import growl from "growl-alert"
 	import classService from '_service/class'
 	import validator from '_helpers/validator'
+	import TestForm from '_components/includes/form/TestForm.vue'
 
 	export default {
 		computed: {
@@ -65,12 +67,16 @@
 		},
 		data () {
 			return {
-				edit: false
+				edit: false,
+				testForm: true
 			}
 		},
 		methods: {
 			toggleUpdate(){
 				this.edit = !this.edit
+			},
+			toggleTestForm(){
+				this.testForm = !this.testForm
 			},
 			update() {
 				this.$store.dispatch('toggleLoader', true)
@@ -110,6 +116,9 @@
 					return false
 				}
 			}
+		},
+		components: {
+			TestForm
 		}
 	}
 </script>
