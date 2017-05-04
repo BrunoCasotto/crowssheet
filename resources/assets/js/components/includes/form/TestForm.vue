@@ -4,6 +4,7 @@
 
 		<template v-for="( question, index ) in test.questions">
 			<div class="well question">
+				<i @click="deleteQuestion(index)" class="fa fa-trash remove-button"></i>
 				<label>Descrição</label>
 				<textarea
 					class="form-control" 
@@ -68,6 +69,7 @@
 
 		<div class="form-controller">
 			<button @click="save" class="btn btn-default btn-salvar">Salvar</button>
+			<button @click="incrementQuestion" class="btn btn-default btn-increment">+ Questão</button>
 		</div>
 	</form>
 </template>
@@ -79,24 +81,7 @@
 		data() {
 			return {
 				test: {
-					questions: [
-						{
-							description: "",
-							opt1: "",
-							opt2: "",
-							opt3: "",
-							opt4: "",
-							correct: ""
-						},
-						{
-							description: "",
-							opt1: "",
-							opt2: "",
-							opt3: "",
-							opt4: "",
-							correct: ""
-						}
-					]
+					questions: []
 				}
 			}
 		},
@@ -106,6 +91,19 @@
 			}
 		},
 		methods: {
+			incrementQuestion() {
+				this.test.questions.push({
+					description: "",
+					opt1: "",
+					opt2: "",
+					opt3: "",
+					opt4: "",
+					correct: ""
+				})
+			},
+			deleteQuestion( index ) {
+				this.test.questions.splice( index, 1)
+			},
 			validate() {
 				this.classData.description = tinymce.get('form-class-description').getContent()
 				this.classData.content = tinymce.get('form-class-content').getContent()
@@ -162,6 +160,14 @@
 		}
 
 		.question {
+			position: relative;
+
+			.remove-button {
+				position: absolute;
+				right: 10px;
+				top: 10px;
+				cursor: pointer;
+			}
 
 			&__option-label {
 				margin-top: 10px;
@@ -178,7 +184,7 @@
 
 				.correct {
 					margin: 10px;
-    				width: 15px;
+					width: 15px;
 				}
 			}
 		}
@@ -199,6 +205,14 @@
 
 				&:hover {
 					background-color: darken( $orange-base ,20);
+				}
+			}
+
+			.btn-increment {
+				background-color: $red-base;
+
+				&:hover {
+					background-color: darken( $red-base ,20);
 				}
 			}
 		}
