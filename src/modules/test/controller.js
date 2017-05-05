@@ -27,6 +27,17 @@ class TestController {
 		)
 		reply(response)
 	}
+
+	* delete(request, reply) {
+		let service = new CourseService()
+
+		let response = yield service.delete(
+			request.payload.userKey
+			,request.payload.courseKey
+			,request.payload.classKey
+		)
+		reply(response)
+	}
 }
 
 module.exports = TestController

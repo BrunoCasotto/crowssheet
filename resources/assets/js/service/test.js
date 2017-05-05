@@ -28,4 +28,16 @@ export default new class TestService {
 		})
 	}
 
+	delete( userKey, courseKey, classKey ) {
+		return Axios({
+			url: '/test/delete',
+			method: 'post',
+			data: {
+				userKey : userKey,
+				courseKey : courseKey,
+				classKey : classKey
+			}
+		})
+	}
+
 }

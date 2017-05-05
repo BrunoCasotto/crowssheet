@@ -68,9 +68,10 @@
 		</template>
 
 		<div class="form-controller">
-			<button v-if="isUpdate" @click="update" class="btn btn-default btn-salvar">Atualizar</button>
-			<button v-else @click="save" class="btn btn-default btn-salvar">Salvar</button>
+			<button v-if="isUpdate" @click="update" class="btn btn-default btn-update">Atualizar</button>
+			<button v-else @click="save" class="btn btn-default btn-save">Salvar</button>
 			<button @click="incrementQuestion" class="btn btn-default btn-increment">+ Questão</button>
+			<button v-if="isUpdate" @click="deleteTest" class="btn btn-default btn-delete">Deletar teste</button>
 		</div>
 	</form>
 </template>
@@ -131,6 +132,28 @@
 						if (response.data.status) {
 							this.$store.dispatch('toggleLoader', false)
 							growl.success('Atualizado')
+							location.reload()
+						} else {
+							this.$store.dispatch('toggleLoader', false)
+							growl.error(response.data.data.message)
+						}
+					})
+					.catch(error => {
+						this.$store.dispatch('toggleLoader', false)
+						growl.error(error.data.message)
+					})
+					this.$store.dispatch('toggleLoader', false)
+				}
+			},
+			deleteTest() {
+				if(this.validate()) {
+					this.$store.dispatch('toggleLoader', true)
+					testService
+					.delete( this.user.uid, this.classData.courseId, this.classData.data.key )
+					.then(response => {
+						if (response.data.status) {
+							this.$store.dispatch('toggleLoader', false)
+							growl.success('Removido')
 							location.reload()
 						} else {
 							this.$store.dispatch('toggleLoader', false)
@@ -265,11 +288,11 @@
 			.btn {
 				color: white;
 				font-weight: bold;
-				margin-top: 20px;
-				width: 100px;
+				min-width: 100px;
+				margin: 20px 5px 0 5px;
 			}
 		
-			.btn-salvar {
+			.btn-increment {
 				background-color: $orange-base;
 				margin-right: 10px; 
 
@@ -278,7 +301,15 @@
 				}
 			}
 
-			.btn-increment {
+			.btn-update, .btn-save {
+				background-color: $green-base;
+
+				&:hover {
+					background-color: darken( $green-base ,20);
+				}
+			}
+
+			.btn-delete {
 				background-color: $red-base;
 
 				&:hover {

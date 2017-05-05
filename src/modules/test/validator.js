@@ -1,6 +1,6 @@
 var Joi = require('joi')
 
-class CourseValidator {
+class TestValidator {
 
 	get saveTest() {
 		return  {
@@ -24,6 +24,16 @@ class CourseValidator {
 		}
 	}
 
+	get deleteTest() {
+		return  {
+			payload: {
+				userKey: Joi.string().min(5).required(),
+				courseKey: Joi.string().min(5).required(),
+				classKey: Joi.string().min(5).required()
+			}
+		}
+	}
+
 }
 
-module.exports = new CourseValidator()
+module.exports = new TestValidator()

@@ -1,5 +1,6 @@
 let TestController = require("@modules/test/controller")
 let controller = new TestController()
+let validator = require('./validator')
 
 module.exports = [
 	{
@@ -16,6 +17,14 @@ module.exports = [
 		handler: controller.store,
 		config: {
 			validate: validator.updateTest
+		}
+	},
+	{
+		method: 'POST',
+		path: '/test/delete',
+		handler: controller.delete,
+		config: {
+			validate: validator.deleteTest
 		}
 	}
 ]

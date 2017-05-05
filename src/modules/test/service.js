@@ -21,6 +21,13 @@ class  TestService extends firebase{
 			testObject, 'test'
 		)
 	}
+
+	delete( userKey, courseKey, classKey) {
+		return this.core.delete(
+			`users/${userKey}/courses/${courseKey}/classes/${classKey}`,
+			'test'
+		)
+	}
 }
 
 module.exports = TestService
