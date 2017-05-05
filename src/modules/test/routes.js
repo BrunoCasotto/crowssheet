@@ -9,5 +9,13 @@ module.exports = [
 		config: {
 			validate: validator.saveTest
 		}
+	},
+	{
+		method: 'POST',
+		path: '/test/update',
+		handler: controller.store,
+		config: {
+			validate: validator.updateTest
+		}
 	}
 ]

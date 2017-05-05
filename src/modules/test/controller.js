@@ -14,6 +14,19 @@ class TestController {
 			,request.payload.test
 		)
 	}
+
+	* update(request, reply) {
+		let service = new CourseService()
+		request.payload.test.questions = JSON.stringify(request.payload.test.questions)
+
+		let response = yield service.update(
+			request.payload.userKey
+			,request.payload.courseKey
+			,request.payload.classKey
+			,request.payload.test
+		)
+		reply(response)
+	}
 }
 
 module.exports = TestController

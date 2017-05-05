@@ -124,7 +124,24 @@
 			},
 			update() {
 				if(this.validate()) {
-
+					this.$store.dispatch('toggleLoader', true)
+					testService
+					.update( this.user.uid, this.classData.courseId, this.classData.data.key, this.test )
+					.then(response => {
+						if (response.data.status) {
+							this.$store.dispatch('toggleLoader', false)
+							growl.success('Atualizado')
+							location.reload()
+						} else {
+							this.$store.dispatch('toggleLoader', false)
+							growl.error(response.data.data.message)
+						}
+					})
+					.catch(error => {
+						this.$store.dispatch('toggleLoader', false)
+						growl.error(error.data.message)
+					})
+					this.$store.dispatch('toggleLoader', false)
 				}
 			},
 			verifyTestExists() {
