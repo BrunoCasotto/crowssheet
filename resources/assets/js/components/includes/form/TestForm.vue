@@ -254,7 +254,7 @@
 		
 			.btn-salvar {
 				background-color: $orange-base;
-				margin-right: 10px;
+				margin-right: 10px; 
 
 				&:hover {
 					background-color: darken( $orange-base ,20);

@@ -5,19 +5,19 @@
 		<test-form v-show="testForm"></test-form>
 		<div v-show="!testForm" class="class-form">
 			<div class="form-group">
-				<label>Matéria/Titulo</label>
+				<label class="title">Matéria/Titulo</label>
 				<input v-show="edit" v-model="classData.title" class="form-control">
 				<h4 v-show="!edit" class="content">{{ classData.title }}</h4>
 			</div>
 
 			<div class="form-group">
-				<label>Url do vídeo</label>
+				<label class="title">Url do vídeo</label>
 				<input v-show="edit" class="form-control" v-model="classData.video">
 				<h4 v-show="!edit" class="content">{{ classData.video }}</h4>
 			</div>
 
 			<div class="form-group">
-				<label>Descrição</label>
+				<label class="title">Descrição</label>
 				<div v-show="edit">
 					<textarea
 						id="form-class-description"
@@ -29,7 +29,7 @@
 			</div>
 
 			<div class="form-group">
-				<label>Conteúdo principal</label>
+				<label class="title">Conteúdo principal</label>
 				<div v-show="edit">
 					<textarea
 						id="form-class-content"
@@ -131,19 +131,46 @@
 		max-width: 700px;
 
 		.title {
-			font-size: 25px;
+			font-size: 20px;
 			margin-left: 10px;
 		}
 
-		.back-class {
+		.back {
 			cursor: pointer;
 			font-size: 20px;
 			margin-left: 20px;
 			margin-top: 20px;
+			&:hover {
+				color: lighten( $black-base ,20);
+			}
+
+			span {
+				font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+				font-weight: bold;
+			}
 		}
 
 		.class-form {
 			margin: 20px;
+
+			.form-group {
+				.title {
+					font-size: 20px;
+					display: flex;
+
+					&:before {
+						content: '';
+						display: block;
+						margin-right: 5px;
+						width: 10px;
+						height: 10px;
+						background-color: $orange-base;
+						border-radius: 50%;
+						margin-top: 9px;
+						opacity: 0.35;
+					}
+				}
+			}
 
 			.btn {
 				color: white;
