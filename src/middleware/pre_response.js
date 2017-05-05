@@ -8,5 +8,14 @@ module.exports = (request, reply)=> {
             + JSON.stringify(request.session) + '; </script>'
         }
     }
+
+    if(request.response.isBoom) {
+        if(request.response.output.statusCode === '404') {
+            //do here
+        } else if(request.response.output.statusCode === '500') {
+            //do here
+        }
+    }
+
     reply.continue()
 }
