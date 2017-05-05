@@ -1,5 +1,7 @@
 <template lang="html">
 	<div class="class">
+		<i v-if="testForm" @click="toggleTestForm" class="fa fa-arrow-left back-class" aria-hidden="true"><span>Voltar</span></i>
+		<label class="title" v-if="testForm">{{ classData.title }}</label>
 		<test-form v-show="testForm"></test-form>
 		<div v-show="!testForm" class="class-form">
 			<div class="form-group">
@@ -131,6 +133,13 @@
 		.title {
 			font-size: 25px;
 			margin-left: 10px;
+		}
+
+		.back-class {
+			cursor: pointer;
+			font-size: 20px;
+			margin-left: 20px;
+			margin-top: 20px;
 		}
 
 		.class-form {

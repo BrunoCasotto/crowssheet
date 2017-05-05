@@ -58,7 +58,7 @@
 				<input 
 					type="radio" 
 					class="correct"
-					value="opt3"
+					value="opt4"
 					:name="'opt'+index"
 					v-model="question.correct"
 				>
@@ -68,7 +68,8 @@
 		</template>
 
 		<div class="form-controller">
-			<button @click="save" class="btn btn-default btn-salvar">Salvar</button>
+			<button v-if="isUpdate" @click="update" class="btn btn-default btn-salvar">Atualizar</button>
+			<button v-else @click="save" class="btn btn-default btn-salvar">Salvar</button>
 			<button @click="incrementQuestion" class="btn btn-default btn-increment">+ Questão</button>
 		</div>
 	</form>
@@ -76,52 +77,34 @@
 <script>
 	import growl from "growl-alert"
 	import validator from '_helpers/validator'
+	import testService from '_service/test'
 
 	export default {
 		data() {
 			return {
 				test: {
 					questions: []
-				}
+				},
+				isUpdate: false
 			}
 		},
 		computed: {
 			user: function () {
 				return this.$store.state.Session
+			},
+			classData: function() {
+				return this.$store.state.Class
 			}
 		},
+		mounted() {
+			this.verifyTestExists()
+		},
 		methods: {
-			incrementQuestion() {
-				this.test.questions.push({
-					description: "",
-					opt1: "",
-					opt2: "",
-					opt3: "",
-					opt4: "",
-					correct: ""
-				})
-			},
-			deleteQuestion( index ) {
-				this.test.questions.splice( index, 1)
-			},
-			validate() {
-				this.classData.description = tinymce.get('form-class-description').getContent()
-				this.classData.content = tinymce.get('form-class-content').getContent()
-
-				if(
-					validator.stringValidator( 'titulo', 5, this.classData.title) &&
-					validator.stringValidator( 'descrição', 10, this.classData.description) &&
-					validator.stringValidator( 'conteudo principal', 5, this.classData.content)
-				) {
-					return true
-				} else {
-					return false
-				}
-			},
 			save() {
 				if(this.validate()) {
 					this.$store.dispatch('toggleLoader', true)
-					classService.store( this.user.uid, this.course.key, this.classData)
+					testService
+					.store( this.user.uid, this.classData.courseId, this.classData.data.key, this.test )
 					.then(response => {
 						if (response.data.status) {
 							this.$store.dispatch('toggleLoader', false)
@@ -137,6 +120,73 @@
 						growl.error(error.data.message)
 					})
 					this.$store.dispatch('toggleLoader', false)
+				}
+			},
+			update() {
+				if(this.validate()) {
+
+				}
+			},
+			verifyTestExists() {
+				if(this.classData.data.test) {
+					this.test = this.classData.data.test
+					this.test.questions = JSON.parse(this.classData.data.test.questions)
+					this.isUpdate = true
+				}
+			},
+			incrementQuestion() {
+				this.test.questions.push({
+					description: "",
+					opt1: "",
+					opt2: "",
+					opt3: "",
+					opt4: "",
+					correct: ""
+				})
+			},
+			deleteQuestion( index ) {
+				this.test.questions.splice( index, 1)
+			},
+			validate() {
+				let errors = 0
+
+				if( this.test.questions.length > 0 ) {
+					this.test.questions.forEach( ( question, index )=> {
+						if(!validator.stringValidatorMessage(
+							`A descrição do exercício ${index+1} deve conter no mínimo 10 caracteres.`,
+							5, question.description
+						) ||
+						!validator.stringValidatorMessage(
+							`A questão 1 do exercício ${index+1} deve conter no mínimo 5 caracteres.`,
+							5, question.opt1
+						) ||
+						!validator.stringValidatorMessage(
+							`A questão 2 do exercício ${index+1} deve conter no mínimo 5 caracteres.`,
+							5, question.opt2
+						) ||
+						!validator.stringValidatorMessage(
+							`A questão 3 do exercício ${index+1} deve conter no mínimo 5 caracteres.`,
+							5, question.opt3
+						) ||
+						!validator.stringValidatorMessage(
+							`A questão 4 do exercício ${index+1} deve conter no mínimo 5 caracteres.`,
+							5, question.opt4
+						) ||
+						!validator.stringValidatorMessage(
+							`A resposta deve ser selecionada no exercício ${index+1}.`,
+							1, question.correct
+						)) {
+							errors++
+						}
+					})
+				} else {
+					growl.warning('Para concluir insira ao menos uma questão.')
+				}
+
+				if(errors === 0) {
+					return true
+				} else {
+					return false
 				}
 			}
 		}
@@ -161,12 +211,14 @@
 
 		.question {
 			position: relative;
+			background-image: linear-gradient(to bottom, white, $orange-base);
 
 			.remove-button {
 				position: absolute;
 				right: 10px;
 				top: 10px;
 				cursor: pointer;
+				font-size: 20px;
 			}
 
 			&__option-label {
@@ -202,6 +254,7 @@
 		
 			.btn-salvar {
 				background-color: $orange-base;
+				margin-right: 10px;
 
 				&:hover {
 					background-color: darken( $orange-base ,20);

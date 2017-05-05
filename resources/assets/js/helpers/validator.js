@@ -10,3 +10,14 @@ exports.stringValidator = ( label, number_characters, word )=>{
 
 	}
 }
+
+exports.stringValidatorMessage = ( message, number_characters, word )=>{
+	if( word.length > number_characters ) {
+		return true
+
+	} else {
+		growl.warning(message)
+		return false
+
+	}
+}
