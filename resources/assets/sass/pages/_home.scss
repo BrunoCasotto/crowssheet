@@ -1,0 +1,21 @@
+@import '../config/vars.scss';
+
+.home {
+	&__header {
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		img {
+			width: 100%;
+			background-image: url('/images/wall1.jpeg');
+		}
+	}
+
+	&__posts {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+}

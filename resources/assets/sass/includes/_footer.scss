@@ -1,0 +1,12 @@
+@import "~_config/_vars.scss";
+
+.footer {
+	height: 70px;
+	text-align: center;
+	line-height: 70px;
+	background-color: $black-base;
+	p {
+		font-size: 20px;
+		color: white;
+	}
+}

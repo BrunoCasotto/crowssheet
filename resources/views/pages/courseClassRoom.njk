@@ -1,0 +1,21 @@
+{% extends 'index.njk' %}
+
+{% block title %}Aula{% endblock %}
+
+{% block content %}
+	<account></account>
+	<div class="base-page">
+		<div class="base-page__menu">
+			{% include "includes/menu.njk" %}
+		</div>
+		<div class="base-page__content">
+			<div class="base-page__content__header">
+			<div class="header__title">
+				<p>Vamos estudar?<p>
+			</div>
+			</div>
+			<course-class-room></course-class-room>
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+/*
+=======================
+    CUSTOM
+=======================
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+
+[v-cloak] {		//Não remover
+  display: none;
+}
+
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 14px;
+	font-weight: 400;
+	-webkit-text-size-adjust: 100%;
+ 	-ms-text-size-adjust: 100%;
+ 	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
+
+	img {
+		max-width: 100%;
+	}
+
+	a {
+		text-decoration: none;
+		&:hover{
+			text-decoration: none;
+		}
+	}
+}
