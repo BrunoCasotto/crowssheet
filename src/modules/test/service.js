@@ -7,7 +7,7 @@ class  TestService extends firebase{
 		return new serviceCore()
 	}
 
-	store( userKey, courseKey, classKey, testObject) {
+	store ( userKey, courseKey, classKey, testObject) {
 		return this.core.storeSet(
 			`users/${userKey}/courses/${courseKey}/classes/${classKey}`,
 			'test',
@@ -15,17 +15,9 @@ class  TestService extends firebase{
 		)
 	}
 
-	update( userKey, courseKey, classKey, testObject ) {
-		return this.core.update(
-			`users/${userKey}/courses/${courseKey}/classes/${classKey}/`,
-			testObject, 'test'
-		)
-	}
-
-	delete( userKey, courseKey, classKey) {
+	delete ( userKey, courseKey, classKey) {
 		return this.core.delete(
-			`users/${userKey}/courses/${courseKey}/classes/${classKey}`,
-			'test'
+			`users/${userKey}/courses/${courseKey}/classes/${classKey}/test`
 		)
 	}
 }
