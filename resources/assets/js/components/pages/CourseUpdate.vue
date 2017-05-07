@@ -1,16 +1,18 @@
 <template lang="html">
 	<div class="course">
+		<button v-if="edit" @click="toggleUpdate" class="fa fa-arrow-left btn btn-black" >Voltar</button>
+
 		<h4 v-if="classForm" class="title">{{ course.title }}</h4>
 		<class-form v-show="classForm"></class-form>
 		<div v-show="!classForm" class="course-form">
 			<div class="form-group">
-				<label for="exampleInputEmail1">Matéria/Titulo: </label>
+				<label class="title">Matéria/Titulo: </label>
 				<input v-show="edit" class="form-control" v-model="course.title">
 				<h4 v-show="!edit" class="content">{{ course.title }}</h4>
 			</div>
 
 			<div class="form-group">
-				<label for="exampleInputEmail1">Descrição</label>
+				<label class="title">Descrição</label>
 				<div v-show="edit">
 					<textarea 
 						id="form-description" 
@@ -22,9 +24,9 @@
 				<p v-show="!edit" class="content" v-html="course.description"></p>
 			</div>
 			<div class="form-controller">
-				<button  @click="toggleClassForm" class="btn btn-default btn-salvar" >Inserir Aula</button>
-				<button v-if="edit" class="btn btn-default btn-salvar" @click="update">Salvar</button>
-				<button v-else class="btn btn-default btn-salvar" @click="toggleUpdate">Atualizar</button>
+				<button  @click="toggleClassForm" class="btn btn-default btn-black" >Inserir Aula</button>
+				<button v-if="edit" class="btn btn-default btn-orange" @click="update">Salvar</button>
+				<button v-else class="btn btn-default btn-green" @click="toggleUpdate">Atualizar</button>
 			</div>
 		</div>
 		<class-list v-if="!classForm" :classes="classList"></class-list>
@@ -113,6 +115,8 @@
 
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
+	@import "~_config/_commons.scss";
+
 	.course {
 		max-width: 700px;
 
@@ -124,26 +128,22 @@
 		.course-form {
 			margin: 20px;
 
-			.btn {
-				color: white;
-				font-weight: bold;
-				margin-top: 20px;
-				width: 100px;
-			}
-		
-			.btn-salvar {
-				background-color: $red-base;
+			.form-group {
+				.title {
+					font-size: 20px;
+					display: flex;
 
-				&:hover {
-					background-color: darken( $red-base ,20);
-				}
-			}
-
-			.btn-adicionar {
-				background-color: $black-base;
-
-				&:hover {
-					background-color: darken( $black-base ,20);
+					&:before {
+						content: '';
+						display: block;
+						margin-right: 5px;
+						width: 10px;
+						height: 10px;
+						background-color: $orange-base;
+						border-radius: 50%;
+						margin-top: 9px;
+						opacity: 0.35;
+					}
 				}
 			}
 		}

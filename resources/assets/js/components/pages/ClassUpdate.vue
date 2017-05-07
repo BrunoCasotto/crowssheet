@@ -1,6 +1,8 @@
 <template lang="html">
 	<div class="class">
-		<i v-if="testForm" @click="toggleTestForm" class="fa fa-arrow-left back-class" aria-hidden="true"><span>Voltar</span></i>
+		<button v-if="testForm" @click="toggleTestForm" class="fa fa-arrow-left btn btn-black" >Voltar</button>
+		<button v-if="edit" @click="toggleUpdate" class="fa fa-arrow-left btn btn-black" >Voltar</button>
+
 		<label class="title" v-if="testForm">{{ classData.title }}</label>
 		<test-form v-show="testForm"></test-form>
 		<div v-show="!testForm" class="class-form">
@@ -41,9 +43,9 @@
 			</div>
  
 			<div class="form-controller">
-				<button @click="toggleTestForm" class="btn btn-default btn-salvar" >Prova</button>
-				<button v-if="edit" class="btn btn-default btn-salvar" @click="update">Salvar</button>
-				<button v-else class="btn btn-default btn-salvar" @click="toggleUpdate">Atualizar</button>
+				<button v-if="!testForm" @click="toggleTestForm" class="btn btn-default btn-black" >Atualizar/inserir Prova</button>
+				<button v-if="edit" class="btn btn-default btn-green" @click="update">Salvar</button>
+				<button v-else class="btn btn-default btn-orange" @click="toggleUpdate">Atualizar</button>
 			</div>
 		</div>
 	</div>
@@ -127,6 +129,7 @@
 
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
+	@import "~_config/_commons.scss";
 	.class {
 		max-width: 700px;
 
@@ -169,29 +172,6 @@
 						margin-top: 9px;
 						opacity: 0.35;
 					}
-				}
-			}
-
-			.btn {
-				color: white;
-				font-weight: bold;
-				margin-top: 20px;
-				width: 100px;
-			}
-		
-			.btn-salvar {
-				background-color: $red-base;
-
-				&:hover {
-					background-color: darken( $red-base ,20);
-				}
-			}
-
-			.btn-adicionar {
-				background-color: $black-base;
-
-				&:hover {
-					background-color: darken( $black-base ,20);
 				}
 			}
 		}

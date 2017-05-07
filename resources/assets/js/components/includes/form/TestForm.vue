@@ -68,10 +68,10 @@
 		</template>
 
 		<div class="form-controller">
-			<button v-if="isUpdate" @click="update" class="btn btn-default btn-update">Atualizar</button>
-			<button v-else @click="save" class="btn btn-default btn-save">Salvar</button>
-			<button @click="incrementQuestion" class="btn btn-default btn-increment">+ Questão</button>
-			<button v-if="isUpdate" @click="deleteTest" class="btn btn-default btn-delete">Deletar teste</button>
+			<button v-if="isUpdate" @click="update" class="btn btn-default btn-orange">Atualizar</button>
+			<button v-else @click="save" class="btn btn-default btn-green">Salvar</button>
+			<button @click="incrementQuestion" class="btn btn-default btn-black">+ Questão</button>
+			<button v-if="isUpdate" @click="deleteTest" class="btn btn-default btn-red">Deletar teste</button>
 		</div>
 	</form>
 </template>
@@ -235,6 +235,7 @@
 
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
+	@import "~_config/_commons.scss";
 
 	form {
 		max-width: 600px;
@@ -285,40 +286,9 @@
 			display: flex;
 			width: 100%;
 
-			.btn {
-				color: white;
-				font-weight: bold;
-				min-width: 100px;
-				margin: 20px 5px 0 5px;
-			}
-		
-			.btn-increment {
-				background-color: $orange-base;
-				margin-right: 10px; 
-
-				&:hover {
-					background-color: darken( $orange-base ,20);
-				}
-			}
-
-			.btn-update, .btn-save {
-				background-color: $green-base;
-
-				&:hover {
-					background-color: darken( $green-base ,20);
-				}
-			}
-
-			.btn-delete {
-				background-color: $red-base;
-
-				&:hover {
-					background-color: darken( $red-base ,20);
-				}
+			@media screen and (max-width: $screen-sm) {
+				display: block;
 			}
 		}
-
 	}
-
-
 </style>

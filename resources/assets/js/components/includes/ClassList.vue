@@ -11,7 +11,7 @@
 					<p class="item-description" v-html="classData.description"></p>
 				</div>
 				<div class="controller">
-					<i class="btn btn-default btn-delete">Deletar</i>
+					<i @click="delete( classData.key )" class="fa fa-trash icon-delete"></i>
 				</div>
 			</div>
 		</div>
@@ -80,18 +80,17 @@
 
 			.controller {
 				padding: 5px;
-				flex: 1;
+				position: relative;
 
-				.btn {
-					min-width: 100px;
-					color: white;
-					font-weight: bold;
-					margin-left: auto;
-				}
-				.btn-delete {
-					background-color: $black-base;
+				.icon-delete {
+					position: absolute;
+					right: 10px;
+					top: 10px;
+					cursor: pointer;
+					font-size: 20px;
+
 					&:hover {
-						background-color: lighten($black-base,15);
+						color: darken( $black-base ,20);
 					}
 				}
 

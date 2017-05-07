@@ -3,13 +3,12 @@
 		<div class="list">
 			<div v-for="course in courses" class="list__item">
 				<div class="item">
-					<h4 class="item-title" >{{ course.title }}</h4>
+					<a class="item-title" :href="'/course/update?id='+ course.key +'&userId='+ user.uid">
+						<h4>{{ course.title }}</h4>
+					</a>
 					<p class="item-description" v-html="course.description"></p>
 				</div>
 				<div class="controller">
-					<a :href="'/course/update?id='+ course.key +'&userId='+ user.uid">
-						<i class="btn btn-default btn-update">Ver curso</i>
-					</a>
 					<i class="btn btn-default btn-delete" @click="deleteCourse( course.key )">Deletar</i>
 				</div>
 			</div>
@@ -113,6 +112,11 @@
 			.item {
 				flex: 5;
 				overflow: hidden;
+
+				.item-title {
+					color: black;
+					font-size: 20px;
+				}
 			}
 
 			.controller {

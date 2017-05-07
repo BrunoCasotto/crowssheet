@@ -1,0 +1,43 @@
+	.btn {
+		color: white;
+		font-weight: bold;
+		margin: 20px 5px 0 5px;
+		min-width: 100px;
+
+		@media screen and (max-width: $screen-sm) {
+			width: 100%;
+			margin-top: 10px;
+		}
+
+		&-orange {
+			background-color: $orange-base;
+
+			&:hover {
+				background-color: darken( $orange-base ,20);
+			}
+		}
+
+		&-black {
+			background-color: $black-base;
+
+			&:hover {
+				background-color: lighten( $black-base ,20);
+			}
+		}
+
+		&-green {
+			background-color: $black-base;
+
+			&:hover {
+				background-color: lighten( $black-base ,20);
+			}
+		}
+
+		&-red {
+			background-color: $red-base;
+
+			&:hover {
+				background-color: lighten( $red-base ,20);
+			}
+		}
+	}
