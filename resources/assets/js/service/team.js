@@ -2,20 +2,20 @@ import Axios from 'axios';
 
 export default new class TeamService { 
 
-	store( userId, team ) {
+    store( userId, team ) {
         return Axios({
             url: '/team/create',
             method: 'post',
             data: { userId: userId, team: team}
         })
-	}
+    }
 
-	getAll( userId ) {
+    getAll( userId ) {
         return Axios({
             url: '/team/all?user='+userId,
             method: 'get',
             data: {}
         })
-	}
+    }
 
 }

@@ -1,29 +1,26 @@
 <template lang="html">
 	<div class="team-list">
 		<div class="list">
-			<team-form></team-form>
 			<div v-for="team in teams" class="list__item">
 				<div class="item">
-					<div class="description">
-						<h4 class="name" >{{ team.name }}</h4>
-					</div>
+					<a class="item-title" :href="'/course/update?id='+ course.key +'&userId='+ user.uid">
+						<h4>{{ team.title }}</h4>
+					</a>
 				</div>
 				<div class="controller">
-					<i class="btn btn-default btn-insert" @click="updateCourse( user.key )">Ver status</i>
+					<i class="btn btn-default btn-delete" @click="deleteCourse( team.key )">Deletar</i>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-	import TeamService from '_service/team'
 	import growl from "growl-alert"
-	import ClassModal from '_common/components/modal/ClassModal.vue'
-	import TeamForm from '_components/TeamForm.vue'
+	import TeamForm from '_components/includes/form/TeamForm.vue'
+	import teamService from '_service/team'
 
 	export default {
-		name: 'course-list',
-		data: ()=> {
+		data() {
 			return {
 				teams: []
 			}
@@ -33,17 +30,13 @@
 				return this.$store.state.Session
 			}
 		},
-		mounted (){
-			this.fetchTeams()
-		},
-		components: {
-			ClassModal,
-			TeamForm
+		mounted() {
+			this.fetch()
 		},
 		methods: {
-			fetchTeams() {
+			fetch() {
 				this.$store.dispatch('toggleLoader', true)
-				TeamService.getAll( this.user.uid )
+				teamService.getAll(this.user.uid)
 				.then(response => {
 					this.$store.dispatch('toggleLoader', false)
 					this.teams = response.data
@@ -53,12 +46,13 @@
 					growl.error('Ocorreu algum erro') 
 				})
 			}
-		},
+		}
 	}
 </script>
 
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
+	@import "~_config/_commons.scss";
 
 	.team-list {
 		width: 100%;
@@ -78,45 +72,9 @@
 				border-top: solid 1px $color-grey--base;
 			}
 
-			.item {
-				flex: 5;
-				overflow: hidden;
-
-				.description {
-					display: flex;
-
-					img {
-						padding: 5px;
-					}
-
-					.name {
-						font-weight: bold;
-					}
-				}
-
-				.email {
-					margin-top: 10px;
-				}
-			}
-
 			.controller {
 				padding: 5px;
 				flex: 1;
-
-				.btn {
-					min-width: 100px;
-					color: white;
-					font-weight: bold;
-					margin-left: auto;
-				}
-
-				.btn-insert {
-					background-color: $red-base;
-
-					&:hover {
-						background-color: lighten($red-base,15);
-					}
-				}
 			}
 		}
 	}

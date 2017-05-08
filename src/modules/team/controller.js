@@ -2,8 +2,8 @@ let TeamService = require("@modules/team/service")
 
 class TeamController {
 
-	showteams(request, reply) {
-		reply.view('pages/teamList')  
+	* showteams(request, reply) {
+		reply.view('pages/team',{})
 	}
 
 	* getAll(request, reply) {

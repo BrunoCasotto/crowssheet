@@ -37,13 +37,13 @@ import Logo from "_common/components/Logo.vue"
             font-family: 'Dancing Script', cursive;
 
             @media screen and(max-width: $screen-md) {
-				font-size: 4rem;
-			}
+                font-size: 4rem;
+            }
 
             @media screen and(max-width: $screen-sm) {
                 margin: 30px;
-				font-size: 2.5rem;
-			}
+             font-size: 2.5rem;
+            }
         }
     }
 </style>
