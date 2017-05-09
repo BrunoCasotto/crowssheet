@@ -37,7 +37,7 @@
 	import growl from "growl-alert"
 	import courseService from '_service/course'
 	import ClassForm from '_components/includes/form/ClassForm.vue'
-	import ClassList from '_components/includes/ClassList.vue'
+	import ClassList from '_components/includes/list/ClassList.vue'
 
 	export default {
 		computed: {

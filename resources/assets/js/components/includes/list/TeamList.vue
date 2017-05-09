@@ -3,12 +3,12 @@
 		<div class="list">
 			<div v-for="team in teams" class="list__item">
 				<div class="item">
-					<a class="item-title" :href="'/course/update?id='+ course.key +'&userId='+ user.uid">
-						<h4>{{ team.title }}</h4>
+					<a class="item-title" :href="'/team/update?id='+ team.key +'&userId='+ user.uid">
+						<h4>{{ team.name }}</h4>
 					</a>
 				</div>
 				<div class="controller">
-					<i class="btn btn-default btn-delete" @click="deleteCourse( team.key )">Deletar</i>
+					<i @click="deleteTeam(index)" class="fa fa-trash remove-button"></i>
 				</div>
 			</div>
 		</div>
@@ -20,9 +20,10 @@
 	import teamService from '_service/team'
 
 	export default {
-		data() {
-			return {
-				teams: []
+		props: {
+			teams: {
+				type: Array,
+				default: []
 			}
 		},
 		computed: {
@@ -30,21 +31,9 @@
 				return this.$store.state.Session
 			}
 		},
-		mounted() {
-			this.fetch()
-		},
 		methods: {
-			fetch() {
-				this.$store.dispatch('toggleLoader', true)
-				teamService.getAll(this.user.uid)
-				.then(response => {
-					this.$store.dispatch('toggleLoader', false)
-					this.teams = response.data
-				})
-				.catch(error => {
-					this.$store.dispatch('toggleLoader', false)
-					growl.error('Ocorreu algum erro') 
-				})
+			deleteTeam( index ) {
+
 			}
 		}
 	}
@@ -56,25 +45,39 @@
 
 	.team-list {
 		width: 100%;
-		max-width: 500px;
 
 		.list__item {
 			display: flex;
 			padding: 5px 20px;
-			height: 100px;
+			min-height: 20px;
 			margin: 5px auto;
 			cursor: pointer;
 			border: solid 1px $color-grey--base;
 			transition: .5s all ease;
 			background-color: white;
+			position: relative;
 
 			&:first-child {
 				border-top: solid 1px $color-grey--base;
 			}
 
+			.item {
+				.item-title {
+					color: black;
+					font-size: 20px;
+				}
+			}
+
 			.controller {
 				padding: 5px;
-				flex: 1;
+
+				.remove-button {
+					position: absolute;
+					right: 10px;
+					top: 10px;
+					cursor: pointer;
+					font-size: 20px;
+				}
 			}
 		}
 	}
