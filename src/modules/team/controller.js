@@ -89,7 +89,22 @@ class TeamController {
 
 
 	* removeUser(request, reply) {
+		let service = new TeamService()
+		let team = yield service.getSingle( request.payload.teamId )
+		team.users = JSON.parse(team.users)
 
+		if(team.users.includes(request.payload.userId)) {
+			var index = team.users.indexOf(request.payload.userId)
+			team.users.splice(index, 1)
+		} else {
+			return {
+				status: false,
+				message: 'O usuário não existe'
+			}
+		}
+
+		team.users = JSON.stringify(team.users)
+		return yield service.update( request.payload.teamId, team )
 	}
 
 	* insertCourse(request, reply) {

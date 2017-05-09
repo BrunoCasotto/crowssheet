@@ -7,13 +7,12 @@
 
 		<div v-if="insert" class="insert-users">
 			<h4 v-show="!edit" class="title">Lista de usuários</h4>
-			<div v-if="users.length > 0" class="list">
+			<div class="list">
 				<div v-for="user in users" class="list__item">
-					<i @click="deleteQuestion(index)" class="fa fa-trash btn-remove"></i>
 					<i @click="insertUser(user.uid)" class="btn btn-black btn-status">Inserir</i>
 					<div class="item">
 						<div class="description">
-							<img :src="user.photo" alt="" height="50" width="50">
+							<!--<img :src="user.photo" alt="" height="50" width="50">-->
 							<h4 class="name" >{{ user.name }}</h4>
 						</div>
 						<p class="email">{{user.email}}</p>
@@ -21,17 +20,16 @@
 					</div>
 				</div>
 			</div>
-			<div v-else>Nenhum usuário cadastrado</div>
 		</div>
 		<div v-else class="team-users">
 			<h4 v-show="!edit" class="title">Lista de usuários do time</h4>
 			<div v-if="team.users.length > 0" class="list">
 				<div v-for="user in team.users" class="list__item">
-					<i @click="deleteQuestion(index)" class="fa fa-trash btn-remove"></i>
+					<i @click="removeUser(user.uid)" class="fa fa-trash btn-remove"></i>
 					<i class="btn btn-black btn-status">Ver status</i>
 					<div class="item">
 						<div class="description">
-							<img :src="user.photo" alt="" height="50" width="50">
+							<!--<img :src="user.photo" alt="" height="50" width="50">-->
 							<h4 class="name" >{{ user.name }}</h4>
 						</div>
 						<p class="email">{{user.email}}</p>
@@ -41,8 +39,8 @@
 			</div>
 			<div v-else>Nenhum usuário cadastrado</div>
 		</div>
-		<i @click="toggleInsert" class="btn btn-orange">Inserir usuário</i>
-		<i @click="save()" class="btn btn-green">salvar</i>
+		<i v-if="insert" @click="toggleInsert" class="btn btn-orange">voltar</i>
+		<i  v-else @click="toggleInsert" class="btn btn-red">Inserir usuário</i>
 	</div>
 </template>
 <script>
@@ -72,13 +70,35 @@
 		},
 		methods: {
 			insertUser( userId ) {
-				teamService.insertUser(userId, this.team.key )
+				this.$store.dispatch('toggleLoader', true)
+				teamService
+				.insertUser(userId, this.team.key )
 				.then(response => {
 					if (response.data.status) {
 						this.$store.dispatch('toggleLoader', false)
 						growl.success('Inserido com sucesso')
 						window.location.reload()
 						this.toggleInsert()
+					} else {
+						this.$store.dispatch('toggleLoader', false)
+						growl.error(response.data.message)
+					}
+				})
+				.catch(error => {
+					this.$store.dispatch('toggleLoader', false)
+					growl.error(error.data.message)
+				})
+				this.$store.dispatch('toggleLoader', false)
+			},
+			removeUser( userId ) {
+				this.$store.dispatch('toggleLoader', true)
+				teamService
+				.removeUser(userId, this.team.key )
+				.then(response => {
+					if (response.data.status) {
+						this.$store.dispatch('toggleLoader', false)
+						growl.success('Removido com sucesso')
+						window.location.reload()
 					} else {
 						this.$store.dispatch('toggleLoader', false)
 						growl.error(response.data.message)

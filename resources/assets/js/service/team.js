@@ -30,4 +30,15 @@ export default new class TeamService {
         })
     }
 
+    removeUser( userId, teamId ) {
+        return Axios({
+            url: '/team/remove-user',
+            method: 'post',
+            data: {
+                teamId: teamId,
+                userId: userId
+            }
+        })
+    }
+
 }
