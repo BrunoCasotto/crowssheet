@@ -20,6 +20,7 @@ import CourseForm from '_components/pages/CourseForm.vue'
 import CourseUpdate from '_components/pages/CourseUpdate.vue'
 import CourseList from '_components/pages/CourseList.vue'
 import Team from '_components/pages/Team.vue'
+import TeamUpdate from '_components/pages/TeamUpdate.vue'
 import UserList from '_components/pages/UserList.vue'
 import ClassRoom from '_components/pages/ClassRoom.vue'
 import ClassUpdate from '_components/pages/ClassUpdate.vue'
@@ -49,6 +50,7 @@ new Vue({
         CourseClassRoom,
         TestRoom,
         CourseUpdate,
-        ClassUpdate
+        ClassUpdate,
+        TeamUpdate
     }
 })

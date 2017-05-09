@@ -5,7 +5,7 @@ class  TeamService{
 	get core() {
 		return new serviceCore()
 	}
-	
+
 	create( user, team ) {
 		return this.core.store('teams', team)
 		.then((response)=>{
@@ -33,28 +33,17 @@ class  TeamService{
 			}
 		})
 	}
+
+	update(teamId, team) {
+		return this.core.update('teams/', team, teamId)
+	}
+
 	getAll( userId ) {
 		return this.core.getAll('users/'+userId+'/teams/')
 	}
 
 	getSingle( teamId ) {
 		return this.core.getSingle('teams/', teamId)
-	}
-
-	insertUser( userId ) {
-		return this.core.storeSet('teams/users',users,{})
-	}
-
-	removeUser( userId ) {
-		return this.core.delete( 'teams/users/', userId )
-	}
-
-	insertCourse( courseId ) {
-		return this.core.storeSet('teams/courses',courseId,{})
-	}
-
-	removeCourse( courseId ) {
-		return tthis.core.delete( 'teams/courses/', courseId )
 	}
 
 }

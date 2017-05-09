@@ -7,6 +7,8 @@ import Modal from './modules/modal.js'
 import Session from './modules/session.js'
 import Course from './modules/course.js'
 import Class from './modules/class.js'
+import Team from './modules/team.js'
+import Users from './modules/users.js'
 
 // getting a initial state
 let data = window.__INITIAL_STATE__ || {}
@@ -29,7 +31,9 @@ const store = new Vuex.Store({
     Modal,
     Session: Session(session),
     Course: Course(data),
-    Class: Class(data)
+    Class: Class(data),
+    Team: Team(data),
+    Users: Users(data)
     }
 })
 

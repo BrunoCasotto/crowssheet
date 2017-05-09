@@ -24,7 +24,8 @@
 		data() {
 			return {
 				team: {
-					name: ''
+					name: '',
+					users: JSON.stringify([])
 				},
 				teams: []
 			}
@@ -71,7 +72,6 @@
 				teamService.getAll(this.user.uid)
 				.then(response => {
 					this.$store.dispatch('toggleLoader', false)
-					console.log(response.data)
 					this.teams = response.data
 				})
 				.catch(error => {

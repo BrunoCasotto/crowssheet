@@ -19,7 +19,7 @@ class CoreService extends firebase{
 	}
 
 	// This is a set method
-	storeSet(path, id, data) {
+	storeSet(path, id, data={}) {
 	return this.database.ref(path).child(id)
 		.set(data)
 		.then(result => {
