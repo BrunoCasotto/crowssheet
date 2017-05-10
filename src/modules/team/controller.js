@@ -109,11 +109,6 @@ class TeamController {
 		team.users = JSON.stringify(team.users)
 		return yield service.update( request.payload.teamId, team )
 	}
-	
-	* getTeam(request, reply) {
-		
-	}
-
 
 	* removeUser(request, reply) {
 		let service = new TeamService()
@@ -135,7 +130,21 @@ class TeamController {
 	}
 
 	* insertCourse(request, reply) {
+		let service = new TeamService()
+		let team = yield service.getSingle( request.payload.teamId )
+		team.courses = JSON.parse(team.courses)
 
+		if(team.courses.includes(request.payload.courseId)) {
+			return {
+				status: false,
+				message: 'O curso ja foi cadastrado'
+			}
+		} else {
+			team.courses.push( request.payload.courseId )
+		}
+
+		team.courses = JSON.stringify(team.courses)
+		return yield service.update( request.payload.teamId, team )
 	}
 
 	* removeCourse(request, reply) {

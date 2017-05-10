@@ -78,7 +78,7 @@
 			</div>
 			<div v-else>Nenhum curso cadastrado</div>
 		</div>
-		<i v-if="insert_course" @click="toggleInsertCourse" class="btn btn-orange">Voltar</i>
+		<i v-if="insert_courses" @click="toggleInsertCourse" class="btn btn-orange">Voltar</i>
 		<i  v-else @click="toggleInsertCourse" class="btn btn-red">Inserir curso</i>
 	</div>
 	<!-- -->

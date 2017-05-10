@@ -41,4 +41,15 @@ export default new class TeamService {
         })
     }
 
+    insertCourse( courseId, teamId ) {
+        return Axios({
+            url: '/team/insert-course',
+            method: 'post',
+            data: {
+                teamId: teamId,
+                courseId: courseId
+            }
+        })
+    }
+
 }
