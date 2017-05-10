@@ -34,8 +34,17 @@ class  TeamService{
 		})
 	}
 
-	update(teamId, team) {
+	update(user, teamId, team) {
 		return this.core.update('teams/', team, teamId)
+		.then((response)=>{
+			return this.core.update( 'users/'+user+'/teams/',team, teamId)
+		})
+		.catch((error)=>{
+			return {
+				status: false,
+				data: error
+			}
+		})
 	}
 
 	getAll( userId ) {

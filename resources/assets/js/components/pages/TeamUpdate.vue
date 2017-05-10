@@ -1,8 +1,12 @@
 <template lang="html">
 	<div class="team">
 		<div class="form-group">
-			<input v-show="edit" class="form-control" v-model="team.name">
-			<h4 v-show="!edit" class="title">{{ team.name }}</h4>
+			<input v-if="edit" class="form-control" v-model="team.name">
+			<h4 v-else class="title">{{ team.name }}</h4>
+
+			<button v-if="edit" @click="update" class="btn btn-black btn-save">salvar</button>
+			<i v-else @click="toggleEdit" class="fa fa-pencil"></i>
+
 		</div>
 
 		<!-- users list and form to insert users-->
@@ -194,11 +198,34 @@
 				})
 				this.$store.dispatch('toggleLoader', false)
 			},
+			update() {
+				this.$store.dispatch('toggleLoader', true)
+				teamService
+				.update(this.user.uid, this.team.key, { name: this.team.name } )
+				.then(response => {
+					if (response.data.status) {
+						this.$store.dispatch('toggleLoader', false)
+						growl.success('Salvo')
+						this.toggleEdit()
+					} else {
+						this.$store.dispatch('toggleLoader', false)
+						growl.error(response.data.message)
+					}
+				})
+				.catch(error => {
+					this.$store.dispatch('toggleLoader', false)
+					growl.error(error.data.message)
+				})
+				this.$store.dispatch('toggleLoader', false)
+			},
 			toggleInsert(){
 				this.insert = !this.insert
 			},
 			toggleInsertCourse() {
 				this.insert_courses = !this.insert_courses
+			},
+			toggleEdit() {
+				this.edit = !this.edit
 			}
 		}
 	}
@@ -212,6 +239,20 @@
 		max-width: 500px;
 		padding: 15px;
 
+		.form-group {
+			display: flex;
+
+			i {
+				line-height: 100%;
+				padding-top: 15px;
+				margin-left: 10px;
+				cursor: pointer;
+			}
+
+			.btn-save {
+				margin: 0 0 0 5px;
+			}
+		}
 
 		.title {
 			font-size: 20px;

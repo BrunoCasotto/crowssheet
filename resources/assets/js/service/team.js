@@ -63,4 +63,16 @@ export default new class TeamService {
         })
     }
 
+    update( userId, teamId, team ) {
+        return Axios({
+            url: '/team/update',
+            method: 'post',
+            data: {
+                teamId: teamId,
+                team: team,
+                userId: userId
+            }
+        })
+    }
+
 }

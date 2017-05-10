@@ -167,7 +167,8 @@ class TeamController {
 	}
 
 	* update(request, reply) {
-
+		let service = new TeamService()
+		return yield service.update( request.payload.userId, request.payload.teamId, request.payload.team )
 	}
 }
 module.exports = TeamController
