@@ -27,6 +27,11 @@ class CourseService extends firebase{
 
 	delete( user, id ) {
 		return this.core.delete( 'users/'+user+'/courses/', id )
+		.then( response =>{
+			if(response.status) {
+				this.core.delete( 'courses/', id )
+			}
+		})
 	}
 
 	update( user, newCourse, id) {
@@ -54,7 +59,7 @@ class CourseService extends firebase{
 	}
 
 	getSingle( user, id ) {
-		return this.core.getSingle('users/'+user+'/courses/', id)
+		return this.core.getSingle('courses/', id)
 	}
 }
 module.exports = CourseService 
