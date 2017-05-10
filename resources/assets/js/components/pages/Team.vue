@@ -25,7 +25,8 @@
 			return {
 				team: {
 					name: '',
-					users: JSON.stringify([])
+					users: [],
+					courses: []
 				},
 				teams: []
 			}

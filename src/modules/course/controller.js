@@ -21,7 +21,7 @@ class CourseController {
 	}
 
 	* showAllCourse(request, reply) {
-		reply.view('pages/courseList')  
+		reply.view('pages/courseList')
 	}
 
 	* showSingleCourse(request, reply) {

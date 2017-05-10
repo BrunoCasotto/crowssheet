@@ -1,5 +1,6 @@
 let TeamService = require("@modules/team/service")
 let UserService = require("@modules/user/service")
+let CourseService = require("@modules/course/service")
 
 class TeamController {
 
@@ -11,6 +12,9 @@ class TeamController {
 		let service = new TeamService()
 		let team = yield service.getSingle( request.query.id )
 		let teamUsers = JSON.parse(team.users)
+		let teamCourses = JSON.parse(team.courses)
+		team.users = []
+		team.courses = []
 
 		//getting user list
 		let userService = new UserService()
@@ -24,19 +28,39 @@ class TeamController {
 
 			//setting users on team users Array
 			if(teamUsers.length > 0) {
-				team.users = []
 				teamUsers.forEach( userId =>{
 					team.users.push(response[userId])
 				})
 			}
 		}
 
+		//getting course list
+		let courseService = new CourseService()
+		let courseResponse =  yield courseService.getAll( request.query.userId )
+		let courses = []
+
+		if(courseResponse) {
+			for(var key in courseResponse) {
+				courseResponse[key]['key'] = key
+				courses.push(courseResponse[key])
+			}
+
+			//setting courses on team courses Array
+			if(teamCourses.length > 0) {
+				teamCourses.forEach( userId =>{
+					team.courses.push(courseResponse[userId])
+				})
+			}
+		}
+
+
 		//colocando o time na sessão
 		if(team) {
 			team.key = request.query.id
 			request['session']  = {
 				team: team,
-				users: users
+				users: users,
+				courses: courses
 			}
 		}
 
@@ -57,6 +81,9 @@ class TeamController {
 	
 	* create(request, reply) {
 		let service = new TeamService()
+		request.payload.team.users = JSON.stringify(request.payload.team.users)
+		request.payload.team.courses = JSON.stringify(request.payload.team.courses)
+
 		return yield service.create( request.payload.userId, request.payload.team )
 	}
 

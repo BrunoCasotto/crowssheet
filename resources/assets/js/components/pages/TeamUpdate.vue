@@ -5,6 +5,7 @@
 			<h4 v-show="!edit" class="title">{{ team.name }}</h4>
 		</div>
 
+		<!-- users list and form to insert users-->
 		<div v-if="insert" class="insert-users">
 			<h4 v-show="!edit" class="title">Lista de usuários</h4>
 			<div class="list">
@@ -16,7 +17,6 @@
 							<h4 class="name" >{{ user.name }}</h4>
 						</div>
 						<p class="email">{{user.email}}</p>
-						
 					</div>
 				</div>
 			</div>
@@ -41,7 +41,47 @@
 		</div>
 		<i v-if="insert" @click="toggleInsert" class="btn btn-orange">voltar</i>
 		<i  v-else @click="toggleInsert" class="btn btn-red">Inserir usuário</i>
+	<!-- End list and insert users-->
+
+	<div class="line"></div>
+
+	<!-- List course and insert -->
+		<div v-if="insert_courses" class="insert-courses">
+			<h4 class="title">Lista de cursos</h4>
+			<div class="list">
+				<div v-for="course in courses" class="list__item">
+					<i @click="insertUser(course.key)" class="btn btn-black btn-status">Inserir</i>
+					<div class="item">
+						<div class="description">
+							<a class="item-title" :href="'/course/update?id='+ course.key +'&userId='+ user.uid">
+								<h4 class="name" >{{ course.title }}</h4>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div v-else class="team-courses">
+			<h4 class="title">Lista de cursos do time</h4>
+			<div v-if="team.courses.length > 0" class="list">
+				<div v-for="course in team.courses" class="list__item">
+					<i @click="removeCourse(course.key)" class="fa fa-trash btn-remove"></i>
+					<i class="btn btn-black btn-status">Ver status</i>
+					<div class="item">
+						<div class="description">
+							<a class="item-title" :href="'/course/update?id='+ course.key +'&userId='+ user.uid">
+								<h4 class="name" >{{ course.title }}</h4>
+							</a> 
+						</div>
+					</div>
+				</div>
+			</div>
+			<div v-else>Nenhum curso cadastrado</div>
+		</div>
+		<i v-if="insert_course" @click="toggleInsertCourse" class="btn btn-orange">Voltar</i>
+		<i  v-else @click="toggleInsertCourse" class="btn btn-red">Inserir curso</i>
 	</div>
+	<!-- -->
 </template>
 <script>
 	import CourseService from '_service/course'
@@ -54,6 +94,7 @@
 			return {
 				edit: false,
 				insert: false,
+				insert_courses: false,
 				teamUsers: []
 			}
 		},
@@ -66,6 +107,9 @@
 			},
 			users: function () {
 				return this.$store.state.Users
+			},
+			courses: function () {
+				return this.$store.state.Courses
 			}
 		},
 		methods: {
@@ -110,8 +154,14 @@
 				})
 				this.$store.dispatch('toggleLoader', false)
 			},
+			removeCourse( courseId ) {
+
+			},
 			toggleInsert(){
 				this.insert = !this.insert
+			},
+			toggleInsertCourse() {
+				this.insert_courses = !this.insert_courses
 			}
 		}
 	}
@@ -143,13 +193,13 @@
 			}
 		}
 
-		.team-users, .insert-users {
+		.team-users, .insert-users, .insert-courses, .team-courses {
 			width: 100%;
 
 			.list__item {
 				display: flex;
 				padding: 5px 20px;
-				height: 100px;
+				max-height: 100px;
 				margin: 5px auto;
 				cursor: pointer;
 				border: solid 1px $color-grey--base;
@@ -180,6 +230,11 @@
 					.email {
 						margin-top: 10px;
 					}
+
+					.item-title {
+						color: black;
+						font-size: 20px;
+					}
 				}
 
 				.btn-remove {
@@ -200,6 +255,13 @@
 				}
 
 			}
+		}
+
+		.line {
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border-top: solid 1px $orange-base;
+			width: 100%;
 		}
 	}
 </style>
