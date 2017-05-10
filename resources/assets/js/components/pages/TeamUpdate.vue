@@ -50,7 +50,7 @@
 			<h4 class="title">Lista de cursos</h4>
 			<div class="list">
 				<div v-for="course in courses" class="list__item">
-					<i @click="insertUser(course.key)" class="btn btn-black btn-status">Inserir</i>
+					<i @click="insertCourse(course.key)" class="btn btn-black btn-status">Inserir</i>
 					<div class="item">
 						<div class="description">
 							<a class="item-title" :href="'/course/update?id='+ course.key +'&userId='+ user.uid">
@@ -66,7 +66,6 @@
 			<div v-if="team.courses.length > 0" class="list">
 				<div v-for="course in team.courses" class="list__item">
 					<i @click="removeCourse(course.key)" class="fa fa-trash btn-remove"></i>
-					<i class="btn btn-black btn-status">Ver status</i>
 					<div class="item">
 						<div class="description">
 							<a class="item-title" :href="'/course/update?id='+ course.key +'&userId='+ user.uid">
@@ -155,7 +154,45 @@
 				this.$store.dispatch('toggleLoader', false)
 			},
 			removeCourse( courseId ) {
-
+				this.$store.dispatch('toggleLoader', true)
+				teamService
+				.removeCourse(courseId, this.team.key )
+				.then(response => {
+					if (response.data.status) {
+						this.$store.dispatch('toggleLoader', false)
+						growl.success('Curso removido com sucesso')
+						window.location.reload()
+					} else {
+						this.$store.dispatch('toggleLoader', false)
+						growl.error(response.data.message)
+					}
+				})
+				.catch(error => {
+					this.$store.dispatch('toggleLoader', false)
+					growl.error(error.data.message)
+				})
+				this.$store.dispatch('toggleLoader', false)
+			},
+			insertCourse( courseId ) {
+				this.$store.dispatch('toggleLoader', true)
+				teamService
+				.insertCourse(courseId, this.team.key )
+				.then(response => {
+					if (response.data.status) {
+						this.$store.dispatch('toggleLoader', false)
+						growl.success('Curso inserido com sucesso')
+						window.location.reload()
+						this.toggleInsertCourse()
+					} else {
+						this.$store.dispatch('toggleLoader', false)
+						growl.error(response.data.message)
+					}
+				})
+				.catch(error => {
+					this.$store.dispatch('toggleLoader', false)
+					growl.error(error.data.message)
+				})
+				this.$store.dispatch('toggleLoader', false)
 			},
 			toggleInsert(){
 				this.insert = !this.insert

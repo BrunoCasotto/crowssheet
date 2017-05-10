@@ -148,7 +148,22 @@ class TeamController {
 	}
 
 	* removeCourse(request, reply) {
+		let service = new TeamService()
+		let team = yield service.getSingle( request.payload.teamId )
+		team.courses = JSON.parse(team.courses)
 
+		if(team.courses.includes(request.payload.courseId)) {
+			var index = team.courses.indexOf(request.payload.courseId)
+			team.courses.splice(index, 1)
+		} else {
+			return {
+				status: false,
+				message: 'O curso não existe'
+			}
+		}
+
+		team.courses = JSON.stringify(team.courses)
+		return yield service.update( request.payload.teamId, team )
 	}
 
 	* update(request, reply) {

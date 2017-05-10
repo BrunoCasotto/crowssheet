@@ -52,4 +52,15 @@ export default new class TeamService {
         })
     }
 
+    removeCourse( courseId, teamId ) {
+        return Axios({
+            url: '/team/remove-course',
+            method: 'post',
+            data: {
+                teamId: teamId,
+                courseId: courseId
+            }
+        })
+    }
+
 }
