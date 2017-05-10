@@ -3,14 +3,22 @@ let AuthService = require('@modules/authentication/service')
 class AuthController {
 
 	index(request, reply) {
+		console.log(request.state)
+		if(request.state) {
+			if(request.state.session.user) {
+				reply.view('pages/dashboard')
+			} else {
+				reply.view('pages/login',{}).state('session', { user: null })
+			}
+		} else {
+			reply.view('pages/login',{}).state('session', { user: null })
+		}
+	}
+
+	* showDashboard(request, reply) {
 		let service = new AuthService()
-		service.isSigned().then((result)=>{
-			if(result) {
-				reply.redirect('/dashboard')
-			 } else	{
-				reply.view('pages/login')
-			 }
-		})
+		let token = yield service.verifyToken(request.query.token)
+		reply.view('pages/dashboard').state('session', { user: token.data })
 	}
 
 	getToken(request, reply) {
@@ -19,35 +27,14 @@ class AuthController {
 	}
 
 	showSingup(request, reply) {
-        reply.view('pages/singup',{
+		reply.view('pages/singup',{
 			noheader: true
 		})
-    }
-
-	* singin(request, reply) {
-		let service = new AuthService()
-		return yield service.login(request.payload.email, request.payload.password)
 	}
 
 	* singup(request, reply) {
 		let service = new AuthService()
-		return yield service.singup( request.payload.email, request.payload.password, request.payload.name)
-	}
-	
-	* singout(request, reply) {
-		let service = new AuthService()
-		let response = yield service.singout()
-		if(response) {
-			reply.view('pages/login',{noheader: true})
-		} else {
-			return response
-		}
-		
-	}
-
-	* isLogged(request, reply) {
-		let service = new AuthService()
-		return yield service.isSigned()
+		return yield service.singup( request.payload.email, request.payload.password, request.payload.name )
 	}
 }
 module.exports = AuthController

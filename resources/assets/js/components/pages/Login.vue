@@ -70,7 +70,7 @@
 				
 				if(authKey) {
 					if(JSON.parse(localStorage[authKey]).apiKey) {
-						window.location.assign('/dashboard')
+						// window.location.assign('/dashboard')
 					}
 				}
 			},
@@ -82,7 +82,7 @@
 					this.$store.dispatch('toggleLoader', false)
 					if (response.status == true) {
 						this.$store.dispatch('updateSession', response.data)
-						window.location.assign('/dashboard')
+						// window.location.assign('/dashboard')
 					}
 				})
 				.catch(error => {

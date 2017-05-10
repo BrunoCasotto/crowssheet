@@ -6,14 +6,15 @@ class AuthService extends firebase{
 		return require('@config/token')
 	}
 
-	singout() {
-		return this._firebase.auth().signOut()
+	verifyToken( token ) {
+		return this._firebase.auth()
+		.verifyIdToken( token )
 		.then((response)=> {
 			return {
 				status: true,
 				data: response
 			}
-		}).catch((error)=>{
+		}).catch((error)=> {
 			return {
 				status: false,
 				data: error
@@ -30,7 +31,7 @@ class AuthService extends firebase{
 			photoURL: "http://1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png",
 			disabled: false
 		}).then((response)=>{
-			return { 
+			return {
 				status: true,
 				data: response
 			}
@@ -40,12 +41,6 @@ class AuthService extends firebase{
 				status: false,
 				data: error
 			 }
-		})
-	}
-
-	isSigned() {
-		return new Promise( (resolve, reject) => {
-			resolve(this._firebase.auth().currentUser)
 		})
 	}
 }

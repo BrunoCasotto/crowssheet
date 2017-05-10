@@ -46,6 +46,15 @@ server.bind( bind )
 
 server.ext('onPreResponse', preResponse)
 
+server.state('session', {
+    ttl: null,
+    isSecure: false,
+    isHttpOnly: true,
+    encoding: 'base64json',
+    clearInvalid: false, // remove invalid cookies
+    strictHeader: true // don't allow violations of RFC 6265
+});
+
 server.start(err => {
     if (err) {
         console.log(err)

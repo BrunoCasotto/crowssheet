@@ -4,7 +4,7 @@ class HomeController {
 
 	index(request, reply) {
 		let service = new postService()
-		reply.view('pages/home')	
+		reply.view('pages/home')
 	}
 }
 

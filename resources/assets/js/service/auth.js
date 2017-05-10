@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import Firebase from 'firebase'
 
-class AuthService { 
+class AuthService {
 
 	constructor() {
 		this._firebase = {}
@@ -17,11 +17,17 @@ class AuthService {
 	login(email, password) {
 		return this._firebase.auth()
 		.signInWithEmailAndPassword(email, password)
-		.then((response)=>{
-			return {
-				status: true,
-				data: response
-			 }
+		.then(response =>{
+			this._firebase.auth()
+			.currentUser.getToken(true)
+			.then((idToken)=> {
+				window.location.href = '/dashboard?token='+idToken
+			}).catch((error)=> {
+				return {
+					status: false,
+					message: error
+				}
+			})
 		})
 		.catch((error)=> {
 			return { 
@@ -48,11 +54,11 @@ class AuthService {
 	}
 
 	singup(user) {
-		console.log(user)
 		return Axios({
-            url: '/user/create',
-            method: 'post',
-            data: user
-        })
+			url: '/user/create',
+			method: 'post',
+			data: user
+		})
 	}
-} export default new AuthService()
+}
+export default new AuthService()
