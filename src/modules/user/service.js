@@ -11,7 +11,7 @@ class UserService  extends firebase {
 		return this.core.getAll('users')
 	}
 	
-	create(email, password, name, photo) {
+	create(email, password, name, photo, teacher) {
 		
 		return this._firebase.auth().createUser({
 				email: email,
@@ -26,7 +26,8 @@ class UserService  extends firebase {
 					'email': email,
 					'name': name,
 					'photo': photo,
-					'uid': response.uid
+					'uid': response.uid,
+					'teacher': teacher
 				})
 			})
 			.catch((error)=> {

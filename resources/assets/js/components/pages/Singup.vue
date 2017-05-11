@@ -7,45 +7,49 @@
 			<form class="form" v-on:submit.prevent>
 				<label class="form__title">Singup</label>
 				<div class="form__row">
-				<div class="col col--md">
-					<input 
-					type="text" 
-					name="name" 
-					placeholder="name" 
-					class="input input--blank"
-					v-model="name"
-					>
+					<div class="col col--md">
+						<input 
+						type="text" 
+						name="name" 
+						placeholder="name" 
+						class="input input--blank"
+						v-model="name"
+						>
+					</div>
+					<div class="col col--md">
+						<input 
+						type="text" 
+						name="email" 
+						placeholder="e-mail" 
+						class="input input--blank"
+						v-model="email"
+						>
+					</div>
+					</div>
+					<div class="form__row">
+					<div class="col col--md">
+						<input 
+						type="password" 
+						name="password" 
+						placeholder="password" 
+						class="input input--blank"
+						v-model="password"
+						>
+					</div>
+					<div class="col col--md">
+						<input 
+						type="password"
+						name="passwordAgain" 
+						placeholder="password again" 
+						class="input input--blank"
+						v-model="passwordAgain"
+						>
+					</div>
 				</div>
-				<div class="col col--md">
-					<input 
-					type="text" 
-					name="email" 
-					placeholder="e-mail" 
-					class="input input--blank"
-					v-model="email"
-					>
-				</div>
-				</div>
-				<div class="form__row">
-				<div class="col col--md">
-					<input 
-					type="password" 
-					name="password" 
-					placeholder="password" 
-					class="input input--blank"
-					v-model="password"
-					>
-				</div>
-				<div class="col col--md">
-					<input 
-					type="password"
-					name="passwordAgain" 
-					placeholder="password again" 
-					class="input input--blank"
-					v-model="passwordAgain"
-					>
-				</div>
-				</div>
+				<label class="checkbox-inline">
+					<input type="checkbox" v-model="teacher">Registrar-se como professor
+				</label>
+
 				<button class="btn btn-default form__btn" @click="register">Registrar</butotn>
 			</form>
 		</div>
@@ -58,6 +62,7 @@
 	import axios from 'axios'
 	import growl from "growl-alert"
 	import authService from '_service/auth'
+	import validator from '_helpers/validator'
 
 	export default {
 		data () {
@@ -66,7 +71,8 @@
 				email: '',
 				password: '',
 				passwordAgain: '',
-				photo:'http://wpshowdown.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
+				photo:'http://wpshowdown.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png',
+				teacher: false
 			}
 		},
 		components: {
@@ -75,23 +81,44 @@
 		},
 		methods: {
 			register () {
-				authService
-				.singup({
-					name: this.name,
-					email: this.email,
-					password: this.password,
-					photo: this.photo
-				})
-				.then(response => {
-					console.log(response)
-					if(response.data.status == true) {
-						window.location.replace('/')
+				if(this.validate()) {
+					this.$store.dispatch('toggleLoader', true)
+					authService
+					.singup({
+						name: this.name,
+						email: this.email,
+						password: this.password,
+						photo: this.photo,
+						teacher: this.teacher
+					})
+					.then(response => {
+						this.$store.dispatch('toggleLoader', false)
+						if(response.data.status == true) {
+							window.location.replace('/')
+						}
+					})
+					.catch(error => {
+						this.$store.dispatch('toggleLoader', false)
+						console.log(error)
+					})
+				}
+			},
+			validate() {
+				if(
+					validator.stringValidator( 'nome', 5, this.name) &&
+					validator.stringValidator( 'email', 5, this.email) &&
+					validator.stringValidator( 'senha', 5, this.password)
+				) {
+					if(this.password != this.passwordAgain) {
+						growl.warning('As senhas nao conferem')
+						return false
 					}
-				})
-				.catch(error => {
-					console.log(error)
-				})
-			}
+
+					return true
+				} else {
+					return false
+				}
+			},
 		}
 	}
 </script>
@@ -123,12 +150,16 @@
 			padding: 40px;
 			background-color: $black-base;
 			border-radius: 8px;
-			z-index: 100;
+			 z-index: 5;
 			transform: translateY(-50px);
 			max-width: 1000px;
 			@media screen and(max-width: $screen-md) {
 				padding: 20px;
 				margin-top: 50px;
+			}
+
+			.checkbox-inline {
+				color: white;
 			}
 
 			&__title {

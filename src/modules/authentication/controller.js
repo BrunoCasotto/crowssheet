@@ -3,16 +3,7 @@ let AuthService = require('@modules/authentication/service')
 class AuthController {
 
 	index(request, reply) {
-		console.log(request.state)
-		if(request.state) {
-			if(request.state.session.user) {
-				reply.view('pages/dashboard')
-			} else {
-				reply.view('pages/login',{}).state('session', { user: null })
-			}
-		} else {
-			reply.view('pages/login',{}).state('session', { user: null })
-		}
+		reply.view('pages/login',{}).state('session', { user: null })
 	}
 
 	* showDashboard(request, reply) {

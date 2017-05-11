@@ -24,7 +24,8 @@ class UserController {
 			request.payload.email,
 			request.payload.password, 
 			request.payload.name, 
-			request.payload.photo
+			request.payload.photo,
+			request.payload.teacher
 		)
 	}
 

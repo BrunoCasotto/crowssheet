@@ -63,16 +63,16 @@
 		},
 		methods: {
 			verifyLogin() {
-				let authKey = null
-				for (var key in localStorage){
-					authKey = key
-				}
+				// let authKey = null
+				// for (var key in localStorage){
+				// 	authKey = key
+				// }
 				
-				if(authKey) {
-					if(JSON.parse(localStorage[authKey]).apiKey) {
-						// window.location.assign('/dashboard')
-					}
-				}
+				// if(authKey) {
+				// 	if(JSON.parse(localStorage[authKey]).apiKey) {
+				// 		window.location.assign('/dashboard')
+				// 	}
+				// }
 			},
 			login () {
 				this.$store.dispatch('toggleLoader', true)
@@ -82,7 +82,7 @@
 					this.$store.dispatch('toggleLoader', false)
 					if (response.status == true) {
 						this.$store.dispatch('updateSession', response.data)
-						// window.location.assign('/dashboard')
+						window.location.assign('/dashboard')
 					}
 				})
 				.catch(error => {
