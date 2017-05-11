@@ -3,13 +3,12 @@ let AuthService = require('@modules/authentication/service')
 class AuthController {
 
 	index(request, reply) {
-		reply.view('pages/login',{}).state('session', { user: null })
+		reply.view('pages/login',{})
 	}
 
 	* showDashboard(request, reply) {
 		let service = new AuthService()
-		let token = yield service.verifyToken(request.query.token)
-		reply.view('pages/dashboard').state('session', { user: token.data })
+		reply.view('pages/dashboard')
 	}
 
 	getToken(request, reply) {

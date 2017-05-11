@@ -3,9 +3,9 @@ AuthController = require("@modules/authentication/controller")
 controller = new AuthController()
 
 module.exports = [
-	{method: 'GET',path: '/',handler: controller.index},
-	{method: 'GET',	path: '/auth/register', handler: controller.showSingup},
-	{method: 'GET',	path: '/dashboard', handler: controller.showDashboard},
-	{method: 'POST', path: '/auth/singup', handler: controller.singup},
-	{method: 'POST', path: '/token', handler: controller.getToken},
+	{ method: 'GET',path: '/',handler: controller.index },
+	{ method: 'GET',	path: '/auth/register', handler: controller.showSingup },
+	{ method: 'GET',	path: '/dashboard', handler: controller.showDashboard },
+	{ method: 'POST', path: '/auth/singup', handler: controller.singup },
+	{ method: 'POST', path: '/token', handler: controller.getToken }
 ]

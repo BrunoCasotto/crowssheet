@@ -51,8 +51,8 @@ server.state('session', {
     isSecure: false,
     isHttpOnly: true,
     encoding: 'base64json',
-    clearInvalid: false, // remove invalid cookies
-    strictHeader: true // don't allow violations of RFC 6265
+    clearInvalid: false,
+    strictHeader: true
 });
 
 server.start(err => {
