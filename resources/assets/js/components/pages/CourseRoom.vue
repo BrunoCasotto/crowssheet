@@ -1,145 +1,131 @@
 <template lang="html">
-	<div class="course-list">
-		<div class="list">
-			<div class="list__item">
-				<div class="item">
-					<h4 class="item-title" >Aula 1</h4>
-					<p class="item-description" v-html="">
-						Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60
-					</p>
-				</div>
-				<div class="controller">
-					<a href="/classroom/course.key/aula.key" class="btn btn-default btn-update">Iniciar</a>
-				</div>
+	<div class="course">
+		<h4 v-if="classForm" class="title">{{ course.title }}</h4>
+		<div class="course-form">
+			<div class="form-group">
+				<h4  class="title">{{ course.title }}</h4>
+			</div>
+
+			<div class="form-group">
+				<p  class="content" v-html="course.description"></p>
 			</div>
 		</div>
+		<class-list v-if="!classForm" :classes="classList"></class-list>
 	</div>
 </template>
 <script>
-	import CourseService from '_service/course'
+	import axios from "axios"
 	import growl from "growl-alert"
-	import ClassModal from '_common/components/modal/ClassModal.vue'
+	import courseService from '_service/course'
+	import ClassForm from '_components/includes/form/ClassForm.vue'
+	import ClassList from '_components/includes/list/ClassList.vue'
 
 	export default {
-		name: 'course-list',
-		data: ()=> {
-			return {
-				courses: []
-			}
-		},
 		computed: {
 			user: function () {
 				return this.$store.state.Session
+			},
+			course: function() {
+				return this.$store.state.Course
 			}
 		},
-		mounted (){
-			this.fetchCourses()
+		data () {
+			return {
+				edit: false,
+				classForm: false,
+				classList: []
+			}
+		},
+		mounted() {
+			this.filterClassList()
 		},
 		components: {
-			ClassModal
+			ClassForm,
+			ClassList
 		},
 		methods: {
-			fetchCourses() {
-				this.$store.dispatch('toggleLoader', true)
-				CourseService.getAll(this.user.uid)
-				.then(response => {
-					this.$store.dispatch('toggleLoader', false)
-					this.courses = response.data
-				})
-				.catch(error => {
-					this.$store.dispatch('toggleLoader', false)
-					growl.error('Ocorreu algum erro') 
-				})
+			toggleUpdate(){
+				this.edit = !this.edit
 			},
-			deleteCourse( id ) {
+			toggleClassForm(){
+				this.classForm = !this.classForm
+			},
+			filterClassList() {
+				for(var key in this.course.classes) {
+					this.course.classes[key]['key'] = key
+					this.classList.push(this.course.classes[key])
+				}
+			},
+			update() {
 				this.$store.dispatch('toggleLoader', true)
-				CourseService.delete( this.user.uid, id )
-				.then(response => {
-					if(response.status) {
+				if(this.validateForm()) {
+					courseService
+					.update( this.user.uid, this.course, this.course.key )
+					.then(response => {
+						if (response.data.status) {
+							this.$store.dispatch('toggleLoader', false)
+							growl.success('Salvo')
+							this.toggleUpdate()
+						} else {
+							this.$store.dispatch('toggleLoader', false)
+							growl.error(response.data.data.message)
+						}
+					})
+					.catch(error => {
 						this.$store.dispatch('toggleLoader', false)
-						growl.success('Item descartado.')
-						this.fetchCourses()
-					} else {
-						this.fetchCourses()
-						growl.warning('Tente novamente') 
-					}
-				})
-				.catch(error => {
+						growl.error(error.data.message)
+					})
 					this.$store.dispatch('toggleLoader', false)
-					growl.error('Ocorreu algum erro') 
-				})
+				}
 			},
-			updateCourse(key) {
-				this.courses.forEach((item)=>{
-					if(item.key == key) {
-						this.$store.dispatch('toggleModal', {
-							type: 'course-form',
-							active: true,
-							data: item
-						})
+			validateForm () {
+				this.course.description = tinymce.get('form-description').getContent()
+				if(this.course.title.length < 5) {
+					growl.warning('O titulo deve conter no minimo 5 caracteres')
+				} else {
+					if(this.course.description.length < 10) {
+						growl.warning('A descrição deve conter no minimo 10 caracteres') 
+					} else {
+						return true
 					}
-				})
+				}
 			}
-		},
+		}
 	}
 </script>
 
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
-	.course-list {
-		width: 100%;
+	@import "~_config/_commons.scss";
+
+	.course {
 		max-width: 700px;
-		margin: 20px;
 
-		.list__item {
-			display: flex;
-			padding: 5px 20px;
-			height: 100px;
-			margin: 5px auto;
-			cursor: pointer;
-			border: solid 1px $color-grey--base;
-			transition: .5s all ease;
-			background-color: white;
+		.title {
+			font-size: 25px;
+			margin-left: 10px;
+		}
 
-			&:hover {
-				height: 200px;
-			}
+		.course-form {
+			margin: 20px;
 
-			&:first-child {
-				border-top: solid 1px $color-grey--base;
-			}
+			.form-group {
+				.title {
+					font-size: 20px;
+					display: flex;
 
-			.item {
-				flex: 5;
-				overflow: hidden;
-			}
-
-			.controller {
-				padding: 5px;
-				flex: 1;
-
-				.btn {
-					min-width: 100px;
-					color: white;
-					font-weight: bold;
-					margin-left: auto;
-				}
-
-				.btn-update {
-					background-color: $red-base;
-
-					&:hover {
-						background-color: lighten($red-base,15);
+					&:before {
+						content: '';
+						display: block;
+						margin-right: 5px;
+						width: 10px;
+						height: 10px;
+						background-color: $orange-base;
+						border-radius: 50%;
+						margin-top: 9px;
+						opacity: 0.35;
 					}
 				}
-
-				.btn-delete {
-					background-color: $black-base;
-					&:hover {
-						background-color: lighten($black-base,15);
-					}
-				}
-
 			}
 		}
 	}

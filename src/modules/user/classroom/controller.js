@@ -8,16 +8,26 @@ class ClassRoomController {
 		reply.view('pages/classRoom')
 	}
 
-	showCourseRoom (request, reply) {
-		reply.view('pages/courseRoom')
+	* showCourseRoom (request, reply) {
+		let service = new CourseService()
+		let course = yield service.getSingle( null, request.params.courseId )
+		console.log(course)
+
+		if(course) {
+			course.key = request.query.id
+			request['session']  = {
+				course: course
+			}
+		}
+		reply.view('pages/courseRoom',{})
 	}
 
 	showClassRoom (request, reply) {
-		reply.view('pages/courseClassRoom')
+		reply.view('pages/courseClassRoom',{})
 	}
 
 	showTestRoom (request, reply) {
-		reply.view('pages/testRoom')
+		reply.view('pages/testRoom',{})
 	}
 
 	* getUserCourses(request, reply) {
