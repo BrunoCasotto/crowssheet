@@ -29,5 +29,20 @@ class UserController {
 		)
 	}
 
+	* getSingle(request, reply) {
+		let service = new UserService()
+		let user = yield service.getSingle(request.params.id)
+
+		if(user.courses) {
+			delete user.courses
+		}
+
+		if(user.teams) {
+			delete user.teams
+		}
+
+		return user
+	}
+
 }
 module.exports = UserController

@@ -1,5 +1,6 @@
 import Axios from 'axios'
 import Firebase from 'firebase'
+import SessionHelper from '_helpers/session'
 
 class AuthService {
 
@@ -9,26 +10,22 @@ class AuthService {
 			url: '/token',
 			method: 'post',
 			data: {}
-		}).then((result)=>{
-			this._firebase = Firebase.initializeApp(result.data)
-		}).catch((error)=>{})
+		}).then((result)=>{ this._firebase = Firebase.initializeApp(result.data) }).catch((error)=>{})
 	}
 
 	login(email, password) {
 		return this._firebase.auth()
 		.signInWithEmailAndPassword(email, password)
-		.then(response =>{
-			this._firebase.auth()
-			.currentUser.getToken(true)
-			.then((idToken)=> {
-				window.location.href = '/dashboard?token='+idToken
-			}).catch((error)=> {
+		.then(response =>{ 
+			if(response.uid) {
+				return SessionHelper.saveSession( response.uid )
+			} else {
 				return {
 					status: false,
-					message: error
+					message: 'Dados incorretos'
 				}
-			})
-		})
+			}
+		 })
 		.catch((error)=> {
 			return { 
 				status: false,
@@ -41,6 +38,7 @@ class AuthService {
 		return this._firebase.auth()
 		.signOut()
 		.then((response)=> {
+			SessionHelper.removeSession()
 			return {
 				status: true,
 				data: response

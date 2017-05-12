@@ -63,16 +63,7 @@
 		},
 		methods: {
 			verifyLogin() {
-				// let authKey = null
-				// for (var key in localStorage){
-				// 	authKey = key
-				// }
-				
-				// if(authKey) {
-				// 	if(JSON.parse(localStorage[authKey]).apiKey) {
-				// 		window.location.assign('/dashboard')
-				// 	}
-				// }
+				console.log(JSON.parse(localStorage.getItem('firebase')))
 			},
 			login () {
 				this.$store.dispatch('toggleLoader', true)
@@ -80,12 +71,14 @@
 				.login( this.email, this.password )
 				.then(response => {
 					this.$store.dispatch('toggleLoader', false)
-					if (response.status == true) {
-						this.$store.dispatch('updateSession', response.data)
-						window.location.assign('/dashboard')
+
+					if(response.status === true) {
+						window.location.assign( '/dashboard' )
+					} else {
+						growl.error(response.data.message)
 					}
-				})
-				.catch(error => {
+
+				}).catch(error => {
 					this.$store.dispatch('toggleLoader', false)
 				})
 			}

@@ -15,13 +15,17 @@ import Courses from './modules/courses.js'
 let data = window.__INITIAL_STATE__ || {}
 
 // gettin session by localStorage
-let authKey = [], session = {}
-for (var key in localStorage){
-  authKey.push(key)
-}
+// let authKey = [], session = {}
+// for (var key in localStorage){
+//   authKey.push(key)
+// }
 
-if(authKey[0]) {
-    session = JSON.parse(localStorage[authKey[0]])
+// if(authKey[0]) {
+//     session = JSON.parse(localStorage[authKey[0]])
+// }
+let session = null
+if(JSON.parse(localStorage.getItem('firebase'))) {
+    session = JSON.parse(localStorage.getItem('firebase'))
 }
 
 Vue.use(Vuex)

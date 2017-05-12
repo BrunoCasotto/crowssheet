@@ -1,6 +1,7 @@
 <template lang="html">
 	<div class="course-list">
-		<div class="list">
+		
+		<div v-if="courses.length > 0" class="list">
 			<div v-for="course in courses" class="list__item">
 				<div class="item">
 					<a class="item-title" :href="'/course/update?id='+ course.key +'&userId='+ user.uid">
@@ -12,6 +13,10 @@
 					<i class="btn btn-default btn-delete" @click="deleteCourse( course.key )">Deletar</i>
 				</div>
 			</div>
+		</div>
+		<div v-else>
+			<p>Nenhum curso cadastrado.</p>
+			<a href="/course/form" class="btn btn-default btn-orange">Ir para formulário</a>
 		</div>
 	</div>
 </template>
@@ -80,12 +85,13 @@
 					}
 				})
 			}
-		},
+		}
 	}
 </script>
 
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
+	@import "~_config/_commons.scss";
 	.course-list {
 		width: 100%;
 		max-width: 700px;

@@ -52,5 +52,10 @@ new Vue({
         CourseUpdate,
         ClassUpdate,
         TeamUpdate
+    },
+    mounted() {
+        if(!window.location.pathname) {
+            window.location.href = '/'
+        }
     }
 })
