@@ -1,27 +1,44 @@
 <template lang="html">
 	<div class="class-room">
+
+		<h4 class="title">{{classData.title}}</h4>
+
 		<div class="class-room__video">
-			<iframe src="https://www.youtube.com/embed/XGSy3_Czz8k"></iframe>
+			<iframe :src="classData.video"></iframe>
 		</div>
+
 		<div class="class-room__content">
-			<p class="content" v-html="">
-				<h4>De onde ele vem?</h4>
-				Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. Com mais de 2000 anos, suas raízes podem ser encontradas em uma obra de literatura latina clássica datada de 45 AC. Richard McClintock, um professor de latim do Hampden-Sydney College na Virginia, pesquisou uma das mais obscuras palavras em latim, consectetur, oriunda de uma passagem de Lorem Ipsum, e, procurando por entre citações da palavra na literatura clássica, descobriu a sua indubitável origem. Lorem Ipsum vem das seções 1.10.32 e 1.10.33 do "de Finibus Bonorum et Malorum" (Os Extremos do Bem e do Mal), de Cícero, escrito em 45 AC. Este livro é um tratado de teoria da ética muito popular na época da Renascença. A primeira linha de Lorem Ipsum, "Lorem Ipsum dolor sit amet..." vem de uma linha na seção 1.10.32.
-
-				O trecho padrão original de Lorem Ipsum, usado desde o século XVI, está reproduzido abaixo para os interessados. Seções 1.10.32 e 1.10.33 de "de Finibus Bonorum et Malorum" de Cicero também foram reproduzidas abaixo em sua forma exata original, acompanhada das versões para o inglês da tradução feita por H. Rackham em 1914.
-
-				<h4>Onde posso conseguí-lo?</h4> 
-				Existem muitas variações disponíveis de passagens de Lorem Ipsum, mas a maioria sofreu algum tipo de alteração, seja por inserção de passagens com humor, ou palavras aleatórias que não parecem nem um pouco convincentes. Se você pretende usar uma passagem de Lorem Ipsum, precisa ter certeza de que não há algo embaraçoso escrito escondido no meio do texto. Todos os geradores de Lorem Ipsum na internet tendem a repetir pedaços predefinidos conforme necessário, fazendo deste o primeiro gerador de Lorem Ipsum autêntico da internet. Ele usa um dicionário com mais de 200 palavras em Latim combinado com um punhado de modelos de estrutura de frases para gerar um Lorem Ipsum com aparência razoável, livre de repetições, inserções de humor, palavras não características, etc.
-			</p>
+			<p v-show="!edit" class="content" v-html="classData.description"></p>
+			<p class="content" v-html="classData.content"></p>
+		</div>
+		<div class="well">
+			<a v-if="classData.file" :href="classData.file"> Download do conteúdo da disciplina </a>
 		</div>
 		<div class="class-room__controller">
 			<a href="/classroom/course.key/aula.key/test.key" class="btn btn-default btn-test">Realizar a prova</a>
 		</div>
+
 	</div>
 </template>
 <script>
+	import axios from "axios"
 	import growl from "growl-alert"
+	import classService from '_service/class'
+	import validator from '_helpers/validator'
+	import TestForm from '_components/includes/form/TestForm.vue'
+
 	export default {
+		computed: {
+			user: function () {
+				return this.$store.state.Session
+			},
+			classData: function() {
+				return this.$store.state.Class
+			},
+			courseId: function() {
+				return this.$store.state.Class.courseId
+			}
+		}
 	}
 </script>
 
@@ -31,6 +48,24 @@
 		width: 100%;
 		max-width: 700px;
 		margin-top: 20px;
+		padding: 20px;
+
+		.title {
+			font-size: 20px;
+			display: flex;
+
+			&:before {
+				content: '';
+				display: block;
+				margin-right: 5px;
+				width: 10px;
+				height: 10px;
+				background-color: $orange-base;
+				border-radius: 50%;
+				margin-top: 9px;
+				opacity: 0.35;
+			}
+		}
 
 		.class-room__video {
 			display: flex;

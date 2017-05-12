@@ -1,6 +1,7 @@
 let TeamService = require("@modules/team/service")
 let UserService = require("@modules/user/service")
 let CourseService = require("@modules/course/service")
+let ClassService = require("@modules/course/class/service")
 
 class ClassRoomController {
 
@@ -11,10 +12,9 @@ class ClassRoomController {
 	* showCourseRoom (request, reply) {
 		let service = new CourseService()
 		let course = yield service.getSingle( null, request.params.courseId )
-		console.log(course)
 
 		if(course) {
-			course.key = request.query.id
+			course.key = request.params.courseId
 			request['session']  = {
 				course: course
 			}
@@ -22,7 +22,17 @@ class ClassRoomController {
 		reply.view('pages/courseRoom',{})
 	}
 
-	showClassRoom (request, reply) {
+	* showClassRoom (request, reply) {
+		let service = new ClassService()
+		let classData = yield service.getSingle(null, request.params.courseId, request.params.classId)
+
+		if(classData) {
+			classData.key = request.params.classId
+			request['session']  = {
+				classData: classData
+			}
+
+		}
 		reply.view('pages/courseClassRoom',{})
 	}
 
