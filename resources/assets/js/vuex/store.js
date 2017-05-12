@@ -10,6 +10,7 @@ import Class from './modules/class.js'
 import Team from './modules/team.js'
 import Users from './modules/users.js'
 import Courses from './modules/courses.js'
+import Test from './modules/test.js'
 
 // getting a initial state
 let data = window.__INITIAL_STATE__ || {}
@@ -39,7 +40,8 @@ const store = new Vuex.Store({
     Class: Class(data),
     Team: Team(data),
     Users: Users(data),
-    Courses: Courses(data)
+    Courses: Courses(data),
+    Test: Test(data)
     }
 })
 

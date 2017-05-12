@@ -1,33 +1,32 @@
 <template lang="html">
 	<div class="test">
 
-		<div class="test__question">
-			<div class="test__question__description">
-				<h4 class="description__number">1</h4>
-				<p class="description__text">
-					O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde o ano de 1500, quando uma misturou os caracteres de um texto para criar um espécime de livro. Este texto não só sobreviveu 5 séculos.
-				</p>
+		<template v-for="( question, index) in test.questions">
+			<div class="test__question">
+				<div class="test__question__description">
+					<h4 class="description__number">{{ index+1 }}</h4>
+					<p class="description__text">{{ question.description }}</p>
+				</div>
+				<div class="test__question__answer">
+					<label>
+						<input v-model="answer[index]" name="answer" :value="index+'-opt1'" type="radio"></input>
+						 {{ question.opt1 }} 
+					</label>
+					<label>
+						<input v-model="answer[index]" name="answer" :value="index+'-opt2'" type="radio"></input>
+						 {{ question.opt2 }} 
+					</label>
+					<label>
+						<input v-model="answer[index]" name="answer" :value="index+'-opt3'" type="radio"></input>
+						 {{ question.opt3 }} 
+					</label>
+					<label>
+						<input v-model="answer[index]" name="answer" :value="index+'-opt4'" type="radio"></input>
+						 {{ question.opt4 }} 
+					</label>
+				</div>
 			</div>
-			<div class="test__question__answer">
-				<label><input name="answer" value="1" type="radio"></input> resposta 1</label>
-				<label><input name="answer" value="2" type="radio"></input> resposta 2</label>
-				<label><input name="answer" value="3" type="radio"></input> resposta 3</label>
-			</div>
-		</div>
-
-		<div class="test__question">
-			<div class="test__question__description">
-				<h4 class="description__number">2</h4>
-				<p class="description__text">
-					O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde o ano de 1500, quando uma misturou os caracteres de um texto para criar um espécime de livro. Este texto não só sobreviveu 5 séculos.
-				</p>
-			</div>
-			<div class="test__question__answer">
-				<label><input name="answer" value="1" type="radio"></input> resposta 1</label>
-				<label><input name="answer" value="2" type="radio"></input> resposta 2</label>
-				<label><input name="answer" value="3" type="radio"></input> resposta 3</label>
-			</div>
-		</div>
+		</template>
 
 		<div class="test__controller">
 			<button class="btn btn--back">Abandonar teste</button>
@@ -38,7 +37,19 @@
 <script>
 	import growl from "growl-alert"
 	export default {
-
+		data() {
+			return {
+				answer: []
+			}
+		},
+		computed: {
+			user: function () {
+				return this.$store.state.Session
+			},
+			test: function() {
+				return this.$store.state.Test
+			}
+		}
 	}
 </script>
 

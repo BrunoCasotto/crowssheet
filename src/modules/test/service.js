@@ -20,6 +20,10 @@ class  TestService extends firebase{
 			`courses/${courseKey}/classes/${classKey}/test`
 		)
 	}
+
+	getSingle( courseKey, classKey ) {
+		return this.core.getSingle(`courses/${courseKey}/classes/${classKey}/test`, '')
+	}
 }
 
 module.exports = TestService

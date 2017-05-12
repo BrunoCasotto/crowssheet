@@ -28,15 +28,27 @@ class ClassRoomController {
 
 		if(classData) {
 			classData.key = request.params.classId
+			classData.courseId = request.params.courseId
 			request['session']  = {
 				classData: classData
 			}
-
 		}
 		reply.view('pages/courseClassRoom',{})
 	}
 
-	showTestRoom (request, reply) {
+	* showTestRoom (request, reply) {
+		let TestService = require("@modules/test/service")
+		let service = new TestService()
+		let test = yield service.getSingle(request.params.courseId, request.params.classId)
+		if(test) {
+			if(test.questions) {
+				test.questions = JSON.parse(test.questions)
+			}
+
+			request['session']  = {
+				test: test
+			}
+		}
 		reply.view('pages/testRoom',{})
 	}
 

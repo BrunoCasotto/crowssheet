@@ -15,7 +15,7 @@
 			<a v-if="classData.file" :href="classData.file"> Download do conteúdo da disciplina </a>
 		</div>
 		<div class="class-room__controller">
-			<a href="/classroom/course.key/aula.key/test.key" class="btn btn-default btn-test">Realizar a prova</a>
+			<a :href="'/classroom/test/'+courseId+'/'+classData.key" class="btn btn-default btn-test">Realizar a prova</a>
 		</div>
 
 	</div>
