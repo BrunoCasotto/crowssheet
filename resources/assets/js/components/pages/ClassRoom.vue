@@ -1,28 +1,42 @@
 <template lang="html">
-	<div class="course-list">
-		<div class="list">
+<div class="class-room">
+
+	<select class="form-control" v-model="teamSelected">
+		<option disabled value="selecione">Selecione um grupo</option>
+		 <option v-for="team in teams" v-bind:value="team.key">
+			{{ team.name }}
+		</option>
+	</select>
+
+
+	<div v-if="courses.length > 0" class="list">
 			<div v-for="course in courses" class="list__item">
 				<div class="item">
-					<h4 class="item-title" >{{ course.title }}</h4>
+					<a class="item-title" :href="'/classroom/'+course.key">
+						<h4>{{ course.title }}</h4>
+					</a>
 					<p class="item-description" v-html="course.description"></p>
-				</div>
-				<div class="controller">
-					<a href="/classroom/course.key" class="btn btn-default btn-update">Ver aulas</a>
 				</div>
 			</div>
 		</div>
-	</div>
+		<div v-else>
+			<p>Nenhum curso para exibir.</p>
+		</div>
+
+
+</div>
 </template>
 <script>
 	import CourseService from '_service/course'
+	import ClassRoomService from '_service/classRoom'
 	import growl from "growl-alert"
-	import ClassModal from '_common/components/modal/ClassModal.vue'
 
 	export default {
-		name: 'course-list',
 		data: ()=> {
 			return {
-				courses: []
+				courses: [],
+				teams: [],
+				teamSelected: 'selecione'
 			}
 		},
 		computed: {
@@ -31,15 +45,28 @@
 			}
 		},
 		mounted (){
-			this.fetchCourses()
-		},
-		components: {
-			ClassModal
+			this.fetchTeams()
 		},
 		methods: {
-			fetchCourses() {
+			fetchTeams(){
 				this.$store.dispatch('toggleLoader', true)
-				CourseService.getAll(this.user.uid)
+				ClassRoomService
+				.getUserTeams(this.user.uid)
+				.then(response => {
+					this.$store.dispatch('toggleLoader', false)
+					this.teams = response.data
+				})
+				.catch(error => {
+					this.$store.dispatch('toggleLoader', false)
+					growl.error('Ocorreu algum erro') 
+				})
+			}
+		},
+		watch: {
+			teamSelected: function(){
+				this.$store.dispatch('toggleLoader', true)
+				ClassRoomService
+				.getTeamCourses(this.teamSelected)
 				.then(response => {
 					this.$store.dispatch('toggleLoader', false)
 					this.courses = response.data
@@ -48,97 +75,48 @@
 					this.$store.dispatch('toggleLoader', false)
 					growl.error('Ocorreu algum erro') 
 				})
-			},
-			deleteCourse( id ) {
-				this.$store.dispatch('toggleLoader', true)
-				CourseService.delete( this.user.uid, id )
-				.then(response => {
-					if(response.status) {
-						this.$store.dispatch('toggleLoader', false)
-						growl.success('Item descartado.')
-						this.fetchCourses()
-					} else {
-						this.fetchCourses()
-						growl.warning('Tente novamente') 
-					}
-				})
-				.catch(error => {
-					this.$store.dispatch('toggleLoader', false)
-					growl.error('Ocorreu algum erro') 
-				})
-			},
-			updateCourse(key) {
-				this.courses.forEach((item)=>{
-					if(item.key == key) {
-						this.$store.dispatch('toggleModal', {
-							type: 'course-form',
-							active: true,
-							data: item
-						})
-					}
-				})
 			}
-		},
+		}
 	}
 </script>
 
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
-	.course-list {
-		width: 100%;
-		max-width: 700px;
-		margin: 20px;
+	@import "~_config/_commons.scss";
+	.class-room {
+		max-width: 500px;
+		padding: 20px;
 
-		.list__item {
-			display: flex;
-			padding: 5px 20px;
-			height: 100px;
-			margin: 5px auto;
-			cursor: pointer;
-			border: solid 1px $color-grey--base;
-			transition: .5s all ease;
-			background-color: white;
+		.list {
+			.list__item {
+				display: flex;
+				padding: 5px 20px;
+				height: 100px;
+				margin: 5px auto;
+				cursor: pointer;
+				border: solid 1px $color-grey--base;
+				transition: .5s all ease;
+				background-color: white;
 
-			&:hover {
-				height: 200px;
-			}
-
-			&:first-child {
-				border-top: solid 1px $color-grey--base;
-			}
-
-			.item {
-				flex: 5;
-				overflow: hidden;
-			}
-
-			.controller {
-				padding: 5px;
-				flex: 1;
-
-				.btn {
-					min-width: 100px;
-					color: white;
-					font-weight: bold;
-					margin-left: auto;
+				&:hover {
+					height: 200px;
 				}
 
-				.btn-update {
-					background-color: $red-base;
+				&:first-child {
+					border-top: solid 1px $color-grey--base;
+				}
 
-					&:hover {
-						background-color: lighten($red-base,15);
+				.item {
+					flex: 5;
+					overflow: hidden;
+
+					.item-title {
+						color: black;
+						font-size: 20px;
 					}
 				}
-
-				.btn-delete {
-					background-color: $black-base;
-					&:hover {
-						background-color: lighten($black-base,15);
-					}
-				}
-
 			}
 		}
+
 	}
 </style>

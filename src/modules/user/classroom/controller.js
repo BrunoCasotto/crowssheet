@@ -1,3 +1,6 @@
+let TeamService = require("@modules/team/service")
+let UserService = require("@modules/user/service")
+let CourseService = require("@modules/course/service")
 
 class ClassRoomController {
 
@@ -15,6 +18,52 @@ class ClassRoomController {
 
 	showTestRoom (request, reply) {
 		reply.view('pages/testRoom')
+	}
+
+	* getUserCourses(request, reply) {
+		let user_service = new UserService()
+		let user = yield user_service.getSingle(request.params.userId)
+
+		if( user.hasOwnProperty("teams") ) {
+			user.teams = JSON.parse(user.teams)
+		} else {
+			reply([])
+		}
+
+		//getting team list
+		let team_service = new TeamService()
+		let teams = []
+
+		for(let i=0; i<user.teams.length; i++) {
+			let team = yield team_service.getSingle( user.teams[i] )
+			team.key = user.teams[i]
+			teams.push( team )
+		}
+
+		reply(teams)
+	}
+
+	* getTeamCourses(request, reply) {
+		let team_service = new TeamService()
+		let team = yield team_service.getSingle( request.params.teamId )
+
+		if( team.hasOwnProperty("courses") ) {
+			team.courses = JSON.parse(team.courses)
+		} else {
+			reply([])
+		}
+
+		//getting course list
+		let course_service = new CourseService()
+
+		let courses = []
+		for(let i=0; i<team.courses.length; i++) {
+			let course = yield course_service.getSingle( null, team.courses[i] )
+			course.key = team.courses[i]
+			courses.push( course )
+		}
+
+		return courses
 	}
 
 }

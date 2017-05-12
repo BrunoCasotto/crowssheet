@@ -5,5 +5,7 @@ module.exports = [
 	{ method: 'GET', path: '/classroom', handler: controller.index },
 	{ method: 'GET', path: '/classroom/{courseId}', handler: controller.showCourseRoom },
 	{ method: 'GET', path: '/classroom/{courseId}/{classId}', handler: controller.showClassRoom },
-	{ method: 'GET', path: '/classroom/{courseId}/{classId}/{testId}', handler: controller.showTestRoom }
+	{ method: 'GET', path: '/classroom/{courseId}/{classId}/{testId}', handler: controller.showTestRoom },
+	{ method: 'GET', path: '/classroom/teams/{userId}', handler: controller.getUserCourses },
+	{ method: 'GET', path: '/classroom/courses/{teamId}', handler: controller.getTeamCourses }
 ]

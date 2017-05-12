@@ -13,16 +13,18 @@
 		<div v-if="insert" class="insert-users">
 			<h4 v-show="!edit" class="title">Lista de usuários</h4>
 			<div class="list">
-				<div v-for="user in users" class="list__item">
-					<i @click="insertUser(user.uid)" class="btn btn-black btn-status">Inserir</i>
-					<div class="item">
-						<div class="description">
-							<!--<img :src="user.photo" alt="" height="50" width="50">-->
-							<h4 class="name" >{{ user.name }}</h4>
+				<template  v-for="user in users">
+					<div v-if="!user.teacher" class="list__item">
+						<i @click="insertUser(user.uid)" class="btn btn-black btn-status">Inserir</i>
+						<div class="item">
+							<div class="description">
+								<!--<img :src="user.photo" alt="" height="50" width="50">-->
+								<h4 class="name" >{{ user.name }}</h4>
+							</div>
+							<p class="email">{{user.email}}</p>
 						</div>
-						<p class="email">{{user.email}}</p>
 					</div>
-				</div>
+				</template>
 			</div>
 		</div>
 		<div v-else class="team-users">
