@@ -11,9 +11,6 @@
 			<input class="form-control" v-model="classData.video">
 		</div>
 
-		<iframe v-show="classData.video" width="420" height="315" :src="classData.video">
-		</iframe>
-
 		<div class="form-group">
 			<label>Descrição</label>
 			<textarea
