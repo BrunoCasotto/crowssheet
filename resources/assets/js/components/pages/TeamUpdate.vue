@@ -119,7 +119,7 @@
 			insertUser( userId ) {
 				this.$store.dispatch('toggleLoader', true)
 				teamService
-				.insertUser(userId, this.team.key )
+				.insertUser( userId, this.team.key )
 				.then(response => {
 					if (response.data.status) {
 						this.$store.dispatch('toggleLoader', false)

@@ -34,17 +34,20 @@ class  TeamService{
 		})
 	}
 
-	update(user, teamId, team) {
-		return this.core.update('teams/', team, teamId)
-		.then((response)=>{
-			return this.core.update( 'users/'+user+'/teams/',team, teamId)
-		})
-		.catch((error)=>{
-			return {
-				status: false,
-				data: error
-			}
-		})
+	update( teamId, team, user=null) {
+		if(user) {
+			return this.core.update('teams/', team, teamId)
+			.then((response)=>{
+				return this.core.update( 'users/'+user+'/teams/',team, teamId)
+			}).catch((error)=>{
+				return {
+					status: false,
+					data: error
+				}
+			})
+		} else {
+			return this.core.update('teams/', team, teamId)
+		}
 	}
 
 	getAll( userId ) {

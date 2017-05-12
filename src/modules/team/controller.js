@@ -105,8 +105,21 @@ class TeamController {
 		} else {
 			team.users.push( request.payload.userId )
 		}
-
 		team.users = JSON.stringify(team.users)
+
+		//update user
+		let userService = new UserService()
+		let user = yield userService.getSingle(request.payload.userId)
+
+		if( user.hasOwnProperty("teams") ) {
+			user.teams = JSON.parse(user.teams)
+			user.teams.push(request.payload.teamId)
+		} else {
+			user['teams'] = [request.payload.teamId]
+		}
+		user.teams = JSON.stringify(user.teams)
+		yield userService.update(request.payload.userId, user)
+
 		return yield service.update( request.payload.teamId, team )
 	}
 
@@ -124,8 +137,19 @@ class TeamController {
 				message: 'O usuário não existe'
 			}
 		}
-
 		team.users = JSON.stringify(team.users)
+
+		//update user
+		let userService = new UserService()
+		let user = yield userService.getSingle(request.payload.userId)
+		user.teams = JSON.parse(user.teams)
+
+		var index = user.teams.indexOf( request.payload.teamId )
+		user.teams.splice(index, 1)
+		user.teams = JSON.stringify(user.teams)
+
+		yield userService.update(request.payload.userId, user)
+
 		return yield service.update( request.payload.teamId, team )
 	}
 
@@ -168,7 +192,7 @@ class TeamController {
 
 	* update(request, reply) {
 		let service = new TeamService()
-		return yield service.update( request.payload.userId, request.payload.teamId, request.payload.team )
+		return yield service.update(  request.payload.teamId, request.payload.team, request.payload.userId )
 	}
 }
 module.exports = TeamController

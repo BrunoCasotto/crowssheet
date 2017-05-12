@@ -53,9 +53,9 @@ new Vue({
         ClassUpdate,
         TeamUpdate
     },
-    mounted() {
-        if(!window.location.pathname) {
-            window.location.href = '/'
+    computed: {
+        user: function () {
+            return this.$store.state.Session
         }
     }
 })

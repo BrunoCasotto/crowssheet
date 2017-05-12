@@ -42,5 +42,9 @@ class UserService  extends firebase {
 			})
 	}
 
+	update(userId, user) {
+		return this.core.update('users/', user, userId)
+	}
+
 }
 module.exports = UserService
