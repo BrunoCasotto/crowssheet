@@ -4,7 +4,10 @@
 		<h4 class="title">{{classData.title}}</h4>
 
 		<div class="class-room__video">
-			<youtube v-if="classData.video.length > 0" :video-id="classData.video"></youtube>
+			<youtube-component 
+				v-if="classData.video.length > 0" 
+				:url="classData.video"
+			></youtube-component>
 			<p v-else>Nenhuma video aula cadastrada</p>
 		</div>
 
@@ -27,6 +30,7 @@
 	import classService from '_service/class'
 	import validator from '_helpers/validator'
 	import TestForm from '_components/includes/form/TestForm.vue'
+	import YoutubeComponent from '_components/includes/video.vue'
 
 	export default {
 		computed: {
@@ -39,6 +43,9 @@
 			courseId: function() {
 				return this.$store.state.Class.courseId
 			}
+		},
+		components:  {
+			YoutubeComponent
 		}
 	}
 </script>

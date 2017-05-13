@@ -17,8 +17,9 @@
 				<input v-show="edit" class="form-control" v-model="classData.video">
 				<h4 v-show="!edit" class="content">{{ classData.video }}</h4>
 
-				<youtube v-if="classData.video.length > 0" :video-id="classData.video"></youtube>
-				<p v-else>Nenhuma video aula cadastrada</p>
+				<youtube-component
+					:url="classData.video"
+				></youtube-component>
 			</div>
 
 			<div class="form-group">
@@ -59,6 +60,7 @@
 	import classService from '_service/class'
 	import validator from '_helpers/validator'
 	import TestForm from '_components/includes/form/TestForm.vue'
+	import YoutubeComponent from '_components/includes/video.vue'
 
 	export default {
 		computed: {
@@ -124,7 +126,8 @@
 			}
 		},
 		components: {
-			TestForm
+			TestForm,
+			YoutubeComponent
 		}
 	}
 </script>
