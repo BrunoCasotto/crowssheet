@@ -1,6 +1,10 @@
 <template>
-	<div v-if="videoId">
-		<youtube :video-id="videoId"></youtube>
+	<div v-if="videoId" class="video">
+		<button v-if="videoIsActive" @click="toggleVideo" class="btn btn-orange">Esconder o video</button>
+		<button v-else @click="toggleVideo" class="btn btn-orange">Exibir o video</button>
+
+		<youtube v-if="videoIsActive" @ready="ready"  :video-id="videoId"></youtube>
+		<div v-if="spinner" class="spinner"></div>
 	</div>
 </template>
 
@@ -10,7 +14,9 @@
 	export default {
 		data() {
 			return {
-				videoId: null
+				videoId: null,
+				videoIsActive: false,
+				spinner: false
 			}
 		},
 		props: {
@@ -31,12 +37,29 @@
 			fetchVideo() {
 				this.videoId = null
 				this.videoId = getIdFromURL(this.url)
-				console.log(this.videoId)
+			},
+			toggleVideo() {
+				this.videoIsActive = !this.videoIsActive
+				if(this.videoIsActive) {
+					this.spinner = true
+				}
+			},
+			ready() {
+				this.spinner = false
 			}
 		}
 	}
 </script>
 
 <style lang="sass">
-	
+	@import "~_config/_vars.scss";
+	@import "~_config/_commons.scss";
+
+	.video {
+		position: relative;
+
+		button {
+			margin: 10px;
+		}
+	}
 </style>

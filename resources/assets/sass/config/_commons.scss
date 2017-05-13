@@ -1,8 +1,13 @@
+	//buttons
 	.btn {
 		color: white;
 		font-weight: bold;
 		margin: 20px 5px 0 5px;
 		min-width: 100px;
+
+		&:active, &:hover {
+			color: white;
+		}
 
 		@media screen and (max-width: $screen-sm) {
 			width: 100%;
@@ -42,6 +47,8 @@
 		}
 	}
 
+	//loaders and spinners
+
 	.loader-overlay {
 		opacity: 0.8;
 		top: 0;
@@ -51,6 +58,26 @@
 		width: 100%;
 		z-index: 10;
 		animation: color 3s infinite alternate ease-in-out;
+	}
+
+	.spinner {
+		border: 8px solid $orange-base;
+		border-right-color: transparent;
+		border-radius: 50%;
+		height: 30px;
+		left: 50%;
+		margin: -23px 0 0 -23px;
+		position: absolute;
+		top: 50%;
+		width: 30px;
+		animation: spinner .7s infinite ease;
+	}
+
+
+	//animations
+	@keyframes spinner {
+		0% { transform:rotate(0deg); }
+		100% { transform:rotate(360deg); }
 	}
 
 
