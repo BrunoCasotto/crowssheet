@@ -41,3 +41,26 @@
 			}
 		}
 	}
+
+	.loader-overlay {
+		opacity: 0.8;
+		top: 0;
+		left: 0;
+		height: 100%;
+		position: fixed;
+		width: 100%;
+		z-index: 10;
+		animation: color 3s infinite alternate ease-in-out;
+	}
+
+
+	@keyframes load {
+		0% { left: 0; height: 30px; width: 15px }
+		50% { height: 8px; width: 40px }
+		100% { left: 235px; height: 30px; width: 15px}
+	}
+
+	@keyframes color {
+		0% { background-color: white; }
+		100% { background-color: gray;}
+	}

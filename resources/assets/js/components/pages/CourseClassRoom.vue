@@ -73,7 +73,7 @@
 
 			iframe {
 				height: 350px;
-    			width: 550px;
+				width: 550px;
 
 				@media screen and(max-width: $screen-sm) {
 					width: 100%;

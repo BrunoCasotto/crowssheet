@@ -1,7 +1,12 @@
 <template lang="html">
 	<div class="test">
-
-		<template v-for="( question, index) in test.questions">
+		<div  v-if="this.blockTest" class="loader-overlay block-page">
+			<p class="text"> Ops, voce ja realizou essa tarefa.
+				Sua nota foi <span>{{ this.score }} </span>
+				<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
+			</p>
+		</div>
+		<template v-else v-for="( question, index) in test.questions">
 			<div class="test__question">
 				<div class="test__question__description">
 					<h4 class="description__number">{{ index+1 }}</h4>
@@ -54,7 +59,7 @@
 		</template>
 
 		<div class="test__controller">
-			<button class="btn btn--back">Abandonar teste</button>
+			<button :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn--back">Abandonar teste</button>
 			<button @click="finalize()" class="btn btn--finish">Finalizar a prova</button>
 		</div>
 	</div>
@@ -66,7 +71,9 @@
 	export default {
 		data() {
 			return {
-				answer: []
+				answer		: [],
+				score		: 0,
+				blockTest	: false
 			}
 		},
 		computed: {
@@ -80,7 +87,22 @@
 				return this.$store.state.Class
 			}
 		},
+		mounted() {
+			this.checkTest()
+		},
 		methods: {
+			checkTest() {
+				let history = JSON.parse(this.test.history)
+
+				if(history.length > 0){
+					history.forEach(data => {
+						if(data.userId == this.user.uid) {
+							this.blockTest 	= true
+							this.score 		= data.score
+						}
+					})
+				}
+			},
 			finalize() {
 				let response = {
 					answers: this.answer,
@@ -100,6 +122,7 @@
 					if (response.data.status) {
 						this.$store.dispatch('toggleLoader', false)
 						growl.success(response.data.message)
+						window.location.reload()
 					} else {
 						this.$store.dispatch('toggleLoader', false)
 						growl.error(response.data.data.message)
@@ -118,10 +141,30 @@
 
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
+	@import "~_config/_commons.scss";
+
 	.test {
 		width: 100%;
 		max-width: 700px;
 		padding: 10px;
+
+		.block-page {
+			opacity: 1;
+
+			.text {
+				text-align: center;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				font-family: helvetica, arial, sans-serif;
+				font-size: 2rem;
+
+				span {
+					color: $red-base;
+				}
+			}
+		}
 
 		.test__question {
 			min-height: 200px;

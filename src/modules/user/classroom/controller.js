@@ -11,11 +11,11 @@ class ClassRoomController {
 	}
 
 	* showCourseRoom (request, reply) {
-		let service = new CourseService()
-		let course = yield service.getSingle( null, request.params.courseId )
+		let service 	= new CourseService()
+		let course 		= yield service.getSingle( null, request.params.courseId )
 
 		if(course) {
-			course.key = request.params.courseId
+			course.key 			= request.params.courseId
 			request['session']  = {
 				course: course
 			}
@@ -24,12 +24,12 @@ class ClassRoomController {
 	}
 
 	* showClassRoom (request, reply) {
-		let service = new ClassService()
-		let classData = yield service.getSingle(null, request.params.courseId, request.params.classId)
+		let service 	= new ClassService()
+		let classData 	= yield service.getSingle(null, request.params.courseId, request.params.classId)
 
 		if(classData) {
-			classData.key = request.params.classId
-			classData.courseId = request.params.courseId
+			classData.key		= request.params.classId
+			classData.courseId 	= request.params.courseId
 			request['session']  = {
 				classData: classData
 			}
@@ -38,11 +38,11 @@ class ClassRoomController {
 	}
 
 	* showTestRoom (request, reply) {
-		let test_service = new TestService()
-		let test = yield test_service.getSingle(request.params.courseId, request.params.classId)
+		let test_service 	= new TestService()
+		let test 			= yield test_service.getSingle(request.params.courseId, request.params.classId)
 
-		let service = new ClassService()
-		let classData = yield service.getSingle(null, request.params.courseId, request.params.classId)
+		let service 		= new ClassService()
+		let classData 		= yield service.getSingle(null, request.params.courseId, request.params.classId)
 
 		if(test && classData) {
 			if(test.questions) {
