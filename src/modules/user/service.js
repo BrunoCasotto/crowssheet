@@ -16,6 +16,17 @@ class UserService  extends firebase {
 	}
 	
 	create(email, password, name, photo, teacher) {
+
+		//default value to create a user
+		let status = {
+			level: 1,
+			progress: 0,
+			completedTests: "[]",
+			avatar: {
+				gender: 'male',
+				picture: 'http://wpshowdown.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png',
+			}
+		}
 		
 		return this._firebase.auth().createUser({
 				email: email,
@@ -31,7 +42,8 @@ class UserService  extends firebase {
 					'name': name,
 					'photo': photo,
 					'uid': response.uid,
-					'teacher': teacher
+					'teacher': teacher,
+					'status' : status
 				})
 			})
 			.catch((error)=> {

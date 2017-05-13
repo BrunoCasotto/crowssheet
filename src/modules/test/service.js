@@ -8,6 +8,10 @@ class  TestService extends firebase{
 	}
 
 	store ( userKey, courseKey, classKey, testObject) {
+		if(!testObject.history) {
+			testObject.history = "[]"
+		}
+
 		return this.core.storeSet(
 			`courses/${courseKey}/classes/${classKey}`,
 			'test',

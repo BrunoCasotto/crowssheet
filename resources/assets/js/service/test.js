@@ -40,4 +40,17 @@ export default new class TestService {
 		})
 	}
 
+	answer( userId, courseId, classId, answer ) {
+		return Axios({
+			url: '/test/answer',
+			method: 'post',
+			data: {
+				userId : userId,
+				classId : classId,
+				courseId: courseId,
+				answer : answer
+			}
+		})
+	}
+
 }

@@ -4,18 +4,18 @@ class ClassValidator {
 
 	get store() {
 		return  {
-			payload: {
-				courseClass: {
-					title: Joi.string().min(5).required(),
-					description: Joi.string().min(10).required(),
-					content: Joi.string().min(50).required(),
-					image: Joi.string().min(5),
-					file: Joi.string().min(5),
-					video: Joi.string().min(5)
-				},
-				userId: Joi.string().min(5).required(),
-				courseId: Joi.string().min(5).required()
-			}
+			// payload: {
+			// 	courseClass: {
+			// 		title: Joi.string().min(5).required(),
+			// 		description: Joi.string().min(10).required(),
+			// 		content: Joi.string().min(50).required(),
+			// 		image: Joi.string().min(5),
+			// 		file: Joi.string().min(5),
+			// 		video: Joi.string().min(5)
+			// 	},
+			// 	userId: Joi.string().min(5).required(),
+			// 	courseId: Joi.string().min(5).required()
+			// }
 		}
 	}
 

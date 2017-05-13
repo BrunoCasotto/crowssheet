@@ -8,7 +8,7 @@
 		</div>
 
 		<div class="class-room__content">
-			<p v-show="!edit" class="content" v-html="classData.description"></p>
+			<p class="content" v-html="classData.description"></p>
 			<p class="content" v-html="classData.content"></p>
 		</div>
 		<div class="well">

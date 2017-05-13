@@ -1,7 +1,7 @@
 <template lang="html">
 	<div class="course">
 
-		<h4 v-if="classForm" class="title">{{ course.title }}</h4>
+		<h4 class="title">{{ course.title }}</h4>
 		<div class="course-form">
 			<div class="form-group">
 				<h4  class="title">{{ course.title }}</h4>

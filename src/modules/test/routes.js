@@ -26,5 +26,10 @@ module.exports = [
 		config: {
 			validate: validator.deleteTest
 		}
+	},
+	{
+		method: 'POST',
+		path: '/test/answer',
+		handler: controller.answerTest
 	}
 ]

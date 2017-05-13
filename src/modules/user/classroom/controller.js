@@ -2,6 +2,7 @@ let TeamService = require("@modules/team/service")
 let UserService = require("@modules/user/service")
 let CourseService = require("@modules/course/service")
 let ClassService = require("@modules/course/class/service")
+let TestService = require("@modules/test/service")
 
 class ClassRoomController {
 
@@ -37,24 +38,31 @@ class ClassRoomController {
 	}
 
 	* showTestRoom (request, reply) {
-		let TestService = require("@modules/test/service")
-		let service = new TestService()
-		let test = yield service.getSingle(request.params.courseId, request.params.classId)
-		if(test) {
+		let test_service = new TestService()
+		let test = yield test_service.getSingle(request.params.courseId, request.params.classId)
+
+		let service = new ClassService()
+		let classData = yield service.getSingle(null, request.params.courseId, request.params.classId)
+
+		if(test && classData) {
 			if(test.questions) {
 				test.questions = JSON.parse(test.questions)
 			}
 
+			classData.courseId = request.params.courseId
+			classData.key = request.params.classId
 			request['session']  = {
-				test: test
+				test: test,
+				classData: classData
 			}
 		}
+
 		reply.view('pages/testRoom',{})
 	}
 
 	* getUserCourses(request, reply) {
-		let user_service = new UserService()
-		let user = yield user_service.getSingle(request.params.userId)
+		let user_service 	= new UserService()
+		let user 			= yield user_service.getSingle(request.params.userId)
 
 		if( user.hasOwnProperty("teams") ) {
 			user.teams = JSON.parse(user.teams)
@@ -63,8 +71,8 @@ class ClassRoomController {
 		}
 
 		//getting team list
-		let team_service = new TeamService()
-		let teams = []
+		let team_service 	= new TeamService()
+		let teams 			= []
 
 		for(let i=0; i<user.teams.length; i++) {
 			let team = yield team_service.getSingle( user.teams[i] )
@@ -76,8 +84,8 @@ class ClassRoomController {
 	}
 
 	* getTeamCourses(request, reply) {
-		let team_service = new TeamService()
-		let team = yield team_service.getSingle( request.params.teamId )
+		let team_service 	= new TeamService()
+		let team 			= yield team_service.getSingle( request.params.teamId )
 
 		if( team.hasOwnProperty("courses") ) {
 			team.courses = JSON.parse(team.courses)
@@ -86,13 +94,17 @@ class ClassRoomController {
 		}
 
 		//getting course list
-		let course_service = new CourseService()
+		let course_service 	= new CourseService()
+		let courses 		= []
 
-		let courses = []
 		for(let i=0; i<team.courses.length; i++) {
-			let course = yield course_service.getSingle( null, team.courses[i] )
-			course.key = team.courses[i]
-			courses.push( course )
+			console.log(team.courses[i])
+			let course	= yield course_service.getSingle( null, team.courses[i] )
+
+			if(course) {
+				course.key	= team.courses[i]
+				courses.push( course )
+			}
 		}
 
 		return courses

@@ -86,7 +86,6 @@
 				this.$store.dispatch('toggleLoader', true)
 				if(this.validate()) {
 					let key = this.classData.key
-					delete this.classData.key
 					classService
 					.update( this.user.uid, this.courseId, key, this.classData )
 					.then(response => {

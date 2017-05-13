@@ -9,33 +9,60 @@
 				</div>
 				<div class="test__question__answer">
 					<label>
-						<input v-model="answer[index]" name="answer" :value="index+'-opt1'" type="radio"></input>
+						<input 
+							v-model="answer[index]" 
+							:name="index" 
+							:value="index+'-opt1'" 
+							type=
+						"radio"
+						></input>
 						 {{ question.opt1 }} 
 					</label>
+
 					<label>
-						<input v-model="answer[index]" name="answer" :value="index+'-opt2'" type="radio"></input>
+						<input 
+							v-model="answer[index]" 
+							:name="index" 
+							:value="index+'-opt2'" 
+							type="radio"
+						></input>
 						 {{ question.opt2 }} 
 					</label>
+
 					<label>
-						<input v-model="answer[index]" name="answer" :value="index+'-opt3'" type="radio"></input>
+						<input 
+							v-model="answer[index]" 
+							:name="index" 
+							:value="index+'-opt3'" 
+							type="radio"
+						></input>
 						 {{ question.opt3 }} 
 					</label>
+
 					<label>
-						<input v-model="answer[index]" name="answer" :value="index+'-opt4'" type="radio"></input>
+						<input 
+							v-model="answer[index]" 
+							:name="index" 
+							:value="index+'-opt4'" 
+							type="radio"
+						></input>
 						 {{ question.opt4 }} 
 					</label>
+
 				</div>
 			</div>
 		</template>
 
 		<div class="test__controller">
 			<button class="btn btn--back">Abandonar teste</button>
-			<button class="btn btn--finish">Finalizar a prova</button>
+			<button @click="finalize()" class="btn btn--finish">Finalizar a prova</button>
 		</div>
 	</div>
 </template>
 <script>
 	import growl from "growl-alert"
+	import testService from '_service/test'
+
 	export default {
 		data() {
 			return {
@@ -48,6 +75,42 @@
 			},
 			test: function() {
 				return this.$store.state.Test
+			},
+			classData: function() {
+				return this.$store.state.Class
+			}
+		},
+		methods: {
+			finalize() {
+				let response = {
+					answers: this.answer,
+					date: new Date().toLocaleDateString("pt-BR").slice(0,10)
+				}
+
+				this.$store.dispatch('toggleLoader', true)
+				testService
+				.answer(
+					this.user.uid, 
+					this.classData.courseId, 
+					this.classData.key,
+					response
+				)
+				.then(response => {
+
+					if (response.data.status) {
+						this.$store.dispatch('toggleLoader', false)
+						growl.success(response.data.message)
+					} else {
+						this.$store.dispatch('toggleLoader', false)
+						growl.error(response.data.data.message)
+					}
+
+				})
+				.catch(error => {
+					this.$store.dispatch('toggleLoader', false)
+					growl.error(error.data.message)
+				})
+				this.$store.dispatch('toggleLoader', false)
 			}
 		}
 	}
@@ -58,6 +121,7 @@
 	.test {
 		width: 100%;
 		max-width: 700px;
+		padding: 10px;
 
 		.test__question {
 			min-height: 200px;
