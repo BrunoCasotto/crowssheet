@@ -86,6 +86,7 @@
     "vue-slider": "^1.1.1",
     "vue-style-loader": "^1.0.0",
     "vue-template-compiler": "^2.1.10",
+    "vue-youtube-embed": "^2.1.1",
     "vuefire": "^1.1.1",
     "vuex": "^2.1.2",
     "vuex-router-sync": "^2.0.0",

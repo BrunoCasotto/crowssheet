@@ -16,6 +16,9 @@
 				<label class="title">Url do vídeo</label>
 				<input v-show="edit" class="form-control" v-model="classData.video">
 				<h4 v-show="!edit" class="content">{{ classData.video }}</h4>
+
+				<youtube v-if="classData.video.length > 0" :video-id="classData.video"></youtube>
+				<p v-else>Nenhuma video aula cadastrada</p>
 			</div>
 
 			<div class="form-group">

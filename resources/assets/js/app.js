@@ -4,6 +4,8 @@ import "es6-promise"
 // ==== modules important ========
 import Vue from 'vue'
 import store from './vuex/store'
+import VueYouTubeEmbed from 'vue-youtube-embed'
+Vue.use(VueYouTubeEmbed)
 
 //===== components ======
 import Menu from '_common/components/Menu.vue' 

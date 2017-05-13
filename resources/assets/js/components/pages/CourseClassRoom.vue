@@ -4,7 +4,8 @@
 		<h4 class="title">{{classData.title}}</h4>
 
 		<div class="class-room__video">
-			<iframe :src="classData.video"></iframe>
+			<youtube v-if="classData.video.length > 0" :video-id="classData.video"></youtube>
+			<p v-else>Nenhuma video aula cadastrada</p>
 		</div>
 
 		<div class="class-room__content">
