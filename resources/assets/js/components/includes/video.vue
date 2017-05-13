@@ -14,15 +14,15 @@
 	export default {
 		data() {
 			return {
-				videoId: null,
-				videoIsActive: false,
-				spinner: false
+				videoId			: null,
+				videoIsActive	: false,
+				spinner			: false
 			}
 		},
 		props: {
 			url: {
-				type: String,
-				default: ''
+				type	: String,
+				default	: ''
 			}
 		},
 		mounted() {
@@ -35,7 +35,7 @@
 		},
 		methods: {
 			fetchVideo() {
-				this.videoId = null
+				this.videoId = false
 				this.videoId = getIdFromURL(this.url)
 			},
 			toggleVideo() {
@@ -59,7 +59,7 @@
 		position: relative;
 
 		button {
-			margin: 10px;
+			margin-bottom: 10px;
 		}
 	}
 </style>

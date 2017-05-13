@@ -1,13 +1,8 @@
 	//buttons
 	.btn {
-		color: white;
 		font-weight: bold;
 		margin: 20px 5px 0 5px;
 		min-width: 100px;
-
-		&:active, &:hover {
-			color: white;
-		}
 
 		@media screen and (max-width: $screen-sm) {
 			width: 100%;
@@ -15,6 +10,7 @@
 		}
 
 		&-orange {
+			color: white;
 			background-color: $orange-base;
 
 			&:hover {
@@ -24,13 +20,16 @@
 
 		&-black {
 			background-color: $black-base;
+			color: white;
 
-			&:hover {
+			&:hover, &:active {
+				color: white;
 				background-color: lighten( $black-base ,20);
 			}
 		}
 
 		&-green {
+			color: white;
 			background-color: $black-base;
 
 			&:hover {
@@ -39,6 +38,7 @@
 		}
 
 		&-red {
+			color: white;
 			background-color: $red-base;
 
 			&:hover {
