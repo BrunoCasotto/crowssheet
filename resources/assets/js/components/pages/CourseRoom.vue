@@ -1,5 +1,6 @@
 <template lang="html">
 	<div class="course">
+		<a href="/classroom/" class="btn btn-black">Voltar</a>
 
 		<h4 class="title">{{ course.title }}</h4>
 		<div class="course-form">

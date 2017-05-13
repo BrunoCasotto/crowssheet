@@ -1,8 +1,8 @@
 <template lang="html">
 	<div class="class-room">
+		<a :href="'/classroom/'+courseId" class="btn btn-black">Voltar</a>
 
 		<h4 class="title">{{classData.title}}</h4>
-
 		<div class="class-room__video">
 			<youtube-component 
 				v-if="classData.video.length > 0" 
@@ -55,8 +55,7 @@
 	.class-room {
 		width: 100%;
 		max-width: 700px;
-		margin-top: 20px;
-		padding: 20px;
+		padding: 10px;
 
 		.title {
 			font-size: 20px;

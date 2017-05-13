@@ -45,12 +45,12 @@ class ClassRoomController {
 		let classData 		= yield service.getSingle(null, request.params.courseId, request.params.classId)
 
 		if(test && classData) {
-			if(test.questions) {
+			if(typeof(test.questions) == 'string') {
 				test.questions = JSON.parse(test.questions)
 			}
 
-			classData.courseId = request.params.courseId
-			classData.key = request.params.classId
+			classData.courseId 	= request.params.courseId
+			classData.key 		= request.params.classId
 			request['session']  = {
 				test: test,
 				classData: classData
