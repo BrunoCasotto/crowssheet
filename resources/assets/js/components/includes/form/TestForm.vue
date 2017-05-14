@@ -169,9 +169,9 @@
 			},
 			verifyTestExists() {
 				if(this.classData.data.test) {
-					this.test = this.classData.data.test
+					this.test 			= this.classData.data.test
 					this.test.questions = JSON.parse(this.classData.data.test.questions)
-					this.isUpdate = true
+					this.isUpdate 		= true
 				}
 			},
 			incrementQuestion() {

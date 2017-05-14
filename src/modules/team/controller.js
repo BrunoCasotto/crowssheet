@@ -9,17 +9,18 @@ class TeamController {
 	}
 
 	* showUpdate(request, reply) {
-		let service = new TeamService()
-		let team = yield service.getSingle( request.query.id )
-		let teamUsers = JSON.parse(team.users)
+		let service 	= new TeamService()
+		let team 		= yield service.getSingle( request.query.id )
+		let teamUsers 	= JSON.parse(team.users)
 		let teamCourses = JSON.parse(team.courses)
-		team.users = []
-		team.courses = []
+		team.users 		= []
+		team.courses 	= []
 
 		//getting user list
 		let userService = new UserService()
-		let response =  yield userService.getAll( request.query.userId )
-		let users = []
+		let response 	=  yield userService.getAll( request.query.userId )
+		let users 		= []
+
 		if(response) {
 			for(var key in response) {
 				response[key]['key'] = key
@@ -35,9 +36,9 @@ class TeamController {
 		}
 
 		//getting course list
-		let courseService = new CourseService()
-		let courseResponse =  yield courseService.getAll( request.query.userId )
-		let courses = []
+		let courseService 	= new CourseService()
+		let courseResponse 	=  yield courseService.getAll( request.query.userId )
+		let courses 		= []
 
 		if(courseResponse) {
 			for(var key in courseResponse) {
@@ -47,17 +48,18 @@ class TeamController {
 
 			//setting courses on team courses Array
 			if(teamCourses.length > 0) {
-				teamCourses.forEach( userId =>{
-					team.courses.push(courseResponse[userId])
+				teamCourses.forEach( courseId =>{
+					if(courseResponse[courseId] != undefined) {
+						team.courses.push(courseResponse[courseId])
+					}
 				})
 			}
 		}
 
-
 		//colocando o time na sessão
 		if(team) {
 			team.key = request.query.id
-			request['session']  = {
+			request['session'] = {
 				team: team,
 				users: users,
 				courses: courses
