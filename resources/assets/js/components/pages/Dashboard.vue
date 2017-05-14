@@ -29,6 +29,13 @@
 			</div>
 		</div>
 		<!-- end information -->
+
+		<!--User level-->
+		<div class="dashboard-status">
+			<user-level :status="userData.status"></user-level>
+		</div>
+		<!--end User level-->
+
 		</div>
 	</div>
 </template>
@@ -36,13 +43,45 @@
 	import TextBlock from "_common/components/Text-block.vue"
 	import Logo from "_common/components/Logo.vue"
 	import Loader from '_common/components/Loader.vue'
+	import UserLevel from '_components/includes/UserLevel.vue'
+	import userService from '_service/user'
 
 	export default {
 		name: 'Dashboard',
+		data() {
+			return {
+				userData: {}
+			}
+		},
+		computed: {
+			user: function () {
+				return this.$store.state.Session
+			}
+		},
+		mounted() {
+			this.fetchUser()
+		},
+		methods: {
+			fetchUser() {
+				this.$store.dispatch('toggleLoader', true)
+				userService
+				.getSingleComplete( this.user.uid )
+				.then(response => {
+					this.userData = response.data
+					this.$store.dispatch('toggleLoader', false)
+
+				}).catch(error => {
+					this.$store.dispatch('toggleLoader', false)
+					growl.error(error.data.message)
+				})
+				this.$store.dispatch('toggleLoader', false)
+			}
+		},
 		components: {
-			TextBlock
+			TextBlock,
+			UserLevel
 		}
-    }
+	}
 </script>
 
 <style lang="sass" scoped>
@@ -78,6 +117,17 @@
 			width: 100%;
 			height: 400px;
 			margin: 0 auto;
+		}
+
+		.dashboard-status {
+			display: flex;
+			justify-content: flex-start;
+			padding: 10px;
+			margin: 10px 0;
+
+			@media screen and(max-width: $screen-sm) {
+				justify-content: center;
+			}
 		}
 	}
 </style>

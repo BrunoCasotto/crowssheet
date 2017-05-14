@@ -44,5 +44,29 @@ class UserController {
 		return user
 	}
 
+	* getSingleComplete(request, reply) {
+		let service = new UserService()
+		let user = yield service.getSingle(request.params.id)
+
+		if(user.courses) {
+			user.courses = JSON.parse(user.courses)
+		}
+
+		if(user.teams) {
+			user.teams = JSON.parse(user.teams)
+		}
+
+		if(user.status) {
+			if(user.status.completedTests) {
+				user.status.completedTests = JSON.parse(user.status.completedTests)
+			}
+			if(user.status.progress) {
+				user.status.progress = parseFloat(user.status.progress).toFixed(2)
+			}
+		}
+
+		return user
+	}
+
 }
 module.exports = UserController

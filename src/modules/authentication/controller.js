@@ -1,4 +1,5 @@
 let AuthService = require('@modules/authentication/service')
+let UserService = require("@modules/user/service")
 
 class AuthController {
 
@@ -7,7 +8,6 @@ class AuthController {
 	}
 
 	* showDashboard(request, reply) {
-		let service = new AuthService()
 		reply.view('pages/dashboard')
 	}
 
