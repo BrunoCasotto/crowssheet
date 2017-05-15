@@ -131,11 +131,12 @@
 				let average 	= parseFloat(0)
 				let history 	= JSON.parse(this.userData.status.completedTests)
 				let testNumber 	= history.length
-
-				history.forEach( test=> {
-					average 	+= parseFloat(test.score)
-				})
-				average 		= average / testNumber
+				if(history.lenght > 0) {
+					history.forEach( test=> {
+						average 	+= parseFloat(test.score)
+					})
+					average 		= average / testNumber
+				}
 				//setting the block
 				this.blocks.push({
 					color: '#000',
