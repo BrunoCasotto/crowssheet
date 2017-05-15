@@ -46,7 +46,6 @@
 		background-color: $orange-base;
 		border: solid 1px $color-grey--base;
 		padding: 15px;
-		border-radius: 8px;
 		width: 300px;
 		height: 100px;
 

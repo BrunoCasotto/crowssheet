@@ -31,11 +31,13 @@
 		<!-- end information -->
 
 		<!--User level-->
-		<div class="dashboard-status">
+		<div v-if="!user.teacher" class="dashboard-status">
 			<user-level :status="userData.status"></user-level>
 		</div>
-		<!--end User level-->
+		<div class="dashboard-metrics">
 
+		</div>
+		<!--end User level-->
 		</div>
 	</div>
 </template>
@@ -45,12 +47,15 @@
 	import Loader from '_common/components/Loader.vue'
 	import UserLevel from '_components/includes/UserLevel.vue'
 	import userService from '_service/user'
+	import reportService from '_service/report'
+	import growl from "growl-alert"
 
 	export default {
 		name: 'Dashboard',
 		data() {
 			return {
-				userData: {}
+				userData: {},
+				studentsNumber: 0
 			}
 		},
 		computed: {
@@ -60,6 +65,7 @@
 		},
 		mounted() {
 			this.fetchUser()
+			this.getStudentsNumber()
 		},
 		methods: {
 			fetchUser() {
@@ -68,6 +74,20 @@
 				.getSingleComplete( this.user.uid )
 				.then(response => {
 					this.userData = response.data
+					this.$store.dispatch('toggleLoader', false)
+
+				}).catch(error => {
+					this.$store.dispatch('toggleLoader', false)
+					growl.error(error.data.message)
+				})
+				this.$store.dispatch('toggleLoader', false)
+			},
+			getStudentsNumber() {
+				this.$store.dispatch('toggleLoader', true)
+				reportService
+				.getStudents( this.user.uid )
+				.then(response => {
+					this.studentsNumber = response.data.length
 					this.$store.dispatch('toggleLoader', false)
 
 				}).catch(error => {
