@@ -121,7 +121,7 @@
 			insertUser( userId ) {
 				this.$store.dispatch('toggleLoader', true)
 				teamService
-				.insertUser( userId, this.team.key )
+				.insertUser( userId, this.team.key, this.user.uid )
 				.then(response => {
 					if (response.data.status) {
 						this.$store.dispatch('toggleLoader', false)
@@ -142,7 +142,7 @@
 			removeUser( userId ) {
 				this.$store.dispatch('toggleLoader', true)
 				teamService
-				.removeUser(userId, this.team.key )
+				.removeUser(userId, this.team.key, this.user.uid )
 				.then(response => {
 					if (response.data.status) {
 						this.$store.dispatch('toggleLoader', false)
@@ -162,7 +162,7 @@
 			removeCourse( courseId ) {
 				this.$store.dispatch('toggleLoader', true)
 				teamService
-				.removeCourse(courseId, this.team.key )
+				.removeCourse(courseId, this.team.key, this.user.uid )
 				.then(response => {
 					if (response.data.status) {
 						this.$store.dispatch('toggleLoader', false)
@@ -182,7 +182,7 @@
 			insertCourse( courseId ) {
 				this.$store.dispatch('toggleLoader', true)
 				teamService
-				.insertCourse(courseId, this.team.key )
+				.insertCourse(courseId, this.team.key, this.user.uid )
 				.then(response => {
 					if (response.data.status) {
 						this.$store.dispatch('toggleLoader', false)

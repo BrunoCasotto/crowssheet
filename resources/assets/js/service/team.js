@@ -19,46 +19,50 @@ export default new class TeamService {
         })
     }
 
-    insertUser( userId, teamId ) {
+    insertUser( userId, teamId, ownerId ) {
         return Axios({
             url: '/team/insert-user',
             method: 'post',
             data: {
                 teamId: teamId,
-                userId: userId
+                userId: userId,
+                ownerId: ownerId
             }
         })
     }
 
-    removeUser( userId, teamId ) {
+    removeUser( userId, teamId, ownerId ) {
         return Axios({
             url: '/team/remove-user',
             method: 'post',
             data: {
                 teamId: teamId,
-                userId: userId
+                userId: userId,
+                ownerId: ownerId
             }
         })
     }
 
-    insertCourse( courseId, teamId ) {
+    insertCourse( courseId, teamId, ownerId ) {
         return Axios({
             url: '/team/insert-course',
             method: 'post',
             data: {
                 teamId: teamId,
-                courseId: courseId
+                courseId: courseId,
+                ownerId: ownerId
             }
         })
     }
 
-    removeCourse( courseId, teamId ) {
+    removeCourse( courseId, teamId, ownerId ) {
         return Axios({
             url: '/team/remove-course',
             method: 'post',
             data: {
                 teamId: teamId,
-                courseId: courseId
+                courseId: courseId,
+                ownerId: ownerId
             }
         })
     }

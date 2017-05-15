@@ -49,11 +49,21 @@ class UserController {
 		let user = yield service.getSingle(request.params.id)
 
 		if(user.courses) {
-			user.courses = JSON.parse(user.courses)
+			let courses = []
+			for(var key in user.courses) {
+				user.courses[key]['key'] = key
+				courses.push(user.courses[key])
+			}
+			user.courses = courses
 		}
 
 		if(user.teams) {
-			user.teams = JSON.parse(user.teams)
+			let teams = []
+			for(var key in user.teams) {
+				user.teams[key]['key'] = key
+				teams.push(user.teams[key])
+			}
+			user.teams = teams
 		}
 
 		if(user.status) {
