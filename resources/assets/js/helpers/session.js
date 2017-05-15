@@ -16,7 +16,8 @@ exports.saveSession = ( id )=>{
 		user.teacher = result.data.teacher
 		localStorage.setItem('firebase', JSON.stringify(user))
 		return {
-			status: true
+			status: true,
+			data: user
 		}
 	}).catch((error)=>{})
 }

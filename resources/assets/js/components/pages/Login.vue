@@ -62,18 +62,18 @@
 			Loader
 		},
 		methods: {
-			verifyLogin() {
-				console.log(JSON.parse(localStorage.getItem('firebase')))
+			verifyLogin () {
+				console.log( JSON.parse ( localStorage.getItem('firebase') ) )
 			},
 			login () {
-				this.$store.dispatch('toggleLoader', true)
+				this.$store.dispatch ( 'toggleLoader', true )
 				authService
 				.login( this.email, this.password )
-				.then(response => {
+				.then( response => {
 					this.$store.dispatch('toggleLoader', false)
 
 					if(response.status === true) {
-						window.location.assign( '/dashboard' )
+						window.location.assign( `/dashboard?userId=${response.data.uid}` )
 					} else {
 						growl.error(response.data.message)
 					}

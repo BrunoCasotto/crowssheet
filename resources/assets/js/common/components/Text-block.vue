@@ -3,7 +3,7 @@
 	v-bind:style="{ background: color }" 
 	v-bind:class="['block-text', appearance]"
 	>
-		<div class="text">
+		<div v-bind:style="{ color: font }" class="text">
 			<h5>{{title}}</h5>
 			<p>{{text}}</p>
 		</div>
@@ -21,7 +21,8 @@
 			appearance: '',
 			color: '',
 			title: '',
-			text: ''
+			text: '',
+			font: ''
 		}
 	}
 </script>

@@ -1,10 +1,9 @@
 import AuthService from '_service/auth'
 
-
 export default {
     state : {
-		session: {}
-	},
+        session: {}
+    },
     mutations : {
         setSession (state, data) {
             state.session = data

@@ -19,7 +19,7 @@
 	export default {
 		data() {
 			return {
-				progress: "10%"
+				progress:this.status.progress? `${this.status.progress} %` : '0%'
 			}
 		},
 		props: {
@@ -28,11 +28,6 @@
 				default: function() {
 					return {}
 				}
-			}
-		},
-		watch: {
-			'status.progress': function() {
-				this.progress = `${this.status.progress} %`
 			}
 		}
 	}
@@ -76,6 +71,7 @@
 				border-radius: 8px;
 				border: solid 1px $black-base;
 				position: relative;
+				background: white;
 
 				.progress-bar {
 					height: 100%;

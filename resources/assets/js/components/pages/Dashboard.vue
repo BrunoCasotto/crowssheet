@@ -3,30 +3,17 @@
 		<!-- information -->
 		<div class="dashboard-home">
 		<div class="content__info">
-			<div class="block">
-				<text-block 
-				appearance="block--sm"
-				color= "#828c94"
-				:title="'Visualizações'"
-				:text="'100'"
-				></text-block>
-			</div>
-			<div class="block">
-				<text-block 
-				appearance="block--sm"
-				color= "#ff5c46"
-				:title="'Total Alunos'"
-				:text="'60'"
-				></text-block>
-			</div>
-			<div class="block">
-				<text-block 
-				appearance="block--sm"
-				color= "#2c9fc8"
-				:title="'Média turma'"
-				:text="'6.0'"
-				></text-block>
-			</div>
+			<template v-for="block in blocks">
+				<div class="block">
+					<text-block 
+					appearance="block--sm"
+					:color="block.color"
+					:font="block.font"
+					:title="block.title"
+					:text="block.text"
+					></text-block>
+				</div>
+			</template>
 		</div>
 		<!-- end information -->
 
@@ -54,47 +41,119 @@
 		name: 'Dashboard',
 		data() {
 			return {
-				userData: {},
-				studentsNumber: 0
+				blocks: []
 			}
 		},
 		computed: {
 			user: function () {
 				return this.$store.state.Session
+			},
+			userData: function () {
+				return this.$store.state.CompleteUser
 			}
 		},
 		mounted() {
-			this.fetchUser()
-			this.getStudentsNumber()
+			this.fillBlocks()
 		},
 		methods: {
-			fetchUser() {
-				this.$store.dispatch('toggleLoader', true)
-				userService
-				.getSingleComplete( this.user.uid )
-				.then(response => {
-					this.userData = response.data
-					this.$store.dispatch('toggleLoader', false)
-
-				}).catch(error => {
-					this.$store.dispatch('toggleLoader', false)
-					growl.error(error.data.message)
-				})
-				this.$store.dispatch('toggleLoader', false)
+			fillBlocks () {
+				if(this.user.teacher) {
+					this.fillStudents()
+					this.fillCourses()
+					this.fillMycourses()
+				} else {
+					this.fillMyteams()
+					this.fillMyAverage()
+					this.fillMyfinishTests()
+				}
 			},
-			getStudentsNumber() {
-				this.$store.dispatch('toggleLoader', true)
-				reportService
-				.getStudents( this.user.uid )
-				.then(response => {
-					this.studentsNumber = response.data.length
-					this.$store.dispatch('toggleLoader', false)
+			fillStudents() {
+				let students = 0
+				if(this.userData.teams) {
+					for(var key in this.userData.teams) {
+						students += JSON.parse(this.userData.teams[key].users).length
+					}
+				}
 
-				}).catch(error => {
-					this.$store.dispatch('toggleLoader', false)
-					growl.error(error.data.message)
+				//setting the block
+				this.blocks.push({
+					color: '#ff9400',
+					title: 'Numero de alunos',
+					text: students,
+					font: 'black'
 				})
-				this.$store.dispatch('toggleLoader', false)
+			},
+			fillCourses() {
+				let courses = 0
+				if(this.userData.teams) {
+					for(var key in this.userData.teams) {
+						courses += JSON.parse(this.userData.teams[key].courses).length
+					}
+				}
+
+				//setting the block
+				this.blocks.push({
+					color: '#000',
+					title: 'Cursos disponibilizados',
+					text: courses,
+					font: 'white'
+				})
+			},
+			fillMycourses() {
+				let courses = 0
+				if(this.userData.courses) {
+					courses = Object.keys(this.userData.courses).length
+				}
+
+				//setting the block
+				this.blocks.push({
+					color: '#d71e1e',
+					title: 'Total de cursos cadastrados',
+					text: courses,
+					font: 'black'
+				})
+			},
+			fillMyteams() {
+				let teams = 0
+				if(this.userData.teams) {
+					teams = JSON.parse(this.userData.teams).length
+				}
+
+				//setting the block
+				this.blocks.push({
+					color: '#ff9400',
+					title: 'Numero de times que participo',
+					text: teams,
+					font: 'black'
+				})
+			},
+			fillMyAverage () {
+				let average 	= parseFloat(0)
+				let history 	= JSON.parse(this.userData.status.completedTests)
+				let testNumber 	= history.length
+
+				history.forEach( test=> {
+					average 	+= parseFloat(test.score)
+				})
+				average 		= average / testNumber
+				//setting the block
+				this.blocks.push({
+					color: '#000',
+					title: 'Média de notas',
+					text: parseFloat(average).toFixed(2),
+					font: 'white'
+				})
+			},
+			fillMyfinishTests() {
+				let history 	= JSON.parse(this.userData.status.completedTests)
+
+				//setting the block
+				this.blocks.push({
+					color: '#d71e1e',
+					title: 'Total de atividades concluidas',
+					text: history.length,
+					font: 'white'
+				})
 			}
 		},
 		components: {

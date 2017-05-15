@@ -8,7 +8,14 @@ class AuthController {
 	}
 
 	* showDashboard(request, reply) {
-		reply.view('pages/dashboard')
+		let service = new UserService()
+		let user = yield service.getSingle( request.query.userId )
+		if(user) {
+			request['session']  = {
+				completeUser: user
+			}
+		}
+		reply.view('pages/dashboard',{})
 	}
 
 	getToken(request, reply) {
