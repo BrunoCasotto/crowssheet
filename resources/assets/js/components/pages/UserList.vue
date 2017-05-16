@@ -48,7 +48,12 @@
 			'filterName': function() {
 				if(this.filterName.length > 0) {
 					if(this.users) {
-						this.filteredUsers = Searchjs.matchArray(this.users,{name:this.filterName, _text:true})
+						this.filteredUsers = Searchjs.matchArray(this.users,{
+							name:this.filterName,
+							email: this.filterName,
+							 _join: "OR",
+							_text:true,
+						})
 					}
 				} else {
 					this.filteredUsers = this.users
