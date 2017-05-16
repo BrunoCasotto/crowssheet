@@ -61,5 +61,15 @@
 		button {
 			margin-bottom: 10px;
 		}
+
+		iframe {
+			max-width: 100%;
+			margin: 0;
+			padding: 10px;
+			height: 350px;
+			@media screen and(max-width: $screen-md) {
+				height: 300px;
+			}
+		}
 	}
 </style>

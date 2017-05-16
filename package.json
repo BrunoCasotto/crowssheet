@@ -76,6 +76,7 @@
     "path": "^0.12.7",
     "request": "^2.79.0",
     "sass-loader": "^4.0.0",
+    "searchjs": "^0.8.0",
     "style-loader": "^0.13.1",
     "vision": "^4.1.1",
     "vue": "^2.1.10",

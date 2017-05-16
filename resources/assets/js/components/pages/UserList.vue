@@ -1,7 +1,11 @@
 <template lang="html">
 	<div class="user-list">
 		<div class="list">
-			<div v-for="user in users" class="list__item">
+			<div class="form-group">
+					<label>Filtrar por nome</label>
+					<input v-model="filterName" class="form-control">
+				</div>
+			<div v-for="user in filteredUsers" class="list__item">
 				<div class="item">
 					<div class="description">
 						<img :src="user.photo" alt="" height="50" width="50">
@@ -21,12 +25,15 @@
 	import UserService from '_service/user'
 	import growl from "growl-alert"
 	import ClassModal from '_common/components/modal/ClassModal.vue'
+	import Searchjs from '_npm/searchjs'
 
 	export default {
 		name: 'course-list',
 		data: ()=> {
 			return {
-				users: []
+				users: [],
+				filterName: '',
+				filteredUsers: []
 			}
 		},
 		computed: {
@@ -36,6 +43,17 @@
 		},
 		mounted (){
 			this.fetchUsers()
+		},
+		watch: {
+			'filterName': function() {
+				if(this.filterName.length > 0) {
+					if(this.users) {
+						this.filteredUsers = Searchjs.matchArray(this.users,{name:this.filterName, _text:true})
+					}
+				} else {
+					this.filteredUsers = this.users
+				}
+			}
 		},
 		components: {
 			ClassModal
@@ -47,6 +65,7 @@
 				.then(response => {
 					this.$store.dispatch('toggleLoader', false)
 					this.users = response.data
+					this.filteredUsers = response.data
 				})
 				.catch(error => {
 					this.$store.dispatch('toggleLoader', false)
@@ -63,6 +82,8 @@
 		width: 100%;
 		max-width: 500px;
 		margin: 20px;
+		height: calc( 100vh /1.4 );
+		overflow: scroll;
 
 		.list__item {
 			display: flex;

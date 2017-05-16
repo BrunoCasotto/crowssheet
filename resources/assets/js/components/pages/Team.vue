@@ -89,6 +89,7 @@
 	@import "~_config/_commons.scss";
 	.team {
 		max-width: 500px;
+		padding: 10px;
 
 		&-form {
 			padding-top: 20px;

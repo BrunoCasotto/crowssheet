@@ -1,5 +1,5 @@
 <template lang="html">
-   	<div class="team-form">
+	<div class="team-form">
 		<div class="team-form__content">
 			<form v-on:submit.prevent>
 				<label>Nome da equipe</label>
