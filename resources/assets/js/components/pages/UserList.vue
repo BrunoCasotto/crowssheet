@@ -2,9 +2,9 @@
 	<div class="user-list">
 		<div class="list">
 			<div class="form-group">
-					<label>Filtrar por nome</label>
-					<input v-model="filterName" class="form-control">
-				</div>
+				<label>Filtrar por nome</label>
+				<input v-model="filterName" class="form-control">
+			</div>
 			<div v-for="user in filteredUsers" class="list__item">
 				<div class="item">
 					<div class="description">

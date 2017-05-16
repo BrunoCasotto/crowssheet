@@ -3,22 +3,23 @@
 		<div class="form-group">
 			<input v-if="edit" class="form-control" v-model="team.name">
 			<h4 v-else class="title">{{ team.name }}</h4>
-
 			<button v-if="edit" @click="update" class="btn btn-black btn-save">salvar</button>
 			<i v-else @click="toggleEdit" class="fa fa-pencil"></i>
-
 		</div>
-
+		<!-- filter -->
+		<div class="form">
+			<label>Filtrar</label>
+			<input v-model="filterUser" class="form-control">
+		</div>
 		<!-- users list and form to insert users-->
 		<div v-if="insert" class="insert-users">
-			<h4 v-show="!edit" class="title">Lista de usuários</h4>
+			<h4 class="title">Lista de usuários</h4>
 			<div class="list">
-				<template  v-for="user in users">
+				<template  v-for="user in filteredUsers">
 					<div v-if="!user.teacher" class="list__item">
 						<i @click="insertUser(user.uid)" class="btn btn-black btn-status">Inserir</i>
 						<div class="item">
 							<div class="description">
-								<!--<img :src="user.photo" alt="" height="50" width="50">-->
 								<h4 class="name" >{{ user.name }}</h4>
 							</div>
 							<p class="email">{{user.email}}</p>
@@ -28,14 +29,14 @@
 			</div>
 		</div>
 		<div v-else class="team-users">
-			<h4 v-show="!edit" class="title">Lista de usuários do time</h4>
+
+			<h4 class="title">Lista de usuários do time</h4>
 			<div v-if="team.users.length > 0" class="list">
-				<div v-for="user in team.users" class="list__item">
+				<div v-for="user in filteredTeamUsers" class="list__item">
 					<i @click="removeUser(user.uid)" class="fa fa-trash btn-remove"></i>
 					<i class="btn btn-black btn-status">Ver status</i>
 					<div class="item">
 						<div class="description">
-							<!--<img :src="user.photo" alt="" height="50" width="50">-->
 							<h4 class="name" >{{ user.name }}</h4>
 						</div>
 						<p class="email">{{user.email}}</p>
@@ -48,14 +49,17 @@
 		<i v-if="insert" @click="toggleInsert" class="btn btn-orange">voltar</i>
 		<i  v-else @click="toggleInsert" class="btn btn-red">Inserir usuário</i>
 	<!-- End list and insert users-->
-
 	<div class="line"></div>
-
+	<!-- filter -->
+	<div class="form">
+		<label>Filtrar</label>
+		<input v-model="filterCourse" class="form-control">
+	</div>
 	<!-- List course and insert -->
 		<div v-if="insert_courses" class="insert-courses">
 			<h4 class="title">Lista de cursos</h4>
 			<div class="list">
-				<div v-for="course in courses" class="list__item">
+				<div v-for="course in filteredCourses" class="list__item">
 					<i @click="insertCourse(course.key)" class="btn btn-black btn-status">Inserir</i>
 					<div class="item">
 						<div class="description">
@@ -70,7 +74,7 @@
 		<div v-else class="team-courses">
 			<h4 class="title">Lista de cursos do time</h4>
 			<div v-if="team.courses.length > 0" class="list">
-				<div v-for="course in team.courses" class="list__item">
+				<div v-for="course in filteredTeamCourses" class="list__item">
 					<i @click="removeCourse(course.key)" class="fa fa-trash btn-remove"></i>
 					<div class="item">
 						<div class="description">
@@ -93,15 +97,28 @@
 	import growl from "growl-alert"
 	import TeamList from '_components/includes/list/TeamList.vue'
 	import teamService from '_service/team'
+	import Searchjs from '_npm/searchjs'
 
 	export default {
 		data() {
 			return {
-				edit: false,
-				insert: false,
-				insert_courses: false,
-				teamUsers: []
+				edit				: false,
+				insert				: false,
+				insert_courses		: false,
+				teamUsers			: [],
+				filterCourse		: '',
+				filterUser			: '',
+				filteredUsers		: [],
+				filteredTeamUsers	: [],
+				filteredCourses		: [],
+				filteredTeamCourses : []
 			}
+		},
+		mounted() {
+			this.filteredTeamUsers = this.team.users
+			this.filteredUsers = this.users
+			this.filteredCourses = this.courses
+			this.filteredTeamCourses = this.team.courses
 		},
 		computed: {
 			user: function () {
@@ -115,6 +132,30 @@
 			},
 			courses: function () {
 				return this.$store.state.Courses
+			}
+		},
+		watch: {
+			'filterCourse': function() {
+				if(this.filterCourse.length > 0) {
+					this.goFilterCourse()
+				} else {
+					if(this.insert_courses) {
+						this.filteredCourses = this.courses
+					} else {
+						this.filteredTeamCourses = this.team.courses
+					}
+				}
+			},
+			'filterUser': function() {
+				if(this.filterUser.length > 0) {
+					this.goFilterUser()
+				} else {
+					if(this.insert) {
+						this.filteredUsers = this.users
+					} else {
+						this.filteredTeamUsers = this.team.users
+					}
+				}
 			}
 		},
 		methods: {
@@ -228,6 +269,40 @@
 			},
 			toggleEdit() {
 				this.edit = !this.edit
+			},
+			goFilterCourse() {
+				if(this.insert_courses) {
+					this.filteredCourses = Searchjs
+					.matchArray(this.courses,{
+						title:this.filterCourse,
+						_text:true
+					})
+				} else {
+					this.filteredTeamCourses = Searchjs
+					.matchArray(this.team.courses,{
+						title:this.filterCourse,
+						_text:true
+					})
+				}
+			},
+			goFilterUser() {
+				if(this.insert) {
+					this.filteredUsers = Searchjs
+					.matchArray(this.users,{
+						name:this.filterUser,
+						email: this.filterUser,
+							_join: "OR",
+						_text:true,
+					})
+				} else {
+					this.filteredTeamUsers = Searchjs
+					.matchArray(this.team.users,{
+						name:this.filterUser,
+						email: this.filterUser,
+							_join: "OR",
+						_text:true,
+					})
+				}
 			}
 		}
 	}
@@ -271,6 +346,13 @@
 				margin-top: 9px;
 				opacity: 0.35;
 			}
+		}
+
+		.list {
+			max-height: 350px;
+			overflow: scroll;
+			border-top: 1px groove;
+			border-bottom: 1px groove;
 		}
 
 		.team-users, .insert-users, .insert-courses, .team-courses {
