@@ -11,7 +11,7 @@ class CourseService extends firebase{
 		return this.core.store('/courses/'+courseId+'/classes/', courseClass)
 	}
 
-	delete( user, courseId, id ) {
+	delete( courseId, id ) {
 		return this.core.delete( '/courses/'+courseId+'/classes/', id )
 	}
 

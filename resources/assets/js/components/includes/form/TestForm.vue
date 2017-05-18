@@ -71,14 +71,16 @@
 			<button v-if="isUpdate" @click="update" class="btn btn-default btn-orange">Atualizar</button>
 			<button v-else @click="save" class="btn btn-default btn-green">Salvar</button>
 			<button @click="incrementQuestion" class="btn btn-default btn-black">+ Questão</button>
-			<button v-if="isUpdate" @click="deleteTest" class="btn btn-default btn-red">Deletar teste</button>
+			<button v-if="isUpdate" @click="callConfirmation" class="btn btn-default btn-red">Deletar teste</button>
 		</div>
+		<confirmation :callback="deleteTest" message="Deseja remover esse teste ?"></confirmation>
 	</form>
 </template>
 <script>
 	import growl from "growl-alert"
 	import validator from '_helpers/validator'
 	import testService from '_service/test'
+	import Confirmation from '_common/components/modal/Confirmation.vue'
 
 	export default {
 		data() {
@@ -101,6 +103,9 @@
 			this.verifyTestExists()
 		},
 		methods: {
+			callConfirmation () {
+				this.$store.dispatch('toggleConfirm', true)
+			},
 			save() {
 				if(this.validate()) {
 					this.$store.dispatch('toggleLoader', true)
@@ -229,6 +234,9 @@
 					return false
 				}
 			}
+		},
+		components: {
+			Confirmation
 		}
 	}
 </script>

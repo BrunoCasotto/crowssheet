@@ -14,29 +14,13 @@ export default new class ClassService {
 		})
 	}
 
-    getAll( userId ) {
-		return Axios({
-            url: '/course/all?userId='+userId,
-            method: 'get',
-            data: {}
-        })
-	}
-
-    getSingle( userId, id ) {
+    delete( courseId, id ) {
         return Axios({
-            url: `/course?userId=${userId}&id=${id}`,
-            method: 'get',
-            data: {}
-        })
-	}
-
-    delete( userId, id ) {
-		return Axios({
-            url: '/course/delete',
+            url: '/class/delete',
             method: 'post',
             data: {
                 id: id,
-                userId: userId
+                courseId: courseId
             }
         })
 	}

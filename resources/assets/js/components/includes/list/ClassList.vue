@@ -11,14 +11,25 @@
 					<p class="item-description" v-html="classData.description"></p>
 				</div>
 				<div class="controller">
-					<i @click="delete( classData.key )" class="fa fa-trash icon-delete"></i>
+					<span @click="callConfirmation( classData.key )" class="fa fa-trash icon-delete"></span>
 				</div>
 			</div>
 		</div>
+		<confirmation :callback="deleteClass" message="Deseja remover essa aula ?"></confirmation>
 	</div>
 </template>
 <script>
+	import classService from '_service/class'
+	import growl from "growl-alert"
+	import Confirmation from '_common/components/modal/Confirmation.vue'
+
 	export default {
+		data () {
+			return {
+				confirm: true,
+				key: ''
+			}
+		},
 		props: {
 			classes: {
 				type: Array,
@@ -32,6 +43,35 @@
 			course: function() {
 				return this.$store.state.Course
 			}
+		},
+		methods: {
+			deleteClass() {
+				this.$store.dispatch('toggleLoader', true)
+				 classService
+				.delete( this.course.key, this.key )
+				.then(response => {
+					if (response.data.status) {
+						this.$store.dispatch('toggleLoader', false)
+						growl.success('Removido')
+						window.location.reload()
+					} else {
+						this.$store.dispatch('toggleLoader', false)
+						growl.error(response.data.data.message)
+					}
+				})
+				.catch (error => {
+					this.$store.dispatch('toggleLoader', false)
+					growl.error(error.data.message)
+				})
+				this.$store.dispatch('toggleLoader', false)
+			},
+			callConfirmation ( key ) {
+				this.key = key
+				this.$store.dispatch('toggleConfirm', true)
+			}
+		},
+		components: {
+			Confirmation
 		}
 	}
 </script>

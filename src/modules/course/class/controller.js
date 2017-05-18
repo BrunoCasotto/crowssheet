@@ -32,7 +32,6 @@ class ClassController {
 	* delete(request, reply) {
 		let service = new ClassService()
 		let response = yield service.delete( 
-			request.payload.userId,
 			request.payload.courseId,
 			request.payload.id
 		)

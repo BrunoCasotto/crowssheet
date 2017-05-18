@@ -23,7 +23,6 @@ class ClassValidator {
 		return  {
 			payload: {
 				id: Joi.string().min(5).required(),
-				userId: Joi.string().min(5).required(),
 				courseId: Joi.string().min(5).required()
 			}
 		}

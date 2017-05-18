@@ -10,7 +10,7 @@
 					<p class="item-description" v-html="course.description"></p>
 				</div>
 				<div class="controller">
-					<i class="btn btn-default btn-delete" @click="deleteCourse( course.key )">Deletar</i>
+					<i class="btn btn-default btn-delete" @click="callConfirmation( course.key )">Deletar</i>
 				</div>
 			</div>
 		</div>
@@ -18,18 +18,21 @@
 			<p>Nenhum curso cadastrado.</p>
 			<a href="/course/form" class="btn btn-default btn-orange">Ir para formulário</a>
 		</div>
+		<confirmation :callback="deleteCourse" message="Deseja remover esse curso ?"></confirmation>
 	</div>
 </template>
 <script>
 	import CourseService from '_service/course'
 	import growl from "growl-alert"
 	import ClassModal from '_common/components/modal/ClassModal.vue'
+	import Confirmation from '_common/components/modal/Confirmation.vue'
 
 	export default {
 		name: 'course-list',
 		data: ()=> {
 			return {
-				courses: []
+				courses: [],
+				key: ''
 			}
 		},
 		computed: {
@@ -41,7 +44,8 @@
 			this.fetchCourses()
 		},
 		components: {
-			ClassModal
+			ClassModal,
+			Confirmation
 		},
 		methods: {
 			fetchCourses() {
@@ -56,9 +60,9 @@
 					growl.error('Ocorreu algum erro') 
 				})
 			},
-			deleteCourse( id ) {
+			deleteCourse() {
 				this.$store.dispatch('toggleLoader', true)
-				CourseService.delete( this.user.uid, id )
+				CourseService.delete( this.user.uid, this.key )
 				.then(response => {
 					if(response.status) {
 						this.$store.dispatch('toggleLoader', false)
@@ -84,6 +88,10 @@
 						})
 					}
 				})
+			},
+			callConfirmation ( key ) {
+				this.key = key
+				this.$store.dispatch('toggleConfirm', true)
 			}
 		}
 	}
