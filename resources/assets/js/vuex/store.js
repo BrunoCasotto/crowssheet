@@ -12,7 +12,7 @@ import Users from './modules/users.js'
 import Courses from './modules/courses.js'
 import Test from './modules/test.js'
 import CompleteUser from './modules/completeUser.js'
-import MenuMobile from './modules/MenuMobile.js'
+import MenuMobile from './modules/menuMobile.js'
 
 // getting a initial state
 let data = window.__INITIAL_STATE__ || {}
