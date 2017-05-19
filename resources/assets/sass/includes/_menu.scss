@@ -1,10 +1,21 @@
 @import "~_config/_vars.scss";
 
 .menu {
-	width: 100%;
+	width: 250px;
 	height: 100%;
 	border-right: solid 0.5px black;
 	background-image: linear-gradient(to bottom, white, $orange-base);
+
+	@media screen and(max-width: $screen-sm) {
+		display: none;
+	}
+
+	&--active {
+		display: block;
+		position: absolute;
+		z-index: 90;
+		box-shadow: 3px -5px 14px -4px;
+	}
 
 	.menu__logo {
 		padding: 10px;

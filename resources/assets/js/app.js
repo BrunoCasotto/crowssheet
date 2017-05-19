@@ -11,6 +11,7 @@ Vue.use(VueYouTubeEmbed)
 import Menu from '_common/components/Menu.vue' 
 import Logo from '_common/components/Logo.vue' 
 import Modal from '_common/components/modal/Base.vue'
+import MenuMobile from '_common/components/MenuMobile.vue'
 import Account from '_common/components/Account.vue'
 import Loader from '_common/components/Loader.vue'
 
@@ -53,11 +54,15 @@ new Vue({
         TestRoom,
         CourseUpdate,
         ClassUpdate,
-        TeamUpdate
+        TeamUpdate,
+        MenuMobile
     },
     computed: {
         user: function () {
             return this.$store.state.Session
+        },
+        menuActive: function() {
+            return this.$store.state.MenuMobile.state
         }
     }
 })

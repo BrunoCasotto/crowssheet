@@ -4,11 +4,7 @@
 	display:flex;
 
 	.base-page__menu {
-		width: 250px;
-
-		@media screen and(max-width: $screen-sm) {
-			display: none;
-		}
+		max-width: 250px;
 	}
 
 	.base-page__content {
