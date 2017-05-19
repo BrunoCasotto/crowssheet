@@ -51,7 +51,7 @@
 	}
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 	@import "~_config/_vars.scss";
 	@import "~_config/_commons.scss";
 

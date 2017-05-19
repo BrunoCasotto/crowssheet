@@ -21,7 +21,7 @@
 		<div class="class-room__controller">
 			<a :href="'/classroom/test/'+courseId+'/'+classData.key" class="btn btn-default btn-test">Realizar a prova</a>
 		</div>
-
+		<chat :class-data="classData"></chat>
 	</div>
 </template>
 <script>
@@ -31,6 +31,7 @@
 	import validator from '_helpers/validator'
 	import TestForm from '_components/includes/form/TestForm.vue'
 	import YoutubeComponent from '_components/includes/video.vue'
+	import Chat from '_components/includes/chat.vue'
 
 	export default {
 		computed: {
@@ -45,7 +46,8 @@
 			}
 		},
 		components:  {
-			YoutubeComponent
+			YoutubeComponent,
+			Chat
 		}
 	}
 </script>

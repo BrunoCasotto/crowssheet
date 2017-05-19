@@ -52,6 +52,7 @@
 				<button v-else class="btn btn-default btn-orange" @click="toggleUpdate">Atualizar</button>
 			</div>
 		</div>
+		<chat :class-data="classData"></chat>
 	</div>
 </template>
 <script>
@@ -61,6 +62,7 @@
 	import validator from '_helpers/validator'
 	import TestForm from '_components/includes/form/TestForm.vue'
 	import YoutubeComponent from '_components/includes/video.vue'
+	import Chat from '_components/includes/chat.vue'
 
 	export default {
 		computed: {
@@ -127,7 +129,8 @@
 		},
 		components: {
 			TestForm,
-			YoutubeComponent
+			YoutubeComponent,
+			Chat
 		}
 	}
 </script>

@@ -23,6 +23,11 @@
 		},
 		{
 			method: 'POST', 
+			path: '/class/insert-comment', 
+			handler: controller.insertComment
+		},
+		{
+			method: 'POST', 
 			path: '/class/update', 
 			handler: controller.update,
 			config: {
@@ -49,5 +54,10 @@
 			config: {
 				validate: validator.getAll
 			}
+		},
+		{
+			method: 'GET', 
+			path: '/class/get-comment/{courseId}/{id}/{page}',
+			handler: controller.getAllcomments
 		}
 	]

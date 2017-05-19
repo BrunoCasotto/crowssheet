@@ -19,7 +19,7 @@
 	}
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 	.header {
 		svg {
 			width: 200px;

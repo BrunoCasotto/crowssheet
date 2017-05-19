@@ -73,5 +73,48 @@ class ClassController {
 			request.query.id
 		)
 	}
+
+	* insertComment(request, reply) {
+		let service 	= new ClassService()
+		let comments 	= []
+
+		if(request.payload.courseClass.comments) {
+			comments = JSON.parse(request.payload.courseClass.comments)
+		}
+
+		comments.push(request.payload.comment)
+		request.payload.courseClass.comments = JSON.stringify(comments)
+		reply(yield service.update(
+				null,
+				request.payload.courseId,
+				request.payload.courseClass,
+				request.payload.id
+			)
+		)
+	}
+
+	* getAllcomments(request, reply) {
+		let service 	= new ClassService()
+		let comments 	= []
+		let classData = yield service.getSingle(
+			null,
+			request.params.courseId,
+			request.params.id
+		)
+		let final = true
+		if(classData.comments) {
+			comments = JSON.parse(classData.comments)
+			comments.reverse()
+			if(comments.length > parseInt(request.params.page) + 4) {
+				final = false
+			}
+			comments = comments.slice(request.params.page - 1, parseInt(request.params.page) + 4)
+		}
+
+		reply({
+			comments: comments,
+			final: final
+		})
+	}
 }
 module.exports = ClassController

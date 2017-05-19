@@ -26,7 +26,6 @@ export default new class ClassService {
 	}
 
     update( userId, courseId, id, courseClass ) {
-        console.log(userId, courseId, id, courseClass)
         return Axios({
             url: '/class/update',
             method: 'post',
@@ -34,6 +33,30 @@ export default new class ClassService {
                 userId: userId,
                 courseId: courseId,
                 courseClass: courseClass,
+                id : id
+            }
+        })
+    }
+
+    insertComment( courseId, id, courseClass, comment ) {
+        return Axios({
+            url: '/class/insert-comment',
+            method: 'post',
+            data: {
+                courseId: courseId,
+                courseClass: courseClass,
+                id : id,
+                comment: comment
+            }
+        })
+    }
+
+    getComments (courseId, id, number) {
+        return Axios({
+            url: `/class/get-comment/${courseId}/${id}/${number}`,
+            method: 'get',
+            data: {
+                courseId: courseId,
                 id : id
             }
         })
