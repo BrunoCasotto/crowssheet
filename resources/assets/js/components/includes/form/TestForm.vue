@@ -1,7 +1,10 @@
 <template lang="html">
 	<form v-on:submit.prevent>
 		<h4 class="title">Cadastro de Prova</h4>
-
+		<div class="form-group">
+			<label class="title">Definir data limite</label>
+			<input type="date" v-model="test.schendule" class="form-control">
+		</div>
 		<template v-for="( question, index ) in test.questions">
 			<div class="well question">
 				<i @click="deleteQuestion(index)" class="fa fa-trash remove-button"></i>
@@ -69,7 +72,7 @@
 
 		<div class="form-controller">
 			<button v-if="isUpdate" @click="update" class="btn btn-default btn-orange">Atualizar</button>
-			<button v-else @click="save" class="btn btn-default btn-green">Salvar</button>
+			<button v-else @click="save" class="btn btn-default btn-orange">Salvar</button>
 			<button @click="incrementQuestion" class="btn btn-default btn-black">+ Questão</button>
 			<button v-if="isUpdate" @click="callConfirmation" class="btn btn-default btn-red">Deletar teste</button>
 		</div>
@@ -86,7 +89,8 @@
 		data() {
 			return {
 				test: {
-					questions: []
+					questions: [],
+					schendule: null
 				},
 				isUpdate: false
 			}
@@ -198,24 +202,24 @@
 				if( this.test.questions.length > 0 ) {
 					this.test.questions.forEach( ( question, index )=> {
 						if(!validator.stringValidatorMessage(
-							`A descrição do exercício ${index+1} deve conter no mínimo 10 caracteres.`,
-							5, question.description
+							`A descrição do exercício ${index+1} deve conter no mínimo 5 caracteres.`,
+							4, question.description
 						) ||
 						!validator.stringValidatorMessage(
-							`A questão 1 do exercício ${index+1} deve conter no mínimo 5 caracteres.`,
-							5, question.opt1
+							`A questão 1 do exercício ${index+1} deve conter no mínimo 2 caracteres.`,
+							1, question.opt1
 						) ||
 						!validator.stringValidatorMessage(
-							`A questão 2 do exercício ${index+1} deve conter no mínimo 5 caracteres.`,
-							5, question.opt2
+							`A questão 2 do exercício ${index+1} deve conter no mínimo 2 caracteres.`,
+							1, question.opt2
 						) ||
 						!validator.stringValidatorMessage(
-							`A questão 3 do exercício ${index+1} deve conter no mínimo 5 caracteres.`,
-							5, question.opt3
+							`A questão 3 do exercício ${index+1} deve conter no mínimo 2 caracteres.`,
+							1, question.opt3
 						) ||
 						!validator.stringValidatorMessage(
-							`A questão 4 do exercício ${index+1} deve conter no mínimo 5 caracteres.`,
-							5, question.opt4
+							`A questão 4 do exercício ${index+1} deve conter no mínimo 2 caracteres.`,
+							1, question.opt4
 						) ||
 						!validator.stringValidatorMessage(
 							`A resposta deve ser selecionada no exercício ${index+1}.`,
@@ -252,6 +256,10 @@
 
 		@media screen and(max-width: $screen-md) {
 			margin: 20px;
+		}
+
+		[type="date"] {
+			max-width: 200px;
 		}
 
 		.title {

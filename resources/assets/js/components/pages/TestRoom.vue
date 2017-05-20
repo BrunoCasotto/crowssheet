@@ -1,10 +1,15 @@
 <template lang="html">
 	<div class="test">
-		<div  v-if="this.blockTest" class="loader-overlay block-page">
-			<p class="text"> Ops, voce ja realizou essa tarefa.
+		<div  v-if="this.blockTest || this.blockSchendule" class="loader-overlay block-page">
+
+			<p v-if="this.blockTest" class="text"> Ops, voce ja realizou essa tarefa.
 				Sua nota foi <span>{{ this.score }} </span>
 				<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
 			</p>
+			<p v-else class="text"> Ops, a data limite do teste foi <span>{{ this.test.schendule }} </span>
+				<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
+			</p>
+
 		</div>
 		<template v-else v-for="( question, index) in test.questions">
 			<div class="test__question">
@@ -67,13 +72,15 @@
 <script>
 	import growl from "growl-alert"
 	import testService from '_service/test'
+	import moment from 'moment'
 
 	export default {
 		data() {
 			return {
-				answer		: [],
-				score		: 0,
-				blockTest	: false
+				answer			: [],
+				score			: 0,
+				blockTest		: false,
+				blockSchendule	: false
 			}
 		},
 		computed: {
@@ -102,11 +109,19 @@
 						}
 					})
 				}
+
+				if(this.test.schendule) {
+					let testSchendule = new Date(this.test.schendule)
+					let now = new Date()
+					if(now > testSchendule) {
+						this.blockSchendule = true
+					}
+				}
 			},
 			finalize() {
 				let response = {
 					answers: this.answer,
-					date: new Date().toLocaleDateString("pt-BR").slice(0,10)
+					date: moment()
 				}
 
 				this.$store.dispatch('toggleLoader', true)
