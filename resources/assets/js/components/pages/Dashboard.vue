@@ -2,30 +2,31 @@
    	<div class="dashboard">
 		<!-- information -->
 		<div class="dashboard-home">
-		<div class="content__info">
-			<template v-for="block in blocks">
-				<div class="block">
-					<text-block 
-					appearance="block--sm"
-					:color="block.color"
-					:font="block.font"
-					:title="block.title"
-					:text="block.text"
-					></text-block>
-				</div>
-			</template>
+			<div class="content__info">
+				<template v-for="block in blocks">
+					<div class="block">
+						<text-block
+						appearance="block--sm"
+						:color="block.color"
+						:font="block.font"
+						:title="block.title"
+						:text="block.text"
+						></text-block>
+					</div>
+				</template>
+			</div>
 		</div>
 		<!-- end information -->
 
 		<!--User level-->
 		<div v-if="!user.teacher" class="dashboard-status">
 			<user-level :status="userData.status"></user-level>
+			<achievement-list :achievements="achievements"></achievement-list>
 		</div>
 		<div class="dashboard-metrics">
 
 		</div>
 		<!--end User level-->
-		</div>
 	</div>
 </template>
 <script>
@@ -33,6 +34,7 @@
 	import Logo from "_common/components/Logo.vue"
 	import Loader from '_common/components/Loader.vue'
 	import UserLevel from '_components/includes/UserLevel.vue'
+	import AchievementList from '_components/includes/list/AchievementList.vue'
 	import userService from '_service/user'
 	import reportService from '_service/report'
 	import growl from "growl-alert"
@@ -54,8 +56,15 @@
 		},
 		mounted() {
 			this.fillBlocks()
+			this.filterStats()
 		},
 		methods: {
+			filterStats () {
+				if(this.userData.status.achievements) 
+					this.achievements = JSON.parse(this.userData.status.achievements)
+				else
+					this.achievements = []
+			},
 			fillBlocks () {
 				if(this.user.teacher) {
 					this.fillStudents()
@@ -159,7 +168,8 @@
 		},
 		components: {
 			TextBlock,
-			UserLevel
+			UserLevel,
+			AchievementList
 		}
 	}
 </script>
@@ -195,13 +205,10 @@
 		
 		.dashboard-home {
 			width: 100%;
-			height: 400px;
 			margin: 0 auto;
 		}
 
 		.dashboard-status {
-			display: flex;
-			justify-content: flex-start;
 			padding: 10px;
 			margin: 10px 0;
 

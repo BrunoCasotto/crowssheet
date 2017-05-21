@@ -21,6 +21,7 @@ class UserService  extends firebase {
 		let status = {
 			level: 1,
 			progress: 0,
+			achievements: "[]",
 			completedTests: "[]",
 			avatar: {
 				gender: 'male',

@@ -54,6 +54,7 @@
 
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
+	@import "~_config/_commons.scss";
 	.class-room {
 		width: 100%;
 		max-width: 700px;

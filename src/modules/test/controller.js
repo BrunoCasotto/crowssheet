@@ -61,9 +61,10 @@ class TestController {
 			let achievement_service  = new Achievement()
 			let achievement 		 = yield achievement_service.getRandon( finalScore )
 			user.status.achievements = user.status.achievements ? JSON.parse(user.status.achievements) : []
+
 			//if exists a return
 			if(achievement) {
-				user.status.achievements.push(achievement)
+				user.status.achievements = Helpers.updateStatusAchievement(achievement, user.status.achievements)
 			}
 		}
 
@@ -76,7 +77,7 @@ class TestController {
 		}
 
 		//update object to user stats
-			user.status = Helpers.updateStatusProgress( 
+		user.status = Helpers.updateStatusProgress( 
 			finalScore,
 			classData.test.questions.length,
 			user.status
@@ -90,7 +91,7 @@ class TestController {
 		//update objects
 		classData.test.history.push(historyItem)
 		user.status.completedTests .push(historyUserItem)
-		console.log(user.status)
+
 		// prepare object to save
 		classData.test.questions 	= JSON.stringify(classData.test.questions)
 		classData.test.history 		= JSON.stringify(classData.test.history)
