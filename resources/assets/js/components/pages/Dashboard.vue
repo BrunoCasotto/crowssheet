@@ -131,7 +131,7 @@
 				let average 	= parseFloat(0)
 				let history 	= JSON.parse(this.userData.status.completedTests)
 				let testNumber 	= history.length
-				if(history.lenght > 0) {
+				if(history.length > 0) {
 					history.forEach( test=> {
 						average 	+= parseFloat(test.score)
 					})
