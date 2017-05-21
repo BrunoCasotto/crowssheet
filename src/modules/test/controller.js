@@ -1,7 +1,8 @@
-let TestService = require("@modules/test/service")
-let ClassService = require("@modules/course/class/service")
-let UserService = require("@modules/user/service")
-let Helpers = require("./helpers")
+let TestService 	= require("@modules/test/service")
+let ClassService 	= require("@modules/course/class/service")
+let UserService 	= require("@modules/user/service")
+let Achievement 	= require("@modules/achievement/service")
+let Helpers 		= require("./helpers")
 
 class TestController {
 	
@@ -26,7 +27,6 @@ class TestController {
 		)
 		reply(response)
 	}
-
 
 	//Receive the answers and update user/test history and status
 	* answerTest(request, reply) {
@@ -56,8 +56,18 @@ class TestController {
 		let questionsNumber		= test.questions.length
 		let finalScore			= parseFloat(10/questionsNumber * score).toFixed(2)
 
+		//getting a achievement
+		if ( finalScore >= 5 ) {
+			let achievement_service  = new Achievement()
+			let achievement 		 = yield achievement_service.getRandon( finalScore )
+			user.status.achievements = user.status.achievements ? JSON.parse(user.status.achievements) : []
+			//if exists a return
+			if(achievement) {
+				user.status.achievements.push(achievement)
+			}
+		}
+
 		//create object to test history
-		user.status.completedTests = JSON.parse(user.status.completedTests)
 		let historyItem = {
 			userId		: request.payload.userId,
 			userName	: user.name,
@@ -65,23 +75,27 @@ class TestController {
 			score		: finalScore
 		}
 
-		//update status
-		let newStatus = Helpers.updateStatusProgress( finalScore, classData.test.questions.length, user.status )
-		user.status = newStatus
-
 		//update object to user stats
-		let historyUserItem = historyItem
+			user.status = Helpers.updateStatusProgress( 
+			finalScore,
+			classData.test.questions.length,
+			user.status
+		)
+		user.status.completedTests 	= JSON.parse(user.status.completedTests)
+
+		let historyUserItem 		= historyItem
 		historyUserItem.courseId 	= request.payload.courseId
 		historyUserItem.classId 	= request.payload.classId
 
 		//update objects
 		classData.test.history.push(historyItem)
 		user.status.completedTests .push(historyUserItem)
-
+		console.log(user.status)
 		// prepare object to save
 		classData.test.questions 	= JSON.stringify(classData.test.questions)
-		user.status.completedTests 	= JSON.stringify(user.status.completedTests)
 		classData.test.history 		= JSON.stringify(classData.test.history)
+		user.status.achievements	= JSON.stringify(user.status.achievements)
+		user.status.completedTests 	= JSON.stringify(user.status.completedTests)
 
 		//save in the database
 		user_service.update( request.payload.userId, user )

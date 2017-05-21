@@ -15,4 +15,3 @@ exports.updateStatusProgress = (final_score, questions_number, status)=>{
 
 	return status
 }
-

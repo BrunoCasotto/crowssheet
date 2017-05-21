@@ -111,8 +111,9 @@
 				}
 
 				if(this.test.schendule) {
-					let testSchendule = new Date(this.test.schendule)
-					let now = new Date()
+					let now = moment().format("MM-DD-YYYY")
+					let testSchendule = moment(this.test.schendule).format("MM-DD-YYYY")
+
 					if(now > testSchendule) {
 						this.blockSchendule = true
 					}
