@@ -1,7 +1,6 @@
 <template lang="html">
 	<div class="test">
 		<div  v-if="this.blockTest || this.blockSchendule" class="loader-overlay block-page">
-
 			<p v-if="this.blockTest" class="text"> Ops, voce ja realizou essa tarefa.
 				Sua nota foi <span>{{ this.score }} </span>
 				<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
@@ -9,7 +8,6 @@
 			<p v-else class="text"> Ops, a data limite do teste foi <span>{{ this.test.schendule }} </span>
 				<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
 			</p>
-
 		</div>
 		<template v-else v-for="( question, index) in test.questions">
 			<div class="test__question">
@@ -58,7 +56,6 @@
 						></input>
 						 {{ question.opt4 }} 
 					</label>
-
 				</div>
 			</div>
 		</template>
@@ -67,12 +64,18 @@
 			<button :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn--back">Abandonar teste</button>
 			<button @click="finalize()" class="btn btn--finish">Finalizar a prova</button>
 		</div>
+
+		<!-- user items -->
+		<div id="achievements">
+			<user-items :achievements="achievements"></user-items>
+		</div>
 	</div>
 </template>
 <script>
 	import growl from "growl-alert"
 	import testService from '_service/test'
 	import moment from 'moment'
+	import UserItems from '_components/includes/list/UserItems.vue'
 
 	export default {
 		data() {
@@ -80,7 +83,8 @@
 				answer			: [],
 				score			: 0,
 				blockTest		: false,
-				blockSchendule	: false
+				blockSchendule	: false,
+				achievements	:[]
 			}
 		},
 		computed: {
@@ -92,12 +96,25 @@
 			},
 			classData: function() {
 				return this.$store.state.Class
+			},
+			userData: function () {
+				return this.$store.state.CompleteUser
+			},
+			testItem: function () {
+				return this.$store.state.TestItem
 			}
 		},
 		mounted() {
 			this.checkTest()
+			this.filterStats()
 		},
 		methods: {
+			filterStats () {
+				if(this.userData.status.achievements) 
+					this.achievements = JSON.parse(this.userData.status.achievements)
+				else
+					this.achievements = []
+			},
 			checkTest() {
 				let history = JSON.parse(this.test.history)
 
@@ -131,7 +148,8 @@
 					this.user.uid, 
 					this.classData.courseId, 
 					this.classData.key,
-					response
+					response,
+					this.testItem || null
 				)
 				.then(response => {
 
@@ -151,6 +169,9 @@
 				})
 				this.$store.dispatch('toggleLoader', false)
 			}
+		},
+		components: {
+			UserItems
 		}
 	}
 </script>
@@ -163,6 +184,11 @@
 		width: 100%;
 		max-width: 700px;
 		padding: 10px;
+
+		.message {
+			color: black;
+			font-size: 18px;
+		}
 
 		.block-page {
 			opacity: 1;

@@ -40,7 +40,7 @@ export default new class TestService {
 		})
 	}
 
-	answer( userId, courseId, classId, answer ) {
+	answer( userId, courseId, classId, answer, item ) {
 		return Axios({
 			url: '/test/answer',
 			method: 'post',
@@ -48,7 +48,8 @@ export default new class TestService {
 				userId : userId,
 				classId : classId,
 				courseId: courseId,
-				answer : answer
+				answer : answer,
+				item: item
 			}
 		})
 	}

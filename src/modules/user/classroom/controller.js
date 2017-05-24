@@ -11,8 +11,8 @@ class ClassRoomController {
 	}
 
 	* showCourseRoom (request, reply) {
-		let service 	= new CourseService()
-		let course 		= yield service.getSingle( null, request.params.courseId )
+		let service = new CourseService()
+		let course 	= yield service.getSingle( null, request.params.courseId )
 
 		if(course) {
 			course.key 			= request.params.courseId
@@ -40,7 +40,8 @@ class ClassRoomController {
 	* showTestRoom (request, reply) {
 		let test_service 	= new TestService()
 		let test 			= yield test_service.getSingle(request.params.courseId, request.params.classId)
-
+		let user_service 	= new UserService()
+		let user 			= yield user_service.getSingle(request.query.userId)
 		let service 		= new ClassService()
 		let classData 		= yield service.getSingle(null, request.params.courseId, request.params.classId)
 
@@ -53,7 +54,9 @@ class ClassRoomController {
 			classData.key 		= request.params.classId
 			request['session']  = {
 				test: test,
-				classData: classData
+				classData: classData,
+				completeUser: user,
+				testItem: request.query.item ||  null
 			}
 		}
 

@@ -56,11 +56,24 @@ class TestController {
 		let questionsNumber		= test.questions.length
 		let finalScore			= parseFloat(10/questionsNumber * score).toFixed(2)
 
+		//applying the achievement
+		let achievement_service  = new Achievement()
+		let achievement			 = null
+		user.status.achievements = user.status.achievements ? JSON.parse(user.status.achievements) : []
+
+		if(request.payload.item) {
+			//getting a achievement object
+			achievement = yield achievement_service.getSingle(request.payload.item)
+			if(achievement.type == 'score') {
+				finalScore = Helpers.updateScoreAchievement(achievement, finalScore)
+			}
+			user.status.achievements = Helpers.removeStatusAchievement(request.payload.item, user.status.achievements)
+			console.log(user.status.achievements)
+		}
+
 		//getting a achievement
 		if ( finalScore >= 5 ) {
-			let achievement_service  = new Achievement()
 			let achievement 		 = yield achievement_service.getRandon( finalScore )
-			user.status.achievements = user.status.achievements ? JSON.parse(user.status.achievements) : []
 
 			//if exists a return
 			if(achievement) {
@@ -99,8 +112,8 @@ class TestController {
 		user.status.completedTests 	= JSON.stringify(user.status.completedTests)
 
 		//save in the database
-		user_service.update( request.payload.userId, user )
-		class_service.update( null, request.payload.courseId, classData, request.payload.classId )
+		// user_service.update( request.payload.userId, user )
+		// class_service.update( null, request.payload.courseId, classData, request.payload.classId )
 		
 		return {
 			status: true,

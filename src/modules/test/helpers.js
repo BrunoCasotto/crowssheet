@@ -30,3 +30,38 @@ exports.updateStatusAchievement = (achievement, achievements)=>{
 	achievements.push(achievement)
 	return achievements
 }
+
+exports.removeStatusAchievement = (achievement, achievements)=>{
+
+	for(let i=0; i < achievements.length; i++) {
+		if(achievements[i].key == achievement) {
+			if(parseInt(achievements[i].quantity) > 1) {
+				achievements[i].quantity = parseInt(achievements[i].quantity) - 1
+			} else {
+				achievements.splice(i, 1)
+			}
+		}
+	}
+	return achievements
+
+}
+
+exports.updateScoreAchievement = (achievement, final_score)=>{
+	let score_plus = 0
+	if(achievement.percent) {
+		score_plus = final_score * achievement.percent/100
+	}
+
+	if(achievement.score) {
+		score_plus = achievement.score
+	}
+
+	final_score = parseFloat(final_score) + parseFloat(score_plus)
+	if(final_score > 10) {
+		return 10
+	}
+	return final_score
+}
+
+
+

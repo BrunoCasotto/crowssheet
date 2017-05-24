@@ -19,7 +19,7 @@
 	export default {
 		data() {
 			return {
-				progress:this.status.progress? `${this.status.progress} %` : '0%'
+				progress:this.status.progress? `${this.status.progress}%` : '0%'
 			}
 		},
 		props: {
@@ -89,6 +89,7 @@
 					line-height: 100%;
 					width: 100%;
 					position: absolute;
+					z-index: 1;
 				}
 			}
 		}

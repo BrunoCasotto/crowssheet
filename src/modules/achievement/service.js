@@ -30,5 +30,9 @@ class AchievementService extends firebase{
 			return null
 	}
 
+	getSingle( id ) {
+		return this.core.getSingle('achievements/', id)
+	}
+
 }
 module.exports = AchievementService

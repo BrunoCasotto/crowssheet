@@ -13,6 +13,7 @@ import Courses from './modules/courses.js'
 import Test from './modules/test.js'
 import CompleteUser from './modules/completeUser.js'
 import MenuMobile from './modules/menuMobile.js'
+import TestItem from './modules/testItem.js'
 
 // getting a initial state
 let data = window.__INITIAL_STATE__ || {}
@@ -26,6 +27,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     modules: {
+        MenuMobile: MenuMobile,
         Loader,
         Modal,
         Session: Session(session),
@@ -36,7 +38,7 @@ const store = new Vuex.Store({
         Courses: Courses(data),
         Test: Test(data),
         CompleteUser: CompleteUser(data),
-        MenuMobile: MenuMobile
+        TestItem: TestItem(data)
     }
 })
 
