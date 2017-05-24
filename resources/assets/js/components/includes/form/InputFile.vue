@@ -1,10 +1,7 @@
 <template>
     <div class="well input-file">
-        <img :src="pictureUrl" class="img-thumbnail input-file__img-previous">
-        <button class="btn btn-default btn__save" @click="clear">Remove</button>
         <div class="form-group">
             <label for="exampleInputEmail1">{{title}}</label>
-            <!--<input type="file" name="file" id="input" class="form-control" v-model="file" @change="upload">-->
             <input type="file" name="file" id="input" class="form-control" @change="upload">
         </div>
     </div>
@@ -52,7 +49,7 @@
                     growl.error('ocorreu um erro ao upload')
                 }, () => {
                     this.pictureUrl = uploadTask.snapshot.downloadURL
-                    this.$dispatch('picture-url',this.pictureUrl)
+                    this.$store.dispatch('setFileUrl', this.pictureUrl)
                      growl.success('upload concluido')
                 })
             },

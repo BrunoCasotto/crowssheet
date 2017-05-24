@@ -29,10 +29,7 @@
 			</textarea>
 		</div>
 
-		<div class="form-group well">
-			<label for="exampleInputEmail1">Arquivos para download</label>
-			<input type="file" name="file" id="input-data" class="form-control">
-		</div>
+		<input-file title="Arquivos para download"></input-file>
 
 		<div class="form-controller">
 			<button @click="save" class="btn btn-default btn-salvar">Salvar</button>
@@ -43,6 +40,7 @@
 	import growl from "growl-alert"
 	import classService from '_service/class'
 	import validator from '_helpers/validator'
+	import inputFile from '_components/includes/form/InputFile.vue'
 
 	export default {
 		data: ()=> {
@@ -53,7 +51,7 @@
 					content: "",
 					image: "https://braziljs.org/blog/content/images/2016/04/1436439824nodejs-logo-1.png",
 					video: "",
-					file: "http://fisica.ufpr.br/kurumin/kurumin-light-7.0.iso"
+					file: ""
 				}
 			}
 		},
@@ -63,6 +61,9 @@
 			},
 			course: function() {
 				return this.$store.state.Course
+			},
+			classFile: function() {
+				return this.$store.state.FileUrl.url
 			}
 		},
 		methods: {
@@ -82,6 +83,8 @@
 			},
 			save() {
 				if(this.validate()) {
+					this.classData.file = this.classFile ? this.classFile : null
+
 					this.$store.dispatch('toggleLoader', true)
 					classService.store( this.user.uid, this.course.key, this.classData)
 					.then(response => {
@@ -101,6 +104,9 @@
 					this.$store.dispatch('toggleLoader', false)
 				}
 			}
+		},
+		components: {
+			inputFile
 		}
 	}
 </script>

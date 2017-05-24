@@ -14,6 +14,7 @@ import Test from './modules/test.js'
 import CompleteUser from './modules/completeUser.js'
 import MenuMobile from './modules/menuMobile.js'
 import TestItem from './modules/testItem.js'
+import FileUrl from './modules/fileUrl.js'
 
 // getting a initial state
 let data = window.__INITIAL_STATE__ || {}
@@ -30,6 +31,7 @@ const store = new Vuex.Store({
         MenuMobile: MenuMobile,
         Loader,
         Modal,
+        FileUrl,
         Session: Session(session),
         Course: Course(data),
         Class: Class(data),

@@ -56,7 +56,6 @@
 		},
 		mounted() {
 			this.fillBlocks()
-			this.filterStats()
 		},
 		methods: {
 			filterStats () {
@@ -74,6 +73,7 @@
 					this.fillMyteams()
 					this.fillMyAverage()
 					this.fillMyfinishTests()
+					this.filterStats()
 				}
 			},
 			fillStudents() {
@@ -92,19 +92,28 @@
 					font: 'black'
 				})
 			},
+			removeRepeat( course_list ) {
+				let result = []
+				course_list.forEach((item)=> {
+					if(result.indexOf(item) < 0) {
+						result.push(item)
+					}
+				})
+				return result
+			},
 			fillCourses() {
-				let courses = 0
+				let list = []
 				if(this.userData.teams) {
 					for(var key in this.userData.teams) {
-						courses += JSON.parse(this.userData.teams[key].courses).length
+						list = list.concat( JSON.parse(this.userData.teams[key].courses))
 					}
 				}
-
+				list = this.removeRepeat(list)
 				//setting the block
 				this.blocks.push({
 					color: '#000',
 					title: 'Cursos disponibilizados',
-					text: courses,
+					text: list.length,
 					font: 'white'
 				})
 			},

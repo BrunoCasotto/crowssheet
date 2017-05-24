@@ -16,7 +16,9 @@
 			<p class="content" v-html="classData.content"></p>
 		</div>
 		<div class="well">
-			<a v-if="classData.file" :href="classData.file"> Download do conteúdo da disciplina </a>
+			<a v-if="classData.file" download target="_blank" :href="classData.file"> 
+				Download do conteúdo da disciplina 
+			</a>
 		</div>
 		<div class="class-room__controller">
 			<a v-if="classData.test" :href="'/classroom/test/'+courseId+'/'+classData.key+'?userId='+user.uid" class="btn btn-default btn-test">Realizar a prova</a>
