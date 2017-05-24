@@ -91,7 +91,7 @@
     "vuefire": "^1.1.1",
     "vuex": "^2.1.2",
     "vuex-router-sync": "^2.0.0",
-    "webpack": "^2.2.1",
+    "webpack": "2.2.1",
     "webpack-dev-server": "^2.3.0"
   }
 }
