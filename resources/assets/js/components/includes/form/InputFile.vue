@@ -25,19 +25,7 @@
                 pictureUrl: '/images/default.jpg'
             }
         },
-        mounted () {
-            this.init()
-        },
         methods: {
-            init () {
-                axios.post('/token')
-                    .then(response => {
-                        firebase.initializeApp(response.data)
-                    })
-                    .catch(error => {
-                        growl.error('Ocorreu um erro')
-                    })
-            },
             upload () {
                 let storageRef = firebase.storage().ref()
                 let file = document.getElementById('input').files[0]

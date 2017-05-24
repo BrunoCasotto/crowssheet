@@ -3,12 +3,6 @@
     <div @click="toggle()" class="account" :class="{'account--active' : active }">
         <span class="account__name">{{ active? session.displayName : initials}}</span>
 		<div class="account__items">
-            <div @click="goTo('profile')" class="item">
-                <a class="fa fa-user">Meu Perfil</a>
-            </div>
-            <div @click="goTo('security')" class="item">
-                <a class="fa fa-lock">Segurança</a>
-            </div>
             <div @click="singout" class="item">
                 <a class="fa fa-power-off">Sair</a>
             </div>
@@ -57,8 +51,8 @@
 				})
 			},
             goTo(location) {
-                if(location == 'profile')
-                    window.location.href = '/account/profile'
+                if(location == 'home')
+                    window.location.href = '/'
 
                 if(location == 'security')
                     window.location.href = '/account/security'
@@ -92,7 +86,7 @@
         z-index: 10;
 
         &--active {
-            height: 200px;
+            height: 130px;
             width: 300px;
             border-radius: 8px;
         }
