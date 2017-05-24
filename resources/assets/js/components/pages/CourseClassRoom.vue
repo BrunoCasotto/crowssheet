@@ -19,7 +19,7 @@
 			<a v-if="classData.file" :href="classData.file"> Download do conteúdo da disciplina </a>
 		</div>
 		<div class="class-room__controller">
-			<a :href="'/classroom/test/'+courseId+'/'+classData.key+'?userId='+user.uid" class="btn btn-default btn-test">Realizar a prova</a>
+			<a v-if="classData.test" :href="'/classroom/test/'+courseId+'/'+classData.key+'?userId='+user.uid" class="btn btn-default btn-test">Realizar a prova</a>
 		</div>
 		<chat :class-data="classData"></chat>
 	</div>

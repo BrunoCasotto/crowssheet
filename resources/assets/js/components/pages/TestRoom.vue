@@ -7,6 +7,9 @@
 			</p>
 			<p v-else class="text"> Ops, a data limite do teste foi <span>{{ this.test.schendule }} </span>
 				<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
+				<span v-if="offerItemSchendule"> parece que voce tem um item de dias extras 
+					<button @click="unlockTest(offerItemSchendule)" class="btn btn-black">usar</button>
+				</span>
 			</p>
 		</div>
 		<template v-else v-for="( question, index) in test.questions">
@@ -66,7 +69,7 @@
 		</div>
 
 		<!-- user items -->
-		<div id="achievements">
+		<div v-if="!offerItemSchendule" id="achievements">
 			<user-items :achievements="achievements"></user-items>
 		</div>
 	</div>
@@ -80,11 +83,12 @@
 	export default {
 		data() {
 			return {
-				answer			: [],
-				score			: 0,
-				blockTest		: false,
-				blockSchendule	: false,
-				achievements	:[]
+				answer				: [],
+				score				: 0,
+				blockTest			: false,
+				blockSchendule		: false,
+				achievements		:[],
+				offerItemSchendule	: false
 			}
 		},
 		computed: {
@@ -109,11 +113,31 @@
 			this.filterStats()
 		},
 		methods: {
+			unlockTest ( item ) {
+				let new_date = moment(this.test.schendule).add(item.days, 'days').format("MM-DD-YYYY")
+				let now = moment().format("MM-DD-YYYY")
+
+				if(now <= new_date) {
+					this.blockSchendule = false
+					this.testItem = item
+				} else {
+					growl.warning("Os dias desse item não são suficientes voce tem apenas "+item.days+" dias")
+				}
+			},
 			filterStats () {
 				if(this.userData.status.achievements) 
 					this.achievements = JSON.parse(this.userData.status.achievements)
 				else
 					this.achievements = []
+
+				if(this.blockSchendule) {
+					this.achievements.forEach( result=>{
+						if(result.type == 'date') {
+							this.offerItemSchendule = result
+							return true
+						}
+					})
+				}
 			},
 			checkTest() {
 				let history = JSON.parse(this.test.history)
@@ -142,6 +166,13 @@
 					date: moment()
 				}
 
+				let test_item = null
+				if(this.offerItemSchendule) {
+					test_item = this.offerItemSchendule.key
+				} else if(this.testItem) {
+					test_item = this.testItem
+				}
+				
 				this.$store.dispatch('toggleLoader', true)
 				testService
 				.answer(
@@ -149,7 +180,7 @@
 					this.classData.courseId, 
 					this.classData.key,
 					response,
-					this.testItem || null
+					test_item
 				)
 				.then(response => {
 

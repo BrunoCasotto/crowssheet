@@ -33,7 +33,6 @@
 			store () {
 				if ( this.validate() ) {
 					this.$store.dispatch('toggleLoader', true)
-					console.log(this.team)
 					TeamService
 					.store( this.user.uid , this.team )
 					.then(response => {

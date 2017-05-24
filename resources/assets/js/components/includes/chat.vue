@@ -85,6 +85,7 @@
 							growl.success("Comentário enviado")
 							this.fetchComments()
 							this.comment.text = ''
+							window.location.reload()
 						} else {
 							this.loader = false
 							growl.error(response.data.data.message)

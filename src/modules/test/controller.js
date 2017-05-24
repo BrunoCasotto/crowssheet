@@ -33,12 +33,13 @@ class TestController {
 		let score 				= 0
 		let class_service 		= new ClassService()
 		let classData 			= yield class_service.getSingle(null, request.payload.courseId, request.payload.classId)
-		classData.test.history 	= JSON.parse(classData.test.history)
+		classData.test.history 	= classData.test.history? JSON.parse(classData.test.history) : []
 		//count score
 		let test		= classData.test
-		test.questions	= JSON.parse(test.questions)
+		if(typeof test.questions == 'string') {
+			test.questions	=  JSON.parse(test.questions)
+		}
 		let answer		= []
-
 		request.payload.answer.answers.forEach(result=>{
 			answer.push( result.split('-')[1] )
 		})
@@ -48,7 +49,6 @@ class TestController {
 				score++
 			}
 		}
-
 		//getting user
 		let user_service = new UserService()
 		let user = yield user_service.getSingle(request.payload.userId)
@@ -61,19 +61,20 @@ class TestController {
 		let achievement			 = null
 		user.status.achievements = user.status.achievements ? JSON.parse(user.status.achievements) : []
 
-		if(request.payload.item) {
+		if(request.payload.item && request.payload.item.length > 0) {
 			//getting a achievement object
 			achievement = yield achievement_service.getSingle(request.payload.item)
+
 			if(achievement.type == 'score') {
 				finalScore = Helpers.updateScoreAchievement(achievement, finalScore)
 			}
+
 			user.status.achievements = Helpers.removeStatusAchievement(request.payload.item, user.status.achievements)
-			console.log(user.status.achievements)
 		}
 
 		//getting a achievement
 		if ( finalScore >= 5 ) {
-			let achievement 		 = yield achievement_service.getRandon( finalScore )
+			let achievement = yield achievement_service.getRandon( finalScore )
 
 			//if exists a return
 			if(achievement) {
@@ -86,11 +87,12 @@ class TestController {
 			userId		: request.payload.userId,
 			userName	: user.name,
 			date		: request.payload.answer.date,
-			score		: finalScore
+			score		: finalScore,
+			achievement : achievement? achievement : null
 		}
 
 		//update object to user stats
-		user.status = Helpers.updateStatusProgress( 
+		user.status = Helpers.updateStatusProgress(
 			finalScore,
 			classData.test.questions.length,
 			user.status
@@ -112,9 +114,9 @@ class TestController {
 		user.status.completedTests 	= JSON.stringify(user.status.completedTests)
 
 		//save in the database
-		// user_service.update( request.payload.userId, user )
-		// class_service.update( null, request.payload.courseId, classData, request.payload.classId )
-		
+		user_service.update( request.payload.userId, user )
+		class_service.update( null, request.payload.courseId, classData, request.payload.classId )
+
 		return {
 			status: true,
 			message: `sua nota foi ${ finalScore }`

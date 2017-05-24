@@ -101,7 +101,6 @@ class ClassRoomController {
 		let courses 		= []
 
 		for(let i=0; i<team.courses.length; i++) {
-			console.log(team.courses[i])
 			let course	= yield course_service.getSingle( null, team.courses[i] )
 
 			if(course) {

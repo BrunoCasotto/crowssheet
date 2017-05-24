@@ -38,7 +38,6 @@ export default new class CourseService {
 	}
 
     update( userId, course, id ) {
-        console.log(userId, course, id)
         return Axios({
             url: '/course/update',
             method: 'post',
