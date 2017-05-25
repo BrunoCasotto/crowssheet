@@ -118,8 +118,8 @@ class TestController {
 		user.status.completedTests 	= JSON.stringify(user.status.completedTests)
 
 		//save in the database
-		// user_service.update( request.payload.userId, user )
-		// class_service.update( null, request.payload.courseId, classData, request.payload.classId )
+		user_service.update( request.payload.userId, user )
+		class_service.update( null, request.payload.courseId, classData, request.payload.classId )
 
 		//if the user receive a gift
 		if(gift) {
