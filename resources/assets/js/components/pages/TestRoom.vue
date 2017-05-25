@@ -1,5 +1,14 @@
 <template lang="html">
 	<div class="test">
+		<div v-if="done"class="loader-overlay block-page">
+			<div class="final__message">
+				<i  v-if="result.gift" class="fa fa-gift gift"></i>
+				<h3 v-if="result.gift" >{{result.gift}}</h3>
+				<p class="">{{ result.text }}</p>
+			</div>
+			<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
+		</div>
+
 		<div  v-if="this.blockTest || this.blockSchendule" class="loader-overlay block-page">
 			<p v-if="this.blockTest" class="text"> Ops, voce ja realizou essa tarefa.
 				Sua nota foi <span>{{ this.score }} </span>
@@ -64,14 +73,16 @@
 		</template>
 
 		<div class="test__controller">
-			<button :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn--back">Abandonar teste</button>
+			<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn--back">Abandonar teste</a>
 			<button @click="finalize()" class="btn btn--finish">Finalizar a prova</button>
 		</div>
 
 		<!-- user items -->
-		<div v-if="!offerItemSchendule" id="achievements">
-			<user-items :achievements="achievements"></user-items>
+		<div v-if="!offerItemSchendule && !test.blockItem" id="achievements">
+			<user-items v-if="!testItem" :achievements="achievements"></user-items>
+			<p v-else class="lead">O item: <mark>{{testItem.name}}</mark> está ativo.</p>
 		</div>
+		<h4 v-if="test.blockItem">O professor bloqueou o uso de itens nessa atividade.<h4>
 	</div>
 </template>
 <script>
@@ -88,7 +99,12 @@
 				blockTest			: false,
 				blockSchendule		: false,
 				achievements		:[],
-				offerItemSchendule	: false
+				offerItemSchendule	: false,
+				done				: false,
+				result				:{
+					gift: null,
+					text: null
+				}
 			}
 		},
 		computed: {
@@ -105,7 +121,7 @@
 				return this.$store.state.CompleteUser
 			},
 			testItem: function () {
-				return this.$store.state.TestItem
+				return this.$store.state.TestItem.item
 			}
 		},
 		mounted() {
@@ -167,10 +183,11 @@
 				}
 
 				let test_item = null
+
 				if(this.offerItemSchendule) {
 					test_item = this.offerItemSchendule.key
 				} else if(this.testItem) {
-					test_item = this.testItem
+					test_item = this.testItem.key
 				}
 				
 				this.$store.dispatch('toggleLoader', true)
@@ -186,11 +203,17 @@
 
 					if (response.data.status) {
 						this.$store.dispatch('toggleLoader', false)
+						this.done = true
+						this.result.text = response.data.message
+
 						growl.success(response.data.message)
-						window.location.reload()
+						if(response.data.gift) {
+							this.result.gift = response.data.gift
+							 growl.success(response.data.gift) 
+							}
 					} else {
 						this.$store.dispatch('toggleLoader', false)
-						growl.error(response.data.data.message)
+						growl.error("Problema de conexão tente novamente")
 					}
 
 				})
@@ -219,6 +242,21 @@
 		.message {
 			color: black;
 			font-size: 18px;
+		}
+
+		.final__message {
+			text-align: center;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			font-family: helvetica, arial, sans-serif;
+			font-size: 2rem;
+
+			i {
+				font-size: 90px;
+				color: $red-base;
+			}
 		}
 
 		.block-page {

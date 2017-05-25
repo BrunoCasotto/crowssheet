@@ -72,13 +72,17 @@ class TestController {
 			user.status.achievements = Helpers.removeStatusAchievement(request.payload.item, user.status.achievements)
 		}
 
-		//getting a achievement
-		if ( finalScore >= 5 ) {
-			let achievement = yield achievement_service.getRandon( finalScore )
+		let gift = null
+		if(!test.blockItemGift) {
+			//getting a achievement ( gift)
+			if ( finalScore >= 5 ) {
+				let achievement = yield achievement_service.getRandon( finalScore )
 
-			//if exists a return
-			if(achievement) {
-				user.status.achievements = Helpers.updateStatusAchievement(achievement, user.status.achievements)
+				//if exists a return
+				if(achievement) {
+					gift = achievement
+					user.status.achievements = Helpers.updateStatusAchievement(achievement, user.status.achievements)
+				}
 			}
 		}
 
@@ -114,13 +118,24 @@ class TestController {
 		user.status.completedTests 	= JSON.stringify(user.status.completedTests)
 
 		//save in the database
-		user_service.update( request.payload.userId, user )
-		class_service.update( null, request.payload.courseId, classData, request.payload.classId )
+		// user_service.update( request.payload.userId, user )
+		// class_service.update( null, request.payload.courseId, classData, request.payload.classId )
 
-		return {
-			status: true,
-			message: `sua nota foi ${ finalScore }`
+		//if the user receive a gift
+		if(gift) {
+			return {
+				status: true,
+				message: `Sua nota foi ${ finalScore }`,
+				gift: "PARABÉNS voce ganho o item: " + gift.name
+			}
+		} else {
+			return {
+				status: true,
+				message: `Sua nota foi ${ finalScore }`
+			}
 		}
+
+
 	}
 }
 

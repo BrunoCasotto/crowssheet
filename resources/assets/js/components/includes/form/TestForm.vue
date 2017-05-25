@@ -3,8 +3,14 @@
 		<h4 class="title">Cadastro de Prova</h4>
 		<div class="form-group">
 			<label class="title">Definir data limite de entrega</label>
-			<span>(cupons podem ser utilizados para alterar em 1 dia a entrega.)</span>
 			<input type="date" v-model="test.schendule" class="form-control">
+		</div>
+		<div class="form-group">
+			<label class="title">Configurações</label>
+			<div class="checkbox">
+				<label><input type="checkbox" v-model="test.blockItem">Bloquear uso de itens</label>
+				<label><input type="checkbox" v-model="test.blockItemGift">Bloquear ganho de itens</label>
+			</div>
 		</div>
 		<template v-for="( question, index ) in test.questions">
 			<div class="well question">
@@ -90,8 +96,10 @@
 		data() {
 			return {
 				test: {
-					questions: [],
-					schendule: null
+					questions		: [],
+					schendule		: null,
+					blockItem		: false,
+					blockItemGift	: false
 				},
 				isUpdate: false
 			}

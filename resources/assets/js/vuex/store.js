@@ -40,7 +40,7 @@ const store = new Vuex.Store({
         Courses: Courses(data),
         Test: Test(data),
         CompleteUser: CompleteUser(data),
-        TestItem: TestItem(data)
+        TestItem: TestItem
     }
 })
 

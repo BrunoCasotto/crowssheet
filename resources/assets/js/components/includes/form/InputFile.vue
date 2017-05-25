@@ -27,6 +27,7 @@
         },
         methods: {
             upload () {
+                this.$store.dispatch('toggleLoader', true)
                 let storageRef = firebase.storage().ref()
                 let file = document.getElementById('input').files[0]
                 let extension = '.'+file['type'].split('/')[1]
@@ -34,8 +35,11 @@
                 uploadTask.on('state_changed', snapshot => {
                     growl.success('Upload em andamento: '+snapshot['totalBytes']+'b')
                 }, error => {
+                    this.$store.dispatch('toggleLoader', false)
                     growl.error('ocorreu um erro ao upload')
                 }, () => {
+                    console.log('upload task', uploadTask)
+                    this.$store.dispatch('toggleLoader', false)
                     this.pictureUrl = uploadTask.snapshot.downloadURL
                     this.$store.dispatch('setFileUrl', this.pictureUrl)
                      growl.success('upload concluido')

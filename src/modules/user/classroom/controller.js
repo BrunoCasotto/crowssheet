@@ -55,8 +55,7 @@ class ClassRoomController {
 			request['session']  = {
 				test: test,
 				classData: classData,
-				completeUser: user,
-				testItem: request.query.item ||  null
+				completeUser: user
 			}
 		}
 

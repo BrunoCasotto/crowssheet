@@ -4,7 +4,7 @@
 		<div v-if="achievements.length > 0" class="list">
 			<div v-for="ach in achievements" class="item">
 				<h4 class="name"><span class="qtd">{{ ach.quantity }} x </span>{{ ach.name }}</h4>
-				<a :href="locale+'&item='+ach.key">Utilizar</a>
+				<a @click="useItem(ach)">Utilizar</a>
 				<p class="description">{{ ach.description }}</p>
 			</div>
 		</div>
@@ -24,6 +24,11 @@
 			achievements: {
 				type: Array,
 				default: []
+			}
+		},
+		methods: {
+			useItem(item) {
+				this.$store.dispatch('setTestItem', item)
 			}
 		}
 	}
