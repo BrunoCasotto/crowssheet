@@ -4,7 +4,7 @@
 		<div v-if="achievements.length > 0" class="list">
 			<div v-for="ach in achievements" class="item">
 				<h4 class="name"><span class="qtd">{{ ach.quantity }} x </span>{{ ach.name }}</h4>
-				<a @click="useItem(ach)">Utilizar</a>
+				<a  class="btn-use-item" @click="useItem(ach)">Utilizar</a>
 				<p class="description">{{ ach.description }}</p>
 			</div>
 		</div>
@@ -49,6 +49,10 @@
 			.item {
 				.qtd {
 					color: $orange-base;
+				}
+				.btn-use-item {
+					cursor: pointer;
+					font-weight: bold;
 				}
 			}
 		}

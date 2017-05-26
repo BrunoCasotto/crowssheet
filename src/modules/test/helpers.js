@@ -10,7 +10,27 @@ exports.updateStatusProgress = (final_score, questions_number, status)=>{
 			let aditional 	=  status.progress - 100
 			initial 		= aditional
 		}
-		status.progress = initial
+		status.progress = parseFloat(initial).toFixed(2)
+	}
+
+	return status
+}
+
+exports.updateAverage = (status)=> {
+	let average 	= 0
+	let history 	= status.completedTests
+
+	if(history) {
+		let testNumber 	= history.length
+		history.forEach( test=> {
+			average 	+= parseFloat(test.score)
+		})
+
+		if(testNumber > 0) {
+			status.average = parseFloat(average / testNumber).toFixed(2)
+		} else {
+			status.average = parseFloat(average).toFixed(2)
+		}
 	}
 
 	return status

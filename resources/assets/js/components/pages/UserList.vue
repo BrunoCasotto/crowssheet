@@ -9,7 +9,7 @@
 				<div class="item">
 					<div class="description">
 						<img :src="user.photo" alt="" height="50" width="50">
-						<h4 class="name" >{{ user.name }}</h4>
+						<a :href="'/report/user/'+user.uid"><h4 class="name" >{{ user.name }}</h4>
 					</div>
 					<p class="email">{{user.email}}</p>
 					

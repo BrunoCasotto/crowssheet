@@ -30,6 +30,7 @@ import ClassUpdate from '_components/pages/ClassUpdate.vue'
 import CourseRoom from '_components/pages/CourseRoom.vue'
 import CourseClassRoom from '_components/pages/CourseClassRoom.vue'
 import TestRoom from '_components/pages/TestRoom.vue'
+import UserStats from '_components/pages/UserStats.vue'
 import ClassModal from '_common/components/modal/ClassModal.vue'
 
 new Vue({
@@ -55,7 +56,8 @@ new Vue({
         CourseUpdate,
         ClassUpdate,
         TeamUpdate,
-        MenuMobile
+        MenuMobile,
+        UserStats
     },
     computed: {
         user: function () {

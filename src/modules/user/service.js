@@ -23,6 +23,8 @@ class UserService  extends firebase {
 			progress: 0,
 			achievements: "[]",
 			completedTests: "[]",
+			average: 0,
+			tetsCompleted: 0,
 			avatar: {
 				gender: 'male',
 				picture: 'http://wpshowdown.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png',

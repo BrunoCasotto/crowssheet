@@ -34,6 +34,7 @@ class TestController {
 		let class_service 		= new ClassService()
 		let classData 			= yield class_service.getSingle(null, request.payload.courseId, request.payload.classId)
 		classData.test.history 	= classData.test.history? JSON.parse(classData.test.history) : []
+
 		//count score
 		let test		= classData.test
 		if(typeof test.questions == 'string') {
@@ -101,7 +102,10 @@ class TestController {
 			classData.test.questions.length,
 			user.status
 		)
+
+		//update average
 		user.status.completedTests 	= JSON.parse(user.status.completedTests)
+		user.status = Helpers.updateAverage(user.status)
 
 		let historyUserItem 		= historyItem
 		historyUserItem.courseId 	= request.payload.courseId
@@ -109,7 +113,7 @@ class TestController {
 
 		//update objects
 		classData.test.history.push(historyItem)
-		user.status.completedTests .push(historyUserItem)
+		user.status.completedTests.push(historyUserItem)
 
 		// prepare object to save
 		classData.test.questions 	= JSON.stringify(classData.test.questions)
