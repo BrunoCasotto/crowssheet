@@ -219,7 +219,7 @@
 				})
 				.catch(error => {
 					this.$store.dispatch('toggleLoader', false)
-					growl.error(error.data.message)
+					growl.error("Problema de conexão tente novamente")
 				})
 				this.$store.dispatch('toggleLoader', false)
 			}

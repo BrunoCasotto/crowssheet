@@ -1,5 +1,6 @@
 let TestService 	= require("@modules/test/service")
 let ClassService 	= require("@modules/course/class/service")
+let CourseService 	= require("@modules/course/service")
 let UserService 	= require("@modules/user/service")
 let Achievement 	= require("@modules/achievement/service")
 let Helpers 		= require("./helpers")
@@ -32,6 +33,8 @@ class TestController {
 	* answerTest(request, reply) {
 		let score 				= 0
 		let class_service 		= new ClassService()
+		let couse_service 		= new CourseService()
+		let courseData			= yield couse_service.getSingle( null, request.payload.courseId )
 		let classData 			= yield class_service.getSingle(null, request.payload.courseId, request.payload.classId)
 		classData.test.history 	= classData.test.history? JSON.parse(classData.test.history) : []
 
@@ -110,6 +113,8 @@ class TestController {
 		let historyUserItem 		= historyItem
 		historyUserItem.courseId 	= request.payload.courseId
 		historyUserItem.classId 	= request.payload.classId
+		historyUserItem.courseTitle	= courseData.title
+		historyUserItem.classTitle	= classData.title
 
 		//update objects
 		classData.test.history.push(historyItem)
@@ -126,7 +131,7 @@ class TestController {
 		class_service.update( null, request.payload.courseId, classData, request.payload.classId )
 
 		//if the user receive a gift
-		if(gift) {
+		if( gift ) {
 			return {
 				status: true,
 				message: `Sua nota foi ${ finalScore }`,

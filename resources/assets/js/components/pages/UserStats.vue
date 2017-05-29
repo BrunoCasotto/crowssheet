@@ -8,28 +8,64 @@
 				<a href="#" @click="tab = 'history'">Historico de atividades</a>
 			</li>
 		</ul>
+
 		<div v-if="tab == 'profile'">
 			<h4>{{ user.name }}</h4>
 			<label>Email:</label>
 			<p class="lead">{{ user.email }}</p>
 			<label>Média do aluno:</label>
-			<p class="lead">{{ user.status.average }}</p>
+			<p class="lead">{{ average }}</p>
 			<label>Atividades finalizadas:</label>
 			<p class="lead">{{ totalTests }}</p>
-		<div>
+			<user-level :status="user.status"></user-level>
+		</div>
 
-		<user-level :status="user.status"></user-level>
+		<div v-if="tab == 'history'">
+			<div class="history__list">
+				<template v-for="history_item in history">
+					<blockquote class="history__list__item">
+
+						<div class="item__line">
+							<label>Curso </label>
+							<p class="lead"> {{ history_item.courseTitle }} </p>
+							<label>Aula </label>
+							<p class="lead"> {{ history_item.classTitle }} </p>
+						</div>
+
+						<div class="item__line">
+							<label>Data </label>
+							<p class="lead"> {{ filterDate ( history_item.date ) }} </p>
+							<label>Nota </label>
+
+							<p v-if=" history_item.score >= 6" class="bg-primary score"> {{ history_item.score }} </p>
+							<p v-else class="bg-danger score"> {{ history_item.score }} </p>
+						</div>
+
+						<div class="item__line" v-if="history_item.achievement">
+							<label>Item utilizado </label>
+							<p class="lead"> {{ history_item.achievement.name }} </p>
+							<label>Descrição </label>
+							<p class="lead"> {{ history_item.achievement.description }} </p>
+						</div>
+					</blockquote>
+				</template>
+
+			</div>
+		</div>
 	</div>
 </template>
 <script>
 	import TextBlock from "_common/components/Text-block.vue"
 	import UserLevel from '_components/includes/UserLevel.vue'
+	import moment from 'moment'
 
 	export default {
 		data() {
 			return {
 				totalTests: 0,
-				tab: 'profile'
+				tab: 'profile',
+				history: [],
+				average: 0
 			}
 		},
 		computed: {
@@ -38,12 +74,27 @@
 			}
 		},
 		mounted() {
-			this.countTeste()
+			this.fetch()
+			this.fetchAverage()
 		},
 		methods: {
-			countTeste() {
-				let history = JSON.parse(this.user.status.completedTests)
-				this.totalTests = history.length
+			fetch() {
+				this.history = JSON.parse( this.user.status.completedTests )
+				this.totalTests = this.history.length
+			},
+			fetchAverage() {
+				this.average 	= parseFloat(0)
+				let history 	= JSON.parse( this.user.status.completedTests )
+				let testNumber 	= history.length
+				if( history.length > 0 ) {
+					history.forEach( test=> {
+						this.average 	+= parseFloat( test.score )
+					})
+					this.average = this.average / testNumber
+				}
+			},
+			filterDate( date ) {
+				return moment( date ).format("DD-MM-YYYY")
 			}
 		},
 		components: {
@@ -61,10 +112,37 @@
 		max-width: 500px;
 		width: 100%;
 		padding: 10px;
+
+		.history__list {
+			width: 100%;
+
+			&__item {
+				border-bottom: 1px $color-grey-blue-light;
+				margin-top: 10px;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				max-width: 400px;
+
+				.score {
+					text-align: center;
+				}
+
+				.item__line {
+					margin-left: 5px;
+				}
+
+				span {
+					margin: 0;
+				}
+			}
+		}
 	}
 
 	.lead {
+		margin-left: 5px;
 		margin-bottom: 5px;
+		font-size: 16px;
 	}
 
 	.line {

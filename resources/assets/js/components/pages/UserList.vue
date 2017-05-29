@@ -5,19 +5,24 @@
 				<label>Filtrar por nome</label>
 				<input v-model="filterName" class="form-control">
 			</div>
-			<div v-for="user in filteredUsers" class="list__item">
-				<div class="item">
-					<div class="description">
-						<img :src="user.photo" alt="" height="50" width="50">
-						<a :href="'/report/user/'+user.uid"><h4 class="name" >{{ user.name }}</h4>
+			<template v-for="user in filteredUsers" >
+				<div v-if="!user.teacher" class="list__item">
+					<div class="item">
+						<div class="description">
+							<h4 class="name" >{{ user.name }}</h4>
+						</div>
+						<p class="email">{{user.email}}</p>
 					</div>
-					<p class="email">{{user.email}}</p>
-					
+					<div class="controller">
+						<a 
+						:href="'/report/user/'+user.uid" 
+						class="btn btn-default btn-insert" 
+						@click="updateCourse( user.key )">
+							Ver perfil
+						</a>
+					</div>
 				</div>
-				<div class="controller">
-					<i class="btn btn-default btn-insert" @click="updateCourse( user.key )">Ver status</i>
-				</div>
-			</div>
+			</template>
 		</div>
 	</div>
 </template>

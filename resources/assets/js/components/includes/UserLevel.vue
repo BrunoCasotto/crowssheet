@@ -1,7 +1,7 @@
 <template lang="html">
 <div class="level">
 	<div  v-if="status.level" class="level-block">
-		<p class="block-level">level: <span>{{ status.level }}</span></p>
+		<p class="block-level">Nível: <span>{{ status.level }}</span></p>
 		<div class="block-progress">
 			<p class="progress-text">{{ progress }}</p>
 			<div 

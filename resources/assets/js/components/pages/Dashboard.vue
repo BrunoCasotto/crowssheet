@@ -21,7 +21,8 @@
 		<!--User level-->
 		<div v-if="!user.teacher" class="dashboard-status">
 			<user-level :status="userData.status"></user-level>
-			<achievement-list :achievements="achievements"></achievement-list>
+			<achievement-list v-if="achievements" :achievements="achievements"></achievement-list>
+			<a href="" class="btn btn-orange">Ver perfil</a>
 		</div>
 		<div class="dashboard-metrics">
 
@@ -43,7 +44,8 @@
 		name: 'Dashboard',
 		data() {
 			return {
-				blocks: []
+				blocks: [],
+				achievements: []
 			}
 		},
 		computed: {
@@ -185,6 +187,7 @@
 
 <style lang="sass" scoped>
 	@import "~_config/_vars.scss";
+	@import "~_config/_commons.scss";
 	.dashboard {
 		padding-top: 20px;
 
