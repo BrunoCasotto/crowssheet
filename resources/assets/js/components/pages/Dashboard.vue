@@ -22,10 +22,10 @@
 		<div v-if="!user.teacher" class="dashboard-status">
 			<user-level :status="userData.status"></user-level>
 			<achievement-list v-if="achievements" :achievements="achievements"></achievement-list>
-			<a href="" class="btn btn-orange">Ver perfil</a>
+			<a :href="'/report/user/'+user.uid" class="btn btn-orange">Ver perfil</a>
 		</div>
 		<div class="dashboard-metrics">
-
+			<ranking type="progress" appearance="partial"></ranking>
 		</div>
 		<!--end User level-->
 	</div>
@@ -35,9 +35,8 @@
 	import Logo from "_common/components/Logo.vue"
 	import Loader from '_common/components/Loader.vue'
 	import UserLevel from '_components/includes/UserLevel.vue'
+	import Ranking from '_components/includes/Ranking.vue'
 	import AchievementList from '_components/includes/list/AchievementList.vue'
-	import userService from '_service/user'
-	import reportService from '_service/report'
 	import growl from "growl-alert"
 
 	export default {
@@ -180,7 +179,8 @@
 		components: {
 			TextBlock,
 			UserLevel,
-			AchievementList
+			AchievementList,
+			Ranking
 		}
 	}
 </script>

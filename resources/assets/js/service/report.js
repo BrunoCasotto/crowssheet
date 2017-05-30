@@ -9,4 +9,12 @@ export default new class ReportService {
             data: {}
         })
     }
+
+    getRanking ( type ) {
+        return Axios({
+            url: `/report/user-ranking/${type}`,
+            method: 'get',
+            data: {}
+        })
+    }
 }
