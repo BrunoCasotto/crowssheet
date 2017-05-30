@@ -55,7 +55,7 @@
 			}
 		},
 		mounted() {
-			// this.fetchRanking()
+			this.fetchRanking()
 		},
 		methods: {
 			fetchRanking() {
@@ -91,12 +91,18 @@
 			min-height: 130px;
 			width: 100%;
 
+
+			.btn {
+				margin-top: 60px;
+			}
+
 			table {
 				width: 100%;
 
 				thead {
 					th {
 						text-align: center;
+						font-size: 22px;
 					}
 				}
 
@@ -110,6 +116,11 @@
 
 					td {
 						text-align: center;
+						font-size: 20px;
+						max-width: 150px;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
 					}
 				}
 			}
