@@ -23,7 +23,6 @@ class CoreService extends firebase{
 	return this.database.ref(path).child(id)
 		.set(data)
 		.then(result => {
-			console.log(result)
 			return {
 				status: true,
 				data: result
@@ -38,7 +37,6 @@ class CoreService extends firebase{
 
 	//just delete data referenced by path
 	delete(path="", id="" ) {
-		console.log('Service core', path, id)
 		return this.database.ref(path+id).remove()
 		.then(function(response) {
 			return {
@@ -75,7 +73,7 @@ class CoreService extends firebase{
 	getAll(path) {
 		return this.database.ref(path)
 		.once('value')
-		.then((dataSnapshot)=> {
+		.then(( dataSnapshot ) => {
 			return dataSnapshot.val()
 		})
 	}
@@ -86,6 +84,19 @@ class CoreService extends firebase{
 		.once('value')
 		.then((dataSnapshot)=> {
 			return dataSnapshot.val()
+		})
+	}
+
+	getRanking( path , child) {
+		return new Promise(
+		(resolve, reject)=> {
+			this.database
+			.ref(path)
+			.orderByChild(child)
+			.on("child_added",( snap ) => {
+				console.log(snap.val())
+				resolve( snap.val() )
+			})
 		})
 	}
 }

@@ -1,7 +1,33 @@
 let TeamService = require("@modules/team/service")
 let UserService = require("@modules/user/service")
+let ReportService = require("@modules/report/service")
+let Helpers = require("./helpers")
 
 class ReportController {
+
+	* getUserRanking ( request, reply ) {
+		let user_service  = new UserService()
+		let users 		 	= yield user_service.getAll()
+
+		let user_list	 	= []
+		for(var key in users) {
+			if(!users[key].teacher) {
+				user_list.push({
+					name: users[key].name,
+					uid: users[key].uid,
+					score: users[key].status.average,
+					level: users[key].status.level,
+					progress: users[key].status.progress
+				})
+			}
+		}
+
+		if(request.params.type == 'progress') {
+			user_list = Helpers.sortUserByProgress(user_list)
+		}
+
+		reply(user_list)
+	}
 
 	* getStudents ( request, reply ) {
 		//getting user
