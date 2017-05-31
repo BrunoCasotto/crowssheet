@@ -136,6 +136,7 @@
 			getSingleCourse() {
 				this.$store.dispatch ( 'toggleLoader', true )
 				this.classes = []
+				this.tab = 'course'
 				CourseService
 				.getSingle( this.user.uid, this.courseSelected )
 				.then( response => {
