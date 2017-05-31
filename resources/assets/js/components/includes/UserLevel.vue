@@ -44,6 +44,10 @@
 		width: 300px;
 		height: 100px;
 
+		@media screen and(max-width: $screen-sm ) {
+			margin: 0 auto;
+		}
+
 		.spinner {
 			border: 8px solid $black-base;
 			border-right-color: transparent;

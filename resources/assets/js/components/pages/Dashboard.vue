@@ -87,7 +87,7 @@
 
 				//setting the block
 				this.blocks.push({
-					color: '#ff9400',
+					color: '#DF6B03',
 					title: 'Numero de alunos',
 					text: students,
 					font: 'black'
@@ -112,7 +112,7 @@
 				list = this.removeRepeat(list)
 				//setting the block
 				this.blocks.push({
-					color: '#000',
+					color: '#3E1D00',
 					title: 'Cursos disponibilizados',
 					text: list.length,
 					font: 'white'
@@ -126,7 +126,7 @@
 
 				//setting the block
 				this.blocks.push({
-					color: '#d71e1e',
+					color: '#9e2800',
 					title: 'Total de cursos cadastrados',
 					text: courses,
 					font: 'black'
@@ -140,7 +140,7 @@
 
 				//setting the block
 				this.blocks.push({
-					color: '#ff9400',
+					color: '#DF6B03',
 					title: 'Numero de times que participo',
 					text: teams,
 					font: 'black'
@@ -158,7 +158,7 @@
 				}
 				//setting the block
 				this.blocks.push({
-					color: '#000',
+					color: '#3E1D00',
 					title: 'Média de notas',
 					text: parseFloat(average).toFixed(2),
 					font: 'white'
@@ -169,7 +169,7 @@
 
 				//setting the block
 				this.blocks.push({
-					color: '#d71e1e',
+					color: '#9e2800',
 					title: 'Total de atividades concluidas',
 					text: history.length,
 					font: 'white'

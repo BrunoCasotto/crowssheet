@@ -33,6 +33,10 @@
 		max-height: 300px;
 		overflow-y: scroll;
 
+		@media screen and(max-width: $screen-sm) {
+			 margin: 10px auto;
+		}
+
 		.list {
 			.item {
 				.qtd {
