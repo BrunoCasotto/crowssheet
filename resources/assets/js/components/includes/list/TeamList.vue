@@ -8,7 +8,7 @@
 					</a>
 				</div>
 				<div class="controller">
-					<i @click="deleteTeam(index)" class="fa fa-trash remove-button"></i>
+					<!--<i @click="deleteTeam(index)" class="fa fa-trash remove-button"></i>-->
 				</div>
 			</div>
 		</div>
