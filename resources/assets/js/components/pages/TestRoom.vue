@@ -14,7 +14,7 @@
 				Sua nota foi <span>{{ this.score }} </span>
 				<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
 			</p>
-			<p v-else class="text"> Ops, a data limite do teste foi <span>{{ this.test.schendule }} </span>
+			<p v-else class="text"> Ops, a data limite do teste foi <span>{{ filterDate(this.test.schendule) }} </span>
 				<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
 				<span v-if="offerItemSchendule"> parece que voce tem um item de dias extras 
 					<button @click="unlockTest(offerItemSchendule)" class="btn btn-black">usar</button>
@@ -222,6 +222,9 @@
 					growl.error("Problema de conexão tente novamente")
 				})
 				this.$store.dispatch('toggleLoader', false)
+			},
+			filterDate( date ) {
+				return moment( date ).format("DD-MM-YYYY")
 			}
 		},
 		components: {

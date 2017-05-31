@@ -41,5 +41,12 @@ module.exports = [
                 path: 'fonts/'
             }
         }
+    },
+    {
+        method: '*',
+        path: '/{p*}',
+        handler: function (request, reply) {
+            reply.view('pages/404',{noFooter: true, noMenu: true})
+        }
     }
 ]

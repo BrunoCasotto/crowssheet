@@ -10,9 +10,9 @@ module.exports = (request, reply)=> {
     }
 
     if(request.response.isBoom) {
-        if(request.response.output.statusCode === '404') {
+        if(request.response.output.statusCode == 404) {
 
-        } else if(request.response.output.statusCode === '500') {
+        } else if(request.response.output.statusCode == 500) {
 
         }
     }

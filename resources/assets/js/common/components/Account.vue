@@ -2,7 +2,7 @@
 <div>
     <div @click="toggle()" class="account" :class="{'account--active' : active }">
         <span class="account__name">{{ active? session.displayName : initials}}</span>
-		<div class="account__items">
+        <div class="account__items">
             <div @click="singout" class="item">
                 <a class="fa fa-power-off">Sair</a>
             </div>
