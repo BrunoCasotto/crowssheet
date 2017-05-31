@@ -233,6 +233,7 @@
 
 			.text {
 				margin-left: 5px;
+				word-wrap: break-word;
 			}
 
 			.content__course {
