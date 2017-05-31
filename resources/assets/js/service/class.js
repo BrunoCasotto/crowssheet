@@ -7,12 +7,12 @@ export default new class ClassService {
             url: '/class/save',
             method: 'post',
             data: { 
-				userId: userId, 
-				courseId: courseId,
-				courseClass: courseClass
-			}
-		})
-	}
+                userId: userId, 
+                courseId: courseId,
+                courseClass: courseClass
+            }
+        })
+    }
 
     delete( courseId, id ) {
         return Axios({
@@ -23,7 +23,7 @@ export default new class ClassService {
                 courseId: courseId
             }
         })
-	}
+    }
 
     update( userId, courseId, id, courseClass ) {
         return Axios({

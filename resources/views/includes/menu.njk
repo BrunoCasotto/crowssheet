@@ -19,7 +19,10 @@
 			<a href="/course/list" class="fa fa-mortar-board">Cursos</a>
 		</div>
 		<div v-if=" user.teacher " class="item">
-			<a href="/course/form" class="fa fa-mortar-board">Criar curso</a>
+			<a href="/course/report" class="fa fa-tasks">Detalhes dos cursos</a>
+		</div>
+		<div v-if=" user.teacher " class="item">
+			<a href="/course/form" class="fa fa-plus">Criar curso</a>
 		</div>
 		<div class="item">
 			<a href="/users" class="fa fa-cog">Alunos</a>

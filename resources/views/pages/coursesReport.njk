@@ -1,0 +1,21 @@
+{% extends 'index.njk' %}
+
+{% block title %}Detalhes dos cursos{% endblock %}
+
+{% block content %}
+	<account></account>
+	<div class="base-page">
+		<div class="base-page__menu">
+			{% include "includes/menu.njk" %}
+		</div>
+		<div class="base-page__content">
+			<div class="base-page__content__header">
+			<div class="header__title">
+				<p>Detalhes dos cursos<p>
+			</div>
+			</div>
+			<courses-report></courses-report>
+		</div>
+	</div>
+
+{% endblock %}

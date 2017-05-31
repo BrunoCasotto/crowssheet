@@ -65,5 +65,11 @@ class CourseController {
 		let service = new CourseService()
 		return yield service.getSingle( request.query.userId, request.query.id )
 	}
+
+	* showCourseReport(request ,reply) {
+		let service = new CourseService()
+
+		reply.view('pages/coursesReport') 
+	}
 }
 module.exports = CourseController

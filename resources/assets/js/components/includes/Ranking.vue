@@ -93,7 +93,9 @@
 
 
 			.btn {
-				margin-top: 60px;
+				@media screen and(max-width: $screen-sm) {
+					margin-top: 60px;
+				}
 			}
 
 			table {

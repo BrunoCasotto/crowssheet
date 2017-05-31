@@ -59,5 +59,10 @@
 			method: 'GET', 
 			path: '/course/list', 
 			handler: controller.showAllCourse
+		},
+		{
+			method: 'GET', 
+			path: '/course/report', 
+			handler: controller.showCourseReport
 		}
 	]
