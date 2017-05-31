@@ -37,7 +37,7 @@
 				</ul>
 			</div>
 			<h4 v-else>Selecione um curso</h4>
-
+			<button v-if="tab=='class'" @click="tab = 'course'" class="btn btn-orange">voltar</button>
 			<div v-if="singleClass" v-show="tab=='class'" class="content__class">
 				<h4>{{ singleClass.title }}</h4>
 
