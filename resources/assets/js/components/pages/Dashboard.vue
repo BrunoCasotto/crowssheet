@@ -20,9 +20,14 @@
 
 		<!--User level-->
 		<div v-if="!user.teacher" class="dashboard-status">
-			<user-level :status="userData.status"></user-level>
-			<achievement-list v-if="achievements" :achievements="achievements"></achievement-list>
-			<a :href="'/report/user/'+user.uid" class="btn btn-orange">Ver perfil</a>
+			<div class="status-block">
+				<user-level :status="userData.status"></user-level>
+				<achievement-list v-if="achievements" :achievements="achievements"></achievement-list>
+				<a :href="'/report/user/'+user.uid" class="btn btn-orange">Ver perfil</a>
+			</div>
+			<div class="status-block">
+				<avatar :level="userData.status.level" ></avatar>
+			</div>
 		</div>
 		<div class="dashboard-metrics">
 			<ranking type="progress" appearance="partial"></ranking>
@@ -36,6 +41,7 @@
 	import Loader from '_common/components/Loader.vue'
 	import UserLevel from '_components/includes/UserLevel.vue'
 	import Ranking from '_components/includes/Ranking.vue'
+	import Avatar from '_components/includes/Avatar.vue'
 	import AchievementList from '_components/includes/list/AchievementList.vue'
 	import growl from "growl-alert"
 
@@ -180,7 +186,8 @@
 			TextBlock,
 			UserLevel,
 			AchievementList,
-			Ranking
+			Ranking,
+			Avatar
 		}
 	}
 </script>
@@ -223,6 +230,8 @@
 		.dashboard-status {
 			padding: 10px;
 			margin: 10px 0;
+			display: flex;
+			flex-wrap: wrap;
 
 			@media screen and(max-width: $screen-sm) {
 				justify-content: center;
