@@ -51,8 +51,6 @@
 		border: solid 1px #bdbdbd;
 		max-width: 300px;
 		padding: 10px;
-		margin: 5px;
-		margin-top: 0;
 		max-height: 300px;
 
 		&__image {

@@ -14,10 +14,11 @@
 			<label>Email:</label>
 			<p class="lead">{{ user.email }}</p>
 			<label>Média do aluno:</label>
-			<p class="lead">{{ average }}</p>
+			<p class="lead">{{ filterAverage(average) }}</p>
 			<label>Atividades finalizadas:</label>
 			<p class="lead">{{ totalTests }}</p>
 			<user-level :status="user.status"></user-level>
+			<avatar :level="user.status.level" ></avatar>
 		</div>
 
 		<div v-if="tab == 'history'">
@@ -58,6 +59,7 @@
 	import TextBlock from "_common/components/Text-block.vue"
 	import UserLevel from '_components/includes/UserLevel.vue'
 	import moment from 'moment'
+	import Avatar from '_components/includes/Avatar.vue'
 
 	export default {
 		data() {
@@ -95,11 +97,15 @@
 			},
 			filterDate( date ) {
 				return moment( date ).format("DD-MM-YYYY")
+			},
+			filterAverage( value ) {
+				return parseFloat(value).toFixed(2)
 			}
 		},
 		components: {
 			UserLevel,
-			TextBlock
+			TextBlock,
+			Avatar
 		}
 	}
 </script>
