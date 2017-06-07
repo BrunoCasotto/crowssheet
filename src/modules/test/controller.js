@@ -135,7 +135,7 @@ class TestController {
 			return {
 				status: true,
 				message: `Sua nota foi ${ finalScore }`,
-				gift: "PARABÉNS voce ganho o item: " + gift.name
+				gift: "PARABÉNS você ganhou o item: " + gift.name
 			}
 		} else {
 			return {

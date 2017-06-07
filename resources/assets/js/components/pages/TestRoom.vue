@@ -10,13 +10,13 @@
 		</div>
 
 		<div  v-if="this.blockTest || this.blockSchendule" class="loader-overlay block-page">
-			<p v-if="this.blockTest" class="text"> Ops, voce ja realizou essa tarefa.
+			<p v-if="this.blockTest" class="text"> Ops, voce ja realizou esta tarefa.
 				Sua nota foi <span>{{ this.score }} </span>
 				<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
 			</p>
 			<p v-else class="text"> Ops, a data limite do teste foi <span>{{ filterDate(this.test.schendule) }} </span>
 				<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
-				<span v-if="offerItemSchendule"> parece que voce tem um item de dias extras 
+				<span v-if="offerItemSchendule"> parece que voce têm um item de dias extras 
 					<button @click="unlockTest(offerItemSchendule)" class="btn btn-black">usar</button>
 				</span>
 			</p>
@@ -137,7 +137,7 @@
 					this.blockSchendule = false
 					this.testItem = item
 				} else {
-					growl.warning("Os dias desse item não são suficientes voce tem apenas "+item.days+" dias")
+					growl.warning("Os dias desse item não são suficientes você têm apenas "+item.days+" dias")
 				}
 			},
 			filterStats () {
