@@ -12,7 +12,7 @@
 					<tr>
 						<td class="lead">{{ index + 1 }}</td>
 						<td class="lead">{{ user.name }}</td> 
-						<td class="lead">{{ user.real_progress }}</td>
+						<td class="lead">{{ filterFloat(user.real_progress) }}</td>
 					</tr>
 				</template>
 			</table>
@@ -58,6 +58,10 @@
 			this.fetchRanking()
 		},
 		methods: {
+			filterFloat( number ) {
+				number = String(number)
+				return number.replace(".", ",")
+			},
 			fetchRanking() {
 				this.spinner = true
 				ReportService.getRanking( this.type )
