@@ -46,7 +46,7 @@
 					<p class="lead text">{{singleClass.test.history.length}}</p>
 
 					<label class="title">Média de notas dos alunos</label>
-					<p class="lead text">{{singleClass.test.average}}</p>
+					<p class="lead text">{{ filterFloat(singleClass.test.average) }}</p>
 
 					<div v-if="singleClass.test" class="history__list">
 						<label class="title">Histórico de entregas</label>
@@ -63,8 +63,8 @@
 
 								<div class="item__line">
 									<label>Nota </label>
-									<p v-if=" history_item.score >= 6" class="bg-primary score"> {{ history_item.score }} </p>
-									<p v-else class="bg-danger score"> {{ history_item.score }} </p>
+									<p v-if=" history_item.score >= 6" class="bg-primary score"> {{ filterFloat(history_item.score) }} </p>
+									<p v-else class="bg-danger score"> {{ filterFloat(history_item.score) }} </p>
 								</div>
 
 								<div class="item__line" v-if="history_item.achievement">
@@ -118,6 +118,10 @@
 			}
 		},
 		methods: {
+			filterFloat( number ) {
+				number = String(number)
+				return number.replace(".", ",")
+			},
 			fetchCourses() {
 				this.$store.dispatch ( 'toggleLoader', true )
 				CourseService

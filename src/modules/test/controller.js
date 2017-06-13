@@ -130,6 +130,10 @@ class TestController {
 		user_service.update( request.payload.userId, user )
 		class_service.update( null, request.payload.courseId, classData, request.payload.classId )
 
+		//filter float common
+		finalScore = String(finalScore)
+		finalScore = finalScore.replace(".", ",")
+
 		//if the user receive a gift
 		if( gift ) {
 			return {

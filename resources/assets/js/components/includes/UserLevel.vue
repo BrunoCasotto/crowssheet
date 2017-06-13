@@ -3,7 +3,7 @@
 	<div  v-if="status.level" class="level-block">
 		<p class="block-level">Nível: <span>{{ status.level }}</span></p>
 		<div class="block-progress">
-			<p class="progress-text">{{ progress }}</p>
+			<p class="progress-text">{{ filterFloat(progress) }}</p>
 			<div 
 			class="progress-bar"
 			v-bind:style="{ width: progress }" 
@@ -28,6 +28,12 @@
 				default: function() {
 					return {}
 				}
+			}
+		},
+		methods: {
+			filterFloat( number ) {
+				number = String(number)
+				return number.replace(".", ",")
 			}
 		}
 	}

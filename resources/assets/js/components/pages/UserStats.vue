@@ -14,7 +14,7 @@
 			<label>Email:</label>
 			<p class="lead">{{ user.email }}</p>
 			<label>Média do aluno:</label>
-			<p class="lead">{{ filterAverage(average) }}</p>
+			<p class="lead">{{ filterFloat(filterAverage(average)) }}</p>
 			<label>Atividades finalizadas:</label>
 			<p class="lead">{{ totalTests }}</p>
 			<user-level :status="user.status"></user-level>
@@ -38,8 +38,8 @@
 							<p class="lead"> {{ filterDate ( history_item.date ) }} </p>
 							<label>Nota </label>
 
-							<p v-if=" history_item.score >= 6" class="bg-primary score"> {{ history_item.score }} </p>
-							<p v-else class="bg-danger score"> {{ history_item.score }} </p>
+							<p v-if=" history_item.score >= 6" class="bg-primary score"> {{ filterFloat(history_item.score) }} </p>
+							<p v-else class="bg-danger score"> {{ filterFloat(history_item.score) }} </p>
 						</div>
 
 						<div class="item__line" v-if="history_item.achievement">
@@ -80,6 +80,10 @@
 			this.fetchAverage()
 		},
 		methods: {
+			filterFloat( number ) {
+				number = String(number)
+				return number.replace(".", ",")
+			},
 			fetch() {
 				this.history = JSON.parse( this.user.status.completedTests )
 				this.totalTests = this.history.length
