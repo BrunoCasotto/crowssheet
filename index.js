@@ -11,11 +11,14 @@ const server = new Hapi.Server({
             files: {
                 relativeTo: Path.join(__dirname, 'dist')
             } 
+        },
+        state: {
+            strictHeader: false
         }
     }
 })
 
-server.connection({ port: process.env.PORT || 4000 })
+server.connection({ port: process.env.PORT || 4005 })
 
 server.register(require('vision'), (err) => {
     Hoek.assert(!err, err)
