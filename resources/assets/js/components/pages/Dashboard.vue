@@ -94,7 +94,7 @@
 				//setting the block
 				this.blocks.push({
 					color: '#DF6B03',
-					title: 'Numero de alunos',
+					title: 'Número de alunos',
 					text: students,
 					font: 'black'
 				})

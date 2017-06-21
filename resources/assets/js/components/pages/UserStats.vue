@@ -5,7 +5,7 @@
 				<a @click="tab = 'profile'" href="#">Perfil</a>
 			</li>
 			<li v-bind:class="{ 'active': tab=='history' }">
-				<a href="#" @click="tab = 'history'">Historico de atividades</a>
+				<a href="#" @click="tab = 'history'">Histórico de atividades</a>
 			</li>
 		</ul>
 

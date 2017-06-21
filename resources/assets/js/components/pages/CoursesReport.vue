@@ -16,7 +16,7 @@
 					<a href="#">Detalhes do curso</a>
 				</li>
 				<li v-bind:class="{ 'active': tab=='class' }">
-					<a href="#">Historico da aula</a>
+					<a href="#">Histórico da aula</a>
 				</li>
 			</ul>
 			<!-- course content -->
@@ -42,7 +42,7 @@
 				<h4>{{ singleClass.title }}</h4>
 
 				<template v-if="singleClass.test.history.length > 0">
-					<label class="title">Numero de atividades entregues</label>
+					<label class="title">Número de atividades entregues</label>
 					<p class="lead text">{{singleClass.test.history.length}}</p>
 
 					<label class="title">Média de notas dos alunos</label>

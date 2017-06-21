@@ -4,14 +4,11 @@
 	</div>
 	<div class="items">
 		<div class="item">
-			<a :href="'/dashboard?userId='+user.uid" class="fa fa-home">Inicio</a>
+			<a :href="'/dashboard?userId='+user.uid" class="fa fa-home">Início</a>
 		</div>
 		<div v-if=" user.teacher " class="item">
 			<a href="/teams" class="fa fa-users">Turmas</a>
 		</div>
-		{#<div v-if=" user.teacher " class="item">#}
-			{#<a class="fa fa-address-card">Alunos</a>#}
-		{#</div>#}
 		<div v-if=" !user.teacher " class="item">
 			<a href="/classroom" class="fa fa-pencil-square-o">Sala de aula</a>
 		</div>

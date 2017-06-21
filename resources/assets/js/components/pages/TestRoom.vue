@@ -10,7 +10,7 @@
 		</div>
 
 		<div  v-if="this.blockTest || this.blockSchendule" class="loader-overlay block-page">
-			<p v-if="this.blockTest" class="text"> Ops, voce ja realizou esta tarefa.
+			<p v-if="this.blockTest" class="text"> Ops, você já realizou esta tarefa.
 				Sua nota foi <span>{{ this.score }} </span>
 				<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn-orange">Voltar</a>
 			</p>
@@ -73,8 +73,8 @@
 		</template>
 
 		<div class="test__controller">
-			<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn--back">Abandonar teste</a>
-			<button @click="finalize()" class="btn btn--finish">Finalizar a prova</button>
+			<a :href="'/classroom/'+classData.courseId+'/'+classData.key" class="btn btn--back">Abandonar atividade</a>
+			<button @click="finalize()" class="btn btn--finish">Finalizar a atividade</button>
 		</div>
 
 		<!-- user items -->

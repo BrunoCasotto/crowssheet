@@ -7,7 +7,7 @@
 		<test-form v-show="testForm"></test-form>
 		<div v-show="!testForm" class="class-form">
 			<div class="form-group">
-				<label class="title">Matéria/Titulo</label>
+				<label class="title">Matéria/Título</label>
 				<input v-show="edit" v-model="classData.title" class="form-control">
 				<h4 v-show="!edit" class="content">{{ classData.title }}</h4>
 			</div>

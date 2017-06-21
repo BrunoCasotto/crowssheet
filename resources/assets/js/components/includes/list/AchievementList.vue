@@ -1,6 +1,6 @@
 <template lang="html">
 	<div class="achievement">
-		<h4>Inventário de items:</h4>
+		<h4>Inventário de itens:</h4>
 		<div v-if="achievements.length > 0" class="list">
 			<div v-for="ach in achievements" class="item">
 				<h4 class="name"><span class="qtd">{{ ach.quantity }} x </span>{{ ach.name }}</h4>

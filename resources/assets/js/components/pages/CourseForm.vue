@@ -1,7 +1,7 @@
 <template lang="html">
    	<div class="course-form">
 		<div class="form-group">
-			<label for="exampleInputEmail1">Matéria/Titulo</label>
+			<label for="exampleInputEmail1">Matéria/Título</label>
 			<input class="form-control" v-model="course.title">
 		</div>
 

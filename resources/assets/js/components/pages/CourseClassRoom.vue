@@ -8,7 +8,7 @@
 				v-if="classData.video.length > 0" 
 				:url="classData.video"
 			></youtube-component>
-			<p v-else>Nenhuma video aula cadastrada</p>
+			<p v-else>Nenhuma vídeo aula cadastrada</p>
 		</div>
 
 		<div class="class-room__content">

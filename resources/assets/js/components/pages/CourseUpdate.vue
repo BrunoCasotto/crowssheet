@@ -6,7 +6,7 @@
 		<class-form v-show="classForm"></class-form>
 		<div v-show="!classForm" class="course-form">
 			<div class="form-group">
-				<label class="title">Matéria/Titulo: </label>
+				<label class="title">Matéria/Título: </label>
 				<input v-show="edit" class="form-control" v-model="course.title">
 				<h4 v-show="!edit" class="content">{{ course.title }}</h4>
 			</div>
