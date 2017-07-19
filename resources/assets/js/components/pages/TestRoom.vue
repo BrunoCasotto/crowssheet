@@ -82,7 +82,7 @@
 			<user-items v-if="!testItem" :achievements="achievements"></user-items>
 			<p v-else class="lead">O item: <mark>{{testItem.name}}</mark> está ativo.</p>
 		</div>
-		<h4 v-if="test.blockItem">O professor bloqueou o uso de itens nessa atividade.<h4>
+		<h4 v-if="test.blockItem">O professor bloqueou o uso de itens nessa atividade.</h4>
 	</div>
 </template>
 <script>

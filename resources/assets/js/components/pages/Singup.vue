@@ -50,7 +50,7 @@
 					<input type="checkbox" v-model="teacher">Registrar-se como professor
 				</label>
 
-				<button class="btn btn-default form__btn" @click="register">Registrar</butotn>
+				<button class="btn btn-default form__btn" @click="register">Registrar</button>
 			</form>
 		</div>
 	</div>
