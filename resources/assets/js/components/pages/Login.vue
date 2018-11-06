@@ -52,9 +52,6 @@
 				password: ''
 			}
 		},
-		mounted() {
-			this.verifyLogin()
-		},
 		components: {
 			LogoCorvo,
 			VHeader,
@@ -62,9 +59,6 @@
 			Loader
 		},
 		methods: {
-			verifyLogin () {
-				console.log( JSON.parse ( localStorage.getItem('firebase') ) )
-			},
 			login () {
 				this.$store.dispatch ( 'toggleLoader', true )
 				authService
@@ -72,12 +66,9 @@
 				.then( response => {
 					this.$store.dispatch('toggleLoader', false)
 
-					if(response.status === true) {
-						window.location.assign( `/dashboard?userId=${response.data.uid}` )
-					} else {
+					if (!response.status) {
 						growl.error(response.data.message)
 					}
-
 				}).catch(error => {
 					this.$store.dispatch('toggleLoader', false)
 				})

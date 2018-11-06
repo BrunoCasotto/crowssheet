@@ -7,6 +7,17 @@ class AuthController {
 		reply.view('pages/login',{})
 	}
 
+	* login(request, reply) {
+		const service = new UserService()
+		const { uid } = request.payload
+		let user = yield service.getSingle(uid)
+
+		if(user.courses) delete user.courses
+		if(user.teams) delete user.teams
+
+		return reply.response(user).state('data', uid )
+	}
+
 	* showDashboard(request, reply) {
 		let service = new UserService()
 		let user = yield service.getSingle( request.query.userId )

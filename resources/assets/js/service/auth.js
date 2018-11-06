@@ -1,6 +1,10 @@
 import Axios from 'axios'
 import Firebase from 'firebase'
-import SessionHelper from '_helpers/session'
+
+const ErrorMessage = {
+	status: false,
+	message: 'Dados incorretos'
+}
 
 class AuthService {
 
@@ -10,35 +14,37 @@ class AuthService {
 			url: '/token',
 			method: 'post',
 			data: {}
-		}).then((result)=>{ this._firebase = Firebase.initializeApp(result.data) }).catch((error)=>{})
+		}).then((result)=>{
+			this._firebase = Firebase.initializeApp(result.data)
+		}).catch((error)=>{})
 	}
 
-	login(email, password) {
-		return this._firebase.auth()
-		.signInWithEmailAndPassword(email, password)
-		.then(response =>{ 
-			if(response.uid) {
-				return SessionHelper.saveSession( response.uid )
+	async login(email, password) {
+		const authObj = await this._firebase.auth().signInWithEmailAndPassword(email, password)
+		if(authObj) {
+			const uid = authObj.uid || ''
+			let user = await this.getUser({uid})
+
+			if(user) {
+				window.location.assign( `/dashboard` )
 			} else {
-				return {
-					status: false,
-					message: 'Dados incorretos'
-				}
+				window.location.assign( `/register` )
 			}
-		 })
-		.catch((error)=> {
-			return { 
-				status: false,
-				data: error
-			 }
-		})
+		} else {
+			return ErrorMessage
+		}
+	}
+
+	async getUser({uid}) {
+		const userObject = await Axios({ url: '/login', method: 'post', data: { uid } })
+		if(userObject.data) return userObject.data
+		return ErrorMessage
 	}
 
 	singout() {
 		return this._firebase.auth()
 		.signOut()
 		.then((response)=> {
-			SessionHelper.removeSession()
 			return {
 				status: true,
 				data: response

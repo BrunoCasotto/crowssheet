@@ -7,5 +7,6 @@ module.exports = [
 	{ method: 'GET',	path: '/auth/register', handler: controller.showSingup },
 	{ method: 'GET',	path: '/dashboard', handler: controller.showDashboard },
 	{ method: 'POST', path: '/auth/singup', handler: controller.singup },
-	{ method: 'POST', path: '/token', handler: controller.getToken }
+	{ method: 'POST', path: '/token', handler: controller.getToken },
+	{ method: 'POST', path: '/login', handler: controller.login }
 ]
