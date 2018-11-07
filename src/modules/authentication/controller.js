@@ -1,5 +1,13 @@
-let AuthService = require('@modules/authentication/service')
-let UserService = require("@modules/user/service")
+const AuthService = require('@modules/authentication/service')
+const UserService = require("@modules/user/service")
+const cookie_options = {
+	ttl: 24 * 60 * 1000,
+	encoding: 'none',
+	isSecure: false,
+	isHttpOnly: false,
+	clearInvalid: true,
+	strictHeader: true
+}
 
 class AuthController {
 
@@ -15,7 +23,9 @@ class AuthController {
 		if(user.courses) delete user.courses
 		if(user.teams) delete user.teams
 
-		return reply.response(user).state('data', uid )
+		reply.state('user_uid', uid, cookie_options);
+
+		return reply.response(user)
 	}
 
 	* showDashboard(request, reply) {
