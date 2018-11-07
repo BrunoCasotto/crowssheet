@@ -12,7 +12,11 @@ const cookie_options = {
 class AuthController {
 
 	index(request, reply) {
-		reply.view('pages/login',{})
+		if(request.state.user_uid) {
+			reply().redirect('/dashboard')
+		} else {
+			reply.view('pages/login',{})
+		}
 	}
 
 	* login(request, reply) {

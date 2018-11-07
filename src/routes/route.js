@@ -9,4 +9,5 @@ let routes = require("@modules/home/routes")
 	.concat(require("@modules/test/routes"))
 	.concat(require("@modules/report/routes"))
 	.concat(require("@modules/achievement/routes"))
+	.concat(require("@modules/dashboard/routes"))
 module.exports = routes

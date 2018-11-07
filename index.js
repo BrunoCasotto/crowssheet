@@ -1,7 +1,8 @@
 require('module-alias/register')
 const Hapi = require('hapi')
 const routes = require('@route/route.js')
-const preResponse = require('@middleware/pre_response.js')
+const preResponse = require('@middleware/preResponse.js')
+const onRequest = require('@middleware/onRequest.js')
 const Path = require('path')
 const Hoek = require('hoek')
 
@@ -50,6 +51,7 @@ let bind = {
 server.bind(bind)
 
 server.ext('onPreResponse', preResponse)
+server.ext('onPreHandler', onRequest)
 
 server.state('session', {
   ttl: null,
