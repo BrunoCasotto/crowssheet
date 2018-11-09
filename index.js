@@ -2,6 +2,7 @@ require('module-alias/register')
 const Hapi = require('hapi')
 const routes = require('@route/route.js')
 const preResponse = require('@middleware/preResponse.js')
+const authMiddleware = require('@middleware/auth.js')
 const Path = require('path')
 
 const viewsConfig = {
@@ -42,6 +43,7 @@ const start = async () => {
   await server.route(require('@route/file.js'))
 
   server.ext('onPreResponse', preResponse)
+  server.ext('onRequest', authMiddleware)
   server.start()
 }
 
